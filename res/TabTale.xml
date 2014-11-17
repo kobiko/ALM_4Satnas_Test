@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ttScenes>
+	<ttStartScene>0</ttStartScene>
+    <ttPageControlStartScene>1</ttPageControlStartScene>
+    <ttXmlVerion>1</ttXmlVerion>
+    <ttBookLanguage>english</ttBookLanguage>
+    <ttAppName>Xmas: The 4 Santas</ttAppName>
+    <ttTransformablesMaxScale>2</ttTransformablesMaxScale>
+    <ttImport>TabTaleMacros.xml</ttImport>
+    <ttImport>InAppDialogMacro.xml</ttImport>
+    <ttImport>mapSceneMacros.xml</ttImport>
+
+    <ttMuteHelpPage> <!-- mute help configuration -->
+        <ttWebViewURL>platform/misc/mute_help.html</ttWebViewURL>
+        <ttWebViewWidth>85</ttWebViewWidth>
+        <ttWebViewHeight>85</ttWebViewHeight>
+        <ttWebViewPosition x="50" y="50"/>
+        <ttWebViewCloseButtonImage>platform/misc/ac_close_info.png</ttWebViewCloseButtonImage>
+        <ttWebViewCloseSound>platform/bookshelf/close_btn.mp3</ttWebViewCloseSound>
+        <ttWebViewCloseButtonPosition x="92" y="92"/>
+    </ttMuteHelpPage>
+
+    <ttWakeUpNotification> 
+        <ttHasntPlayed>
+            <ttMessageBody>Evil Sneevil, Here we come...</ttMessageBody>
+            <ttMessageBody>We need to bring the power back!</ttMessageBody>
+            <ttLandingScene/>
+        </ttHasntPlayed>
+        <ttHasntPlayedDays>1</ttHasntPlayedDays>
+        <ttReceiveSound>sounds/narrations/map/we_need_to_bring_the_power_back.mp3</ttReceiveSound>
+        <ttTimeOfDay>16:30</ttTimeOfDay>
+        <ttTimeRandomOffset>180</ttTimeRandomOffset>
+    </ttWakeUpNotification>
+    <ttWakeUpNotification>
+        <ttHasntPlayed>
+            <ttMessageBody>Lets rescue Buddy</ttMessageBody>
+            <ttMessageBody>Lets power it up</ttMessageBody>
+            <ttLandingScene/>   
+        </ttHasntPlayed>
+        <ttHasntPlayedDays>2</ttHasntPlayedDays>
+        <ttReceiveSound>sounds/narrations/superSanta/lets_rescue_boddy-01.mp3</ttReceiveSound>
+        <ttTimeOfDay>16:30</ttTimeOfDay>
+        <ttTimeRandomOffset>180</ttTimeRandomOffset>
+    </ttWakeUpNotification>
+    <ttWakeUpNotification>
+        <ttHasntPlayed>
+            <ttMessageBody>Oh no, help me out!</ttMessageBody>
+            <ttLandingScene/> 
+        </ttHasntPlayed>
+        <ttHasntPlayedDays>4</ttHasntPlayedDays>
+        <ttTimeOfDay>17:00</ttTimeOfDay>
+        <ttReceiveSound>sounds/narrations/clumsySanta/oh_no_help_me_out.mp3</ttReceiveSound>
+    </ttWakeUpNotification>
+    <ttWakeUpNotification>
+        <ttHasntPlayed>
+            <ttMessageBody>Evil Sneevil, Here we come...</ttMessageBody>
+            <ttLandingScene/>   
+        </ttHasntPlayed>
+        <ttHasntPlayedDays>5</ttHasntPlayedDays>
+        <ttTimeOfDay>17:00</ttTimeOfDay>
+        <ttDayOfWeek>Friday</ttDayOfWeek>
+        <ttRepeats>10</ttRepeats>
+        <ttDaysBetweenRepeats>7</ttDaysBetweenRepeats>
+        <ttReceiveSound>sounds/narrations/map/evil_sneevil_here_we_come.mp3</ttReceiveSound>
+    </ttWakeUpNotification>
+    
+    <ttSceneImport dynamic="yes">coverScene.xml</ttSceneImport>
+    <ttSceneImport dynamic="no">mapScene.xml</ttSceneImport>
+    <ttSceneImport dynamic="yes">level01.xml</ttSceneImport>
+	<ttSceneImport dynamic="yes">level02.xml</ttSceneImport>
+	<ttSceneImport dynamic="yes">level03.xml</ttSceneImport>
+    <ttSceneImport dynamic="yes">level04.xml</ttSceneImport>
+    <ttSceneImport dynamic="yes">level05.xml</ttSceneImport>
+    <ttSceneImport dynamic="yes">level06.xml</ttSceneImport>
+    <ttSceneImport dynamic="yes">level07.xml</ttSceneImport>
+    <ttSceneImport dynamic="yes">level08.xml</ttSceneImport>
+    <ttSceneImport dynamic="yes">level09.xml</ttSceneImport>
+    <ttSceneImport dynamic="yes">level10.xml</ttSceneImport>
+    <ttSceneImport dynamic="yes">level11.xml</ttSceneImport>
+    <ttSceneImport dynamic="yes">level12.xml</ttSceneImport>
+    <ttSceneImport dynamic="yes">level13.xml</ttSceneImport>
+    <ttSceneImport dynamic="yes">level14.xml</ttSceneImport>
+    <ttSceneImport dynamic="yes">level15.xml</ttSceneImport>
+    <ttSceneImport dynamic="yes">level16.xml</ttSceneImport>
+    <ttSceneImport dynamic="yes">minigameRiver.xml</ttSceneImport>
+    <ttSceneImport dynamic="yes">minigameSwamp.xml</ttSceneImport>
+    <ttSceneImport dynamic="yes">minigameSnow.xml</ttSceneImport>
+</ttScenes>

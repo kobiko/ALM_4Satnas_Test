@@ -1,0 +1,1446 @@
+<!-- ALL EXTERNAL LAYERS-->
+<ttMacro name="debugMenu.externalLayers">
+    <ttMacroBody>
+
+    <!-- MAIN MENU EXTRA LAYERS-->
+    <!-- showGrid layer -->
+    <ttLayer>
+        <ttName>dummyForGrid</ttName>
+        <ttLoadAtInit>yes</ttLoadAtInit>
+        <ttObject>
+            <ttImage>dummyForGrid</ttImage>
+            <ttVisible>yes</ttVisible>
+            <ttType>lable</ttType>
+            <ttBasePositionX>50</ttBasePositionX>
+            <ttBasePositionY>-50</ttBasePositionY>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>debugMenu.showGrid</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>showGrid</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+    </ttLayer>
+
+    <!-- MISC MENU EXTRA LAYERS -->
+    <!--scale scene layer-->
+    <ttLayer>
+        <ttLoadAtInit>yes</ttLoadAtInit>
+        <ttName>dummyForAutomaticScaleScene</ttName>
+        <ttObject>
+            <ttType>lable</ttType>
+            <ttImage>dummyForAutomaticScaleScene</ttImage>
+            <ttVisible>NO</ttVisible>
+            <ttActionsGroup>
+                <ttTrigger>automatic</ttTrigger>
+                <ttOperator>
+                    <ttScript>return shouldScaleScene == 1 </ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>scaleScene</ttType>
+                        <ttScaleX>0.7</ttScaleX>
+                        <ttScaleY>0.6</ttScaleY>
+                        <ttBasePosition x="8" y="5"/>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>automatic</ttTrigger>
+                <ttOperator>
+                    <ttScript>return shouldScaleScene == 0 </ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>scaleScene</ttType>
+                        <ttScaleX>1</ttScaleX>
+                        <ttScaleY>1</ttScaleY>
+                        <ttBasePosition x="0" y="0"/>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+    </ttLayer>
+    <!-- touched object layer-->
+    <ttLayer>
+        <ttLoadAtInitScript>return debugMenu:isLayerOpen("touchedObjectLayer")</ttLoadAtInitScript>
+        <ttName>touchedObjectLayer</ttName>
+        <ttObject>
+            <ttImage>platform/misc/black.png</ttImage>
+            <ttOpacity>128</ttOpacity>
+            <ttScaleX>70</ttScaleX>
+            <ttScaleY>10</ttScaleY>
+            <ttBasePositionX>50</ttBasePositionX>
+            <ttBasePositionY>55</ttBasePositionY>
+            <ttActionsGroup>
+                <ttApplyOn>layer</ttApplyOn>
+                <ttTrigger>onTouchesMoved</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>moveToTouch</ttType>
+                        <ttDragFromTap>YES</ttDragFromTap>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject>
+            <ttImage>X</ttImage>
+            <ttType>lable</ttType>
+            <ttRedPercentage>100</ttRedPercentage>
+            <ttBasePositionX>70</ttBasePositionX>
+            <ttBasePositionY>57</ttBasePositionY>
+            <ttActionsGroup>
+                <ttTrigger>onTouchesBegan</ttTrigger>
+                <ttMacroInvoke macro_name="debugMenu.closeExternalLayerAndShowDebugMenuButton">
+                    <ttMacroParam name="$name" value="touchedObjectLayer"/>
+                </ttMacroInvoke>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject>
+            <ttImage>no object selected yet</ttImage>
+            <ttType>lable</ttType>
+            <ttId>touchedObjectLabel</ttId>
+            <ttBasePositionX>50</ttBasePositionX>
+            <ttBasePositionY>55</ttBasePositionY>
+            <ttGreenPercentage>100</ttGreenPercentage>
+            <ttFontSize>30</ttFontSize>
+        </ttObject>
+    </ttLayer>
+    <!-- custom panel layer-->
+    <ttLayer>
+        <ttName>customPanelContainer</ttName>
+        <ttLoadAtInitScript>return debugMenu:isLayerOpen("customPanelContainer")</ttLoadAtInitScript>
+        <ttLayers>
+            <ttLayer>
+                <ttName>customPanelLayer</ttName>
+                <!-- Cliiper -->
+                <ttObject>
+                    <ttType>layerDrawingArea</ttType>
+                    <ttImage>platform/misc/black.png</ttImage>
+                    <ttScaleX>70</ttScaleX>
+                    <ttScaleY>30</ttScaleY>
+                    <ttBasePositionX>50</ttBasePositionX>
+                    <ttBasePositionY>30</ttBasePositionY>
+                </ttObject>
+                <!-- Content Layer -->
+                <ttObject>
+                    <ttVisibleScript>return (hideCustomPanelContainer ~= 1)</ttVisibleScript>
+                    <ttImage>platform/misc/black.png</ttImage>
+                    <ttOpacity>150</ttOpacity>
+                    <ttScaleX>70</ttScaleX>
+                    <ttScaleY>30</ttScaleY>
+                    <ttBasePositionX>50</ttBasePositionX>
+                    <ttBasePositionY>30</ttBasePositionY>
+                    <ttActionsGroup>
+                        <ttTrigger>notification</ttTrigger>
+                        <ttNotificationIdentifyer>debugMenu.showHideCustomPanelContainer</ttNotificationIdentifyer>
+                        <ttSequenceGroup>
+                            <ttAction>
+                                <ttType>toggleVisibility</ttType>
+                            </ttAction>
+                        </ttSequenceGroup>
+                    </ttActionsGroup>
+                </ttObject>
+                <ttMacroInvoke macro_name="debugMenu.customPanel"/>
+            </ttLayer>
+        </ttLayers>
+        <!-- Title Bar -->
+        <ttObject>
+            <ttImage>platform/misc/black.png</ttImage>
+            <ttOpacity>128</ttOpacity>
+            <ttScaleX>70</ttScaleX>
+            <ttScaleY>5</ttScaleY>
+            <ttBasePosition x ="script: return debugMenu:getPositionX(50,0)" y = "script: return debugMenu:getPositionY(48, -4)"/>
+            
+            <ttActionsGroup>
+                <ttTrigger>onTouchesMoved</ttTrigger>
+                <ttApplyOn>layer</ttApplyOn>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>moveToTouch</ttType>
+                        <ttDragFromTap>YES</ttDragFromTap>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>automatic</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>setLayerZIndex</ttType>
+                        <ttIntValue>5000</ttIntValue>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <!--minimize button-->
+        <ttObject>
+            <ttImage>-</ttImage>
+            <ttType>lable</ttType>
+            <ttFontSize>40</ttFontSize>
+            <ttRedPercentage>100</ttRedPercentage>
+            <ttBasePosition x ="script: return debugMenu:getPositionX(80,0)" y = "script: return debugMenu:getPositionY(48, -4)"/>
+            <ttActionsGroup>
+                <ttTrigger>automatic+notification</ttTrigger>
+                <ttNotificationIdentifyer>debugMenu.showHideCustomPanelContainer</ttNotificationIdentifyer>
+                <ttOperator>
+                    <ttScript>return (hideCustomPanelContainer == 1)</ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>setLabelText</ttType>
+                        <ttText>+</ttText>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>automatic+notification</ttTrigger>
+                <ttNotificationIdentifyer>debugMenu.showHideCustomPanelContainer</ttNotificationIdentifyer>
+                <ttOperator>
+                    <ttScript>return (hideCustomPanelContainer == 0)</ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>setLabelText</ttType>
+                        <ttText>-</ttText>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>onTouchesBegan</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>hideCustomPanelContainer</ttVariable>
+                        <ttOperator>
+                            <ttScript> if (hideCustomPanelContainer == 0 or hideCustomPanelContainer == nil) then
+                                return 1
+                                else
+                                return 0
+                                end
+                            </ttScript>
+                        </ttOperator>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>debugMenu.showHideCustomPanelContainer</ttNotificationIdentifyer>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject>
+            <ttImage>X</ttImage>
+            <ttType>lable</ttType>
+            <ttFontSize>40</ttFontSize>
+            <ttRedPercentage>100</ttRedPercentage>
+            <ttBasePosition x ="script: return debugMenu:getPositionX(85,5)" y = "script: return debugMenu:getPositionY(48, -4)"/>
+            <ttActionsGroup>
+                <ttTrigger>onTouchesBegan</ttTrigger>
+                <ttMacroInvoke macro_name="debugMenu.closeExternalLayerAndShowDebugMenuButton">
+                    <ttMacroParam name="$name" value="customPanelContainer"/>
+                </ttMacroInvoke>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject>
+            <ttImage>Custom Panel</ttImage>
+            <ttBasePosition x ="script: return debugMenu:getPositionX(50,0)" y = "script: return debugMenu:getPositionY(48, -4)"/>
+            <ttType>lable</ttType>
+            <ttGreenPercentage>100</ttGreenPercentage>
+            <ttBluePercentage>100</ttBluePercentage>
+        </ttObject>
+    </ttLayer>
+    <!-- version info layer-->
+    <ttLayer>
+        <ttName>showVersionInfo</ttName>
+        <ttLoadAtInitScript>return debugMenu:isLayerOpen("showVersionInfo")</ttLoadAtInitScript>
+        <ttObject>
+            <ttImage>platform/misc/black.png</ttImage>
+            <ttOpacity>128</ttOpacity>
+            <ttScaleX>70</ttScaleX>
+            <ttScaleY>40</ttScaleY>
+            <ttBasePositionX>50</ttBasePositionX>
+            <ttBasePositionY>55</ttBasePositionY>
+            <ttActionsGroup>
+                <ttApplyOn>layer</ttApplyOn>
+                <ttTrigger>onTouchesMoved</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>moveToTouch</ttType>
+                        <ttDragFromTap>YES</ttDragFromTap>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject>
+            <ttImage>X</ttImage>
+            <ttType>lable</ttType>
+            <ttRedPercentage>100</ttRedPercentage>
+            <ttBasePosition x ="85" y = "70"/>
+            <ttActionsGroup>
+                <ttTrigger>onTouchesBegan</ttTrigger>
+                <ttMacroInvoke macro_name="debugMenu.closeExternalLayerAndShowDebugMenuButton">
+                    <ttMacroParam name="$name" value="showVersionInfo"/>
+                </ttMacroInvoke>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject>
+            <ttImage>#versionInfo</ttImage>
+            <ttType>lable</ttType>
+            <ttBasePositionX>50</ttBasePositionX>
+            <ttBasePositionY>55</ttBasePositionY>
+            <ttGreenPercentage>100</ttGreenPercentage>
+            <ttFontSize>30</ttFontSize>
+        </ttObject>
+        
+    </ttLayer>
+    <!-- back button layers-->
+    <ttLayer>
+        <ttName>layerForLoadingBackButton</ttName>
+        <ttObject>
+            <ttImage>dummy</ttImage>
+            <ttType>lable</ttType>
+            <ttVisible>no</ttVisible>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>debugMenu.hideShowBackButton</ttNotificationIdentifyer>
+                <ttOperator>
+                    <ttScript>return debugMenu:isBackButtonVisible() == true</ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>loadLayer</ttType>
+                        <ttData>debugMenu.backLayer</ttData>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>debugMenu.hideShowBackButton</ttNotificationIdentifyer>
+                <ttOperator>
+                    <ttScript>return debugMenu:isBackButtonVisible() == false</ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>unLoadLayer</ttType>
+                        <ttData>debugMenu.backLayer</ttData>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            
+            <ttActionsGroup>
+                <ttTrigger>automatic</ttTrigger>
+                <ttOperator>
+                    <ttScript>return debugMenu:isBackButtonVisible()</ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>loadLayer</ttType>
+                        <ttData>debugMenu.backLayer</ttData>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+    </ttLayer>
+    <ttLayer>
+        <!-- Back Botton Layer -->
+        <ttLoadAtInit>no</ttLoadAtInit>
+        <ttName>debugMenu.backLayer</ttName>
+        <ttBasePosition x="85" y="95"/>
+        <ttObject>
+            <ttImage>packages/debugMenu/androidBack.jpg</ttImage>
+            <ttActionsGroup>
+                <ttTrigger>onTouchesMoved</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>moveToTouch</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>isBackMoved</ttVariable>
+                        <ttOperator>
+                            <ttScript>return 1</ttScript>
+                        </ttOperator>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            
+            <!--button wasn't moved-->
+            <ttActionsGroup>
+                <ttTrigger>onTouchesEnded</ttTrigger>
+                <ttOperator>
+                    <ttScript>return (isBackMoved == 0)</ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>simulateBackButtonPressed</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            
+            <!--button was moved-->
+            <ttActionsGroup>
+                <ttTrigger>onTouchesEnded</ttTrigger>
+                <ttOperator>
+                    <ttScript>return (isBackMoved == 1)</ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>isBackMoved</ttVariable>
+                        <ttOperator>
+                            <ttScript>return 0</ttScript>
+                        </ttOperator>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+    </ttLayer>
+    <!-- DEBUGLOG MENU EXTRA LAYERS -->
+    <!-- analytics Container -->
+    <ttLayer>
+        <ttLoadAtInitScript>return debugMenu:isLayerOpen("analyticsContainer")</ttLoadAtInitScript>
+        <ttName>analyticsContainer</ttName>
+        <ttLayers>
+            <ttLayer>
+                <!-- Analytics Layer -->
+                <ttName>analyticsLayer</ttName>
+                <!-- Cliiper -->
+                <ttObject>
+                    <ttType>layerDrawingArea</ttType>
+                    <ttImage>platform/misc/black.png</ttImage>
+                    <ttScaleX>70</ttScaleX>
+                    <ttScaleY>30</ttScaleY>
+                    <ttBasePositionX>50</ttBasePositionX>
+                    <ttBasePositionY>30</ttBasePositionY>
+                </ttObject>
+                <!-- Content Layer -->
+                <ttObject>
+                    <ttVisibleScript>return (hideAnalyticsContainer ~= 1)</ttVisibleScript>
+                    <ttImage>platform/misc/black.png</ttImage>
+                    <ttOpacity>150</ttOpacity>
+                    <ttScaleX>70</ttScaleX>
+                    <ttScaleY>30</ttScaleY>
+                    <ttBasePositionX>50</ttBasePositionX>
+                    <ttBasePositionY>30</ttBasePositionY>
+                    <ttActionsGroup>
+                        <ttTrigger>automatic</ttTrigger>
+                        <ttSequenceGroup>
+                            <ttAction>
+                                <ttType>setVariable</ttType>
+                                <ttVariable>showAnalytics</ttVariable>
+                                <ttOperator>
+                                    <ttScript>return 1</ttScript>
+                                </ttOperator>
+                            </ttAction>
+                        </ttSequenceGroup>
+                    </ttActionsGroup>
+                    <ttActionsGroup>
+                        <ttTrigger>notification</ttTrigger>
+                        <ttNotificationIdentifyer>showHideAnalyticsContainer</ttNotificationIdentifyer>
+                        <ttSequenceGroup>
+                            <ttAction>
+                                <ttType>toggleVisibility</ttType>
+                            </ttAction>
+                        </ttSequenceGroup>
+                    </ttActionsGroup>
+                    
+                    
+                    
+                    
+                    
+                </ttObject>
+                <ttObject>
+                    <ttVisibleScript>return (hideAnalyticsContainer ~= 1)</ttVisibleScript>
+                    <ttId>analyticsLabel</ttId>
+                    <ttType>lable</ttType>
+                    <ttImage>{no events}</ttImage>
+                    <ttAnchorPositionX>0.0</ttAnchorPositionX>
+                    <ttAnchorPositionY>1.0</ttAnchorPositionY>
+                    <ttBasePositionX>13.5</ttBasePositionX>
+                    <ttBasePositionY>45.5</ttBasePositionY>
+                    <ttGreenPercentage>100</ttGreenPercentage>
+                    <ttFontSize>28</ttFontSize>
+                    <ttAlignment>left</ttAlignment>
+                    <ttActionsGroup>
+                        <ttTrigger>notification</ttTrigger>
+                        <ttNotificationIdentifyer>showHideAnalyticsContainer</ttNotificationIdentifyer>
+                        <ttSequenceGroup>
+                            <ttAction>
+                                <ttType>toggleVisibility</ttType>
+                            </ttAction>
+                        </ttSequenceGroup>
+                        
+                    </ttActionsGroup>
+                    
+                    <ttActionsGroup>
+                        <ttTrigger>automatic+notification</ttTrigger>
+                        <ttNotificationIdentifyer>showHideAnalyticsContainer</ttNotificationIdentifyer>
+                        <ttOperator>
+                            <ttScript>return (hideAnalyticsContainer == 1)</ttScript>
+                        </ttOperator>
+                        <ttSequenceGroup>
+                            <ttAction>
+                                <ttType>scale</ttType>
+                                <ttActionDuration>0</ttActionDuration>
+                                <ttScaleTo>0</ttScaleTo>
+                            </ttAction>
+                        </ttSequenceGroup>
+                    </ttActionsGroup>
+                    <ttActionsGroup>
+                        <ttTrigger>automatic+notification</ttTrigger>
+                        <ttNotificationIdentifyer>showHideAnalyticsContainer</ttNotificationIdentifyer>
+                        <ttOperator>
+                            <ttScript>return (hideAnalyticsContainer ~= 1)</ttScript>
+                        </ttOperator>
+                        <ttSequenceGroup>
+                            <ttAction>
+                                <ttType>scale</ttType>
+                                <ttActionDuration>0</ttActionDuration>
+                                <ttScaleTo>1</ttScaleTo>
+                            </ttAction>
+                        </ttSequenceGroup>
+                    </ttActionsGroup>
+                    
+                    <ttActionsGroup>
+                        <ttTrigger>automatic+notification</ttTrigger>
+                        <ttNotificationIdentifyer>scrollDebugLogUp</ttNotificationIdentifyer>
+                        <ttOperator>
+                            <ttScript>return (debugMenu:getOrientation() == "landscape")</ttScript>
+                        </ttOperator>
+                        <ttSequenceGroup>
+                            <ttAction>
+                                <ttType>moveToPoint</ttType>
+                                <ttActionDuration>0.2</ttActionDuration>
+                                <ttFinalPositionX>12.5</ttFinalPositionX>
+                                <ttFinalPositionY>45</ttFinalPositionY>
+                            </ttAction>
+                        </ttSequenceGroup>
+                    </ttActionsGroup>
+                    <ttActionsGroup>
+                        <ttTrigger>automatic+notification</ttTrigger>
+                        <ttNotificationIdentifyer>scrollDebugLogUp</ttNotificationIdentifyer>
+                        <ttOperator>
+                            <ttScript>return (debugMenu:getOrientation() == "portrait")</ttScript>
+                        </ttOperator>
+                        <ttSequenceGroup>
+                            <ttAction>
+                                <ttType>moveToPoint</ttType>
+                                <ttActionDuration>0.2</ttActionDuration>
+                                <ttFinalPositionX>0.5</ttFinalPositionX>
+                                <ttFinalPositionY>40</ttFinalPositionY>
+                            </ttAction>
+                        </ttSequenceGroup>
+                    </ttActionsGroup>
+                    <ttActionsGroup>
+                        <ttTrigger>onTouchesMoved</ttTrigger>
+                        <ttSequenceGroup>
+                            <ttAction>
+                                <ttType>moveToTouch</ttType>
+                                <ttDragFromTap>YES</ttDragFromTap>
+                            </ttAction>
+                        </ttSequenceGroup>
+                    </ttActionsGroup>
+                </ttObject>
+            </ttLayer>
+        </ttLayers>
+        <!-- Title Bar -->
+        <ttObject>
+            <ttImage>platform/misc/black.png</ttImage>
+            <ttOpacity>128</ttOpacity>
+            <ttScaleX>70</ttScaleX>
+            <ttScaleY>5</ttScaleY>
+            <ttBasePosition x ="script: return debugMenu:getPositionX(50,0)" y = "script: return debugMenu:getPositionY(48, -4)"/>
+            <ttActionsGroup>
+                <ttTrigger>onTouchesMoved</ttTrigger>
+                <ttApplyOn>layer</ttApplyOn>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>moveToTouch</ttType>
+                        <ttDragFromTap>YES</ttDragFromTap>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>automatic</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>setLayerZIndex</ttType>
+                        <ttIntValue>5000</ttIntValue>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <!--minimize button-->
+        <ttObject>
+            <ttImage>-</ttImage>
+            <ttType>lable</ttType>
+            <ttFontSize>40</ttFontSize>
+            <ttRedPercentage>100</ttRedPercentage>
+            <ttBasePosition x ="script: return debugMenu:getPositionX(80,5)" y = "script: return debugMenu:getPositionY(48, -4)"/>
+            <ttActionsGroup>
+                <ttTrigger>automatic+notification</ttTrigger>
+                <ttNotificationIdentifyer>showHideAnalyticsContainer</ttNotificationIdentifyer>
+                <ttOperator>
+                    <ttScript>return (hideAnalyticsContainer == 1)</ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>setLabelText</ttType>
+                        <ttText>+</ttText>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>automatic+notification</ttTrigger>
+                <ttNotificationIdentifyer>showHideAnalyticsContainer</ttNotificationIdentifyer>
+                <ttOperator>
+                    <ttScript>return (hideAnalyticsContainer == 0)</ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>setLabelText</ttType>
+                        <ttText>-</ttText>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>onTouchesBegan</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>hideAnalyticsContainer</ttVariable>
+                        <ttOperator>
+                            <ttScript> if (hideAnalyticsContainer == 0 or hideAnalyticsContainer == nil) then
+                                return 1
+                                else
+                                return 0
+                                end
+                            </ttScript>
+                        </ttOperator>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>showHideAnalyticsContainer</ttNotificationIdentifyer>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject>
+            <ttImage>X</ttImage>
+            <ttType>lable</ttType>
+            <ttFontSize>40</ttFontSize>
+            <ttRedPercentage>100</ttRedPercentage>
+            <ttBasePosition x ="script: return debugMenu:getPositionX(85,5)" y = "script: return debugMenu:getPositionY(48, -4)"/>
+            
+            <ttActionsGroup>
+                <ttTrigger>onTouchesBegan</ttTrigger>
+                <ttMacroInvoke macro_name="debugMenu.closeExternalLayerAndShowDebugMenuButton">
+                    <ttMacroParam name="$name" value="analyticsContainer"/>
+                </ttMacroInvoke>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject>
+            <ttImage>Scroll Top</ttImage>
+            <ttType>lable</ttType>
+            <ttFontSize>25</ttFontSize>
+            <ttGreenPercentage>100</ttGreenPercentage>
+            <ttBasePosition x ="script: return debugMenu:getPositionX(20,0)" y = "script: return debugMenu:getPositionY(48, -4)"/>
+            <ttActionsGroup>
+                <ttTrigger>onTouchesBegan</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>scrollDebugLogUp</ttNotificationIdentifyer>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject>
+            <ttImage>All</ttImage>
+            <ttImage>Analytics</ttImage>
+            <ttImage>Local notifications</ttImage>
+            <ttImage>Variables</ttImage>
+            <ttImage>Actions</ttImage>
+            <ttImage>Errors</ttImage>
+            <ttBasePosition x ="script: return debugMenu:getPositionX(50,0)" y = "script: return debugMenu:getPositionY(48, -4)"/>
+            <ttType>lable</ttType>
+            <ttActiveImageIndex>script: return (logFilter or 1)-1</ttActiveImageIndex>
+            <ttGreenPercentage>100</ttGreenPercentage>
+            <ttBluePercentage>100</ttBluePercentage>
+            <ttActionsGroup>
+                <ttTrigger>onTouchesBegan</ttTrigger>
+                <ttOperator>
+                    <ttScript><![CDATA[return ((logFilter == 1) or (logFilter == nil))]]></ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>replaceSpriteWithNextImage</ttType>
+                        <ttIntValue>1</ttIntValue>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>logFilter</ttVariable>
+                        <ttOperator>
+                            <ttConst>2</ttConst>
+                        </ttOperator>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>setDebugLogFilter</ttType>
+                        <ttLogFilter>Analytics</ttLogFilter>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>onTouchesBegan</ttTrigger>
+                <ttOperator>
+                    <ttScript><![CDATA[return (logFilter == 2)]]></ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>replaceSpriteWithNextImage</ttType>
+                        <ttIntValue>2</ttIntValue>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>logFilter</ttVariable>
+                        <ttOperator>
+                            <ttConst>3</ttConst>
+                        </ttOperator>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>setDebugLogFilter</ttType>
+                        <ttLogFilter>Local Notifications</ttLogFilter>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>onTouchesBegan</ttTrigger>
+                <ttOperator>
+                    <ttScript><![CDATA[return (logFilter == 3)]]></ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>replaceSpriteWithNextImage</ttType>
+                        <ttIntValue>3</ttIntValue>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>logFilter</ttVariable>
+                        <ttOperator>
+                            <ttConst>4</ttConst>
+                        </ttOperator>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>setDebugLogFilter</ttType>
+                        <ttLogFilter>Variables</ttLogFilter>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>onTouchesBegan</ttTrigger>
+                <ttOperator>
+                    <ttScript><![CDATA[return (logFilter == 4)]]></ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>replaceSpriteWithNextImage</ttType>
+                        <ttIntValue>4</ttIntValue>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>logFilter</ttVariable>
+                        <ttOperator>
+                            <ttConst>5</ttConst>
+                        </ttOperator>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>setDebugLogFilter</ttType>
+                        <ttLogFilter>Actions</ttLogFilter>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>onTouchesBegan</ttTrigger>
+                <ttOperator>
+                    <ttScript><![CDATA[return (logFilter == 5)]]></ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>replaceSpriteWithNextImage</ttType>
+                        <ttIntValue>5</ttIntValue>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>logFilter</ttVariable>
+                        <ttOperator>
+                            <ttConst>6</ttConst>
+                        </ttOperator>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>setDebugLogFilter</ttType>
+                        <ttLogFilter>Errors</ttLogFilter>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>onTouchesBegan</ttTrigger>
+                <ttOperator>
+                    <ttScript><![CDATA[return (logFilter == 6)]]></ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>replaceSpriteWithNextImage</ttType>
+                        <ttIntValue>0</ttIntValue>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>logFilter</ttVariable>
+                        <ttOperator>
+                            <ttConst>1</ttConst>
+                        </ttOperator>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>setDebugLogFilter</ttType>
+                        <ttLogFilter></ttLogFilter>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+    </ttLayer>
+    <!-- keyboard layer-->
+    <ttLayer>
+        <ttName>keyboardLayer</ttName>
+        <ttLoadAtInitScript>return debugMenu:isLayerOpen("keyboardLayer")</ttLoadAtInitScript>
+        <ttObject>
+            <ttImage>platform/misc/black.png</ttImage>
+            <ttScaleX>70</ttScaleX>
+            <ttScaleY>40</ttScaleY>
+            <ttBasePositionX>50</ttBasePositionX>
+            <ttBasePositionY>66</ttBasePositionY>
+            <ttVisible>yes</ttVisible>
+            <ttActionsGroup>
+                <ttTrigger>onTouchesBegan</ttTrigger>
+                <ttSequenceGroup>
+                    <!--Not a transparent box-->
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>automatic</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>setLayerZIndex</ttType>
+                        <ttIntValue>5000</ttIntValue>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>automatic</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>loadLayer</ttType>
+                        <ttData>ipAddressLayerVisible</ttData>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject>
+            <ttImage>Keyboard</ttImage>
+            <ttBasePositionX>50</ttBasePositionX>
+            <ttBasePositionY>80</ttBasePositionY>
+            <ttType>lable</ttType>
+            <ttGreenPercentage>100</ttGreenPercentage>
+            <ttBluePercentage>100</ttBluePercentage>
+        </ttObject>
+        
+        <ttObject>
+            <ttImage>X</ttImage>
+            <ttType>lable</ttType>
+            <ttFontSize>40</ttFontSize>
+            <ttRedPercentage>100</ttRedPercentage>
+            <ttBasePositionX>85</ttBasePositionX>
+            <ttBasePositionY>80</ttBasePositionY>
+            
+            <ttActionsGroup>
+                <ttTrigger>onTouchesBegan</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>ipAddress</ttVariable>
+                        <ttOperator>
+                            <ttScript>return ""</ttScript>
+                        </ttOperator>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>unLoadLayer</ttType>
+                        <ttData>ipAddressLayerVisible</ttData>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttMacroInvoke macro_name="debugMenu.closeExternalLayerAndShowDebugMenuButton">
+                    <ttMacroParam name="$name" value="keyboardLayer"/>
+                </ttMacroInvoke>
+            </ttActionsGroup>
+        </ttObject>
+        <ttMacroInvoke macro_name="debugMenu.keyboard">
+            <ttMacroParam name="$var" value="ipAddress"/>
+            <ttMacroParam name="$notification" value="debugMenu.ipChanged"/>
+        </ttMacroInvoke>
+        <ttLayers>
+             <!-- Connect button -->
+            <ttLayer>
+                <ttLoadAtInitScript>return debugMenu:getCurrentMenu() == "debugLogMenu"</ttLoadAtInitScript>
+                <ttObject>
+                    <ttImage>Connect</ttImage>
+                    <ttBasePositionX>50</ttBasePositionX>
+                    <ttBasePositionY>57</ttBasePositionY>
+                    <ttType>lable</ttType>
+                    <ttGreenPercentage>100</ttGreenPercentage>
+                    <ttFontSize>40</ttFontSize>
+                    <ttActionsGroup>
+                        <ttTrigger>automatic</ttTrigger>
+                        <ttSequenceGroup>
+                            <ttAction>
+                                <ttType>setLayerZIndex</ttType>
+                                <ttIntValue>5500</ttIntValue>
+                            </ttAction>
+                        </ttSequenceGroup>
+                    </ttActionsGroup>
+                    <ttActionsGroup>
+                        <ttTrigger>onTouchesBegan</ttTrigger>
+                        <ttSequenceGroup>
+                            <ttAction>
+                                <ttType>setIPAddress</ttType>
+                            </ttAction>
+                        </ttSequenceGroup>
+                        <ttSequenceGroup>
+                            <ttAction>
+                                <ttType>unLoadLayer</ttType>
+                                <ttData>ipAddressLayerVisible</ttData>
+                            </ttAction>
+                        </ttSequenceGroup>
+                        <ttMacroInvoke macro_name="debugMenu.closeExternalLayerAndShowDebugMenuButton">
+                            <ttMacroParam name="$name" value="keyboardLayer"/>
+                        </ttMacroInvoke>
+                    </ttActionsGroup>
+                </ttObject>
+            </ttLayer>
+            <ttLayer>
+                <!-- Start Lua Debug button -->
+                <ttLoadAtInitScript>return debugMenu:getCurrentMenu() == "miscMenu"</ttLoadAtInitScript>
+                <ttObject>
+                    <ttImage>Start Lua Debug</ttImage>
+                    <ttBasePositionX>50</ttBasePositionX>
+                    <ttBasePositionY>57</ttBasePositionY>
+                    <ttType>lable</ttType>
+                    <ttGreenPercentage>100</ttGreenPercentage>
+                    <ttFontSize>40</ttFontSize>
+                    <ttActionsGroup>
+                        <ttTrigger>automatic</ttTrigger>
+                        <ttSequenceGroup>
+                            <ttAction>
+                                <ttType>setLayerZIndex</ttType>
+                                <ttIntValue>5500</ttIntValue>
+                            </ttAction>
+                        </ttSequenceGroup>
+                    </ttActionsGroup>
+                    <ttActionsGroup>
+                        <ttTrigger>onTouchesBegan</ttTrigger>
+                        <ttSequenceGroup>
+                            <ttAction>
+                                <ttType>runScript</ttType>
+                                <ttScript>
+                                    print("starting LUA debug still under testing...!")
+                                    debugMenu:startLuaDebug()
+                                </ttScript>
+                            </ttAction>
+                        </ttSequenceGroup>
+                        <ttSequenceGroup>
+                            <ttAction>
+                                <ttType>unLoadLayer</ttType>
+                                <ttData>ipAddressLayerVisible</ttData>
+                            </ttAction>
+                        </ttSequenceGroup>
+                        <ttMacroInvoke macro_name="debugMenu.closeExternalLayerAndShowDebugMenuButton">
+                            <ttMacroParam name="$name" value="keyboardLayer"/>
+                        </ttMacroInvoke>
+                    </ttActionsGroup>
+                </ttObject>
+            </ttLayer>
+        </ttLayers>
+        
+        <!-- Start Lua Debug button-->
+        
+        
+    </ttLayer>
+    <!-- ip address layer-->
+    <!-- here there are two ipaddress layers. the second one is the visible one that is popped up when pressing on connect to server or start lua debugging. the other one is only for the setip action -->
+    <ttLayer>
+        <ttName>ipAddressLayer</ttName>
+        <ttLoadAtInit>yes</ttLoadAtInit>
+        <ttObject>
+            <ttImage>script: return "ip:"..debugMenu:getIpFromPersistency()</ttImage>
+            <ttType>lable</ttType>
+            <ttVisible>no</ttVisible>
+            <ttId>ipAddress</ttId>
+            <ttBasePosition x="-100" y="-100"/>
+            <ttGreenPercentage>100</ttGreenPercentage>
+            <ttFontSize>30</ttFontSize>
+        </ttObject>
+    </ttLayer>
+    <ttLayer>
+        <ttLoadAtInit>NO</ttLoadAtInit>
+        <ttName>ipAddressLayerVisible</ttName>
+        <ttObject>
+            <ttImage>platform/misc/black.png</ttImage>
+            <ttOpacity>128</ttOpacity>
+            <ttScaleX>70</ttScaleX>
+            <ttScaleY>10</ttScaleY>
+            <ttBasePosition x="script: return debugMenu:getPositionX(50,0)" y="script: return debugMenu:getPositionX(92,-7)"/>
+            <ttActionsGroup>
+                <ttApplyOn>layer</ttApplyOn>
+                <ttTrigger>onTouchesMoved</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>moveToTouch</ttType>
+                        <ttDragFromTap>YES</ttDragFromTap>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject>
+            <ttImage>script: return "ip:"..debugMenu:getIpFromPersistency()</ttImage>
+            <ttType>lable</ttType>
+            <ttId>ipAddressVisible</ttId>
+            <ttBasePosition x="script: return debugMenu:getPositionX(50,0)" y="script: return debugMenu:getPositionX(92,-7)"/>
+            <ttGreenPercentage>100</ttGreenPercentage>
+            <ttFontSize>30</ttFontSize>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>debugMenu.ipChanged</ttNotificationIdentifyer>
+                
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>runScript</ttType>
+                        <ttScript>debugMenu:saveIpToPersistency(tostring(ipAddress))</ttScript>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>setLabelText</ttType>
+                        <ttText>#ipAddress</ttText>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            
+        </ttObject>
+        
+        
+        
+        
+        
+    </ttLayer>
+    <!-- listener layer for connecting automatically to the debug log server -->
+    <ttLayer>
+        <ttName>debugMenu.connectAutomaticallyToLog</ttName>
+        <ttObject>
+            <ttImage>dummyForAutoConnect</ttImage>
+            <ttType>lable</ttType>
+            <ttVisible>no</ttVisible>
+            <ttBasePosition x ="-100" y = "-100"/>
+            <ttActionsGroup>
+                <ttTrigger>automatic</ttTrigger>
+                <ttOperator>
+                    <ttScript>return debugMenu:isIpSet() == true</ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>runScript</ttType>
+                        <ttScript>debugMenu:startLuaDebug()</ttScript>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>setIPAddress</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+    </ttLayer>
+    <!--MEMORY MENU EXTRA LAYERS-->
+    <!-- memory usage layer-->
+    <ttLayer>
+        <!-- Memory Usage Layer -->
+        <ttName>memoryUsageLayer</ttName>
+        <!--Show the memoryUsage if it was already open before-->
+        <ttLoadAtInitScript>return debugMenu:isLayerOpen("memoryUsageLayer")</ttLoadAtInitScript>
+        <!-- Memory Window -->
+        <ttObject>
+            <ttId>memoryWindow</ttId>
+            <ttImage>platform/misc/black.png</ttImage>
+            <ttOpacity>128</ttOpacity>
+            <ttScaleX>55</ttScaleX>
+            <ttScaleY>12</ttScaleY>
+            <ttBasePositionX>30</ttBasePositionX>
+            <ttBasePositionY>20</ttBasePositionY>
+            <ttActionsGroup>
+                <ttTrigger>automatic</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>showMemory</ttVariable>
+                        <ttOperator>
+                            <ttConst>1</ttConst>
+                        </ttOperator>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>onTouchesMoved</ttTrigger>
+                <ttApplyOn>layer</ttApplyOn>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>moveToTouch</ttType>
+                        <ttDragFromTap>YES</ttDragFromTap>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject>
+            <ttImage>X</ttImage>
+            <ttId>memoryLayerCloseButton</ttId>
+            <ttType>lable</ttType>
+            <ttFontSize>40</ttFontSize>
+            <ttRedPercentage>100</ttRedPercentage>
+            <ttBasePositionX>57</ttBasePositionX>
+            <ttBasePositionY>23</ttBasePositionY>
+            <ttActionsGroup>
+                <ttTrigger>onTouchesBegan</ttTrigger>
+                <ttMacroInvoke macro_name="debugMenu.closeExternalLayerAndShowDebugMenuButton">
+                    <ttMacroParam name="$name" value="memoryUsageLayer"/>
+                </ttMacroInvoke>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject>
+            <ttImage>0</ttImage>
+            <ttId>memoryUsageLabel</ttId>
+            <ttType>lable</ttType>
+            <ttFontSize>40</ttFontSize>
+            <ttBasePositionX>28</ttBasePositionX>
+            <ttBasePositionY>23</ttBasePositionY>
+            <ttGreenPercentage>100</ttGreenPercentage>
+            <ttBluePercentage>100</ttBluePercentage>
+            <!--<ttMacroInvoke macro_name="memoryUsageMacro" />-->
+            <ttActionsGroup>
+                <ttTrigger>automatic+notification</ttTrigger>
+                <ttNotificationIdentifyer>refreshMemoryUsageTimer</ttNotificationIdentifyer>
+                <ttAutoActionRunEvery>5</ttAutoActionRunEvery>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>refreshMemoryUsageView</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            
+        </ttObject>
+        <ttObject>
+            <ttImage>platform/misc/black.png</ttImage>
+            <ttId>memoryUsageRefreshButtonBack</ttId>
+            <ttOpacity>128</ttOpacity>
+            <ttScaleX>12.5</ttScaleX>
+            <ttScaleY>5.5</ttScaleY>
+            <ttBasePositionX>7</ttBasePositionX>
+            <ttBasePositionY>17</ttBasePositionY>
+            <!--<ttMacroInvoke macro_name="memoryUsageMacro" />-->
+        </ttObject>
+        <ttObject>
+            <ttImage>Refresh</ttImage>
+            <ttId>memoryUsageRefreshButton</ttId>
+            <ttType>lable</ttType>
+            <ttFontSize>40</ttFontSize>
+            <ttBasePositionX>7</ttBasePositionX>
+            <ttBasePositionY>17</ttBasePositionY>
+            <ttGreenPercentage>100</ttGreenPercentage>
+            <!--<ttMacroInvoke macro_name="memoryUsageMacro" />-->
+            <ttActionsGroup>
+                <ttTrigger>onTouchesBegan</ttTrigger>
+                <ttOperator>
+                    <ttScript><![CDATA[return (showMemory == 1)]]></ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>refreshMemoryUsageView</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject>
+            <ttImage>platform/misc/black.png</ttImage>
+            <ttId>releaseUnusedTexturesButtonBack</ttId>
+            <ttOpacity>128</ttOpacity>
+            <ttScaleX>25</ttScaleX>
+            <ttScaleY>5.5</ttScaleY>
+            <ttBasePositionX>30</ttBasePositionX>
+            <ttBasePositionY>17</ttBasePositionY>
+            <!--<ttMacroInvoke macro_name="memoryUsageMacro" />-->
+        </ttObject>
+        <ttObject>
+            <ttImage>Release Unused</ttImage>
+            <ttId>releaseUnusedTexturesButton</ttId>
+            <ttType>lable</ttType>
+            <ttFontSize>40</ttFontSize>
+            <ttBasePositionX>30</ttBasePositionX>
+            <ttBasePositionY>17</ttBasePositionY>
+            <ttGreenPercentage>100</ttGreenPercentage>
+            <!--<ttMacroInvoke macro_name="memoryUsageMacro" />-->
+            <ttActionsGroup>
+                <ttTrigger>onTouchesBegan</ttTrigger>
+                <ttOperator>
+                    <ttScript><![CDATA[return (showMemory == 1)]]></ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>releaseUnusedTextures</ttType>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>refreshMemoryUsageView</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject>
+            <ttImage>platform/misc/black.png</ttImage>
+            <ttId>resetMaxMemoryUsageButtonBack</ttId>
+            <ttOpacity>128</ttOpacity>
+            <ttScaleX>12.5</ttScaleX>
+            <ttScaleY>5.5</ttScaleY>
+            <ttBasePositionX>53</ttBasePositionX>
+            <ttBasePositionY>17</ttBasePositionY>
+            <!--<ttMacroInvoke macro_name="memoryUsageMacro" />-->
+        </ttObject>
+        <ttObject>
+            <ttImage>Reset</ttImage>
+            <ttId>resetMaxMemoryUsageButton</ttId>
+            <ttType>lable</ttType>
+            <ttFontSize>40</ttFontSize>
+            <ttBasePositionX>53</ttBasePositionX>
+            <ttBasePositionY>17</ttBasePositionY>
+            <ttGreenPercentage>100</ttGreenPercentage>
+            <!--<ttMacroInvoke macro_name="memoryUsageMacro" />-->
+            <ttActionsGroup>
+                <ttTrigger>onTouchesBegan</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>resetMaxMemoryUsage</ttType>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>refreshMemoryUsageView</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+    </ttLayer>
+
+    <!--MONETIZATION MENU EXTRA LAYER-->
+    <!-- a listener layer for the toggle ads-->
+    <ttLayer>
+        <ttName>toggleAdsViewLayer</ttName>
+        <ttLoadAtInit>yes</ttLoadAtInit>
+        <ttObject>
+            <ttType>lable</ttType>
+            <ttVisible>no</ttVisible>
+            <ttImage>Toggle Ads Blocking View Notification Layer</ttImage>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>toggleAdsBlockingView</ttNotificationIdentifyer>
+                <ttOperator>
+                    <ttScript><![CDATA[return (adsBlockingViewShown == 0)]]></ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>showAdsDebug</ttNotificationIdentifyer>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>closeInAppMenu</ttNotificationIdentifyer>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>delay</ttType>
+                        <ttActionDuration>0.5</ttActionDuration>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>toggleAdsBlockingView</ttNotificationIdentifyer>
+                <ttOperator>
+                    <ttScript><![CDATA[return (adsBlockingViewShown == 1)]]></ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>hideAdsDebug</ttNotificationIdentifyer>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>closeInAppMenu</ttNotificationIdentifyer>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>delay</ttType>
+                        <ttActionDuration>0.5</ttActionDuration>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+    </ttLayer>
+
+    <!-- REWARDEDADS MENU EXTRA LAYERS-->
+    <ttLayer>
+        <ttName>rewardedAdsMainLayer</ttName>
+        <ttLoadAtInit>yes</ttLoadAtInit>
+        <ttObject>
+            <ttType>lable</ttType>
+            <ttImage>dummy</ttImage>
+            <ttVisible>no</ttVisible>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>rewardedAdsShowAdDebug</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>loadLayer</ttType>
+                        <ttData>rewardedAdsVideoLayer</ttData>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <ttLayers>
+            <ttLayer>
+                <!-- rewarded ads Layer -->
+                <ttName>rewardedAdsVideoLayer</ttName>
+                <ttLoadAtInit>no</ttLoadAtInit>
+                <!-- rewarded ads Window -->
+                <ttObject>
+                    <ttId>rewardedAdsVideoWindow</ttId>
+                    <ttImage>platform/misc/black.png</ttImage>
+                    <ttOpacity>128</ttOpacity>
+                    <ttScaleX>55</ttScaleX>
+                    <ttScaleY>12</ttScaleY>
+                    <ttBasePositionX>30</ttBasePositionX>
+                    <ttBasePositionY>20</ttBasePositionY>
+                    <ttActionsGroup>
+                        <ttTrigger>automatic</ttTrigger>
+                        <ttSequenceGroup>
+                            <ttAction>
+                                <ttType>setVariable</ttType>
+                                <ttVariable>showMemory</ttVariable>
+                                <ttOperator>
+                                    <ttConst>1</ttConst>
+                                </ttOperator>
+                            </ttAction>
+                        </ttSequenceGroup>
+                    </ttActionsGroup>
+                    <ttActionsGroup>
+                        <ttTrigger>onTouchesMoved</ttTrigger>
+                        <ttApplyOn>layer</ttApplyOn>
+                        <ttSequenceGroup>
+                            <ttAction>
+                                <ttType>moveToTouch</ttType>
+                                <ttDragFromTap>YES</ttDragFromTap>
+                            </ttAction>
+                        </ttSequenceGroup>
+                    </ttActionsGroup>
+                </ttObject>
+                <ttObject>
+                    <ttImage>X</ttImage>
+                    <ttId>memoryLayerCloseButton</ttId>
+                    <ttType>lable</ttType>
+                    <ttFontSize>40</ttFontSize>
+                    <ttRedPercentage>100</ttRedPercentage>
+                    <ttBasePositionX>57</ttBasePositionX>
+                    <ttBasePositionY>23</ttBasePositionY>
+                    <ttActionsGroup>
+                        <ttTrigger>onTouchesBegan</ttTrigger>
+                        <ttSequenceGroup>
+                            <ttAction>
+                                <ttType>sendNotification</ttType>
+                                <ttNotificationIdentifyer>closeRewardedAdsMenuMenu</ttNotificationIdentifyer>
+                            </ttAction>
+                        </ttSequenceGroup>
+                        <ttSequenceGroup>
+                            <ttAction>
+                                <ttType>unLoadLayer</ttType>
+                                <ttData>rewardedAdsVideoLayer</ttData>
+                            </ttAction>
+                        </ttSequenceGroup>
+                    </ttActionsGroup>
+                </ttObject>
+                <ttObject>
+                    <ttImage>Success</ttImage>
+                    <ttType>lable</ttType>
+                    <ttFontSize>40</ttFontSize>
+                    <ttBasePositionX>18</ttBasePositionX>
+                    <ttBasePositionY>20</ttBasePositionY>
+                    <ttGreenPercentage>100</ttGreenPercentage>
+                    <ttBluePercentage>100</ttBluePercentage>
+                    <ttActionsGroup>
+                        <ttTrigger>onTouchesBegan</ttTrigger>
+                        <ttSequenceGroup>
+                            <ttAction>
+                                <ttType>sendNotification</ttType>
+                                <ttNotificationIdentifyer>rewardedAdShowSuccess</ttNotificationIdentifyer>
+                            </ttAction>
+                        </ttSequenceGroup>
+                        <ttSequenceGroup>
+                            <ttAction>
+                                <ttType>unLoadLayer</ttType>
+                                <ttData>rewardedAdsVideoLayer</ttData>
+                            </ttAction>
+                        </ttSequenceGroup>
+                        
+                    </ttActionsGroup>
+                    
+                </ttObject>
+                
+                <ttObject>
+                    <ttImage>Fail</ttImage>
+                    <ttType>lable</ttType>
+                    <ttFontSize>40</ttFontSize>
+                    <ttBasePositionX>38</ttBasePositionX>
+                    <ttBasePositionY>20</ttBasePositionY>
+                    <ttGreenPercentage>100</ttGreenPercentage>
+                    <ttBluePercentage>100</ttBluePercentage>
+                    <ttActionsGroup>
+                        <ttTrigger>onTouchesBegan</ttTrigger>
+                        <ttSequenceGroup>
+                            <ttAction>
+                                <ttType>sendNotification</ttType>
+                                <ttNotificationIdentifyer>rewardedAdShowFail</ttNotificationIdentifyer>
+                            </ttAction>
+                        </ttSequenceGroup>
+                        <ttSequenceGroup>
+                            <ttAction>
+                                <ttType>unLoadLayer</ttType>
+                                <ttData>rewardedAdsVideoLayer</ttData>
+                            </ttAction>
+                        </ttSequenceGroup>
+                    </ttActionsGroup>
+                    
+                </ttObject>
+                
+                
+                
+            </ttLayer>
+        </ttLayers>
+    </ttLayer>
+
+    </ttMacroBody>
+</ttMacro>

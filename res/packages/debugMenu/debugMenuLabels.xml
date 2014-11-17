@@ -1,0 +1,414 @@
+
+<!-- LABELS -->
+
+
+<ttMacro name="debugMenu.mainLabels">
+    <ttMacroParams>
+        <ttMacroParamDef name="$menuNameInConfig"/>
+    </ttMacroParams>
+	<ttMacroBody>
+        <ttMacroInvoke macro_name="debugMenu.addLabel">
+            <ttMacroParam name="$name" value="Grid"/>
+            <ttMacroParam name="$menuName" value="$menuNameInConfig"/>
+            <ttMacroParam name="$touchesBeganMacro" value="debugMenu.sendNotification"/>
+            <ttMacroParam name="$touchesBeganMacroParam" value="debugMenu.showGrid"/>
+        </ttMacroInvoke>
+        
+        <ttMacroInvoke macro_name="debugMenu.addLabel">
+            <ttMacroParam name="$name" value="Memory and performance..."/>
+            <ttMacroParam name="$menuName" value="$menuNameInConfig"/>
+            <ttMacroParam name="$touchesBeganMacro" value="debugMenu.newMenu"/>
+            <ttMacroParam name="$touchesBeganMacroParam" value="memoryMenu"/>
+        </ttMacroInvoke>
+        
+        <ttMacroInvoke macro_name="debugMenu.addLabel">
+            <ttMacroParam name="$name" value="Touch Area"/>
+            <ttMacroParam name="$menuName" value="$menuNameInConfig"/>
+            <ttMacroParam name="$touchesBeganMacro" value="debugMenu.action"/>
+            <ttMacroParam name="$touchesBeganMacroParam" value="showTouchArea"/>
+        </ttMacroInvoke>
+        
+        
+        <ttMacroInvoke macro_name="debugMenu.addLabel">
+            <ttMacroParam name="$name" value="Debug Log..."/>
+            <ttMacroParam name="$menuName" value="$menuNameInConfig"/>
+            <ttMacroParam name="$touchesBeganMacro" value="debugMenu.newMenu"/>
+            <ttMacroParam name="$touchesBeganMacroParam" value="debugLogMenu"/>
+        </ttMacroInvoke>
+        
+        <ttMacroInvoke macro_name="debugMenu.addLabel">
+            <ttMacroParam name="$name" value="Test Local Notifications..."/>
+            <ttMacroParam name="$menuName" value="$menuNameInConfig"/>
+            <ttMacroParam name="$touchesBeganMacro" value="debugMenu.action"/>
+            <ttMacroParam name="$touchesBeganMacroParam" value="testLocalNotification"/>
+        </ttMacroInvoke>
+        
+        <ttMacroInvoke macro_name="debugMenu.addLabel">
+            <ttMacroParam name="$name" value="Monetization..."/>
+            <ttMacroParam name="$menuName" value="$menuNameInConfig"/>
+            <ttMacroParam name="$touchesBeganMacro" value="debugMenu.newMenu"/>
+            <ttMacroParam name="$touchesBeganMacroParam" value="monetizationMenu"/>
+        </ttMacroInvoke>
+        
+        
+        <ttMacroInvoke macro_name="debugMenu.addLabel">
+            <ttMacroParam name="$name" value="Resources..."/>
+            <ttMacroParam name="$menuName" value="$menuNameInConfig"/>
+            <ttMacroParam name="$touchesBeganMacro" value="debugMenu.newMenu"/>
+            <ttMacroParam name="$touchesBeganMacroParam" value="resourcesMenu"/>
+        </ttMacroInvoke>
+        
+        
+        <ttMacroInvoke macro_name="debugMenu.addLabel">
+            <ttMacroParam name="$name" value="Misc..."/>
+            <ttMacroParam name="$menuName" value="$menuNameInConfig"/>
+            <ttMacroParam name="$touchesBeganMacro" value="debugMenu.newMenu"/>
+            <ttMacroParam name="$touchesBeganMacroParam" value="miscMenu"/>
+        </ttMacroInvoke>
+        
+        <ttMacroInvoke macro_name="debugMenu.addLabel">
+            <ttMacroParam name="$name" value="Rewarded ads"/>
+            <ttMacroParam name="$menuName" value="$menuNameInConfig"/>
+            <ttMacroParam name="$touchesBeganMacro" value="debugMenu.newMenu"/>
+            <ttMacroParam name="$touchesBeganMacroParam" value="rewardedAdsMenu"/>
+        </ttMacroInvoke>
+        
+    </ttMacroBody>
+</ttMacro>
+
+<ttMacro name="debugMenu.miscLabels">
+    <ttMacroParams>
+        <ttMacroParamDef name="$menuNameInConfig"/>
+    </ttMacroParams>
+	<ttMacroBody>
+        <ttMacroInvoke macro_name="debugMenu.addLabel">
+            <ttMacroParam name="$name" value="Touched Object"/>
+            <ttMacroParam name="$menuName" value="$menuNameInConfig"/>
+            <ttMacroParam name="$touchesBeganMacro" value="debugMenu.loadLayer"/>
+            <ttMacroParam name="$touchesBeganMacroParam" value="touchedObjectLayer"/>
+        </ttMacroInvoke>
+        
+        <ttMacroInvoke macro_name="debugMenu.addLabel">
+            <ttMacroParam name="$name" value="Custom Panel"/>
+            <ttMacroParam name="$menuName" value="$menuNameInConfig"/>
+            <ttMacroParam name="$touchesBeganMacro" value="debugMenu.loadLayer"/>
+            <ttMacroParam name="$touchesBeganMacroParam" value="customPanelContainer"/>
+        </ttMacroInvoke>
+        
+        <ttMacroInvoke macro_name="debugMenu.addLabel">
+            <ttMacroParam name="$name" value="Version Information"/>
+            <ttMacroParam name="$menuName" value="$menuNameInConfig"/>
+            <ttMacroParam name="$touchesBeganMacro" value="debugMenu.actionAndLoadLayer"/>
+            <ttMacroParam name="$touchesBeganMacroParam" value="showVersionInfo"/>
+        </ttMacroInvoke>
+        
+        <ttMacroInvoke macro_name="debugMenu.addLabel">
+            <ttMacroParam name="$name" value="script: return debugMenu:shouldScaleSceneText()"/>
+            <ttMacroParam name="$menuName" value="$menuNameInConfig"/>
+            <ttMacroParam name="$touchesBeganMacro" value="debugMenu.scaleScene"/>
+            <ttMacroParam name="$touchesBeganMacroParam" value="0"/>
+        </ttMacroInvoke>
+        
+        <ttMacroInvoke macro_name="debugMenu.addLabel">
+            <ttMacroParam name="$name" value="Hide Debug Menu Button"/>
+            <ttMacroParam name="$menuName" value="$menuNameInConfig"/>
+            <ttMacroParam name="$touchesBeganMacro" value="debugMenu.executeScript"/>
+            <ttMacroParam name="$touchesBeganMacroParam" value="debugMenu:hide()"/>
+        </ttMacroInvoke>
+        
+        
+        <ttMacroInvoke macro_name="debugMenu.addLabel">
+            <ttMacroParam name="$name" value="script:return debugMenu:getBackButtonVisibility()"/>
+            <ttMacroParam name="$menuName" value="$menuNameInConfig"/>
+            <ttMacroParam name="$touchesBeganMacro" value="debugMenu.toggleBackButtonVisibility"/>
+            <ttMacroParam name="$touchesBeganMacroParam" value="NOPARAM"/>
+        </ttMacroInvoke>
+        
+        <ttMacroInvoke macro_name="debugMenu.addLabel">
+            <ttMacroParam name="$name" value="Lua-zerobrane debug"/>
+            <ttMacroParam name="$menuName" value="$menuNameInConfig"/>
+            <ttMacroParam name="$touchesBeganMacro" value="debugMenu.loadLayer"/>
+            <ttMacroParam name="$touchesBeganMacroParam" value="keyboardLayer"/>
+        </ttMacroInvoke>
+        
+    </ttMacroBody>
+</ttMacro>
+
+<ttMacro name="debugMenu.debugLogLabels">
+    <ttMacroParams>
+        <ttMacroParamDef name="$menuNameInConfig"/>
+    </ttMacroParams>
+	<ttMacroBody>
+        <ttMacroInvoke macro_name="debugMenu.addLabel">
+            <ttMacroParam name="$name" value="Debug log"/>
+            <ttMacroParam name="$menuName" value="$menuNameInConfig"/>
+            <ttMacroParam name="$touchesBeganMacro" value="debugMenu.loadLayer"/>
+            <ttMacroParam name="$touchesBeganMacroParam" value="analyticsContainer"/>
+        </ttMacroInvoke>
+        
+        <ttMacroInvoke macro_name="debugMenu.addLabel">
+            <ttMacroParam name="$name" value="Send Debug Log"/>
+            <ttMacroParam name="$menuName" value="$menuNameInConfig"/>
+            <ttMacroParam name="$touchesBeganMacro" value="debugMenu.action"/>
+            <ttMacroParam name="$touchesBeganMacroParam" value="sendDebugLog"/>
+        </ttMacroInvoke>
+        
+        <ttMacroInvoke macro_name="debugMenu.addLabel">
+            <ttMacroParam name="$name" value="Connect To Server"/>
+            <ttMacroParam name="$menuName" value="$menuNameInConfig"/>
+            <ttMacroParam name="$touchesBeganMacro" value="debugMenu.loadLayer"/>
+            <ttMacroParam name="$touchesBeganMacroParam" value="keyboardLayer"/>
+        </ttMacroInvoke>
+        
+        <ttMacroInvoke macro_name="debugMenu.addLabel">
+            <ttMacroParam name="$name" value="Disconnect From Server"/>
+            <ttMacroParam name="$menuName" value="$menuNameInConfig"/>
+            <ttMacroParam name="$touchesBeganMacro" value="debugMenu.action"/>
+            <ttMacroParam name="$touchesBeganMacroParam" value="disconnectFromServer"/>
+        </ttMacroInvoke>
+        
+        
+    </ttMacroBody>
+</ttMacro>
+
+<ttMacro name="debugMenu.memoryLabels">
+    <ttMacroParams>
+        <ttMacroParamDef name="$menuNameInConfig"/>
+    </ttMacroParams>
+	<ttMacroBody>
+        <ttMacroInvoke macro_name="debugMenu.addLabel">
+            <ttMacroParam name="$name" value="Scene Memory"/>
+            <ttMacroParam name="$menuName" value="$menuNameInConfig"/>
+            <ttMacroParam name="$touchesBeganMacro" value="debugMenu.action"/>
+            <ttMacroParam name="$touchesBeganMacroParam" value="showSceneDebugMemory"/>
+        </ttMacroInvoke>
+        
+        <ttMacroInvoke macro_name="debugMenu.addLabel">
+            <ttMacroParam name="$name" value="Content Memory"/>
+            <ttMacroParam name="$menuName" value="$menuNameInConfig"/>
+            <ttMacroParam name="$touchesBeganMacro" value="debugMenu.action"/>
+            <ttMacroParam name="$touchesBeganMacroParam" value="showContentDebugMemory"/>
+        </ttMacroInvoke>
+        
+        <ttMacroInvoke macro_name="debugMenu.addLabel">
+            <ttMacroParam name="$name" value="Memory Usage"/>
+            <ttMacroParam name="$menuName" value="$menuNameInConfig"/>
+            <ttMacroParam name="$touchesBeganMacro" value="debugMenu.loadLayer"/>
+            <ttMacroParam name="$touchesBeganMacroParam" value="memoryUsageLayer"/>
+        </ttMacroInvoke>
+        
+        <ttMacroInvoke macro_name="debugMenu.addLabel">
+            <ttMacroParam name="$name" value="Enable/Disable FPS display"/>
+            <ttMacroParam name="$menuName" value="$menuNameInConfig"/>
+            <ttMacroParam name="$touchesBeganMacro" value="debugMenu.action"/>
+            <ttMacroParam name="$touchesBeganMacroParam" value="toggleFPSDisplay"/>
+        </ttMacroInvoke>
+        
+        
+    </ttMacroBody>
+</ttMacro>
+
+<ttMacro name="debugMenu.monetizationLabels">
+    <ttMacroParams>
+        <ttMacroParamDef name="$menuNameInConfig"/>
+    </ttMacroParams>
+	<ttMacroBody>
+        <!--<ttMacroInvoke macro_name="debugMenu.addLabel">
+            <ttMacroParam name="$name" value="Purchase app"/>
+            <ttMacroParam name="$menuName" value="$menuNameInConfig"/>
+            <ttMacroParam name="$touchesBeganMacro" value="debugMenu.setVariable"/>
+            <ttMacroParam name="$touchesBeganMacroParam" value="inAppLevel"/>
+        </ttMacroInvoke>-->
+        
+        <ttMacroInvoke macro_name="debugMenu.addLabel">
+            <ttMacroParam name="$name" value="Toggle Ads Blocking View"/>
+            <ttMacroParam name="$menuName" value="$menuNameInConfig"/>
+            <ttMacroParam name="$touchesBeganMacro" value="debugMenu.toggleAdsBlockingView"/>
+            <ttMacroParam name="$touchesBeganMacroParam" value="toggleAdsBlockingView"/>
+        </ttMacroInvoke>
+        
+        <ttMacroInvoke macro_name="debugMenu.addLabel">
+            <ttMacroParam name="$name" value="Enable/Disable Test Popup Ads"/>
+            <ttMacroParam name="$menuName" value="$menuNameInConfig"/>
+            <ttMacroParam name="$touchesBeganMacro" value="debugMenu.action"/>
+            <ttMacroParam name="$touchesBeganMacroParam" value="setDebugInterstitialMode"/>
+        </ttMacroInvoke>
+        
+        <ttMacroInvoke macro_name="debugMenu.addLabel">
+            <ttMacroParam name="$name" value="Reset InAppPurchase"/>
+            <ttMacroParam name="$menuName" value="$menuNameInConfig"/>
+            <ttMacroParam name="$touchesBeganMacro" value="debugMenu.action"/>
+            <ttMacroParam name="$touchesBeganMacroParam" value="inAppReset"/>
+        </ttMacroInvoke>
+        
+        
+    </ttMacroBody>
+</ttMacro>
+
+<ttMacro name="debugMenu.rewardedAdsLabels">
+    <ttMacroParams>
+        <ttMacroParamDef name="$menuNameInConfig"/>
+    </ttMacroParams>
+	<ttMacroBody>
+        <!--
+        <ttMacroInvoke macro_name="debugMenu.addLabel">
+            <ttMacroParam name="$name" value="Rewarded ads"/>
+            <ttMacroParam name="$menuName" value="$menuNameInConfig"/>
+            <ttMacroParam name="$touchesBeganMacro" value="debugMenu.action"/>
+            <ttMacroParam name="$touchesBeganMacroParam" value=""/>
+        </ttMacroInvoke> -->
+        <!-- new label type-->
+        <ttMacroInvoke macro_name="debugMenu.addLabel">
+            <ttMacroParam name="$name" value="script:return debugMenu:getRewardedAdsAvailability()"/>
+            <ttMacroParam name="$menuName" value="$menuNameInConfig"/>
+            <ttMacroParam name="$touchesBeganMacro" value="debugMenu.toggleRewardedAds"/>
+            <ttMacroParam name="$touchesBeganMacroParam" value="NOPARAM"/>
+        </ttMacroInvoke>
+        
+        <ttMacroInvoke macro_name="debugMenu.addLabel">
+            <ttMacroParam name="$name" value="Send video available notification"/>
+            <ttMacroParam name="$menuName" value="$menuNameInConfig"/>
+            <ttMacroParam name="$touchesBeganMacro" value="debugMenu.sendNotification"/>
+            <ttMacroParam name="$touchesBeganMacroParam" value="rewardedAdReady"/>
+            
+        </ttMacroInvoke>
+        
+        
+    </ttMacroBody>
+</ttMacro>
+
+<ttMacro name="debugMenu.resourcesLabels">
+    <ttMacroParams>
+        <ttMacroParamDef name="$menuNameInConfig"/>
+    </ttMacroParams>
+	<ttMacroBody>
+        <ttMacroInvoke macro_name="debugMenu.addLabel">
+            <ttMacroParam name="$name" value="Resource Reports"/>
+            <ttMacroParam name="$menuName" value="$menuNameInConfig"/>
+            <ttMacroParam name="$touchesBeganMacro" value="debugMenu.action"/>
+            <ttMacroParam name="$touchesBeganMacroParam" value="generateResourcesReports"/>
+        </ttMacroInvoke>
+        
+        <ttMacroInvoke macro_name="debugMenu.addLabel">
+            <ttMacroParam name="$name" value="Remove Unused Resources"/>
+            <ttMacroParam name="$menuName" value="$menuNameInConfig"/>
+            <ttMacroParam name="$touchesBeganMacro" value="debugMenu.action"/>
+            <ttMacroParam name="$touchesBeganMacroParam" value="removeUnusedResources"/>
+            
+        </ttMacroInvoke>
+    </ttMacroBody>
+</ttMacro>
+
+
+<ttMacro name="debugMenu.addLabel">
+    <ttMacroParams>
+        <ttMacroParamDef name="$name"/>
+        <ttMacroParamDef name="$menuName"/>
+        <ttMacroParamDef name="$touchesBeganMacro"/>
+        <ttMacroParamDef name="$touchesBeganMacroParam"/>
+    </ttMacroParams>
+	<ttMacroBody>
+        <ttObject>
+            <ttType>lable</ttType>
+            <ttImage>$name</ttImage>
+            <ttBasePositionX>50</ttBasePositionX>
+            <ttBasePositionY>37</ttBasePositionY>
+            <ttRedPercentage>51.7</ttRedPercentage>
+            <ttGreenPercentage>84.7</ttGreenPercentage>
+            <ttBluePercentage>100</ttBluePercentage>
+            <ttFontSize>30</ttFontSize>
+            <ttActionsGroup>
+                <ttTrigger>automatic</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>runScript</ttType>
+                        <ttScript>debugMenu:addLabel("$name", "$menuName")</ttScript>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>script: return "label.".."$name"</ttNotificationIdentifyer>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>script: return "label.".."$name"</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>moveToPoint</ttType>
+                        <!--<ttFinalPositionX>50</ttFinalPositionX>
+                        <ttFinalPositionY>script: return debugMenu:calculateLabelY("$name")</ttFinalPositionY>-->
+                        <ttFinalPosition x="50" y="script: return debugMenu:calculateLabelY('$name')"/>
+                        <ttActionDuration>0</ttActionDuration>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>onTouchesBegan</ttTrigger>
+                <ttMacroInvoke macro_name="$touchesBeganMacro">
+                    <ttMacroParam name="$param" value="$touchesBeganMacroParam"/>
+                </ttMacroInvoke>
+            </ttActionsGroup>
+        </ttObject>
+    </ttMacroBody>
+</ttMacro>
+
+<!-- for future use -->
+<ttMacro name="debugMenu.addSpecialLabel">
+    <ttMacroParams>
+        <ttMacroParamDef name="$name"/>
+        <ttMacroParamDef name="$visibleScript"/>
+        <ttMacroParamDef name="$menuName"/>
+        <ttMacroParamDef name="$touchesBeganMacro"/>
+        <ttMacroParamDef name="$touchesBeganMacroParam"/>
+    </ttMacroParams>
+	<ttMacroBody>
+        <ttObject>
+            <ttType>lable</ttType>
+            <ttImage>$name</ttImage>
+            <ttBasePositionX>50</ttBasePositionX>
+            <ttBasePositionY>37</ttBasePositionY>
+            <ttRedPercentage>51.7</ttRedPercentage>
+            <ttGreenPercentage>84.7</ttGreenPercentage>
+            <ttBluePercentage>100</ttBluePercentage>
+            <ttFontSize>30</ttFontSize>
+            <ttVisible>$visibleScript</ttVisible>
+            <ttActionsGroup>
+                <ttTrigger>automatic</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>runScript</ttType>
+                        <ttScript>debugMenu:addLabel("$name", "$menuName")</ttScript>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>script: return "label.".."$name"</ttNotificationIdentifyer>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>script: return "label.".."$name"</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>moveToPoint</ttType>
+                        <!--<ttFinalPositionX>50</ttFinalPositionX>
+                         <ttFinalPositionY>script: return debugMenu:calculateLabelY("$name")</ttFinalPositionY>-->
+                        <ttFinalPosition x="50" y="script: return debugMenu:calculateLabelY('$name')"/>
+                        <ttActionDuration>0</ttActionDuration>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>onTouchesBegan</ttTrigger>
+                <ttMacroInvoke macro_name="$touchesBeganMacro">
+                    <ttMacroParam name="$param" value="$touchesBeganMacroParam"/>
+                </ttMacroInvoke>
+            </ttActionsGroup>
+        </ttObject>
+    </ttMacroBody>
+</ttMacro>

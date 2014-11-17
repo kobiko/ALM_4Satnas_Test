@@ -1,0 +1,1176 @@
+<?xml version="1.0" ?>
+<ttMacro name="popUpButton">
+    <ttMacroParams>
+        <ttMacroParamDef name="$triggerDelay"/>
+        <ttMacroParamDef name="$scaleTo"/>
+    </ttMacroParams>
+    <ttMacroBody>
+        <ttActionsGroup>
+            <ttTrigger>notification</ttTrigger>
+            <ttNotificationIdentifyer>showInAppDialog</ttNotificationIdentifyer>
+            <ttSequenceGroup>
+                <ttAction>
+                    <ttType>delay</ttType>
+                    <ttActionDuration>$triggerDelay</ttActionDuration>
+                </ttAction>
+            </ttSequenceGroup>
+            <ttSequenceGroup>
+                <ttAction>
+                    <ttType>scale</ttType>
+                    <ttScaleTo>$scaleTo</ttScaleTo>
+                    <ttActionDuration>0.5</ttActionDuration>
+                    <ttActionEaseMode>easeBackOut</ttActionEaseMode>
+                    <ttActionEaseRate>2</ttActionEaseRate>
+                </ttAction>
+            </ttSequenceGroup>
+        </ttActionsGroup>
+    </ttMacroBody>
+</ttMacro>
+
+<ttMacro name="popUpButtonAnimation">
+    <ttMacroParams>
+        <ttMacroParamDef name="$scale1"/>
+        <ttMacroParamDef name="$scale2"/>
+    </ttMacroParams>
+    <ttMacroBody>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>showInAppDialog</ttNotificationIdentifyer>
+                <ttAutoActionRunEvery>1.5</ttAutoActionRunEvery>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>scaleXy</ttType>
+                        <ttActionDuration>0.75</ttActionDuration>
+                        <ttScaleX>$scale1</ttScaleX>
+                        <ttScaleY>$scale2</ttScaleY>
+                        <ttActionEaseMode>easeInOut</ttActionEaseMode>
+                        <ttActionEaseRate>2</ttActionEaseRate>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>scaleXy</ttType>
+                        <ttActionDuration>0.75</ttActionDuration>
+                        <ttScaleX>$scale2</ttScaleX>
+                        <ttScaleY>$scale1</ttScaleY>
+                        <ttActionEaseMode>easeInOut</ttActionEaseMode>
+                        <ttActionEaseRate>2</ttActionEaseRate>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+    </ttMacroBody>
+</ttMacro>
+
+<ttMacro name="inAppFadeIfPurchased">
+    <ttMacroParams>
+        <ttMacroParamDef name="$theProductId"/>
+    </ttMacroParams>
+    <ttMacroBody>
+        <ttActionsGroup>
+            <ttTrigger>notification</ttTrigger>
+            <ttNotificationIdentifyer>showInAppDialog</ttNotificationIdentifyer>
+            <ttOperator>
+                <ttType>equal</ttType>
+                <ttOperator>
+                    <ttVariable>$theProductId</ttVariable>
+                </ttOperator>
+                <ttOperator>
+                    <ttConst>1</ttConst>
+                </ttOperator>
+            </ttOperator>
+            <ttSequenceGroup>
+                <ttAction>
+                    <ttType>fadeTo</ttType>
+                    <ttOpacity>130</ttOpacity>
+                </ttAction>
+                <ttAction>
+                    <ttType>disableObject</ttType>
+                </ttAction>
+            </ttSequenceGroup>
+        </ttActionsGroup>
+        <ttActionsGroup>
+            <ttTrigger>notification</ttTrigger>
+            <ttNotificationIdentifyer>hideInAppDialog</ttNotificationIdentifyer>
+            <ttSequenceGroup>
+                <ttAction>
+                    <ttType>delay</ttType>
+                    <ttActionDuration>0.35</ttActionDuration>
+                </ttAction>
+            </ttSequenceGroup>
+            <ttSequenceGroup>
+                <ttAction>
+                    <ttType>enableObject</ttType>
+                </ttAction>
+            </ttSequenceGroup>
+        </ttActionsGroup>
+        <ttActionsGroup>
+            <!-- listen to close dialog and enable the object (for the next time user open this dialog)-->
+            <!--ttTrigger>notification+automatic</ttTrigger--> <!-- nir check it out -->
+            <ttTrigger>automatic</ttTrigger>
+            <ttSequenceGroup>
+                <ttAction>
+                    <ttType>enableObject</ttType>
+                </ttAction>
+            </ttSequenceGroup>
+        </ttActionsGroup>
+    </ttMacroBody>
+</ttMacro>
+
+<ttMacro name="inAppBuyObject">
+    <ttMacroParams>
+        <ttMacroParamDef name="$buttonImage"/>
+        <ttMacroParamDef name="$posX"/>
+        <ttMacroParamDef name="$posY"/>
+        <ttMacroParamDef name="$inAppProductId"/>
+        <ttMacroParamDef name="$actionType"/>
+        <ttMacroParamDef name="$unLoadLayerNotification"/>
+        <ttMacroParamDef name="$logEventParam"/>
+        <ttMacroParamDef name="$logEventVal"/>
+    </ttMacroParams>
+    <ttMacroBody>
+        <ttObject>
+            <ttImage>$buttonImage</ttImage>
+            <ttBasePosition x="$posX" y="$posY" />
+            <ttScale>0</ttScale>
+            <!-- block all touches -->
+            <ttActionsGroup>
+                <ttTrigger>onTouchesBegan</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>hideInAppDialog</ttNotificationIdentifyer>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>logEvent</ttType>
+                        <ttLogEventName>Stores</ttLogEventName>
+                        <ttLogEventParam>$logEventParam</ttLogEventParam>
+                        <ttLogEventVal>$logEventVal</ttLogEventVal>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>$actionType</ttType>
+                        <ttData>$inAppProductId</ttData>
+                    </ttAction>
+                </ttSequenceGroup>
+                <!-- wait for animation befor unloading the layer-->
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>delay</ttType>
+                        <ttActionDuration>0.5</ttActionDuration>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>$unLoadLayerNotification</ttNotificationIdentifyer>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttMacroInvoke macro_name="popUpButton">
+                <ttMacroParam name="$triggerDelay" value="0.5"/>
+                <ttMacroParam name="$scaleTo" value="1.0"/>
+            </ttMacroInvoke>
+            <ttMacroInvoke macro_name="inAppFadeIfPurchased">
+                <ttMacroParam name="$theProductId" value="$inAppProductId"/>
+            </ttMacroInvoke>
+        </ttObject>
+    </ttMacroBody>
+</ttMacro>
+<ttMacro name="inAppBuyObjectPlusAnimation">
+    <ttMacroParams>
+        <ttMacroParamDef name="$buttonImage"/>
+        <ttMacroParamDef name="$posX"/>
+        <ttMacroParamDef name="$posY"/>
+        <ttMacroParamDef name="$inAppProductId"/>
+        <ttMacroParamDef name="$actionType"/>
+        <ttMacroParamDef name="$unLoadLayerNotification"/>
+        <ttMacroParamDef name="$logEventParam"/>
+    </ttMacroParams>
+    <ttMacroBody>
+        <ttObject>
+            <ttImage>$buttonImage</ttImage>
+            <ttBasePosition x="$posX" y="$posY" />
+            <ttScale>0</ttScale>
+            <!-- block all touches -->
+            <ttActionsGroup>
+                <ttTrigger>onTouchesBegan</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>hideInAppDialog</ttNotificationIdentifyer>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>logEvent</ttType>
+                        <ttLogEventName>Stores</ttLogEventName>
+                        <ttLogEventParam>$logEventParam</ttLogEventParam>
+                        <ttLogEventVal>FullVersion</ttLogEventVal>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>$actionType</ttType>
+                        <ttData>$inAppProductId</ttData>
+                    </ttAction>
+                </ttSequenceGroup>
+                <!-- wait for animation befor unloading the layer-->
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>delay</ttType>
+                        <ttActionDuration>0.5</ttActionDuration>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>$unLoadLayerNotification</ttNotificationIdentifyer>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttMacroInvoke macro_name="popUpButton">
+                <ttMacroParam name="$triggerDelay" value="0.5"/>
+                <ttMacroParam name="$scaleTo" value="1.0"/>
+            </ttMacroInvoke>
+            <ttMacroInvoke macro_name="inAppFadeIfPurchased">
+                <ttMacroParam name="$theProductId" value="$inAppProductId"/>
+            </ttMacroInvoke>
+            <ttMacroInvoke macro_name="popUpButtonAnimation">
+                <ttMacroParam name="$scale1" value="1.025"/>
+                <ttMacroParam name="$scale2" value="1.0"/>
+            </ttMacroInvoke>
+        </ttObject>
+    </ttMacroBody>
+</ttMacro>
+
+<ttMacro name="inAppPriceOrDescription">
+    <ttMacroParams>
+        <ttMacroParamDef name="$posX"/>
+        <ttMacroParamDef name="$posY"/>
+        <ttMacroParamDef name="$rotate"/>
+        <ttMacroParamDef name="$inAppProductId"/>
+        <ttMacroParamDef name="$infoType"/>
+        <ttMacroParamDef name="$lableWidth"/>
+        <ttMacroParamDef name="$fontType"/>
+        <ttMacroParamDef name="$red"/>
+        <ttMacroParamDef name="$green"/>
+        <ttMacroParamDef name="$blue"/>
+    </ttMacroParams>
+    <ttMacroBody>
+        <ttObject>
+            <ttImage>$infoType</ttImage>
+            <ttType>lable</ttType>
+            <ttBasePosition x="$posX" y="$posY" />
+            <ttScale>0</ttScale>
+            <ttRotate>$rotate</ttRotate>
+            <ttFontType>$fontType</ttFontType>
+            <ttRedPercentage>$red</ttRedPercentage>
+            <ttGreenPercentage>$green</ttGreenPercentage>
+            <ttBluePercentage>$blue</ttBluePercentage>
+            <!-- block all touches -->
+            <ttActionsGroup>
+                <ttTrigger>automatic</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>inAppInfo</ttType>
+                        <ttInfoWidth>$lableWidth</ttInfoWidth>
+                        <ttInAppProductId>$inAppProductId</ttInAppProductId>
+                        <ttInfoType>$infoType</ttInfoType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttMacroInvoke macro_name="popUpButton">
+                <ttMacroParam name="$triggerDelay" value="0.5"/>
+                <ttMacroParam name="$scaleTo" value="0.5"/>
+            </ttMacroInvoke>
+            <ttMacroInvoke macro_name="inAppFadeIfPurchased">
+                <ttMacroParam name="$theProductId" value="$inAppProductId"/>
+            </ttMacroInvoke>
+        </ttObject>
+    </ttMacroBody>
+</ttMacro>
+<ttMacro name="inAppPriceOrDescriptionPlusAnimation">
+    <ttMacroParams>
+        <ttMacroParamDef name="$posX"/>
+        <ttMacroParamDef name="$posY"/>
+        <ttMacroParamDef name="$rotate"/>
+        <ttMacroParamDef name="$inAppProductId"/>
+        <ttMacroParamDef name="$infoType"/>
+        <ttMacroParamDef name="$lableWidth"/>
+        <ttMacroParamDef name="$fontType"/>
+        <ttMacroParamDef name="$red"/>
+        <ttMacroParamDef name="$green"/>
+        <ttMacroParamDef name="$blue"/>
+    </ttMacroParams>
+    <ttMacroBody>
+        <ttObject>
+            <ttImage>$infoType</ttImage>
+            <ttType>lable</ttType>
+            <ttBasePosition x="$posX" y="$posY" />
+            <ttScale>0</ttScale>
+            <ttRotate>$rotate</ttRotate>
+            <ttFontType>$fontType</ttFontType>
+            <ttRedPercentage>$red</ttRedPercentage>
+            <ttGreenPercentage>$green</ttGreenPercentage>
+            <ttBluePercentage>$blue</ttBluePercentage>
+            <!-- block all touches -->
+            <ttActionsGroup>
+                <ttTrigger>automatic</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>inAppInfo</ttType>
+                        <ttInfoWidth>$lableWidth</ttInfoWidth>
+                        <ttInAppProductId>$inAppProductId</ttInAppProductId>
+                        <ttInfoType>$infoType</ttInfoType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttMacroInvoke macro_name="popUpButton">
+                <ttMacroParam name="$triggerDelay" value="0.5"/>
+                <ttMacroParam name="$scaleTo" value="0.5"/>
+            </ttMacroInvoke>
+            <ttMacroInvoke macro_name="inAppFadeIfPurchased">
+                <ttMacroParam name="$theProductId" value="$inAppProductId"/>
+            </ttMacroInvoke>
+            <ttMacroInvoke macro_name="popUpButtonAnimation">
+                <ttMacroParam name="$scale1" value="0.5"/>
+                <ttMacroParam name="$scale2" value="0.45"/>
+            </ttMacroInvoke>
+        </ttObject>
+    </ttMacroBody>
+</ttMacro>
+
+<ttMacro name="inAppPriceOrDescriptionSpecial">
+    <ttMacroParams>
+        <ttMacroParamDef name="$posX"/>
+        <ttMacroParamDef name="$posY"/>
+        <ttMacroParamDef name="$inAppProductId"/>
+        <ttMacroParamDef name="$infoType"/>
+        <ttMacroParamDef name="$lableWidth"/>
+        <ttMacroParamDef name="$fontType"/>
+        <ttMacroParamDef name="$red"/>
+        <ttMacroParamDef name="$green"/>
+        <ttMacroParamDef name="$blue"/>
+    </ttMacroParams>
+    <ttMacroBody>
+        <ttObject>
+            <ttImage>$infoType</ttImage>
+            <ttType>lable</ttType>
+            <ttBasePosition x="$posX" y="$posY" />
+            <ttFontType>$fontType</ttFontType>
+            <ttRedPercentage>$red</ttRedPercentage>
+            <ttGreenPercentage>$green</ttGreenPercentage>
+            <ttBluePercentage>$blue</ttBluePercentage>
+            <!-- block all touches -->
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>1005</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>moveBy</ttType>
+                        <ttFinalPosition x="0" y="-100" />
+                        <ttActionDuration>0.8</ttActionDuration>
+                        <ttActionEaseMode>easeBackOut</ttActionEaseMode>
+                        <ttActionEaseRate>2.0</ttActionEaseRate>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>automatic</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>inAppInfo</ttType>
+                        <ttInfoWidth>$lableWidth</ttInfoWidth>
+                        <ttInAppProductId>$inAppProductId</ttInAppProductId>
+                        <ttInfoType>$infoType</ttInfoType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>priceAnimate</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>scaleXy</ttType>
+                        <ttActionDuration>0.2</ttActionDuration>
+                        <ttActionEaseRate>2.00</ttActionEaseRate>
+                        <ttActionEaseMode>easeElasticOut</ttActionEaseMode>
+                        <ttScaleX>0.8</ttScaleX>
+                        <ttScaleY>0.8</ttScaleY>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>playSound</ttType>
+                        <ttFile>sounds/button_tap_new.mp3</ttFile>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>scaleXy</ttType>
+                        <ttActionDuration>0.2</ttActionDuration>
+                        <ttActionEaseRate>2.00</ttActionEaseRate>
+                        <ttActionEaseMode>easeElasticOut</ttActionEaseMode>
+                        <ttScaleX>1</ttScaleX>
+                        <ttScaleY>1</ttScaleY>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttMacroInvoke macro_name="popDown">
+                <ttMacroParam name="$notifId" value="1006"/>
+                <ttMacroParam name="$triggerDelay" value="0.0"/>
+            </ttMacroInvoke>
+            <ttMacroInvoke macro_name="popDown">
+                <ttMacroParam name="$notifId" value="1007"/>
+                <ttMacroParam name="$triggerDelay" value="0.0"/>
+            </ttMacroInvoke>
+        </ttObject>
+    </ttMacroBody>
+</ttMacro>
+
+<ttMacro name="inAppBackgroundObject">
+    <ttMacroParams>
+        <ttMacroParamDef name="$image"/>
+        <ttMacroParamDef name="$posX"/>
+        <ttMacroParamDef name="$posY"/>
+        <ttMacroParamDef name="$scaleTo"/>
+    </ttMacroParams>
+    <ttMacroBody>
+        <ttObject>
+            <ttImage>images/blockingView.png</ttImage>
+            <ttBasePosition x="50" y="50" />
+            <ttScale>0</ttScale>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>showInAppDialog</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>playSound</ttType>
+                        <ttFile>sounds/pop_up_open.mp3</ttFile>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>setLayerZIndex</ttType>
+                        <ttIntValue>2102</ttIntValue>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>scale</ttType>
+                        <ttScaleTo>100</ttScaleTo>
+                        <ttActionDuration>0</ttActionDuration>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>hideInAppDialog</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>fadeOut</ttType>
+                        <ttActionDuration>0.35</ttActionDuration>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>scale</ttType>
+                        <ttScaleTo>0</ttScaleTo>
+                        <ttActionDuration>0</ttActionDuration>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject>
+            <ttImage>$image</ttImage>
+            <ttBasePosition x="$posX" y="$posY" />
+            <ttScale>0</ttScale>
+            <ttTopRightX>100</ttTopRightX>
+            <ttBottomRightX>100</ttBottomRightX>
+            <ttTopLeftY>100</ttTopLeftY>
+            <ttTopRightY>100</ttTopRightY>
+            <!-- block all touches -->
+            <ttActionsGroup>
+                <ttTrigger>onTouchesBegan</ttTrigger>
+            </ttActionsGroup>
+            <!-- open dialog notification-->
+            <ttMacroInvoke macro_name="popUpButton">
+                <ttMacroParam name="$triggerDelay" value="0"/>
+                <ttMacroParam name="$scaleTo" value="$scaleTo"/>
+            </ttMacroInvoke>
+        </ttObject>
+    </ttMacroBody>
+</ttMacro>
+
+<ttMacro name="inAppRestoreObject">
+    <ttMacroParams>
+        <ttMacroParamDef name="$buttonImage"/>
+        <ttMacroParamDef name="$posX"/>
+        <ttMacroParamDef name="$posY"/>
+        <ttMacroParamDef name="$actionType"/>
+    </ttMacroParams>
+    <ttMacroBody>
+        <ttObject>
+            <ttImage>$buttonImage</ttImage>
+            <ttBasePosition x="$posX" y="$posY" />
+            <ttScale>0</ttScale>
+            <ttVisibleScript>return (not srvc.isAndroid())</ttVisibleScript>
+            <!-- block all touches -->
+            <ttActionsGroup>
+                <ttTrigger>onTouchesBegan</ttTrigger>
+                <ttOperator>
+                    <ttScript>return (not srvc.isAndroid())</ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>2909</ttNotificationIdentifyer>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>$actionType</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>hideInAppDialog</ttNotificationIdentifyer>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttMacroInvoke macro_name="popUpButton">
+                <ttMacroParam name="$triggerDelay" value="0.5"/>
+                <ttMacroParam name="$scaleTo" value="1.0"/>
+            </ttMacroInvoke>
+            <ttMacroInvoke macro_name="inAppFadeIfPurchased">
+                <ttMacroParam name="$theProductId" value="$inAppProductId"/>
+            </ttMacroInvoke>
+        </ttObject>
+    </ttMacroBody>
+</ttMacro>
+
+<ttMacro name="inAppCloseObject">
+    <ttMacroParams>
+        <ttMacroParamDef name="$image"/>
+        <ttMacroParamDef name="$posX"/>
+        <ttMacroParamDef name="$posY"/>
+        <ttMacroParamDef name="$unLoadLayerNotification"/>
+        <ttMacroParamDef name="$logEventParam"/>
+    </ttMacroParams>
+    <ttMacroBody>
+        <ttObject>
+            <ttImage>$image</ttImage>
+            <ttBasePosition x="$posX" y="$posY" />
+            <ttScale>0</ttScale>
+            <ttActionsGroup>
+                <ttTrigger>onTouchesBegan</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>hideInAppDialog</ttNotificationIdentifyer>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>logEvent</ttType>
+                        <ttLogEventName>Stores</ttLogEventName>
+                        <ttLogEventParam>$logEventParam</ttLogEventParam>
+                        <ttLogEventVal>Close</ttLogEventVal>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>playSound</ttType>
+                        <ttFile>sounds/pop_up_close.mp3</ttFile>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>hideInAppDialog</ttNotificationIdentifyer>
+                <ttApplyOn>layer</ttApplyOn>
+                <ttSequenceGroup>
+                <ttAction>
+                    <ttType>playSound</ttType>
+                    <ttFile>sounds/pop_up_close.mp3</ttFile>
+                </ttAction>
+            </ttSequenceGroup>
+            <ttSequenceGroup>
+                 <ttAction>
+                    <ttType>scale</ttType>
+                    <ttScaleTo>0</ttScaleTo>
+                    <ttActionDuration>0.4</ttActionDuration>
+                    <ttActionEaseMode>easeBackIn</ttActionEaseMode>
+                    <ttActionEaseRate>2</ttActionEaseRate>
+                </ttAction>
+            </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>$unLoadLayerNotification</ttNotificationIdentifyer>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <!-- open dialog notification-->
+            <ttMacroInvoke macro_name="popUpButton">
+                <ttMacroParam name="$triggerDelay" value="1"/>
+                <ttMacroParam name="$scaleTo" value="1"/>
+            </ttMacroInvoke>
+        </ttObject>
+    </ttMacroBody>
+</ttMacro>
+
+<ttMacro name="inAppRVObject">
+    <ttMacroParams>
+        <ttMacroParamDef name="$buttonImage"/>
+        <ttMacroParamDef name="$posX"/>
+        <ttMacroParamDef name="$posY"/>
+        <ttMacroParamDef name="$logEventParam"/>
+        <ttMacroParamDef name="$inAppProductId"/>
+    </ttMacroParams>
+    <ttMacroBody>
+        <ttObject>
+            <ttImage>$buttonImage</ttImage>
+            <ttBasePosition x="$posX" y="$posY" />
+            <ttScale>0</ttScale>
+            <ttVisible>NO</ttVisible>
+            <ttActionsGroup>
+                <ttTrigger>onTouchesBegan</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>logEvent</ttType>
+                        <ttLogEventName>Stores</ttLogEventName>
+                        <ttLogEventParam>$logEventParam</ttLogEventParam>
+                        <ttLogEventVal>Get_Free</ttLogEventVal>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>showVideoAd</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>automatic</ttTrigger>
+                <ttOperator>
+                    <ttScript>return (services:rewardedAdsHasVideo())</ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                   <ttAction>
+                        <ttType>makeVisible</ttType>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>scale</ttType>
+                        <ttScaleTo>1</ttScaleTo>
+                        <ttActionDuration>0.5</ttActionDuration>
+                        <ttActionEaseMode>easeBackOut</ttActionEaseMode>
+                        <ttActionEaseRate>2</ttActionEaseRate>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>rewardedAdReady</ttNotificationIdentifyer>
+                <ttOperator>
+                    <ttScript>return (services:rewardedAdsHasVideo())</ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                   <ttAction>
+                        <ttType>makeVisible</ttType>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>scale</ttType>
+                        <ttScaleTo>1</ttScaleTo>
+                        <ttActionDuration>0.5</ttActionDuration>
+                        <ttActionEaseMode>easeBackOut</ttActionEaseMode>
+                        <ttActionEaseRate>2</ttActionEaseRate>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttMacroInvoke macro_name="popUpButton">
+                <ttMacroParam name="$triggerDelay" value="0.5"/>
+                <ttMacroParam name="$scaleTo" value="1.0"/>
+            </ttMacroInvoke>
+            <ttMacroInvoke macro_name="inAppFadeIfPurchased">
+                <ttMacroParam name="$theProductId" value="$inAppProductId"/>
+            </ttMacroInvoke>
+        </ttObject>
+    </ttMacroBody>
+</ttMacro>
+
+<ttMacro name="mainStoreLayer">
+    <ttMacroBody>
+        <ttLayer ttName="mainStoreLayer">
+            <ttLoadAtInit>NO</ttLoadAtInit>
+            <!-- background -->
+            <ttMacroInvoke macro_name="inAppBackgroundObject">
+                <ttMacroParam name="$image" value="InAppPurchaseDialog/back_mainStore.png"/>
+                <ttMacroParam name="$posX" value="50"/>
+                <ttMacroParam name="$posY" value="49.5"/>
+                <ttMacroParam name="$scaleTo" value="1"/>
+            </ttMacroInvoke>
+
+            <!-- FullVersion button -->
+            <ttMacroInvoke macro_name="inAppBuyObjectPlusAnimation">
+                <ttMacroParam name="$buttonImage" value="InAppPurchaseDialog/inAppFullVersion.png"/>
+                <ttMacroParam name="$posX" value="50.3472"/>
+                <ttMacroParam name="$posY" value="52.3958"/>
+                <ttMacroParam name="$inAppProductId" value="inAppProductFullVersion"/>
+                <ttMacroParam name="$actionType" value="inAppPurchase"/>
+                <ttMacroParam name="$unLoadLayerNotification" value="unloadMainStore"/>
+                <ttMacroParam name="$logEventParam" value="Main_Store"/>
+            </ttMacroInvoke>
+            <!-- FullVersion price -->
+            <ttMacroInvoke macro_name="inAppPriceOrDescription">
+                <ttMacroParam name="$posX" value="50.3472"/>
+                <ttMacroParam name="$posY" value="37.5"/>
+                <ttMacroParam name="$inAppProductId" value="inAppProductFullVersion"/>
+                <ttMacroParam name="$infoType" value="price"/>
+                <ttMacroParam name="$lableWidth" value="18"/>
+                <ttMacroParam name="$fontType" value="ArialRoundedMTBold"/>
+                <ttMacroParam name="$red" value="100"/>
+                <ttMacroParam name="$green" value="100"/>
+                <ttMacroParam name="$blue" value="100"/>
+                <ttMacroParam name="$rotate" value="0"/>
+            </ttMacroInvoke>
+
+            <!-- Levels button -->
+            <ttMacroInvoke macro_name="inAppBuyObject">
+                <ttMacroParam name="$buttonImage" value="InAppPurchaseDialog/inAppAllLevels.png"/>
+                <ttMacroParam name="$posX" value="50.3472"/>
+                <ttMacroParam name="$posY" value="22.0573"/>
+                <ttMacroParam name="$inAppProductId" value="inAppProduct_levels"/>
+                <ttMacroParam name="$actionType" value="inAppPurchase"/>
+                <ttMacroParam name="$unLoadLayerNotification" value="unloadMainStore"/>
+                <ttMacroParam name="$logEventParam" value="Main_Store"/>
+                <ttMacroParam name="$logEventVal" value="Levels"/>
+            </ttMacroInvoke>
+            <!-- Levels price -->
+             <ttMacroInvoke macro_name="inAppPriceOrDescription">
+                <ttMacroParam name="$posX" value="51.7472"/>
+                <ttMacroParam name="$posY" value="16"/>
+                <ttMacroParam name="$inAppProductId" value="inAppProduct_levels"/>
+                <ttMacroParam name="$infoType" value="price"/>
+                <ttMacroParam name="$lableWidth" value="16"/>
+                <ttMacroParam name="$fontType" value="ArialRoundedMTBold"/>
+                <ttMacroParam name="$red" value="100"/>
+                <ttMacroParam name="$green" value="100"/>
+                <ttMacroParam name="$blue" value="100"/>
+                <ttMacroParam name="$rotate" value="0"/>
+            </ttMacroInvoke>
+
+            <!-- Decorations button -->
+            <ttMacroInvoke macro_name="inAppBuyObject">
+                <ttMacroParam name="$buttonImage" value="InAppPurchaseDialog/inAppDecorations.png"/>
+                <ttMacroParam name="$posX" value="50.3472"/>
+                <ttMacroParam name="$posY" value="79.4792"/>
+                <ttMacroParam name="$inAppProductId" value="inAppProduct_decorations"/>
+                <ttMacroParam name="$actionType" value="inAppPurchase"/>
+                <ttMacroParam name="$unLoadLayerNotification" value="unloadMainStore"/>
+                <ttMacroParam name="$logEventParam" value="Main_Store"/>
+                <ttMacroParam name="$logEventVal" value="Decorations"/>
+            </ttMacroInvoke>
+            <!-- Decorations price -->
+              <ttMacroInvoke macro_name="inAppPriceOrDescription">
+                <ttMacroParam name="$posX" value="51.7472"/>
+                <ttMacroParam name="$posY" value="73.5"/>
+                <ttMacroParam name="$inAppProductId" value="inAppProduct_decorations"/>
+                <ttMacroParam name="$infoType" value="price"/>
+                <ttMacroParam name="$lableWidth" value="16"/>
+                <ttMacroParam name="$fontType" value="ArialRoundedMTBold"/>
+                <ttMacroParam name="$red" value="100"/>
+                <ttMacroParam name="$green" value="100"/>
+                <ttMacroParam name="$blue" value="100"/>
+                <ttMacroParam name="$rotate" value="0"/>
+           </ttMacroInvoke>
+
+            <!-- RestorePurchase -->
+            <ttMacroInvoke macro_name="inAppRestoreObject">
+                <ttMacroParam name="$buttonImage" value="InAppPurchaseDialog/inAppRestorePurchase.png"/>
+                <ttMacroParam name="$posX" value="15.625"/>
+                <ttMacroParam name="$posY" value="8.125"/>
+                <ttMacroParam name="$actionType" value="inAppRestore"/>
+            </ttMacroInvoke>
+
+            <!-- RemoveAds button-->
+            <ttMacroInvoke macro_name="inAppBuyObject">
+                <ttMacroParam name="$buttonImage" value="InAppPurchaseDialog/inAppRemoveAds.png"/>
+                <ttMacroParam name="$posX" value="85.9375"/>
+                <ttMacroParam name="$posY" value="8.125"/>
+                <ttMacroParam name="$inAppProductId" value="inAppProductRemoveAds"/>
+                <ttMacroParam name="$actionType" value="inAppPurchase"/>
+                <ttMacroParam name="$unLoadLayerNotification" value="unloadMainStore"/>
+                <ttMacroParam name="$logEventParam" value="Main_Store"/>
+                <ttMacroParam name="$logEventVal" value="RemoveAds"/>
+            </ttMacroInvoke>
+            <!-- RemoveAds price -->
+            <ttMacroInvoke macro_name="inAppPriceOrDescription">
+                <ttMacroParam name="$posX" value="86"/>
+                <ttMacroParam name="$posY" value="3.5"/>
+                <ttMacroParam name="$inAppProductId" value="inAppProductRemoveAds"/>
+                <ttMacroParam name="$infoType" value="price"/>
+                <ttMacroParam name="$lableWidth" value="9"/>
+                <ttMacroParam name="$fontType" value="ArialRoundedMTBold"/>
+                <ttMacroParam name="$red" value="100"/>
+                <ttMacroParam name="$green" value="100"/>
+                <ttMacroParam name="$blue" value="100"/>
+                <ttMacroParam name="$rotate" value="0"/>
+           </ttMacroInvoke>
+          
+            <!-- close -->
+            <ttMacroInvoke macro_name="inAppCloseObject">
+                <ttMacroParam name="$image" value="images/iconsUI/closeBtn_popUps.png"/>
+                <ttMacroParam name="$posX" value="92.7083"/>
+                <ttMacroParam name="$posY" value="92.3698"/>
+                <ttMacroParam name="$unLoadLayerNotification" value="unloadMainStore"/>
+                <ttMacroParam name="$logEventParam" value="Main_Store"/>
+            </ttMacroInvoke>
+        </ttLayer>
+     </ttMacroBody>
+</ttMacro>
+
+<ttMacro name="decorationsStoreLayer">
+    <ttMacroBody>
+        <ttLayer ttName="decorationsStoreLayer">
+            <ttLoadAtInit>NO</ttLoadAtInit>
+            <!-- background -->
+            <ttMacroInvoke macro_name="inAppBackgroundObject">
+                <ttMacroParam name="$image" value="InAppPurchaseDialog/back_miniDecorations.png"/>
+                <ttMacroParam name="$posX" value="50"/>
+                <ttMacroParam name="$posY" value="50.0521"/>
+                <ttMacroParam name="$scaleTo" value="1.0"/>
+            </ttMacroInvoke>
+
+            <!-- FullVersion button -->
+            <ttMacroInvoke macro_name="inAppBuyObjectPlusAnimation">
+                <ttMacroParam name="$buttonImage" value="InAppPurchaseDialog/inAppFullVersion.png"/>
+                <ttMacroParam name="$posX" value="50.1736"/>
+                <ttMacroParam name="$posY" value="44.4531"/>
+                <ttMacroParam name="$inAppProductId" value="inAppProductFullVersion"/>
+                <ttMacroParam name="$actionType" value="inAppPurchase"/>
+                <ttMacroParam name="$unLoadLayerNotification" value="unloadDecorationsStoreLayer"/>
+                <ttMacroParam name="$logEventParam" value="Ministore_Decorations"/>
+            </ttMacroInvoke>
+            <!-- FullVersion price -->
+            <ttMacroInvoke macro_name="inAppPriceOrDescription">
+                <ttMacroParam name="$posX" value="50.1736"/>
+                <ttMacroParam name="$posY" value="29.5"/>
+                <ttMacroParam name="$inAppProductId" value="inAppProductFullVersion"/>
+                <ttMacroParam name="$infoType" value="price"/>
+                <ttMacroParam name="$lableWidth" value="18"/>
+                <ttMacroParam name="$fontType" value="ArialRoundedMTBold"/>
+                <ttMacroParam name="$red" value="100"/>
+                <ttMacroParam name="$green" value="100"/>
+                <ttMacroParam name="$blue" value="100"/>
+                <ttMacroParam name="$rotate" value="0"/>
+            </ttMacroInvoke>
+
+            <!-- Decorations button -->
+            <ttMacroInvoke macro_name="inAppBuyObject">
+                <ttMacroParam name="$buttonImage" value="InAppPurchaseDialog/inAppDecorations.png"/>
+                <ttMacroParam name="$posX" value="49.8263"/>
+                <ttMacroParam name="$posY" value="72.0573"/>
+                <ttMacroParam name="$inAppProductId" value="inAppProduct_decorations"/>
+                <ttMacroParam name="$actionType" value="inAppPurchase"/>
+                <ttMacroParam name="$unLoadLayerNotification" value="unloadDecorationsStoreLayer"/>
+                <ttMacroParam name="$logEventParam" value="Ministore_Decorations"/>
+                <ttMacroParam name="$logEventVal" value="Decorations"/>
+            </ttMacroInvoke>
+            <!-- Decorations price -->
+            <ttMacroInvoke macro_name="inAppPriceOrDescription">
+                <ttMacroParam name="$posX" value="51.2263"/>
+                <ttMacroParam name="$posY" value="66"/>
+                <ttMacroParam name="$inAppProductId" value="inAppProduct_decorations"/>
+                <ttMacroParam name="$infoType" value="price"/>
+                <ttMacroParam name="$lableWidth" value="16"/>
+                <ttMacroParam name="$fontType" value="ArialRoundedMTBold"/>
+                <ttMacroParam name="$red" value="100"/>
+                <ttMacroParam name="$green" value="100"/>
+                <ttMacroParam name="$blue" value="100"/>
+                <ttMacroParam name="$rotate" value="0"/>
+            </ttMacroInvoke>
+
+            <!-- RV button -->
+            <ttMacroInvoke macro_name="inAppRVObject">
+                <ttMacroParam name="$buttonImage" value="InAppPurchaseDialog/watchRV.png"/>
+                <ttMacroParam name="$posX" value="50.1736"/>
+                <ttMacroParam name="$posY" value="18"/>
+                <ttMacroParam name="$logEventParam" value="Ministore_Decorations"/>
+                <ttMacroParam name="$inAppProductId" value="inAppProduct_decorations"/>
+            </ttMacroInvoke>
+
+            <!-- close -->
+            <ttMacroInvoke macro_name="inAppCloseObject">
+                <ttMacroParam name="$image" value="images/iconsUI/closeBtn_popUps.png"/>
+                <ttMacroParam name="$posX" value="87.3264"/>
+                <ttMacroParam name="$posY" value="95.625"/>
+                <ttMacroParam name="$unLoadLayerNotification" value="unloadDecorationsStoreLayer"/>
+                <ttMacroParam name="$logEventParam" value="Ministore_Decorations"/>
+            </ttMacroInvoke>
+        </ttLayer>
+    </ttMacroBody>
+</ttMacro>
+
+<ttMacro name="softLevelsStoreLayer">
+    <ttMacroBody>
+        <ttLayer ttName="softLevelsStoreLayer">
+            <ttLoadAtInit>NO</ttLoadAtInit>
+            <!-- background -->
+            <ttMacroInvoke macro_name="inAppBackgroundObject">
+                <ttMacroParam name="$image" value="InAppPurchaseDialog/back_miniAllLevels.png"/>
+                <ttMacroParam name="$posX" value="50"/>
+                <ttMacroParam name="$posY" value="50.0521"/>
+                <ttMacroParam name="$scaleTo" value="1.0"/>
+            </ttMacroInvoke>
+
+            <!-- FullVersion button -->
+            <ttMacroInvoke macro_name="inAppBuyObjectPlusAnimation">
+                <ttMacroParam name="$buttonImage" value="InAppPurchaseDialog/inAppFullVersion.png"/>
+                <ttMacroParam name="$posX" value="50.1736"/>
+                <ttMacroParam name="$posY" value="60.2604"/>
+                <ttMacroParam name="$inAppProductId" value="inAppProductFullVersion"/>
+                <ttMacroParam name="$actionType" value="inAppPurchase"/>
+                <ttMacroParam name="$unLoadLayerNotification" value="unloadSoftLevelsStoreLayer"/>
+                <ttMacroParam name="$logEventParam" value="Ministore_Levels"/>
+            </ttMacroInvoke>
+            <!-- FullVersion price -->
+            <ttMacroInvoke macro_name="inAppPriceOrDescription">
+                <ttMacroParam name="$posX" value="49.9736"/>
+                <ttMacroParam name="$posY" value="46"/>
+                <ttMacroParam name="$inAppProductId" value="inAppProductFullVersion"/>
+                <ttMacroParam name="$infoType" value="price"/>
+                <ttMacroParam name="$lableWidth" value="16"/>
+                <ttMacroParam name="$fontType" value="ArialRoundedMTBold"/>
+                <ttMacroParam name="$red" value="100"/>
+                <ttMacroParam name="$green" value="100"/>
+                <ttMacroParam name="$blue" value="100"/>
+                <ttMacroParam name="$rotate" value="0"/>
+            </ttMacroInvoke>
+
+            <!-- Levels button -->
+            <ttMacroInvoke macro_name="inAppBuyObject">
+                <ttMacroParam name="$buttonImage" value="InAppPurchaseDialog/inAppAllLevels.png"/>
+                <ttMacroParam name="$posX" value="48.8791"/>
+                <ttMacroParam name="$posY" value="31.4896"/>
+                <ttMacroParam name="$inAppProductId" value="inAppProduct_levels"/>
+                <ttMacroParam name="$actionType" value="inAppPurchase"/>
+                <ttMacroParam name="$unLoadLayerNotification" value="unloadSoftLevelsStoreLayer"/>
+                <ttMacroParam name="$logEventParam" value="Ministore_Levels"/>
+                <ttMacroParam name="$logEventVal" value="Levels"/>
+            </ttMacroInvoke>
+            <!-- Levels price -->
+            <ttMacroInvoke macro_name="inAppPriceOrDescription">
+                <ttMacroParam name="$posX" value="51.4791"/>
+                <ttMacroParam name="$posY" value="25.5"/>
+                <ttMacroParam name="$inAppProductId" value="inAppProduct_levels"/>
+                <ttMacroParam name="$infoType" value="price"/>
+                <ttMacroParam name="$lableWidth" value="14"/>
+                <ttMacroParam name="$fontType" value="ArialRoundedMTBold"/>
+                <ttMacroParam name="$red" value="100"/>
+                <ttMacroParam name="$green" value="100"/>
+                <ttMacroParam name="$blue" value="100"/>
+                <ttMacroParam name="$rotate" value="0"/>
+            </ttMacroInvoke>
+
+            <!-- RV button -->
+            <ttMacroInvoke macro_name="inAppRVObject">
+                <ttMacroParam name="$buttonImage" value="InAppPurchaseDialog/watchRV.png"/>
+                <ttMacroParam name="$posX" value="50.1736"/>
+                <ttMacroParam name="$posY" value="13"/>
+                <ttMacroParam name="$logEventParam" value="Ministore_Levels"/>
+                <ttMacroParam name="$inAppProductId" value="inAppProduct_levels"/>
+            </ttMacroInvoke>
+
+            <!-- close -->
+            <ttMacroInvoke macro_name="inAppCloseObject">
+                <ttMacroParam name="$image" value="images/iconsUI/closeBtn_popUps.png"/>
+                <ttMacroParam name="$posX" value="87.3264"/>
+                <ttMacroParam name="$posY" value="95.625"/>
+                <ttMacroParam name="$unLoadLayerNotification" value="unloadSoftLevelsStoreLayer"/>
+                <ttMacroParam name="$logEventParam" value="Ministore_Levels"/>
+            </ttMacroInvoke>
+
+            <!-- text -->
+            <ttObject>
+                <ttImage>InAppPurchaseDialog/txt_lvl07.png</ttImage>
+                <ttImage>InAppPurchaseDialog/txt_lvl07.png</ttImage>
+                <ttImage>InAppPurchaseDialog/txt_lvl07.png</ttImage>
+                <ttImage>InAppPurchaseDialog/txt_lvl07.png</ttImage>
+                <ttImage>InAppPurchaseDialog/txt_lvl07.png</ttImage>
+                <ttImage>InAppPurchaseDialog/txt_lvl07.png</ttImage>
+                <ttImage>InAppPurchaseDialog/txt_lvl07.png</ttImage>
+                <ttImage>InAppPurchaseDialog/txt_lvl07.png</ttImage>
+                <ttImage>InAppPurchaseDialog/txt_lvl08.png</ttImage>
+                <ttImage>InAppPurchaseDialog/txt_lvl09.png</ttImage>
+                <ttImage>InAppPurchaseDialog/txt_lvl10.png</ttImage>
+                <ttBasePosition x="50.8681" y="86" />
+                <ttActionsGroup>
+                    <ttTrigger>automatic</ttTrigger>
+                    <ttSequenceGroup>
+                        <ttAction>
+                            <ttType>replaceSpriteWithNextImage</ttType>
+                            <ttIntValue>#levelSelected</ttIntValue>
+                        </ttAction>
+                    </ttSequenceGroup>
+                </ttActionsGroup>
+            </ttObject>
+        </ttLayer>
+     </ttMacroBody>
+</ttMacro>
+
+<ttMacro name="hardLevelsStoreLayer">
+    <ttMacroBody>
+        <ttLayer ttName="hardLevelsStoreLayer">
+            <ttLoadAtInit>NO</ttLoadAtInit>
+            <!-- background -->
+            <ttMacroInvoke macro_name="inAppBackgroundObject">
+                <ttMacroParam name="$image" value="InAppPurchaseDialog/back_miniAllLevels.png"/>
+                <ttMacroParam name="$posX" value="50"/>
+                <ttMacroParam name="$posY" value="50.0521"/>
+                <ttMacroParam name="$scaleTo" value="1.0"/>
+            </ttMacroInvoke>
+
+            <!-- FullVersion button -->
+            <ttMacroInvoke macro_name="inAppBuyObjectPlusAnimation">
+                <ttMacroParam name="$buttonImage" value="InAppPurchaseDialog/inAppFullVersion.png"/>
+                <ttMacroParam name="$posX" value="50.1736"/>
+                <ttMacroParam name="$posY" value="56.2604"/>
+                <ttMacroParam name="$inAppProductId" value="inAppProductFullVersion"/>
+                <ttMacroParam name="$actionType" value="inAppPurchase"/>
+                <ttMacroParam name="$unLoadLayerNotification" value="unloadHardLevelsStoreLayer"/>
+                <ttMacroParam name="$logEventParam" value="Ministore_Levels"/>
+            </ttMacroInvoke>
+            <!-- FullVersion price -->
+            <ttMacroInvoke macro_name="inAppPriceOrDescription">
+                <ttMacroParam name="$posX" value="50.1736"/>
+                <ttMacroParam name="$posY" value="40"/>
+                <ttMacroParam name="$inAppProductId" value="inAppProductFullVersion"/>
+                <ttMacroParam name="$infoType" value="price"/>
+                <ttMacroParam name="$lableWidth" value="16"/>
+                <ttMacroParam name="$fontType" value="ArialRoundedMTBold"/>
+                <ttMacroParam name="$red" value="100"/>
+                <ttMacroParam name="$green" value="100"/>
+                <ttMacroParam name="$blue" value="100"/>
+                <ttMacroParam name="$rotate" value="0"/>
+            </ttMacroInvoke>
+
+            <!-- Levels button -->
+            <ttMacroInvoke macro_name="inAppBuyObject">
+                <ttMacroParam name="$buttonImage" value="InAppPurchaseDialog/inAppAllLevels.png"/>
+                <ttMacroParam name="$posX" value="49.4791"/>
+                <ttMacroParam name="$posY" value="23.4896"/>
+                <ttMacroParam name="$inAppProductId" value="inAppProduct_levels"/>
+                <ttMacroParam name="$actionType" value="inAppPurchase"/>
+                <ttMacroParam name="$unLoadLayerNotification" value="unloadHardLevelsStoreLayer"/>
+                <ttMacroParam name="$logEventParam" value="Ministore_Levels"/>
+                <ttMacroParam name="$logEventVal" value="Levels"/>
+            </ttMacroInvoke>
+            <!-- Levels price -->
+            <ttMacroInvoke macro_name="inAppPriceOrDescription">
+                <ttMacroParam name="$posX" value="49.4791"/>
+                <ttMacroParam name="$posY" value="18.5"/>
+                <ttMacroParam name="$inAppProductId" value="inAppProduct_levels"/>
+                <ttMacroParam name="$infoType" value="price"/>
+                <ttMacroParam name="$lableWidth" value="14"/>
+                <ttMacroParam name="$fontType" value="ArialRoundedMTBold"/>
+                <ttMacroParam name="$red" value="100"/>
+                <ttMacroParam name="$green" value="100"/>
+                <ttMacroParam name="$blue" value="100"/>
+                <ttMacroParam name="$rotate" value="0"/>
+            </ttMacroInvoke>
+
+            <!-- close -->
+            <ttMacroInvoke macro_name="inAppCloseObject">
+                <ttMacroParam name="$image" value="images/iconsUI/closeBtn_popUps.png"/>
+                <ttMacroParam name="$posX" value="87.3264"/>
+                <ttMacroParam name="$posY" value="95.625"/>
+                <ttMacroParam name="$unLoadLayerNotification" value="unloadHardLevelsStoreLayer"/>
+                <ttMacroParam name="$logEventParam" value="Ministore_Levels"/>
+            </ttMacroInvoke>
+       
+            <!-- text -->
+            <ttObject>
+                <ttImage>InAppPurchaseDialog/txt_lvl11.png</ttImage>
+                <ttBasePosition x="50.8681" y="82" />
+            </ttObject>
+        </ttLayer>
+     </ttMacroBody>
+</ttMacro>
+<!-- load and unload macro object-->
+<ttMacro name="loadAndUnLoadLayerObject">
+    <ttMacroParams>
+        <ttMacroParamDef name="$layerName"/>
+        <ttMacroParamDef name="$loadNotification"/>
+        <ttMacroParamDef name="$unLoadNotification"/>
+    </ttMacroParams>
+    <ttMacroBody>
+        <ttObject>
+            <ttType>lable</ttType>
+            <ttImage>inAppListenerLayerObject</ttImage>
+            <ttVisible>no</ttVisible>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>$loadNotification</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>loadLayer</ttType>
+                        <ttData>$layerName</ttData>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>showInAppDialog</ttNotificationIdentifyer>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>$unLoadNotification</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>unLoadLayer</ttType>
+                        <ttData>$layerName</ttData>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+    </ttMacroBody>
+</ttMacro>
+
+<!-- this layer listen to notification and load/unload the inapp layers-->
+<ttMacro name="inAppListenerLayer">
+    <ttMacroBody>
+        <ttLayer ttName="inAppListenerLayer">
+            <!-- load and unload main store-->
+            <ttMacroInvoke macro_name="loadAndUnLoadLayerObject">
+                <ttMacroParam name="$layerName" value="mainStoreLayer"/>
+                <ttMacroParam name="$loadNotification" value="loadMainStore"/>
+                <ttMacroParam name="$unLoadNotification" value="unloadMainStore"/>
+            </ttMacroInvoke>
+             <!-- load and unload Soft Levels mini store -->
+            <ttMacroInvoke macro_name="loadAndUnLoadLayerObject">
+                <ttMacroParam name="$layerName" value="softLevelsStoreLayer"/>
+                <ttMacroParam name="$loadNotification" value="loadSoftLevelsStoreLayer"/>
+                <ttMacroParam name="$unLoadNotification" value="unloadSoftLevelsStoreLayer"/>
+            </ttMacroInvoke>
+             <!-- load and unload Hard Levels mini store -->
+            <ttMacroInvoke macro_name="loadAndUnLoadLayerObject">
+                <ttMacroParam name="$layerName" value="hardLevelsStoreLayer"/>
+                <ttMacroParam name="$loadNotification" value="loadHardLevelsStoreLayer"/>
+                <ttMacroParam name="$unLoadNotification" value="unloadHardLevelsStoreLayer"/>
+            </ttMacroInvoke>
+            <!-- load and unload Decorations mini store -->
+            <ttMacroInvoke macro_name="loadAndUnLoadLayerObject">
+                <ttMacroParam name="$layerName" value="decorationsStoreLayer"/>
+                <ttMacroParam name="$loadNotification" value="loadDecorationsStoreLayer"/>
+                <ttMacroParam name="$unLoadNotification" value="unloadDecorationsStoreLayer"/>
+            </ttMacroInvoke>
+        </ttLayer>
+    </ttMacroBody>
+</ttMacro>
+
+<!-- list of all inApp layers (only the inAppListenerLayer is loadAtInit) -->
+<ttMacro name="inAppLayers">
+    <ttMacroBody>
+        <ttMacroInvoke macro_name="inAppListenerLayer"/>
+        <ttMacroInvoke macro_name="mainStoreLayer"/>
+        <ttMacroInvoke macro_name="softLevelsStoreLayer"/>
+        <ttMacroInvoke macro_name="hardLevelsStoreLayer"/>
+        <ttMacroInvoke macro_name="decorationsStoreLayer"/>
+    </ttMacroBody>
+</ttMacro>

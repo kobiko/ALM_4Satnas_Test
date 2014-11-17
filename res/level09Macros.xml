@@ -1,0 +1,892 @@
+<ttMacro name="mosquito">
+    <ttMacroParams>
+		<ttMacroParamDef name="$mosquitoID"/>
+		<ttMacroParamDef name="$suckerTarget"/>
+        <ttMacroParamDef name="$posX"/>
+        <ttMacroParamDef name="$posY"/>
+        <ttMacroParamDef name="$flip"/>
+    </ttMacroParams>
+    <ttMacroBody>
+		<ttObject>
+			<ttImage>images/level09/injuries/mosquito.png</ttImage>
+			<ttBasePosition x="$posX" y="$posY" />
+			<ttFlipX>$flip</ttFlipX>
+			<ttId>$suckerTarget</ttId>
+			<ttCollision>
+				<ttCollisionAnchorPoint x="0.5" y="0.5"/>
+				<ttCollisionRadius>4</ttCollisionRadius>
+			</ttCollision>
+			<ttObjects>
+				<ttObject> <!-- wings -->
+					<ttImage>images/level09/injuries/mosquitoWings.png</ttImage>
+					<ttImage>images/level09/injuries/mosquitoWingsClose.png</ttImage>
+					<ttBasePosition x="6" y="4.6" />
+					<ttFlipX>$flip</ttFlipX>
+					<ttZOrder>1000</ttZOrder>
+					<ttAnchorPositionX>0.50</ttAnchorPositionX>
+					<ttAnchorPositionY>0.6</ttAnchorPositionY>
+					<ttActionsGroup><!--activation-->
+						<ttTrigger>notification</ttTrigger>
+						<ttNotificationIdentifyer>script: return "flapWings".."$mosquitoID"</ttNotificationIdentifyer>
+						<ttSequenceGroup>
+							<ttAction ttType="replaceSpriteWithNextImage" ttIntValue="1"/> 				
+							<ttAction ttType="delay" ttActionDuration="0.1"/>				
+						</ttSequenceGroup>		
+						<ttSequenceGroup>
+							<ttAction ttType="replaceSpriteWithNextImage" ttIntValue="0"/> 							
+							<ttAction ttType="delay" ttActionDuration="0.1"/> 								
+						</ttSequenceGroup>				
+						<ttSequenceGroup>
+							<ttAction ttType="replaceSpriteWithNextImage" ttIntValue="1"/> 
+							<ttAction ttType="delay" ttActionDuration="0.1"/>
+						</ttSequenceGroup>	
+						<ttSequenceGroup>
+							<ttAction ttType="replaceSpriteWithNextImage" ttIntValue="0"/> 
+							<ttAction ttType="delay" ttActionDuration="0.1"/>
+						</ttSequenceGroup>						
+					</ttActionsGroup>
+				</ttObject>
+				<ttObject> <!-- pointer -->
+					<ttImage>images/tools/pointer.png</ttImage>
+					<ttAnchorPositionX>0.51</ttAnchorPositionX>
+					<ttAnchorPositionY>0.09</ttAnchorPositionY>
+					<ttRotate>29.52</ttRotate>
+					<ttScale>0.8</ttScale>
+					<ttBasePosition x="8" y="7" />
+					<ttOpacity>0</ttOpacity>
+					<ttActionsGroup> <!-- showPointer -->
+						<ttTrigger>notification</ttTrigger>
+						<ttNotificationIdentifyer>showSuckerPointer</ttNotificationIdentifyer>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>fadeTo</ttType>
+								<ttOpacity>255</ttOpacity>
+								<ttActionDuration>0.2</ttActionDuration>
+							</ttAction>
+						</ttSequenceGroup>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>scaleXy</ttType>
+								<ttActionDuration>0.15</ttActionDuration>
+								<ttScaleX>0.95</ttScaleX>
+								<ttScaleY>0.75</ttScaleY>
+								<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+							</ttAction>
+						</ttSequenceGroup>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>scaleXy</ttType>
+								<ttActionDuration>0.15</ttActionDuration>
+								<ttScaleX>0.8</ttScaleX>
+								<ttScaleY>0.8</ttScaleY>
+								<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+							</ttAction>
+						</ttSequenceGroup>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>scaleXy</ttType>
+								<ttActionDuration>0.15</ttActionDuration>
+								<ttScaleX>0.95</ttScaleX>
+								<ttScaleY>0.75</ttScaleY>
+								<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+							</ttAction>
+						</ttSequenceGroup>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>scaleXy</ttType>
+								<ttActionDuration>0.15</ttActionDuration>
+								<ttScaleX>0.8</ttScaleX>
+								<ttScaleY>0.8</ttScaleY>
+								<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+							</ttAction>
+						</ttSequenceGroup>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>scaleXy</ttType>
+								<ttActionDuration>0.15</ttActionDuration>
+								<ttScaleX>0.95</ttScaleX>
+								<ttScaleY>0.75</ttScaleY>
+								<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+							</ttAction>
+						</ttSequenceGroup>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>scaleXy</ttType>
+								<ttActionDuration>0.15</ttActionDuration>
+								<ttScaleX>0.8</ttScaleX>
+								<ttScaleY>0.8</ttScaleY>
+								<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+							</ttAction>
+							<ttAction>
+								<ttType>fadeTo</ttType>
+								<ttOpacity>0</ttOpacity>
+								<ttActionDuration>0.2</ttActionDuration>
+							</ttAction>
+						</ttSequenceGroup>
+					</ttActionsGroup>
+					<ttActionsGroup> <!-- hidePointer -->
+						<ttTrigger>notification</ttTrigger>
+						<ttNotificationIdentifyer>hideSuckerPointer</ttNotificationIdentifyer>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>fadeTo</ttType>
+								<ttOpacity>0</ttOpacity>
+								<ttActionDuration>0</ttActionDuration>
+							</ttAction>
+						</ttSequenceGroup>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>stopRunningActions</ttType>
+							</ttAction>
+						</ttSequenceGroup>
+					</ttActionsGroup>
+					<ttActionsGroup> <!-- sucker.allvisited -->
+						<ttTrigger>notification</ttTrigger>
+						<ttNotificationIdentifyer>script: return "particlesMos".."$mosquitoID"</ttNotificationIdentifyer>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>fadeTo</ttType>
+								<ttOpacity>0</ttOpacity>
+								<ttActionDuration>0</ttActionDuration>
+							</ttAction>
+							<ttAction>
+								<ttType>makeInvisible</ttType>
+							</ttAction>
+							<ttAction>
+								<ttType>moveToPoint</ttType>
+								<ttFinalPosition x="-121.3542" y="119.5508"/>
+								<ttActionDuration>0</ttActionDuration>
+							</ttAction>
+						</ttSequenceGroup>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>stopRunningActions</ttType>
+							</ttAction>
+						</ttSequenceGroup>
+					</ttActionsGroup>
+				</ttObject>		
+			</ttObjects>
+			<ttActionsGroup><!--activation-->
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>script: return "$mosquitoID"..".activate"</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>sendMessageToController</ttType>
+						<ttControllerName>sucker</ttControllerName>
+						<ttMessage>activate</ttMessage>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>	
+			<ttActionsGroup><!--sucker.visit.specific-->
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>sucker.enter.specific</ttNotificationIdentifyer>
+  				<ttSequenceGroup>
+					<ttAction ttType="sendNotification" ttNotificationIdentifyer="hideSuckerPointer"/>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup><!--sucker.visit.specific-->
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>sucker.enter.specific</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+					<ttAction ttType="sendNotification"> 
+						<ttNotificationIdentifyer>script: return "moveTo".."$mosquitoID"</ttNotificationIdentifyer>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="scale" ttScaleTo="0.85" ttActionDuration="0.3" ttActionEaseMode="easeBackOut" ttActionEaseRate="3"/> 
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="scale" ttScaleTo="0.2" ttActionDuration="0.3" ttActionEaseMode="easeBackOut" ttActionEaseRate="3"/> 				
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="scale" ttScaleTo="0" ttActionDuration="0.3" ttActionEaseMode="easeBackOut" ttActionEaseRate="3"/> 	
+					<ttAction ttType="moveBy">
+						<ttFinalPosition x="0" y="-100"/>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>script: return "mosquito".."$mosquitoID".."Blown"</ttVariable>
+						<ttOperator>
+							<ttScript>return 1</ttScript>
+						</ttOperator>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="sendNotification"> 
+						<ttNotificationIdentifyer>script: return "particlesMos".."$mosquitoID"</ttNotificationIdentifyer>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="sendNotification" ttNotificationIdentifyer="checkSuckerDone"/>
+				</ttSequenceGroup>
+			</ttActionsGroup>	
+	</ttObject>
+	</ttMacroBody>
+</ttMacro>
+
+<ttMacro name="lips">
+    <ttMacroParams>
+		<ttMacroParamDef name="$image"/>
+		<ttMacroParamDef name="$lipsID"/>
+    </ttMacroParams>
+    <ttMacroBody>
+	    <ttObject> <!-- lipsImage01 -->
+			<ttImage>$image</ttImage>
+			<ttScale>1.465</ttScale>
+			<ttBasePosition x="52" y="56" />
+			<ttOpacity>255</ttOpacity>
+			<ttActionsGroup> <!-- fadeOut -->
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>script: return "fadeOut".."$lipsID"</ttNotificationIdentifyer>
+				<ttAction ttType="playSound" ttFile="sounds/level9/ice_lips.mp3"/> 
+					<ttSequenceGroup>
+						<ttAction ttType="fadeTo" ttOpacity="0" ttActionDuration="0.25"/> 
+					</ttSequenceGroup>	
+					<ttSequenceGroup>
+						<ttAction>
+							<ttType>sendNotification</ttType>
+							<ttNotificationIdentifyer>script: return "lips".."$lipsID".."Particles"</ttNotificationIdentifyer>
+						</ttAction>
+					</ttSequenceGroup>					
+			</ttActionsGroup>
+		</ttObject>
+	</ttMacroBody>
+</ttMacro>
+
+<ttMacro name="arrow">
+    <ttMacroParams>
+		<ttMacroParamDef name="$arrowID"/>
+		<ttMacroParamDef name="$tweezersTarget"/>
+        <ttMacroParamDef name="$posX"/>
+        <ttMacroParamDef name="$posY"/>
+        <ttMacroParamDef name="$targetpickedup"/>
+        <ttMacroParamDef name="$targetdropped"/>
+        <ttMacroParamDef name="$rotate"/>
+        <ttMacroParamDef name="$flip"/>
+    </ttMacroParams>
+    <ttMacroBody>
+		<ttObject>
+			<ttImage>images/level09/injuries/arrow.png</ttImage>
+			<ttScale>1.055</ttScale>
+			<ttBasePosition x="$posX" y="$posY" />
+			<ttFlipX>$flip</ttFlipX>
+			<ttRotate>$rotate</ttRotate>
+			<ttId>$tweezersTarget</ttId>
+			<ttCollision>
+				<ttCollisionAnchorPoint x="0.6" y="0.8"/>
+				<ttCollisionRadius>3</ttCollisionRadius>
+			</ttCollision>
+			<ttObjects>
+				<ttObject> <!-- pointer -->
+					<ttImage>images/tools/pointer.png</ttImage>
+					<ttAnchorPositionX>0.51</ttAnchorPositionX>
+					<ttAnchorPositionY>0.09</ttAnchorPositionY>
+					<ttRotate>315</ttRotate>
+					<ttScale>0.7</ttScale>
+					<ttBasePosition x="6.5" y="12" />
+					<ttOpacity>0</ttOpacity>
+					<ttActionsGroup> <!-- showPointer -->
+						<ttTrigger>notification</ttTrigger>
+						<ttNotificationIdentifyer>showTweezersPointer</ttNotificationIdentifyer>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>fadeTo</ttType>
+								<ttOpacity>255</ttOpacity>
+								<ttActionDuration>0.2</ttActionDuration>
+							</ttAction>
+						</ttSequenceGroup>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>scaleXy</ttType>
+								<ttActionDuration>0.15</ttActionDuration>
+								<ttScaleX>0.95</ttScaleX>
+								<ttScaleY>0.75</ttScaleY>
+								<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+							</ttAction>
+						</ttSequenceGroup>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>scaleXy</ttType>
+								<ttActionDuration>0.15</ttActionDuration>
+								<ttScaleX>0.8</ttScaleX>
+								<ttScaleY>0.8</ttScaleY>
+								<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+							</ttAction>
+						</ttSequenceGroup>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>scaleXy</ttType>
+								<ttActionDuration>0.15</ttActionDuration>
+								<ttScaleX>0.95</ttScaleX>
+								<ttScaleY>0.75</ttScaleY>
+								<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+							</ttAction>
+						</ttSequenceGroup>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>scaleXy</ttType>
+								<ttActionDuration>0.15</ttActionDuration>
+								<ttScaleX>0.8</ttScaleX>
+								<ttScaleY>0.8</ttScaleY>
+								<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+							</ttAction>
+						</ttSequenceGroup>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>scaleXy</ttType>
+								<ttActionDuration>0.15</ttActionDuration>
+								<ttScaleX>0.95</ttScaleX>
+								<ttScaleY>0.75</ttScaleY>
+								<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+							</ttAction>
+						</ttSequenceGroup>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>scaleXy</ttType>
+								<ttActionDuration>0.15</ttActionDuration>
+								<ttScaleX>0.8</ttScaleX>
+								<ttScaleY>0.8</ttScaleY>
+								<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+							</ttAction>
+							<ttAction>
+								<ttType>fadeTo</ttType>
+								<ttOpacity>0</ttOpacity>
+								<ttActionDuration>0.2</ttActionDuration>
+							</ttAction>
+						</ttSequenceGroup>
+					</ttActionsGroup>
+					<ttActionsGroup> <!-- hidePointer -->
+						<ttTrigger>notification</ttTrigger>
+						<ttNotificationIdentifyer>hideTweezersPointer</ttNotificationIdentifyer>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>fadeTo</ttType>
+								<ttOpacity>0</ttOpacity>
+								<ttActionDuration>0</ttActionDuration>
+							</ttAction>
+						</ttSequenceGroup>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>stopRunningActions</ttType>
+							</ttAction>
+						</ttSequenceGroup>
+					</ttActionsGroup>
+					<ttActionsGroup> <!-- sucker.allvisited -->
+						<ttTrigger>notification</ttTrigger>
+						<ttNotificationIdentifyer>script: return "removedArrow".."$arrowID"</ttNotificationIdentifyer>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>fadeTo</ttType>
+								<ttOpacity>0</ttOpacity>
+								<ttActionDuration>0</ttActionDuration>
+							</ttAction>
+							<ttAction>
+								<ttType>makeInvisible</ttType>
+							</ttAction>
+							<ttAction>
+								<ttType>moveToPoint</ttType>
+								<ttFinalPosition x="-121.3542" y="119.5508"/>
+								<ttActionDuration>0</ttActionDuration>
+							</ttAction>
+						</ttSequenceGroup>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>stopRunningActions</ttType>
+							</ttAction>
+						</ttSequenceGroup>
+					</ttActionsGroup>
+				</ttObject>
+			</ttObjects>
+			<ttActionsGroup> <!-- releaseRightArm -->
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>releaseRightArm</ttNotificationIdentifyer>
+				<ttOperator>
+					<ttScript>return ($arrowID == 2)</ttScript>
+				</ttOperator>				
+				<ttSequenceGroup>
+					<ttAction ttType="rotateTo" ttActionDuration="0.3" ttActionRotateAngle="-4.73"/>
+					<ttAction>
+						<ttType>moveToPoint</ttType>
+						<ttFinalPosition x="89.4785" y="56.257"/>
+						<ttActionDuration>0.3</ttActionDuration>
+						<ttActionEaseMode>easeBackOut</ttActionEaseMode> 
+						<ttActionEaseRate>3</ttActionEaseRate>
+					</ttAction>
+				</ttSequenceGroup>	
+			</ttActionsGroup>
+			<ttActionsGroup>
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>tweezers.target.activate</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>sendMessageToController</ttType>
+						<ttControllerName>tweezers</ttControllerName>
+						<ttMessage>activate</ttMessage>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup>
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>$targetpickedup</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+					<ttAction ttType="makeInvisible"/>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup>
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>$targetdropped</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+					<ttAction ttType="makeVisible"/>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup>
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>tweezers.cured.specific</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+ 					<ttAction>
+						<ttType>sendNotification</ttType>
+						<ttNotificationIdentifyer>script: return "removedArrow".."$arrowID"</ttNotificationIdentifyer>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+        </ttObject>
+	</ttMacroBody>
+</ttMacro>
+
+<ttMacro name="scissoring">
+    <ttMacroParams/>
+    <ttMacroBody>
+		<ttSequenceGroup>
+			<ttAction ttType="replaceSpriteWithNextImage" ttIntValue="1"/> 
+			<ttAction ttType="playSound" ttFile="sounds/level9/Scissors-01.mp3"/> 
+		</ttSequenceGroup>	
+		<ttSequenceGroup>
+			<ttAction ttType="delay" ttActionDuration="0.2"/>
+		</ttSequenceGroup>	
+		<ttSequenceGroup>
+			<ttAction ttType="replaceSpriteWithNextImage" ttIntValue="0"/> 
+			<ttAction ttType="playSound" ttFile="sounds/level9/Scissors.mp3"/> 
+		</ttSequenceGroup>	
+		<ttSequenceGroup>
+			<ttAction ttType="delay" ttActionDuration="0.2"/>
+		</ttSequenceGroup>	
+		<ttSequenceGroup>
+			<ttAction ttType="replaceSpriteWithNextImage" ttIntValue="1"/> 
+			<ttAction ttType="playSound" ttFile="sounds/level9/Scissors-01.mp3"/> 
+		</ttSequenceGroup>	
+		<ttSequenceGroup>
+			<ttAction ttType="delay" ttActionDuration="0.2"/>
+		</ttSequenceGroup>	
+		<ttSequenceGroup>
+			<ttAction ttType="replaceSpriteWithNextImage" ttIntValue="0"/> 
+			<ttAction ttType="playSound" ttFile="sounds/level9/Scissors.mp3"/> 
+		</ttSequenceGroup>	
+		<ttSequenceGroup>
+			<ttAction ttType="delay" ttActionDuration="0.2"/>
+		</ttSequenceGroup>	
+		<ttSequenceGroup>
+			<ttAction ttType="replaceSpriteWithNextImage" ttIntValue="1"/> 
+			<ttAction ttType="playSound" ttFile="sounds/level9/Scissors-01.mp3"/> 
+		</ttSequenceGroup>	
+		<ttSequenceGroup>
+			<ttAction ttType="delay" ttActionDuration="0.2"/>
+		</ttSequenceGroup>	
+		<ttSequenceGroup>
+			<ttAction ttType="replaceSpriteWithNextImage" ttIntValue="0"/> 
+			<ttAction ttType="playSound" ttFile="sounds/level9/Scissors.mp3"/> 
+		</ttSequenceGroup>	
+		<ttSequenceGroup>
+			<ttAction ttType="delay" ttActionDuration="0.2"/>
+		</ttSequenceGroup>
+	</ttMacroBody>
+</ttMacro>
+<ttMacro name="scissoring1">
+    <ttMacroParams/>
+    <ttMacroBody>
+		<ttSequenceGroup>
+			<ttAction ttType="replaceSpriteWithNextImage" ttIntValue="1"/> 
+			<ttAction ttType="playSound" ttFile="sounds/level9/suction_gun.mp3"/> 
+		</ttSequenceGroup>	
+		<ttSequenceGroup>
+			<ttAction ttType="delay" ttActionDuration="0.2"/>
+		</ttSequenceGroup>	
+		<ttSequenceGroup>
+			<ttAction ttType="replaceSpriteWithNextImage" ttIntValue="0"/> 
+			<ttAction ttType="playSound" ttFile="sounds/level9/suction_gun2.mp3"/> 
+		</ttSequenceGroup>	
+		<ttSequenceGroup>
+			<ttAction ttType="delay" ttActionDuration="0.2"/>
+		</ttSequenceGroup>	
+		<ttSequenceGroup>
+			<ttAction ttType="replaceSpriteWithNextImage" ttIntValue="1"/> 
+			<ttAction ttType="playSound" ttFile="sounds/level9/suction_gun.mp3"/> 
+		</ttSequenceGroup>	
+		<ttSequenceGroup>
+			<ttAction ttType="delay" ttActionDuration="0.2"/>
+		</ttSequenceGroup>	
+		<ttSequenceGroup>
+			<ttAction ttType="replaceSpriteWithNextImage" ttIntValue="0"/> 
+			<ttAction ttType="playSound" ttFile="sounds/level9/suction_gun2.mp3"/> 
+		</ttSequenceGroup>	
+		<ttSequenceGroup>
+			<ttAction ttType="delay" ttActionDuration="0.2"/>
+		</ttSequenceGroup>	
+		<ttSequenceGroup>
+			<ttAction ttType="replaceSpriteWithNextImage" ttIntValue="1"/> 
+			<ttAction ttType="playSound" ttFile="sounds/level9/suction_gun.mp3"/> 
+		</ttSequenceGroup>	
+		<ttSequenceGroup>
+			<ttAction ttType="delay" ttActionDuration="0.2"/>
+		</ttSequenceGroup>	
+		<ttSequenceGroup>
+			<ttAction ttType="replaceSpriteWithNextImage" ttIntValue="0"/> 
+			<ttAction ttType="playSound" ttFile="sounds/level9/suction_gun2.mp3"/> 
+		</ttSequenceGroup>	
+		<ttSequenceGroup>
+			<ttAction ttType="delay" ttActionDuration="0.2"/>
+		</ttSequenceGroup>
+	</ttMacroBody>
+</ttMacro>
+
+<ttMacro name="blowGunPart">
+    <ttMacroParams>
+		<ttMacroParamDef name="$image"/>
+		<ttMacroParamDef name="$scale"/>
+		<ttMacroParamDef name="$bgPartID"/>
+		<ttMacroParamDef name="$place"/>
+		<ttMacroParamDef name="$isInPlace"/>
+		<ttMacroParamDef name="$notInPlace"/>
+        <ttMacroParamDef name="$posX"/>
+        <ttMacroParamDef name="$posY"/>
+        <ttMacroParamDef name="$posXf"/>
+        <ttMacroParamDef name="$posYf"/>
+        <ttMacroParamDef name="$rotate"/>
+        <ttMacroParamDef name="$flip"/>
+    </ttMacroParams>
+    <ttMacroBody>
+	<ttObject>
+		<ttImage>$image</ttImage>
+		<ttScale>$scale</ttScale>
+		<ttBasePosition x="$posX" y="$posY" />
+		<ttId>$bgPartID</ttId>
+		<ttRotate>$rotate</ttRotate>
+		<ttFlipX>$flip</ttFlipX>
+		<ttCollision>
+			<ttCollisionAnchorPoint x="0.5" y="0.5"/>
+			<ttCollisionRadius>1</ttCollisionRadius>
+		</ttCollision>
+		<ttActionsGroup>
+			<ttTrigger>automatic</ttTrigger>
+			<ttSequenceGroup>
+				<ttAction ttType="enableObject"/>
+			</ttSequenceGroup>
+			<ttSequenceGroup>
+				<ttAction>
+					<ttType>scale</ttType>
+                    <ttScaleTo>$scale</ttScaleTo>
+					<ttActionDuration>0.5</ttActionDuration>
+					<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+					<ttActionEaseRate>2.00</ttActionEaseRate>
+				</ttAction>
+			</ttSequenceGroup>               
+		</ttActionsGroup>
+		<ttActionsGroup> <!-- onTouchesBegan -->
+			<ttTrigger>onTouchesBegan</ttTrigger>
+			<ttSequenceGroup>
+				<ttAction>
+					<ttType>setVariable</ttType>
+					<ttVariable>canMoveParts</ttVariable>
+					<ttOperator>
+						<ttScript>return 1</ttScript>
+					</ttOperator>
+				</ttAction>
+			</ttSequenceGroup>		
+			<ttSequenceGroup>
+				<ttAction ttType="moveToTouch"/>
+			</ttSequenceGroup>
+			<ttSequenceGroup>
+				<ttAction ttType="sendNotification" ttNotificationIdentifyer="hidePuzzlePointer"/>
+			</ttSequenceGroup>	
+		</ttActionsGroup>
+		<ttActionsGroup> <!-- onTouchesMoved -->
+			<ttTrigger>onTouchesMoved</ttTrigger>
+			<ttOperator>
+				<ttScript>return (canMoveParts == 1)</ttScript>
+			</ttOperator>
+			<ttSequenceGroup>
+				<ttAction ttType="moveToTouch"/>
+			</ttSequenceGroup>
+			<ttSequenceGroup>
+				<ttAction>
+					<ttType>isObjectInPlace</ttType>
+					<ttMovedObjectId>$bgPartID</ttMovedObjectId>
+					<ttPlacedObjectId>$place</ttPlacedObjectId>
+					<ttInPlaceTolerance>1</ttInPlaceTolerance>
+					<ttInPlaceMode>rectRect</ttInPlaceMode>
+					<ttInPlaceNotification>$isInPlace</ttInPlaceNotification>
+					<ttNotInPlaceNotification>$notInPlace</ttNotInPlaceNotification>
+				</ttAction>
+			</ttSequenceGroup>
+		</ttActionsGroup>
+		<ttActionsGroup> <!-- onTouchesMoved -->
+			<ttTrigger>onTouchesEnded</ttTrigger>
+			<ttSequenceGroup>
+				<ttAction>
+					<ttType>setVariable</ttType>
+					<ttVariable>canMoveParts</ttVariable>
+					<ttOperator>
+						<ttScript>return 0</ttScript>
+					</ttOperator>
+				</ttAction>
+			</ttSequenceGroup>
+			<ttSequenceGroup>
+				<ttAction ttType="disableObject"/>
+			</ttSequenceGroup>
+			<ttSequenceGroup>
+				<ttAction ttType="moveToBase" ttActionDuration="0.3"/>
+			</ttSequenceGroup>
+			<ttSequenceGroup>
+				<ttAction ttType="enableObject"/>
+			</ttSequenceGroup>
+		</ttActionsGroup>
+		<ttActionsGroup>
+			<ttTrigger>notification</ttTrigger>
+			<ttNotificationIdentifyer>$isInPlace</ttNotificationIdentifyer>
+			<ttSequenceGroup>
+				<ttAction ttType="disableObject"/>
+			</ttSequenceGroup>
+			<ttSequenceGroup>
+				<ttAction ttType="moveToPoint">
+					<ttFinalPosition x="$posXf" y="$posYf"/>
+					<ttActionDuration>0.2</ttActionDuration>
+				</ttAction>
+			</ttSequenceGroup>
+			<ttSequenceGroup>
+				<ttAction>
+					<ttType>playSound</ttType>
+					<ttFile>sounds/narrations/clumsySanta/perfect_fit-01.mp3</ttFile>
+					<ttVolume>1</ttVolume>
+				</ttAction>
+			</ttSequenceGroup>
+			<ttSequenceGroup>
+				<ttAction>
+					<ttType>setVariable</ttType>
+					<ttVariable>partsTogether</ttVariable>
+					<ttOperator>
+						<ttScript>return (partsTogether + 1)</ttScript>
+					</ttOperator>
+				</ttAction>
+			</ttSequenceGroup>
+			<ttSequenceGroup>	
+				<ttAction ttType="delay" ttActionDuration="0.3"/>
+			</ttSequenceGroup>	
+			<ttSequenceGroup>
+				<ttAction ttType="sendNotification" ttNotificationIdentifyer="checkPuzzleDone"/>
+			</ttSequenceGroup>
+		</ttActionsGroup>
+	</ttObject>
+	</ttMacroBody>
+</ttMacro>
+<ttMacro name="blowGunPartPosition">
+    <ttMacroParams>
+		<ttMacroParamDef name="$positionID"/>
+        <ttMacroParamDef name="$posX"/>
+        <ttMacroParamDef name="$posY"/>
+    </ttMacroParams>
+    <ttMacroBody>
+	<ttObject>
+		<ttImage>images/fullBlocker.png</ttImage>
+		<ttScale>20</ttScale>
+		<ttOpacity>0</ttOpacity>
+		<ttId>$positionID</ttId>
+		<ttBasePosition x="$posX" y="$posY" />
+		<ttCollision>
+			<ttCollisionAnchorPoint x="0.5" y="0.5"/>
+			<ttCollisionRadius>0.5</ttCollisionRadius>
+		</ttCollision>
+	</ttObject>
+	</ttMacroBody>
+</ttMacro>
+<ttMacro name="cuttingAnim">
+    <ttMacroParams>
+		<ttMacroParamDef name="$startNotification"/>
+		<ttMacroParamDef name="$removeRope1"/>
+		<ttMacroParamDef name="$removeRope2"/>
+        <ttMacroParamDef name="$posX"/>
+        <ttMacroParamDef name="$posY"/>
+    </ttMacroParams>
+    <ttMacroBody>
+		<ttActionsGroup><!--cut1rope-->
+			<ttTrigger>notification</ttTrigger>
+			<ttNotificationIdentifyer>$startNotification</ttNotificationIdentifyer>
+			<ttSequenceGroup>
+				<ttAction ttType="disableObject"/>
+			</ttSequenceGroup>
+			<ttAction ttType="sendNotification" ttNotificationIdentifyer="shockFace.santa"/>
+			<ttSequenceGroup>
+				<ttAction ttType="moveObjectToLayer" ttLayerName="scissorsLayer"/>
+				<ttAction>
+					<ttType>scaleXy</ttType>
+					<ttActionDuration>0</ttActionDuration>
+					<ttScaleX>0.8</ttScaleX>
+					<ttScaleY>0.8</ttScaleY>
+				</ttAction>
+			</ttSequenceGroup>
+			<ttSequenceGroup>
+				<ttAction ttType="moveToPoint">
+					<ttFinalPosition x="$posX" y="$posY"/>
+					<ttActionDuration>0.3</ttActionDuration>
+				</ttAction>
+			</ttSequenceGroup>
+			<ttMacroInvoke macro_name="scissoring"/>
+			<ttSequenceGroup>
+				<ttAction ttType="sendNotification" ttNotificationIdentifyer="$removeRope1"/>
+			</ttSequenceGroup>
+			<ttSequenceGroup>	
+				<ttAction ttType="delay" ttActionDuration="0.5"/>
+			</ttSequenceGroup>				
+			<ttSequenceGroup>
+				<ttAction ttType="sendNotification" ttNotificationIdentifyer="$removeRope2"/>
+			</ttSequenceGroup>	
+			<ttSequenceGroup>
+				<ttAction ttType="sendNotification" ttNotificationIdentifyer="returnScissors"/>
+			</ttSequenceGroup>	
+			<ttSequenceGroup>
+				<ttAction ttType="enableObject"/>
+			</ttSequenceGroup>						
+		</ttActionsGroup>
+	</ttMacroBody>
+</ttMacro>
+
+<ttMacro name="pointerForScissors">
+	<ttMacroParams>
+		<ttMacroParamDef name="$hideSpecific"/>
+        <ttMacroParamDef name="$posX"/>
+        <ttMacroParamDef name="$posY"/>
+        <ttMacroParamDef name="$rotate"/>
+    </ttMacroParams>
+	<ttMacroBody>
+		<ttObject> <!-- pointer -->
+			<ttImage>images/tools/pointer.png</ttImage>
+			<ttAnchorPositionX>0.51</ttAnchorPositionX>
+			<ttAnchorPositionY>0.09</ttAnchorPositionY>
+			<ttRotate>45</ttRotate>
+			<ttScale>0.8</ttScale>
+			<ttRotate>$rotate</ttRotate>
+			<ttBasePosition x="$posX" y="$posY" />
+			<ttOpacity>0</ttOpacity>
+			<ttActionsGroup> <!-- showPointer -->
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>showScissorsPointer</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>fadeTo</ttType>
+						<ttOpacity>255</ttOpacity>
+						<ttActionDuration>0.2</ttActionDuration>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>scaleXy</ttType>
+						<ttActionDuration>0.15</ttActionDuration>
+						<ttScaleX>0.95</ttScaleX>
+						<ttScaleY>0.75</ttScaleY>
+						<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>scaleXy</ttType>
+						<ttActionDuration>0.15</ttActionDuration>
+						<ttScaleX>0.8</ttScaleX>
+						<ttScaleY>0.8</ttScaleY>
+						<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>scaleXy</ttType>
+						<ttActionDuration>0.15</ttActionDuration>
+						<ttScaleX>0.95</ttScaleX>
+						<ttScaleY>0.75</ttScaleY>
+						<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>scaleXy</ttType>
+						<ttActionDuration>0.15</ttActionDuration>
+						<ttScaleX>0.8</ttScaleX>
+						<ttScaleY>0.8</ttScaleY>
+						<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>scaleXy</ttType>
+						<ttActionDuration>0.15</ttActionDuration>
+						<ttScaleX>0.95</ttScaleX>
+						<ttScaleY>0.75</ttScaleY>
+						<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>scaleXy</ttType>
+						<ttActionDuration>0.15</ttActionDuration>
+						<ttScaleX>0.8</ttScaleX>
+						<ttScaleY>0.8</ttScaleY>
+						<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+					</ttAction>
+					<ttAction>
+						<ttType>fadeTo</ttType>
+						<ttOpacity>0</ttOpacity>
+						<ttActionDuration>0.2</ttActionDuration>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup> <!-- hidePointer -->
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>hideScissorsPointer</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>fadeTo</ttType>
+						<ttOpacity>0</ttOpacity>
+						<ttActionDuration>0</ttActionDuration>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>stopRunningActions</ttType>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup> <!-- endSpecific -->
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>$hideSpecific</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>fadeTo</ttType>
+						<ttOpacity>0</ttOpacity>
+						<ttActionDuration>0</ttActionDuration>
+					</ttAction>
+					<ttAction>
+						<ttType>makeInvisible</ttType>
+					</ttAction>
+					<ttAction>
+						<ttType>moveToPoint</ttType>
+						<ttFinalPosition x="-121.3542" y="119.5508"/>
+						<ttActionDuration>0</ttActionDuration>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>stopRunningActions</ttType>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+		</ttObject>		
+	</ttMacroBody>
+</ttMacro>

@@ -1,0 +1,3198 @@
+<?xml version="1.0" ?>
+<!-- hidden objects macros -->
+<ttMacro name="thrownObjectStaticDrop">
+    <ttMacroParams>
+        <ttMacroParamDef name="$imagePath"/>
+        <ttMacroParamDef name="$variableX"/>
+        <ttMacroParamDef name="$variableY"/>
+        <ttMacroParamDef name="$whatDelayForEntrance"/>
+        <ttMacroParamDef name="$whatItemAmI"/>
+        <ttMacroParamDef name="$specificParticles"/>
+        <ttMacroParamDef name="$specificHint"/>
+    </ttMacroParams>
+    <ttMacroBody>
+        <ttObject> <!-- thrownObject -->
+            <ttImage>$imagePath</ttImage>
+            <ttBasePosition x="-50" y="150" />
+            <ttOpacity>255</ttOpacity>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>items.activate</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>moveToPoint</ttType>
+                        <ttActionDuration>0</ttActionDuration>
+                        <ttFinalPosition x="$variableX" y="150"/>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>scale</ttType>
+                        <ttActionDuration>0</ttActionDuration>
+                        <ttScaleTo>1</ttScaleTo>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>delay</ttType>
+                        <ttActionDuration>$whatDelayForEntrance</ttActionDuration>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>moveToPoint</ttType>
+                        <ttActionDuration>0.3</ttActionDuration>
+                        <ttFinalPosition x="$variableX" y="$variableY"/>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>items.activate</ttNotificationIdentifyer>
+                <ttOperator>
+                    <ttScript>return hiddenObj.isThisAValidObject($whatItemAmI) == 1</ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>enableObject</ttType>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>bringToFront</ttType>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>$specificHint</ttNotificationIdentifyer>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>automatic</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>enableObject</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>items.activate</ttNotificationIdentifyer>
+                <ttOperator>
+                    <ttScript>return hiddenObj.isThisAValidObject($whatItemAmI) == 0</ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>disableObject</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>onTouchesBegan</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>correctObjectDubbing</ttNotificationIdentifyer>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>$specificParticles</ttNotificationIdentifyer>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>correctObjectsCounter</ttVariable>
+                        <ttOperator>
+                            <ttScript>return correctObjectsCounter+1</ttScript>
+                        </ttOperator>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>bringToFront</ttType>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>moveBy</ttType>
+                        <ttActionDuration>0.3</ttActionDuration>
+                        <ttFinalPosition x="0" y="10"/>
+                    </ttAction>
+                    <ttAction>  
+                        <ttType>playSound</ttType>
+                        <ttFile>sounds/button_press.mp3</ttFile>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>objectThatHasBeenTouched</ttVariable>
+                        <ttOperator>
+                            <ttScript>return ($whatItemAmI)</ttScript>
+                        </ttOperator>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>rotate</ttType>
+                        <ttActionDuration>0.5</ttActionDuration>
+                        <ttActionRotateAngle>720</ttActionRotateAngle>
+                        <ttActionEaseMode>easeBackIn</ttActionEaseMode>  
+                        <ttActionEaseRate>3.00</ttActionEaseRate>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>scale</ttType>
+                        <ttActionDuration>0.5</ttActionDuration>
+                        <ttScaleTo>0</ttScaleTo>
+                        <ttActionEaseMode>easeBackIn</ttActionEaseMode>  
+                        <ttActionEaseRate>3.00</ttActionEaseRate>
+                    </ttAction>
+                    <ttAction>  
+                        <ttType>playSound</ttType>
+                        <ttFile>sounds/hiddenObject/correctObject.mp3</ttFile>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>correctObject.checkmark</ttNotificationIdentifyer>
+                    </ttAction>
+                    <ttAction>  
+                        <ttType>playSound</ttType>
+                        <ttFile>sounds/checkmark.mp3</ttFile>
+                        <ttVolume>0.6</ttVolume>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+
+        <ttObject>
+            <ttImage>images/fullBlocker.png</ttImage>
+            <ttBasePosition x="$variableX" y="$variableY" />
+            <ttScale>1</ttScale>
+            <ttType>particles</ttType>
+            <ttZOrder>10</ttZOrder>
+            <ttParticles>
+                <ttParticlesPlist>images/particles/hiddenObjectFound.plist</ttParticlesPlist>
+            </ttParticles>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>items.activate</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>moveToPoint</ttType>
+                        <ttActionDuration>0</ttActionDuration>
+                        <ttFinalPosition x="$variableX" y="150"/>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>scale</ttType>
+                        <ttActionDuration>0</ttActionDuration>
+                        <ttScaleTo>1</ttScaleTo>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>delay</ttType>
+                        <ttActionDuration>$whatDelayForEntrance</ttActionDuration>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>moveToPoint</ttType>
+                        <ttActionDuration>0.3</ttActionDuration>
+                        <ttFinalPosition x="$variableX" y="$variableY"/>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>$specificParticles</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>startParticles</ttType>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>moveBy</ttType>
+                        <ttActionDuration>0.3</ttActionDuration>
+                        <ttFinalPosition x="0" y="10"/>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject>
+            <ttImage>images/fullBlocker.png</ttImage>
+            <ttBasePosition x="$variableX" y="$variableY" />
+            <ttScale>1</ttScale>
+            <ttType>particles</ttType>
+            <ttZOrder>10</ttZOrder>
+            <ttOpacity>180</ttOpacity>
+            <ttParticles>
+                <ttParticlesPlist>images/particles/hintParticles.plist</ttParticlesPlist>
+            </ttParticles>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>items.activate</ttNotificationIdentifyer>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>automatic</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>disableObject</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>$specificParticles</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>disableObject</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>$specificHint</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>enableObject</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>moveToPoint</ttType>
+                        <ttActionDuration>0</ttActionDuration>
+                        <ttFinalPosition x="$variableX" y="$variableY"/>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>hintParticles.show</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>startParticles</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+    </ttMacroBody>
+</ttMacro>
+<ttMacro name="thrownObject">
+    <ttMacroParams>
+        <ttMacroParamDef name="$imagePath"/>
+        <ttMacroParamDef name="$variableX"/>
+        <ttMacroParamDef name="$variableY"/>
+        <ttMacroParamDef name="$rotate"/>
+        <ttMacroParamDef name="$scale"/>
+        <ttMacroParamDef name="$flip"/>
+        <ttMacroParamDef name="$whatDelayForEntrance"/>
+        <ttMacroParamDef name="$whatItemAmI"/>
+        <ttMacroParamDef name="$specificParticles"/>
+        <ttMacroParamDef name="$specificHint"/>
+        <ttMacroParamDef name="$isValid"/>
+    </ttMacroParams>
+    <ttMacroBody>
+        <ttObject> <!-- thrownObject -->
+            <ttImage>$imagePath</ttImage>
+            <ttBasePosition x="$variableX" y="$variableY" />
+            <ttOpacity>255</ttOpacity>
+            <ttScale>$scale</ttScale>
+            <ttRotate>$rotate</ttRotate>
+            <ttFlipX>$flip</ttFlipX>
+            <ttActionsGroup>
+                <ttTrigger>onTouchesBegan</ttTrigger>
+                <ttOperator>
+                    <ttScript>return $whatItemAmI == 14</ttScript>
+                </ttOperator>	
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>noNarration</ttVariable>
+						<ttOperator>
+							<ttScript>return 1</ttScript>
+						</ttOperator>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>playSound</ttType>
+						<ttFile>sounds/narrations/curiousSanta/careful.mp3</ttFile>
+						<ttVolume>1</ttVolume>
+					</ttAction>
+				</ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>delay</ttType>
+                        <ttActionDuration>0.2</ttActionDuration>
+                    </ttAction>
+                </ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>noNarration</ttVariable>
+						<ttOperator>
+							<ttScript>return 0</ttScript>
+						</ttOperator>
+					</ttAction>
+				</ttSequenceGroup>				
+			</ttActionsGroup>
+			<ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>items.update</ttNotificationIdentifyer>
+                <ttOperator>
+                    <ttScript>return $isValid == 1</ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>enableObject</ttType>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>$specificHint</ttNotificationIdentifyer>
+                    </ttAction>                    
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>items.activate</ttNotificationIdentifyer>
+                <ttOperator>
+                    <ttScript>return $isValid == 1</ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>enableObject</ttType>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>$specificHint</ttNotificationIdentifyer>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>automatic</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>enableObject</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>items.activate</ttNotificationIdentifyer>
+                <ttOperator>
+                    <ttScript>return $isValid == 0</ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>disableObject</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>onTouchesBegan</ttTrigger>
+				<ttSequenceGroup>
+                    <ttAction>
+                        <ttType>moveObjectToLayer</ttType>
+                        <ttLayerName>panelItemsLayer</ttLayerName>
+                    </ttAction>
+                    <ttAction ttType="moveBy">
+						<ttFinalPosition x="-36" y="0"/>
+					</ttAction>
+				</ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>correctObjectDubbing</ttNotificationIdentifyer>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>$specificParticles</ttNotificationIdentifyer>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>objectThatHasBeenTouched</ttVariable>
+                        <ttOperator>
+                            <ttScript>return ($whatItemAmI)</ttScript>
+                        </ttOperator>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>script: return "getFallPos".."$whatItemAmI"</ttNotificationIdentifyer>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>noTouching</ttNotificationIdentifyer>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>correctObjectsCounter</ttVariable>
+                        <ttOperator>
+                            <ttScript>return correctObjectsCounter+1</ttScript>
+                        </ttOperator>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>noTouching</ttNotificationIdentifyer>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>            
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>script: return "jumpToPanel".."$whatItemAmI"</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+                    <ttAction>
+                        <ttType>moveBy</ttType>
+                        <ttActionDuration>0.3</ttActionDuration>
+                        <ttFinalPosition x="0" y="10"/>
+                    </ttAction>  
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+                        <ttType>moveToPoint</ttType>
+                        <ttActionDuration>0.5</ttActionDuration>
+                        <ttFinalPosition x="#fallPos@X" y="6"/>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>scale</ttType>
+                        <ttActionDuration>0.5</ttActionDuration>
+                        <ttScaleTo>0</ttScaleTo>
+                        <ttActionEaseMode>easeBackIn</ttActionEaseMode>  
+                        <ttActionEaseRate>3.00</ttActionEaseRate>
+                    </ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>script: return "disappear".."$whatItemAmI"</ttNotificationIdentifyer>
+                    </ttAction>
+                    <ttAction>  
+                        <ttType>playSound</ttType>
+                        <ttFile>sounds/button_press.mp3</ttFile>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>fadeTo</ttType>
+                        <ttActionDuration>0.2</ttActionDuration>
+                        <ttOpacity>255</ttOpacity>
+                    </ttAction> 
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>  
+                        <ttType>playSound</ttType>
+                        <ttFile>sounds/hiddenObject/correctObject.mp3</ttFile>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>correctObject.checkmark</ttNotificationIdentifyer>
+                    </ttAction>
+                    <ttAction>  
+                        <ttType>playSound</ttType>
+                        <ttFile>sounds/checkmark.mp3</ttFile>
+                        <ttVolume>0.6</ttVolume>
+                    </ttAction>
+                </ttSequenceGroup>	
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject>
+            <ttImage>images/fullBlocker.png</ttImage>
+            <ttBasePosition x="$variableX" y="$variableY" />
+            <ttScale>1</ttScale>
+            <ttType>particles</ttType>
+            <ttZOrder>10</ttZOrder>
+            <ttParticles>
+                <ttParticlesPlist>images/particles/hiddenObjectFound.plist</ttParticlesPlist>
+            </ttParticles>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>$specificParticles</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>startParticles</ttType>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>moveBy</ttType>
+                        <ttActionDuration>0.3</ttActionDuration>
+                        <ttFinalPosition x="0" y="10"/>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject>
+            <ttImage>images/fullBlocker.png</ttImage>
+            <ttBasePosition x="$variableX" y="$variableY" />
+            <ttScale>1</ttScale>
+            <ttType>particles</ttType>
+            <ttZOrder>10</ttZOrder>
+            <ttOpacity>180</ttOpacity>
+            <ttParticles>
+                <ttParticlesPlist>images/particles/hintParticles.plist</ttParticlesPlist>
+            </ttParticles>
+            <ttActionsGroup>
+                <ttTrigger>automatic</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>disableObject</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>$specificParticles</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>disableObject</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>$specificHint</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>enableObject</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>script: return "hintParticles".."$whatItemAmI"</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>startParticles</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+    </ttMacroBody>
+</ttMacro>
+<ttMacro name="thrownObject07">
+    <ttMacroParams>
+        <ttMacroParamDef name="$imagePath"/>
+        <ttMacroParamDef name="$variableX"/>
+        <ttMacroParamDef name="$variableY"/>
+        <ttMacroParamDef name="$rotate"/>
+        <ttMacroParamDef name="$scale"/>
+        <ttMacroParamDef name="$isFlipped"/>
+        <ttMacroParamDef name="$whatDelayForEntrance"/>
+        <ttMacroParamDef name="$whatItemAmI"/>
+        <ttMacroParamDef name="$specificParticles"/>
+        <ttMacroParamDef name="$specificHint"/>
+        <ttMacroParamDef name="$isValid"/>
+    </ttMacroParams>
+    <ttMacroBody>
+        <ttObject> <!-- thrownObject -->
+            <ttImage>$imagePath</ttImage>
+            <ttBasePosition x="$variableX" y="$variableY" />
+            <ttOpacity>255</ttOpacity>
+            <ttRotate>$rotate</ttRotate>
+            <ttScale>$scale</ttScale>
+            <ttFlipX>$isFlipped</ttFlipX>
+            <ttActionsGroup><!--scale controlBox-->
+                <ttTrigger>automatic</ttTrigger>
+				<ttOperator>
+					<ttScript>return ($whatItemAmI == 11)</ttScript>
+				</ttOperator>
+				<ttSequenceGroup>
+					<ttAction ttType="scale" ttScaleTo="0.75"/>
+				</ttSequenceGroup>				
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>automatic</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>enableObject</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>items.activate</ttNotificationIdentifyer>
+                <ttOperator>
+                    <ttScript>return $isValid == 0</ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>disableObject</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>onTouchesBegan</ttTrigger>
+				<ttSequenceGroup>
+                    <ttAction>
+                        <ttType>moveObjectToLayer</ttType>
+                        <ttLayerName>panelItemsLayer</ttLayerName>
+                    </ttAction>
+                    <ttAction ttType="moveBy">
+						<ttFinalPosition x="-36" y="0"/>
+					</ttAction>
+				</ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>correctObjectDubbing</ttNotificationIdentifyer>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>$specificParticles</ttNotificationIdentifyer>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>correctObjectsCounter</ttVariable>
+                        <ttOperator>
+                            <ttScript>return correctObjectsCounter+1</ttScript>
+                        </ttOperator>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>bringToFront</ttType>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>moveBy</ttType>
+                        <ttActionDuration>0.3</ttActionDuration>
+                        <ttFinalPosition x="0" y="10"/>
+                    </ttAction>
+                    <ttAction>  
+                        <ttType>playSound</ttType>
+                        <ttFile>sounds/button_press.mp3</ttFile>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>fadeTo</ttType>
+                        <ttActionDuration>0.2</ttActionDuration>
+                        <ttOpacity>255</ttOpacity>
+                    </ttAction> 
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>objectThatHasBeenTouched</ttVariable>
+                        <ttOperator>
+                            <ttScript>return ($whatItemAmI)</ttScript>
+                        </ttOperator>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>rotate</ttType>
+                        <ttActionDuration>0.5</ttActionDuration>
+                        <ttActionRotateAngle>720</ttActionRotateAngle>
+                        <ttActionEaseMode>easeBackIn</ttActionEaseMode>  
+                        <ttActionEaseRate>3.00</ttActionEaseRate>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>scale</ttType>
+                        <ttActionDuration>0.5</ttActionDuration>
+                        <ttScaleTo>0</ttScaleTo>
+                        <ttActionEaseMode>easeBackIn</ttActionEaseMode>  
+                        <ttActionEaseRate>3.00</ttActionEaseRate>
+                    </ttAction>
+                    <ttAction>  
+                        <ttType>playSound</ttType>
+                        <ttFile>sounds/hiddenObject/correctObject.mp3</ttFile>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>correctObject.checkmark</ttNotificationIdentifyer>
+                    </ttAction>
+                    <ttAction>  
+                        <ttType>playSound</ttType>
+                        <ttFile>sounds/checkmark.mp3</ttFile>
+                        <ttVolume>0.6</ttVolume>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject>
+            <ttImage>images/fullBlocker.png</ttImage>
+            <ttBasePosition x="$variableX" y="$variableY" />
+            <ttScale>1</ttScale>
+            <ttType>particles</ttType>
+            <ttZOrder>10</ttZOrder>
+            <ttParticles>
+                <ttParticlesPlist>images/particles/hiddenObjectFound.plist</ttParticlesPlist>
+            </ttParticles>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>$specificParticles</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>startParticles</ttType>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>moveBy</ttType>
+                        <ttActionDuration>0.3</ttActionDuration>
+                        <ttFinalPosition x="0" y="10"/>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject>
+            <ttImage>images/fullBlocker.png</ttImage>
+            <ttBasePosition x="$variableX" y="$variableY" />
+            <ttScale>1</ttScale>
+            <ttType>particles</ttType>
+            <ttZOrder>10</ttZOrder>
+            <ttOpacity>180</ttOpacity>
+            <ttParticles>
+                <ttParticlesPlist>images/particles/hintParticles.plist</ttParticlesPlist>
+            </ttParticles>
+            <ttActionsGroup>
+                <ttTrigger>automatic</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>disableObject</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>$specificParticles</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>disableObject</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>$specificHint</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>enableObject</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>script: return "hintParticles".."$whatItemAmI"</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>startParticles</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+    </ttMacroBody>
+</ttMacro>
+
+<ttMacro name="firefly">
+    <ttMacroParams>
+        <ttMacroParamDef name="$variableX"/>
+        <ttMacroParamDef name="$variableY"/>
+        <ttMacroParamDef name="$scale"/>
+        <ttMacroParamDef name="$whatDelayForEntrance"/>
+        <ttMacroParamDef name="$whatItemAmI"/>
+        <ttMacroParamDef name="$specificParticles"/>
+        <ttMacroParamDef name="$specificHint"/>
+        <ttMacroParamDef name="$isFlipped"/>
+    </ttMacroParams>
+    <ttMacroBody>
+        <ttObject> <!-- thrownObject -->
+            <ttImage>images/level07/firefly.png</ttImage>
+            <ttBasePosition x="$variableX" y="$variableY" />
+            <ttOpacity>255</ttOpacity>
+			<ttScale>$scale</ttScale>
+			<ttFlipX>$isFlipped</ttFlipX>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>items.update</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>enableObject</ttType>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>$specificHint</ttNotificationIdentifyer>
+                    </ttAction>                    
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>items.activate</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>enableObject</ttType>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>$specificHint</ttNotificationIdentifyer>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>automatic</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>enableObject</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+ 
+            <ttActionsGroup>
+                <ttTrigger>onTouchesBegan</ttTrigger>
+				<ttSequenceGroup>
+                    <ttAction>
+                        <ttType>moveObjectToLayer</ttType>
+                        <ttLayerName>panelItemsLayer</ttLayerName>
+                    </ttAction>
+                    <ttAction ttType="moveBy">
+						<ttFinalPosition x="-36" y="0"/>
+					</ttAction>
+				</ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>objectThatHasBeenTouched</ttVariable>
+                        <ttOperator>
+                            <ttScript>return ($whatItemAmI)</ttScript>
+                        </ttOperator>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>correctObjectDubbing</ttNotificationIdentifyer>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>script: return "getFallPos".."$whatItemAmI"</ttNotificationIdentifyer>
+                    </ttAction>
+					<ttAction ttType="sendNotification" ttNotificationIdentifyer="noTouching"/>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>$specificParticles</ttNotificationIdentifyer>
+                    </ttAction>                    
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>correctObjectsCounter</ttVariable>
+                        <ttOperator>
+                            <ttScript>return correctObjectsCounter+1</ttScript>
+                        </ttOperator>
+                    </ttAction>>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>script: return "jumpToPanel".."$whatItemAmI"</ttNotificationIdentifyer>					
+				<ttSequenceGroup>
+                    <ttAction>
+                        <ttType>moveBy</ttType>
+                        <ttActionDuration>0.3</ttActionDuration>
+                        <ttFinalPosition x="0" y="10"/>
+                    </ttAction> 
+				</ttSequenceGroup>	
+				<ttSequenceGroup>				
+					<ttAction>
+                        <ttType>moveToPoint</ttType>
+                        <ttActionDuration>0.5</ttActionDuration>
+                        <ttFinalPosition x="#fallPos @X" y="6"/>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>scale</ttType>
+                        <ttActionDuration>0.5</ttActionDuration>
+                        <ttScaleTo>0</ttScaleTo>
+                        <ttActionEaseMode>easeBackIn</ttActionEaseMode>  
+                        <ttActionEaseRate>3.00</ttActionEaseRate>
+                    </ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>	
+					<ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>script: return "disappear".."$whatItemAmI"</ttNotificationIdentifyer>
+                    </ttAction>
+                    <ttAction>  
+                        <ttType>playSound</ttType>
+                        <ttFile>sounds/button_press.mp3</ttFile>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>fadeTo</ttType>
+                        <ttActionDuration>0.2</ttActionDuration>
+                        <ttOpacity>255</ttOpacity>
+                    </ttAction> 
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>objectThatHasBeenTouched</ttVariable>
+                        <ttOperator>
+                            <ttScript>return ($whatItemAmI)</ttScript>
+                        </ttOperator>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>  
+                        <ttType>playSound</ttType>
+                        <ttFile>sounds/hiddenObject/correctObject.mp3</ttFile>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>correctObject.checkmark</ttNotificationIdentifyer>
+                    </ttAction>
+                    <ttAction>  
+                        <ttType>playSound</ttType>
+                        <ttFile>sounds/checkmark.mp3</ttFile>
+                        <ttVolume>0.6</ttVolume>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject>
+            <ttImage>images/fullBlocker.png</ttImage>
+            <ttBasePosition x="$variableX" y="$variableY" />
+            <ttScale>1</ttScale>
+            <ttType>particles</ttType>
+            <ttZOrder>10</ttZOrder>
+            <ttParticles>
+                <ttParticlesPlist>images/particles/hiddenObjectFound.plist</ttParticlesPlist>
+            </ttParticles>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>$specificParticles</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>startParticles</ttType>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>moveBy</ttType>
+                        <ttActionDuration>0.3</ttActionDuration>
+                        <ttFinalPosition x="0" y="10"/>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject>
+            <ttImage>images/fullBlocker.png</ttImage>
+            <ttBasePosition x="$variableX" y="$variableY" />
+            <ttScale>1</ttScale>
+            <ttType>particles</ttType>
+            <ttZOrder>10</ttZOrder>
+            <ttOpacity>180</ttOpacity>
+            <ttParticles>
+                <ttParticlesPlist>images/particles/hintParticles.plist</ttParticlesPlist>
+            </ttParticles>
+            <ttActionsGroup>
+                <ttTrigger>automatic</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>disableObject</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>$specificParticles</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>disableObject</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>$specificHint</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>enableObject</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>script: return "hintParticles".."$whatItemAmI"</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>startParticles</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+		
+	</ttMacroBody>
+</ttMacro>
+<ttMacro name="catapultPart">
+    <ttMacroParams>
+        <ttMacroParamDef name="$image"/>
+        <ttMacroParamDef name="$variableX"/>
+        <ttMacroParamDef name="$variableY"/>
+        <ttMacroParamDef name="$scale"/>
+        <ttMacroParamDef name="$rotate"/>
+        <ttMacroParamDef name="$whatDelayForEntrance"/>
+        <ttMacroParamDef name="$whatItemAmI"/>
+        <ttMacroParamDef name="$specificParticles"/>
+        <ttMacroParamDef name="$specificHint"/>
+        <ttMacroParamDef name="$isFlipped"/>
+    </ttMacroParams>
+    <ttMacroBody>
+        <ttObject> <!-- thrownObject -->
+            <ttImage>$image</ttImage>
+            <ttBasePosition x="$variableX" y="$variableY" />
+            <ttOpacity>255</ttOpacity>
+            <ttRotate>$rotate</ttRotate>
+			<ttScale>$scale</ttScale>
+			<ttFlipX>$isFlipped</ttFlipX>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>items.update</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>enableObject</ttType>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>$specificHint</ttNotificationIdentifyer>
+                    </ttAction>                    
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>items.activate</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>enableObject</ttType>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>$specificHint</ttNotificationIdentifyer>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>automatic</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>enableObject</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+ 
+            <ttActionsGroup>
+                <ttTrigger>onTouchesBegan</ttTrigger>
+				<ttSequenceGroup>
+                    <ttAction>
+                        <ttType>moveObjectToLayer</ttType>
+                        <ttLayerName>panelItemsLayer</ttLayerName>
+                    </ttAction>
+                    <ttAction ttType="moveBy">
+						<ttFinalPosition x="-36" y="0"/>
+					</ttAction>
+				</ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>objectThatHasBeenTouched</ttVariable>
+                        <ttOperator>
+                            <ttScript>return ($whatItemAmI)</ttScript>
+                        </ttOperator>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>correctObjectDubbing</ttNotificationIdentifyer>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>script: return "getFallPos".."$whatItemAmI"</ttNotificationIdentifyer>
+                    </ttAction>
+					<ttAction ttType="sendNotification" ttNotificationIdentifyer="noTouching"/>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>$specificParticles</ttNotificationIdentifyer>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>correctObjectsCounter</ttVariable>
+                        <ttOperator>
+                            <ttScript>return correctObjectsCounter+1</ttScript>
+                        </ttOperator>
+                    </ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>script: return "jumpToPanel".."$whatItemAmI"</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+                    <ttAction>
+                        <ttType>moveBy</ttType>
+                        <ttActionDuration>0.3</ttActionDuration>
+                        <ttFinalPosition x="0" y="10"/>
+                    </ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+                        <ttType>moveToPoint</ttType>
+                        <ttActionDuration>0.5</ttActionDuration>
+                        <ttFinalPosition x="#fallPos @X" y="6"/>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>scale</ttType>
+                        <ttActionDuration>0.5</ttActionDuration>
+                        <ttScaleTo>0</ttScaleTo>
+                        <ttActionEaseMode>easeBackIn</ttActionEaseMode>  
+                        <ttActionEaseRate>3.00</ttActionEaseRate>
+                    </ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>script: return "disappear".."$whatItemAmI"</ttNotificationIdentifyer>
+                    </ttAction>
+                    <ttAction>  
+                        <ttType>playSound</ttType>
+                        <ttFile>sounds/button_press.mp3</ttFile>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>fadeTo</ttType>
+                        <ttActionDuration>0.2</ttActionDuration>
+                        <ttOpacity>255</ttOpacity>
+                    </ttAction> 
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>objectThatHasBeenTouched</ttVariable>
+                        <ttOperator>
+                            <ttScript>return ($whatItemAmI)</ttScript>
+                        </ttOperator>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>  
+                        <ttType>playSound</ttType>
+                        <ttFile>sounds/hiddenObject/correctObject.mp3</ttFile>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>correctObject.checkmark</ttNotificationIdentifyer>
+                    </ttAction>
+                    <ttAction>  
+                        <ttType>playSound</ttType>
+                        <ttFile>sounds/checkmark.mp3</ttFile>
+                        <ttVolume>0.6</ttVolume>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject>
+            <ttImage>images/fullBlocker.png</ttImage>
+            <ttBasePosition x="$variableX" y="$variableY" />
+            <ttScale>1</ttScale>
+            <ttType>particles</ttType>
+            <ttZOrder>10</ttZOrder>
+            <ttParticles>
+                <ttParticlesPlist>images/particles/hiddenObjectFound.plist</ttParticlesPlist>
+            </ttParticles>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>$specificParticles</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>startParticles</ttType>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>moveBy</ttType>
+                        <ttActionDuration>0.3</ttActionDuration>
+                        <ttFinalPosition x="0" y="10"/>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject>
+            <ttImage>images/fullBlocker.png</ttImage>
+            <ttBasePosition x="$variableX" y="$variableY" />
+            <ttScale>1</ttScale>
+            <ttType>particles</ttType>
+            <ttZOrder>10</ttZOrder>
+            <ttOpacity>180</ttOpacity>
+            <ttParticles>
+                <ttParticlesPlist>images/particles/hintParticles.plist</ttParticlesPlist>
+            </ttParticles>
+            <ttActionsGroup>
+                <ttTrigger>automatic</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>disableObject</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>$specificParticles</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>disableObject</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>$specificHint</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>enableObject</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>script: return "hintParticles".."$whatItemAmI"</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>startParticles</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+	</ttMacroBody>
+</ttMacro>
+<ttMacro name="key">
+    <ttMacroParams>
+        <ttMacroParamDef name="$keyID"/>
+        <ttMacroParamDef name="$variableX"/>
+        <ttMacroParamDef name="$variableY"/>
+        <ttMacroParamDef name="$rotate"/>
+        <ttMacroParamDef name="$scale"/>
+        <ttMacroParamDef name="$whatDelayForEntrance"/>
+        <ttMacroParamDef name="$whatItemAmI"/>
+        <ttMacroParamDef name="$specificParticles"/>
+        <ttMacroParamDef name="$specificHint"/>
+    </ttMacroParams>
+    <ttMacroBody>
+        <ttObject> <!-- thrownObject -->
+            <ttImage>images/level12/key01.png</ttImage>
+            <ttImage>images/level12/key01.png</ttImage>
+            <ttImage>images/level12/key02.png</ttImage>
+            <ttImage>images/level12/key03.png</ttImage>
+            <ttImage>images/level12/key04.png</ttImage>
+            <ttImage>images/level12/key05.png</ttImage>
+            <ttImage>images/level12/key06.png</ttImage>
+            <ttImage>images/level12/key07.png</ttImage>
+            <ttImage>images/level12/key08.png</ttImage>
+            <ttBasePosition x="$variableX" y="$variableY" />
+            <ttOpacity>255</ttOpacity>
+			<ttScale>$scale</ttScale>
+			<ttRotate>$rotate</ttRotate>
+            <ttActionsGroup>
+                <ttTrigger>automatic</ttTrigger>
+					<ttSequenceGroup>
+						<ttAction ttType="replaceSpriteWithNextImage" ttIntValue="$keyID"/>
+					</ttSequenceGroup>
+			</ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>items.update</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>enableObject</ttType>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>$specificHint</ttNotificationIdentifyer>
+                    </ttAction>                    
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>items.activate</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>enableObject</ttType>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>$specificHint</ttNotificationIdentifyer>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>automatic</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>enableObject</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+ 
+            <ttActionsGroup>
+                <ttTrigger>onTouchesBegan</ttTrigger>
+				<ttSequenceGroup>
+                    <ttAction>
+                        <ttType>moveObjectToLayer</ttType>
+                        <ttLayerName>panelItemsLayer</ttLayerName>
+                    </ttAction>
+                    <ttAction ttType="moveBy">
+						<ttFinalPosition x="-36" y="0"/>
+					</ttAction>
+				</ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>objectThatHasBeenTouched</ttVariable>
+                        <ttOperator>
+                            <ttScript>return ($whatItemAmI)</ttScript>
+                        </ttOperator>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>correctObjectDubbing</ttNotificationIdentifyer>
+                    </ttAction>
+					<ttAction ttType="sendNotification" ttNotificationIdentifyer="noTouching"/>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>script: return "getFallPos".."$whatItemAmI"</ttNotificationIdentifyer>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>$specificParticles</ttNotificationIdentifyer>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>correctObjectsCounter</ttVariable>
+                        <ttOperator>
+                            <ttScript>return correctObjectsCounter+1</ttScript>
+                        </ttOperator>
+                    </ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>script: return "jumpToPanel".."$whatItemAmI"</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+                    <ttAction>
+                        <ttType>moveBy</ttType>
+                        <ttActionDuration>0.3</ttActionDuration>
+                        <ttFinalPosition x="0" y="10"/>
+                    </ttAction> 
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+                        <ttType>moveToPoint</ttType>
+                        <ttActionDuration>0.5</ttActionDuration>
+                        <ttFinalPosition x="#fallPos @X" y="6"/>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>scale</ttType>
+                        <ttActionDuration>0.5</ttActionDuration>
+                        <ttScaleTo>0</ttScaleTo>
+                        <ttActionEaseMode>easeBackIn</ttActionEaseMode>  
+                        <ttActionEaseRate>3.00</ttActionEaseRate>
+                    </ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>script: return "disappear".."$whatItemAmI"</ttNotificationIdentifyer>
+                    </ttAction>
+                    <ttAction>  
+                        <ttType>playSound</ttType>
+                        <ttFile>sounds/button_press.mp3</ttFile>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>fadeTo</ttType>
+                        <ttActionDuration>0.2</ttActionDuration>
+                        <ttOpacity>255</ttOpacity>
+                    </ttAction> 
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>  
+                        <ttType>playSound</ttType>
+                        <ttFile>sounds/hiddenObject/correctObject.mp3</ttFile>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>correctObject.checkmark</ttNotificationIdentifyer>
+                    </ttAction>
+                    <ttAction>  
+                        <ttType>playSound</ttType>
+                        <ttFile>sounds/checkmark.mp3</ttFile>
+                        <ttVolume>0.6</ttVolume>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject>
+            <ttImage>images/fullBlocker.png</ttImage>
+            <ttBasePosition x="$variableX" y="$variableY" />
+            <ttScale>1</ttScale>
+            <ttType>particles</ttType>
+            <ttZOrder>10</ttZOrder>
+            <ttParticles>
+                <ttParticlesPlist>images/particles/hiddenObjectFound.plist</ttParticlesPlist>
+            </ttParticles>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>$specificParticles</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>startParticles</ttType>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>moveBy</ttType>
+                        <ttActionDuration>0.3</ttActionDuration>
+                        <ttFinalPosition x="0" y="10"/>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject>
+            <ttImage>images/fullBlocker.png</ttImage>
+            <ttBasePosition x="$variableX" y="$variableY" />
+            <ttScale>1</ttScale>
+            <ttType>particles</ttType>
+            <ttZOrder>10</ttZOrder>
+            <ttOpacity>180</ttOpacity>
+            <ttParticles>
+                <ttParticlesPlist>images/particles/hintParticles.plist</ttParticlesPlist>
+            </ttParticles>
+            <ttActionsGroup>
+                <ttTrigger>automatic</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>disableObject</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>$specificParticles</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>disableObject</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>$specificHint</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>enableObject</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>script: return "hintParticles".."$whatItemAmI"</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>startParticles</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+	</ttMacroBody>
+</ttMacro>
+
+<ttMacro name="validObjectStaticDrop">
+    <ttMacroParams>
+        <ttMacroParamDef name="$posX"/>
+        <ttMacroParamDef name="$posY"/>
+        <ttMacroParamDef name="$specificMessageForControll"/>
+    </ttMacroParams>
+    <ttMacroBody>
+        <ttObject> <!-- validObject -->
+            <ttImage>$images</ttImage>
+            <ttBasePosition x="$posX" y="$posY" />
+            <ttScale>0.8</ttScale>
+            <ttOpacity>0</ttOpacity>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>initiate.panel</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>replaceSpriteWithNextImage</ttType>
+                        <ttIntValue>$specificMessageForControll</ttIntValue>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>fadeTo</ttType>
+                        <ttActionDuration>0.5</ttActionDuration>
+                        <ttOpacity>255</ttOpacity>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+
+    </ttMacroBody>
+</ttMacro>
+<ttMacro name="validObjectStatic3">
+    <ttMacroParams>
+        <ttMacroParamDef name="$image"/>
+        <ttMacroParamDef name="$imageRing"/>
+        <ttMacroParamDef name="$posX"/>
+        <ttMacroParamDef name="$posY"/>
+        <ttMacroParamDef name="$scale"/>
+        <ttMacroParamDef name="$whatIndex"/>
+        <ttMacroParamDef name="$specificMessageForControll"/>
+        <ttMacroParamDef name="$flurryVal"/>
+    </ttMacroParams>
+    <ttMacroBody>
+		<ttObject>
+			<ttImage>images/fullBlocker.png</ttImage>
+			<ttVisible>NO</ttVisible>
+			<ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>removeObj</ttNotificationIdentifyer>
+				<ttOperator>
+					<ttScript>return (objectThatHasBeenTouched == $whatIndex)</ttScript>
+				</ttOperator>
+					<ttSequenceGroup>
+						<ttAction>
+							 <ttType>runScript</ttType>
+							 <ttScript>hiddenObj.removeFoundObjects($whatIndex)</ttScript>
+						</ttAction>
+					</ttSequenceGroup>
+					<ttSequenceGroup>
+						<ttAction>
+							<ttType>delay</ttType>
+							<ttActionDuration>1</ttActionDuration>
+						</ttAction>
+					</ttSequenceGroup>
+					<ttSequenceGroup>
+						<ttAction>
+							<ttType>sendNotification</ttType>
+							<ttNotificationIdentifyer>setRandomHint</ttNotificationIdentifyer>
+						</ttAction>	
+					</ttSequenceGroup>
+			</ttActionsGroup>
+		</ttObject>
+		<ttObject>
+			<ttImage>$imageRing</ttImage>
+            <ttBasePosition x="$posX" y="$posY" />
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>script: return "disappear".."$whatIndex"</ttNotificationIdentifyer>
+					<ttAction ttType="fadeTo" ttOpacity="0" ttActionDuration="0.5"/> 
+					<ttSequenceGroup>
+						<ttAction>
+							<ttType>logEvent</ttType>
+							<ttLogEventName>Level_3_Hidden_Items</ttLogEventName>
+							<ttLogEventParam>Item_Completed</ttLogEventParam>
+							<ttLogEventVal>$flurryVal</ttLogEventVal>
+						</ttAction>
+					</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>panel.MoveToLeft</ttNotificationIdentifyer>
+                <ttOperator>
+                    <ttScript>return (($whatIndex > selectedIndex))</ttScript> 
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>delay</ttType>
+                        <ttActionDuration>0.6</ttActionDuration>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>moveBy</ttType>
+                        <ttFinalPosition x="-20" y="0"/>
+                        <ttActionDuration>0.3</ttActionDuration>
+                        <ttActionEaseRate>2.00</ttActionEaseRate>
+                        <ttActionEaseMode>easeBackOut</ttActionEaseMode>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+		</ttObject>	
+	
+        <ttObject> <!-- validObject -->
+            <ttImage>$image</ttImage>
+            <ttBasePosition x="$posX" y="$posY" />
+            <ttScale>$scale</ttScale>
+            <ttOpacity>0</ttOpacity>
+			<ttId>$whatIndex</ttId>
+			<ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>initiate.panel</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>replaceSpriteWithNextImage</ttType>
+                        <ttIntValue>$specificMessageForControll</ttIntValue>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>fadeTo</ttType>
+                        <ttActionDuration>0.5</ttActionDuration>
+                        <ttOpacity>255</ttOpacity>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>script: return "getFallPos".."$whatIndex"</ttNotificationIdentifyer> 
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>fallPos</ttVariable>
+						<ttOperator>
+							<ttScript>return "$whatIndex"</ttScript> 
+						</ttOperator>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="sendNotification" ttNotificationIdentifyer="removeObj"/>
+				</ttSequenceGroup>		
+				<ttSequenceGroup>
+					<ttAction ttType="sendNotification">
+						<ttNotificationIdentifyer>script: return "jumpToPanel".."$whatIndex"</ttNotificationIdentifyer>
+					</ttAction>
+				</ttSequenceGroup>				
+			</ttActionsGroup>
+			<ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>script: return "disappear".."$whatIndex"</ttNotificationIdentifyer>
+					<ttSequenceGroup>
+						<ttAction ttType="fadeTo" ttOpacity="0" ttActionDuration="0.5"/> 
+					</ttSequenceGroup>
+                    <ttSequenceGroup>
+						<ttAction>
+							<ttType>setVariable</ttType>
+							<ttVariable>selectedIndex</ttVariable>
+							<ttOperator>
+								<ttScript>return $whatIndex</ttScript> 
+							</ttOperator>
+						</ttAction>
+					</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="sendNotification" ttNotificationIdentifyer="panel.MoveToLeft"/>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>panel.MoveToLeft</ttNotificationIdentifyer>
+                <ttOperator>
+                    <ttScript>return (($whatIndex > selectedIndex))</ttScript> 
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>delay</ttType>
+                        <ttActionDuration>0.6</ttActionDuration>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>moveBy</ttType>
+                        <ttFinalPosition x="-20" y="0"/>
+                        <ttActionDuration>0.3</ttActionDuration>
+                        <ttActionEaseRate>2.00</ttActionEaseRate>
+                        <ttActionEaseMode>easeBackOut</ttActionEaseMode>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+		</ttObject>
+
+    </ttMacroBody>
+</ttMacro>
+<ttMacro name="validObjectStatic">
+    <ttMacroParams>
+		<ttMacroParamDef name="$image"/>
+		<ttMacroParamDef name="$imageRing"/>
+		<ttMacroParamDef name="$whatIndex"/>
+		<ttMacroParamDef name="$didIMove"/>
+        <ttMacroParamDef name="$posX"/>
+        <ttMacroParamDef name="$posY"/>
+        <ttMacroParamDef name="$specificMessageForControll"/>
+    </ttMacroParams>
+    <ttMacroBody>	
+		<ttObject>
+			<ttImage>images/fullBlocker.png</ttImage>
+			<ttVisible>NO</ttVisible>
+			<ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>removeObj</ttNotificationIdentifyer>
+				<ttOperator>
+					<ttScript>return (objectThatHasBeenTouched == $whatIndex)</ttScript>
+				</ttOperator>
+					<ttSequenceGroup>
+						<ttAction>
+							 <ttType>runScript</ttType>
+							 <ttScript>hiddenObj.removeFoundObjects($whatIndex)</ttScript>
+						</ttAction>
+					</ttSequenceGroup>
+					<ttSequenceGroup>
+						<ttAction>
+							<ttType>delay</ttType>
+							<ttActionDuration>1</ttActionDuration>
+						</ttAction>
+					</ttSequenceGroup>
+					<ttSequenceGroup>
+						<ttAction>
+							<ttType>sendNotification</ttType>
+							<ttNotificationIdentifyer>setRandomHint</ttNotificationIdentifyer>
+						</ttAction>	
+					</ttSequenceGroup>
+			</ttActionsGroup>
+		</ttObject>
+		<ttObject>
+			<ttImage>$imageRing</ttImage>
+            <ttBasePosition x="$posX" y="$posY" />
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>script: return "disappear".."$whatIndex"</ttNotificationIdentifyer>
+					<ttAction ttType="fadeTo" ttOpacity="0" ttActionDuration="0.5"/> 
+			</ttActionsGroup>
+			<ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>panel.MoveToLeft</ttNotificationIdentifyer>
+                <ttOperator>
+                    <ttScript>return (($whatIndex > selectedIndex))</ttScript> 
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>delay</ttType>
+                        <ttActionDuration>0.6</ttActionDuration>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>moveBy</ttType>
+                        <ttFinalPosition x="-16" y="0"/>
+                        <ttActionDuration>0.3</ttActionDuration>
+                        <ttActionEaseRate>2.00</ttActionEaseRate>
+                        <ttActionEaseMode>easeBackOut</ttActionEaseMode>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>$didIMove</ttVariable>
+                        <ttOperator>
+                            <ttScript>return 1</ttScript> 
+                        </ttOperator>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+		</ttObject>	
+		<ttObject>
+			<ttImage>$image</ttImage>
+            <ttBasePosition x="$posX" y="$posY" />
+			<ttId>$whatIndex</ttId>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>script: return "getFallPos".."$whatIndex"</ttNotificationIdentifyer> 
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>fallPos</ttVariable>
+						<ttOperator>
+							<ttScript>return "$whatIndex"</ttScript> 
+						</ttOperator>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="sendNotification" ttNotificationIdentifyer="removeObj"/>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="sendNotification">
+						<ttNotificationIdentifyer>script: return "jumpToPanel".."$whatIndex"</ttNotificationIdentifyer>
+					</ttAction>
+				</ttSequenceGroup>			
+			</ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>script: return "disappear".."$whatIndex"</ttNotificationIdentifyer>
+					<ttAction ttType="fadeTo" ttOpacity="0" ttActionDuration="0.5"/> 
+                    <ttSequenceGroup>
+						<ttAction>
+							<ttType>setVariable</ttType>
+							<ttVariable>selectedIndex</ttVariable>
+							<ttOperator>
+								<ttScript>return $whatIndex</ttScript> 
+							</ttOperator>
+						</ttAction>
+					</ttSequenceGroup>
+					<ttSequenceGroup>
+						<ttAction ttType="sendNotification" ttNotificationIdentifyer="panel.MoveToLeft"/>
+					</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>panel.MoveToLeft</ttNotificationIdentifyer>
+                <ttOperator>
+                    <ttScript>return (($whatIndex > selectedIndex))</ttScript> 
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>delay</ttType>
+                        <ttActionDuration>0.6</ttActionDuration>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>moveBy</ttType>
+                        <ttFinalPosition x="-16" y="0"/>
+                        <ttActionDuration>0.3</ttActionDuration>
+                        <ttActionEaseRate>2.00</ttActionEaseRate>
+                        <ttActionEaseMode>easeBackOut</ttActionEaseMode>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>$didIMove</ttVariable>
+                        <ttOperator>
+                            <ttScript>return 1</ttScript> 
+                        </ttOperator>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+		</ttObject>
+    </ttMacroBody>
+</ttMacro>
+<ttMacro name="validObjectStatic12">
+    <ttMacroParams>
+		<ttMacroParamDef name="$imageRing"/>
+		<ttMacroParamDef name="$whatIndex"/>
+		<ttMacroParamDef name="$didIMove"/>
+        <ttMacroParamDef name="$posX"/>
+        <ttMacroParamDef name="$posY"/>
+        <ttMacroParamDef name="$specificMessageForControll"/>
+    </ttMacroParams>
+    <ttMacroBody>
+		<ttObject>
+			<ttImage>images/fullBlocker.png</ttImage>
+			<ttVisible>NO</ttVisible>
+			<ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>removeObj</ttNotificationIdentifyer>
+				<ttOperator>
+					<ttScript>return (objectThatHasBeenTouched == $whatIndex)</ttScript>
+				</ttOperator>
+					<ttSequenceGroup>
+						<ttAction>
+							 <ttType>runScript</ttType>
+							 <ttScript>hiddenObj.removeFoundObjects($whatIndex)</ttScript>
+						</ttAction>
+					</ttSequenceGroup>
+					<ttSequenceGroup>
+						<ttAction>
+							<ttType>delay</ttType>
+							<ttActionDuration>1</ttActionDuration>
+						</ttAction>
+					</ttSequenceGroup>
+					<ttSequenceGroup>
+						<ttAction>
+							<ttType>sendNotification</ttType>
+							<ttNotificationIdentifyer>setRandomHint</ttNotificationIdentifyer>
+						</ttAction>	
+					</ttSequenceGroup>
+			</ttActionsGroup>
+		</ttObject>
+		<ttObject>
+			<ttImage>$imageRing</ttImage>
+            <ttBasePosition x="$posX" y="$posY" />
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>script: return "disappear".."$whatIndex"</ttNotificationIdentifyer>
+					<ttAction ttType="fadeTo" ttOpacity="0" ttActionDuration="0.5"/> 
+			</ttActionsGroup>
+			<ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>panel.MoveToLeft</ttNotificationIdentifyer>
+                <ttOperator>
+                    <ttScript>return (($whatIndex > selectedIndex))</ttScript> 
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>delay</ttType>
+                        <ttActionDuration>0.6</ttActionDuration>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>moveBy</ttType>
+                        <ttFinalPosition x="-16" y="0"/>
+                        <ttActionDuration>0.3</ttActionDuration>
+                        <ttActionEaseRate>2.00</ttActionEaseRate>
+                        <ttActionEaseMode>easeBackOut</ttActionEaseMode>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>$didIMove</ttVariable>
+                        <ttOperator>
+                            <ttScript>return 1</ttScript> 
+                        </ttOperator>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+		</ttObject>
+        <ttObject> <!-- validObject -->
+            <ttImage>images/level12/key01.png</ttImage>
+            <ttImage>images/level12/key01.png</ttImage>
+            <ttImage>images/level12/key02.png</ttImage>
+            <ttImage>images/level12/key03.png</ttImage>
+            <ttImage>images/level12/key04.png</ttImage>
+            <ttImage>images/level12/key05.png</ttImage>
+            <ttImage>images/level12/key06.png</ttImage>
+            <ttImage>images/level12/key07.png</ttImage>
+            <ttImage>images/level12/key08.png</ttImage>
+            <ttBasePosition x="$posX" y="$posY" />
+            <ttScale>0.4</ttScale>
+			<ttRotate>10</ttRotate>
+            <ttOpacity>0</ttOpacity>
+			<ttId>$whatIndex</ttId>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>script: return "getFallPos".."$whatIndex"</ttNotificationIdentifyer> 
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>fallPos</ttVariable>
+						<ttOperator>
+							<ttScript>return "$whatIndex"</ttScript> 
+						</ttOperator>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="sendNotification" ttNotificationIdentifyer="removeObj"/>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="sendNotification">
+						<ttNotificationIdentifyer>script: return "jumpToPanel".."$whatIndex"</ttNotificationIdentifyer>
+					</ttAction>
+				</ttSequenceGroup>				
+			</ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>initiate.panel</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>replaceSpriteWithNextImage</ttType>
+                        <ttIntValue>$specificMessageForControll</ttIntValue>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>fadeTo</ttType>
+                        <ttActionDuration>0.5</ttActionDuration>
+                        <ttOpacity>255</ttOpacity>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>script: return "disappear".."$whatIndex"</ttNotificationIdentifyer>
+					<ttSequenceGroup>
+						<ttAction ttType="fadeTo" ttOpacity="0" ttActionDuration="0.5"/> 
+					</ttSequenceGroup>
+                    <ttSequenceGroup>
+						<ttAction>
+							<ttType>setVariable</ttType>
+							<ttVariable>selectedIndex</ttVariable>
+							<ttOperator>
+								<ttScript>return $whatIndex</ttScript> 
+							</ttOperator>
+						</ttAction>
+					</ttSequenceGroup>
+					<ttSequenceGroup>
+						<ttAction ttType="sendNotification" ttNotificationIdentifyer="panel.MoveToLeft"/>
+					</ttSequenceGroup>
+			</ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>panel.MoveToLeft</ttNotificationIdentifyer>
+                <ttOperator>
+                    <ttScript>return (($whatIndex > selectedIndex))</ttScript> 
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>delay</ttType>
+                        <ttActionDuration>0.6</ttActionDuration>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>moveBy</ttType>
+                        <ttFinalPosition x="-16" y="0"/>
+                        <ttActionDuration>0.3</ttActionDuration>
+                        <ttActionEaseRate>2.00</ttActionEaseRate>
+                        <ttActionEaseMode>easeBackOut</ttActionEaseMode>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>$didIMove</ttVariable>
+                        <ttOperator>
+                            <ttScript>return 1</ttScript> 
+                        </ttOperator>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+		</ttObject>
+    </ttMacroBody>
+</ttMacro>
+<ttMacro name="validObjectStatic14">
+    <ttMacroParams>
+		<ttMacroParamDef name="$imageRing"/>
+		<ttMacroParamDef name="$whatIndex"/>
+		<ttMacroParamDef name="$didIMove"/>
+        <ttMacroParamDef name="$posX"/>
+        <ttMacroParamDef name="$posY"/>
+        <ttMacroParamDef name="$iPosY"/>
+        <ttMacroParamDef name="$scale"/>
+        <ttMacroParamDef name="$specificMessageForControll"/>
+        <ttMacroParamDef name="$flurryVal"/>
+    </ttMacroParams>
+    <ttMacroBody>
+		<ttObject>
+			<ttImage>images/fullBlocker.png</ttImage>
+			<ttVisible>NO</ttVisible>
+			<ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>removeObj</ttNotificationIdentifyer>
+				<ttOperator>
+					<ttScript>return (objectThatHasBeenTouched == $whatIndex)</ttScript>
+				</ttOperator>
+					<ttSequenceGroup>
+						<ttAction>
+							 <ttType>runScript</ttType>
+							 <ttScript>hiddenObj.removeFoundObjects($whatIndex)</ttScript>
+						</ttAction>
+					</ttSequenceGroup>
+					<ttSequenceGroup>
+						<ttAction>
+							<ttType>delay</ttType>
+							<ttActionDuration>1</ttActionDuration>
+						</ttAction>
+					</ttSequenceGroup>
+					<ttSequenceGroup>
+						<ttAction>
+							<ttType>sendNotification</ttType>
+							<ttNotificationIdentifyer>setRandomHint</ttNotificationIdentifyer>
+						</ttAction>	
+					</ttSequenceGroup>
+			</ttActionsGroup>
+		</ttObject>
+		<ttObject>
+			<ttImage>$imageRing</ttImage>
+            <ttBasePosition x="$posX" y="$posY" />
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>script: return "disappear".."$whatIndex"</ttNotificationIdentifyer>
+					<ttAction ttType="fadeTo" ttOpacity="0" ttActionDuration="0.5"/> 
+                    <ttSequenceGroup>
+						<ttAction>
+							<ttType>setVariable</ttType>
+							<ttVariable>selectedIndex</ttVariable>
+							<ttOperator>
+								<ttScript>return $whatIndex</ttScript> 
+							</ttOperator>
+						</ttAction>
+					</ttSequenceGroup>
+					<ttSequenceGroup>
+						<ttAction>
+							<ttType>logEvent</ttType>
+							<ttLogEventName>Level_14_Hidden_Items</ttLogEventName>
+							<ttLogEventParam>Item_Completed</ttLogEventParam>
+							<ttLogEventVal>$flurryVal</ttLogEventVal>
+						</ttAction>
+					</ttSequenceGroup>
+					<ttSequenceGroup>
+						<ttAction ttType="sendNotification" ttNotificationIdentifyer="panel.MoveToLeft"/>
+					</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>panel.MoveToLeft</ttNotificationIdentifyer>
+                <ttOperator>
+                    <ttScript>return (($whatIndex > selectedIndex))</ttScript> 
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>delay</ttType>
+                        <ttActionDuration>0.6</ttActionDuration>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>moveBy</ttType>
+                        <ttFinalPosition x="-16" y="0"/>
+                        <ttActionDuration>0.3</ttActionDuration>
+                        <ttActionEaseRate>2.00</ttActionEaseRate>
+                        <ttActionEaseMode>easeBackOut</ttActionEaseMode>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>$didIMove</ttVariable>
+                        <ttOperator>
+                            <ttScript>return 1</ttScript> 
+                        </ttOperator>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+		</ttObject>
+        <ttObject> <!-- validObject -->
+            <ttImage>images/level14/mainBodyThumb.png</ttImage>
+            <ttImage>images/level14/mainBodyThumb.png</ttImage>
+            <ttImage>images/level14/planksThumb.png</ttImage>
+            <ttImage>images/level14/wheelsThumb.png</ttImage>
+            <ttImage>images/level14/wheelsThumb.png</ttImage>
+            <ttImage>images/level14/whinchThumb.png</ttImage>
+            <ttImage>images/level14/planksThumb.png</ttImage>
+            <ttImage>images/level14/armThumb.png</ttImage>
+            <ttImage>images/level14/weightThumb.png</ttImage>
+            <ttBasePosition x="$posX" y="$iPosY" />
+            <ttScale>$scale</ttScale>
+            <ttOpacity>0</ttOpacity>
+            <ttId>$whatIndex</ttId>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>script: return "getFallPos".."$whatIndex"</ttNotificationIdentifyer> 
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>fallPos</ttVariable>
+						<ttOperator>
+							<ttScript>return "$whatIndex"</ttScript> 
+						</ttOperator>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="sendNotification" ttNotificationIdentifyer="removeObj"/>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="sendNotification">
+						<ttNotificationIdentifyer>script: return "jumpToPanel".."$whatIndex"</ttNotificationIdentifyer>
+					</ttAction>
+				</ttSequenceGroup>					
+			</ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>initiate.panel</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>replaceSpriteWithNextImage</ttType>
+                        <ttIntValue>$specificMessageForControll</ttIntValue>
+                    </ttAction>
+                </ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>script: return "fallPos".."$whatIndex"</ttVariable>
+						<ttOperator>
+							<ttScript>$posX</ttScript> 
+						</ttOperator>
+					</ttAction>
+				</ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>fadeTo</ttType>
+                        <ttActionDuration>0.5</ttActionDuration>
+                        <ttOpacity>255</ttOpacity>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>script: return "disappear".."$whatIndex"</ttNotificationIdentifyer>
+					<ttSequenceGroup>
+						<ttAction ttType="fadeTo" ttOpacity="0" ttActionDuration="0.5"/> 
+					</ttSequenceGroup>
+			</ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>panel.MoveToLeft</ttNotificationIdentifyer>
+                <ttOperator>
+                    <ttScript>return (($whatIndex > selectedIndex))</ttScript> 
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>delay</ttType>
+                        <ttActionDuration>0.6</ttActionDuration>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>moveBy</ttType>
+                        <ttFinalPosition x="-16" y="0"/>
+                        <ttActionDuration>0.3</ttActionDuration>
+                        <ttActionEaseRate>2.00</ttActionEaseRate>
+                        <ttActionEaseMode>easeBackOut</ttActionEaseMode>
+                    </ttAction>>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>$didIMove</ttVariable>
+                        <ttOperator>
+                            <ttScript>return 1</ttScript> 
+                        </ttOperator>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+		</ttObject>
+    </ttMacroBody>
+</ttMacro>
+
+<ttMacro name="checkmarksHiddenObject">
+    <ttMacroBody>
+        <ttObject><!--checkmarks-->
+            <ttImage>images/hiddenObjects/checkMark.png</ttImage>
+            <ttBasePosition x="49.0689" y="9.05028" />
+            <ttScale>0</ttScale>
+            <ttZOrder>10</ttZOrder>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>correctObject.checkmark</ttNotificationIdentifyer>
+                <ttOperator>
+                    <ttScript>return (objectThatHasBeenTouched == panelItem01HasValue)</ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>scale</ttType>
+                        <ttActionDuration>0.2</ttActionDuration>
+                        <ttScaleTo>1</ttScaleTo>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>bringToFront</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject><!--checkmarks-->
+            <ttImage>images/hiddenObjects/checkMark.png</ttImage>
+            <ttBasePosition x="68.9944" y="8.35196" />
+            <ttScale>0</ttScale>
+            <ttZOrder>10</ttZOrder>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>correctObject.checkmark</ttNotificationIdentifyer>
+                <ttOperator>
+                    <ttScript>return (objectThatHasBeenTouched == panelItem02HasValue)</ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>scale</ttType>
+                        <ttActionDuration>0.2</ttActionDuration>
+                        <ttScaleTo>1</ttScaleTo>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>bringToFront</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject><!--checkmarks-->
+            <ttImage>images/hiddenObjects/checkMark.png</ttImage>
+            <ttBasePosition x="12.7561" y="5.41899" />
+            <ttScale>0</ttScale>
+            <ttZOrder>10</ttZOrder>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>correctObject.checkmark</ttNotificationIdentifyer>
+                <ttOperator>
+                    <ttScript>return (objectThatHasBeenTouched == panelItem03HasValue)</ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>scale</ttType>
+                        <ttActionDuration>0.2</ttActionDuration>
+                        <ttScaleTo>1</ttScaleTo>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>bringToFront</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject><!--checkmarks-->
+            <ttImage>images/hiddenObjects/checkMark.png</ttImage>
+            <ttBasePosition x="83.1471" y="5.41899" />
+            <ttScale>0</ttScale>
+            <ttZOrder>10</ttZOrder>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>correctObject.checkmark</ttNotificationIdentifyer>
+                <ttOperator>
+                    <ttScript>return (objectThatHasBeenTouched == panelItem04HasValue)</ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>scale</ttType>
+                        <ttActionDuration>0.2</ttActionDuration>
+                        <ttScaleTo>1</ttScaleTo>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>bringToFront</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject><!--checkmarks-->
+            <ttImage>images/hiddenObjects/checkMark.png</ttImage>
+            <ttBasePosition x="30.6332" y="5.41899" />
+            <ttScale>0</ttScale>
+            <ttZOrder>10</ttZOrder>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>correctObject.checkmark</ttNotificationIdentifyer>
+                <ttOperator>
+                    <ttScript>return (objectThatHasBeenTouched == panelItem05HasValue)</ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>scale</ttType>
+                        <ttActionDuration>0.2</ttActionDuration>
+                        <ttScaleTo>1</ttScaleTo>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>bringToFront</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+ 
+    </ttMacroBody>
+</ttMacro>
+<ttMacro name="checkmarksHiddenObject07">
+    <ttMacroBody>
+        <ttObject><!--checkmarks-->
+            <ttImage>images/hiddenObjects/checkMark.png</ttImage>
+            <ttBasePosition x="20" y="5" />
+            <ttScale>0</ttScale>
+            <ttZOrder>10</ttZOrder>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>correctObject.checkmark</ttNotificationIdentifyer>
+                <ttOperator>
+                    <ttScript>return (objectThatHasBeenTouched == panelItem01HasValue)</ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>scale</ttType>
+                        <ttActionDuration>0.2</ttActionDuration>
+                        <ttScaleTo>1</ttScaleTo>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>bringToFront</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject><!--checkmarks-->
+            <ttImage>images/hiddenObjects/checkMark.png</ttImage>
+            <ttBasePosition x="30" y="5" />
+            <ttScale>0</ttScale>
+            <ttZOrder>10</ttZOrder>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>correctObject.checkmark</ttNotificationIdentifyer>
+                <ttOperator>
+                    <ttScript>return (objectThatHasBeenTouched == panelItem02HasValue)</ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>scale</ttType>
+                        <ttActionDuration>0.2</ttActionDuration>
+                        <ttScaleTo>1</ttScaleTo>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>bringToFront</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject><!--checkmarks-->
+            <ttImage>images/hiddenObjects/checkMark.png</ttImage>
+            <ttBasePosition x="40" y="5" />
+            <ttScale>0</ttScale>
+            <ttZOrder>10</ttZOrder>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>correctObject.checkmark</ttNotificationIdentifyer>
+                <ttOperator>
+                    <ttScript>return (objectThatHasBeenTouched == panelItem03HasValue)</ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>scale</ttType>
+                        <ttActionDuration>0.2</ttActionDuration>
+                        <ttScaleTo>1</ttScaleTo>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>bringToFront</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject><!--checkmarks-->
+            <ttImage>images/hiddenObjects/checkMark.png</ttImage>
+            <ttBasePosition x="50" y="5" />
+            <ttScale>0</ttScale>
+            <ttZOrder>10</ttZOrder>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>correctObject.checkmark</ttNotificationIdentifyer>
+                <ttOperator>
+                    <ttScript>return (objectThatHasBeenTouched == panelItem04HasValue)</ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>scale</ttType>
+                        <ttActionDuration>0.2</ttActionDuration>
+                        <ttScaleTo>1</ttScaleTo>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>bringToFront</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject><!--checkmarks-->
+            <ttImage>images/hiddenObjects/checkMark.png</ttImage>
+            <ttBasePosition x="60" y="5" />
+            <ttScale>0</ttScale>
+            <ttZOrder>10</ttZOrder>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>correctObject.checkmark</ttNotificationIdentifyer>
+                <ttOperator>
+                    <ttScript>return (objectThatHasBeenTouched == panelItem05HasValue)</ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>scale</ttType>
+                        <ttActionDuration>0.2</ttActionDuration>
+                        <ttScaleTo>1</ttScaleTo>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>bringToFront</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>        
+		<ttObject><!--checkmarks-->
+            <ttImage>images/hiddenObjects/checkMark.png</ttImage>
+            <ttBasePosition x="70" y="5" />
+            <ttScale>0</ttScale>
+            <ttZOrder>10</ttZOrder>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>correctObject.checkmark</ttNotificationIdentifyer>
+                <ttOperator>
+                    <ttScript>return (objectThatHasBeenTouched == panelItem06HasValue)</ttScript>
+                </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>scale</ttType>
+                        <ttActionDuration>0.2</ttActionDuration>
+                        <ttScaleTo>1</ttScaleTo>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>bringToFront</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+ 
+    </ttMacroBody>
+</ttMacro>
+<ttMacro name="lifes">
+    <ttMacroParams>
+        <ttMacroParamDef name="$posX"/>
+        <ttMacroParamDef name="$posY"/>
+        <ttMacroParamDef name="$whatNotification"/>
+        <ttMacroParamDef name="$delay"/>
+    </ttMacroParams>
+    <ttMacroBody>
+        <ttObject><!--heartFull/Broken-->
+            <ttImage>images/hiddenObjects3/scoring_heartFull.png</ttImage>
+            <ttBasePosition x="$posX" y="$posY" />
+            <ttScale>6</ttScale>
+            <ttOpacity>0</ttOpacity>
+            <ttActionsGroup>
+                <ttTrigger>automatic</ttTrigger>
+                <ttTriggerDelay>$delay</ttTriggerDelay>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>moveToPoint</ttType>
+                        <ttFinalPosition x="$posX" y="$posY"/>
+                        <ttActionDuration>0.25</ttActionDuration>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>scale</ttType>
+                        <ttScaleTo>0.5</ttScaleTo>
+                        <ttActionDuration>0.25</ttActionDuration>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>fadeTo</ttType>
+                        <ttOpacity>255</ttOpacity>
+                        <ttActionDuration>0.25</ttActionDuration>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>$whatNotification</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>playSound</ttType>
+                        <ttFile>sounds/hiddenObject/wrong_tap1.mp3</ttFile>
+                        <ttFile>sounds/hiddenObject/wrong_tap2.mp3</ttFile>
+                        <ttFile>sounds/hiddenObject/wrong_tap3.mp3</ttFile>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>jumpBy</ttType>
+                        <ttActionDuration>1</ttActionDuration>
+                        <ttFinalPosition x="0" y="-60"/>
+                        <ttActionHeigth>30.00</ttActionHeigth>
+                        <ttNumberOfJumps>1</ttNumberOfJumps>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>rotate</ttType>
+                        <ttActionDuration>1</ttActionDuration>
+                        <ttActionRotateAngle>720</ttActionRotateAngle>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>makeInvisible</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>replaceSpriteWithNextImage</ttType>
+                        <ttIntValue>0</ttIntValue>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+    </ttMacroBody>
+</ttMacro>
+
+<ttMacro name="hoPointer">
+	    <ttMacroParams>
+        <ttMacroParamDef name="$posX"/>
+        <ttMacroParamDef name="$posY"/>
+    </ttMacroParams>
+	<ttMacroBody>
+		<ttObject> <!-- pointer -->
+			<ttImage>images/tools/handPointer.png</ttImage>
+			<ttAnchorPositionX>0.51</ttAnchorPositionX>
+			<ttAnchorPositionY>0.09</ttAnchorPositionY>
+			<ttRotate>20</ttRotate>
+			<ttBasePosition x="$posX" y="$posY" />
+			<ttOpacity>0</ttOpacity>
+			<ttActionsGroup> <!-- showPointer -->
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>startHOPointer</ttNotificationIdentifyer>
+				<ttAutoActionRunEvery>1.1</ttAutoActionRunEvery>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>enableObject</ttType>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>fadeTo</ttType>
+						<ttOpacity>255</ttOpacity>
+						<ttActionDuration>0.2</ttActionDuration>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>scaleXy</ttType>
+						<ttActionDuration>0.15</ttActionDuration>
+						<ttScaleX>1.15</ttScaleX>
+						<ttScaleY>0.85</ttScaleY>
+						<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="sendNotification" ttNotificationIdentifyer="setBegginingThought"/>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>scaleXy</ttType>
+						<ttActionDuration>0.15</ttActionDuration>
+						<ttScaleX>1</ttScaleX>
+						<ttScaleY>1</ttScaleY>
+						<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>scaleXy</ttType>
+						<ttActionDuration>0.15</ttActionDuration>
+						<ttScaleX>1.15</ttScaleX>
+						<ttScaleY>0.85</ttScaleY>
+						<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>scaleXy</ttType>
+						<ttActionDuration>0.15</ttActionDuration>
+						<ttScaleX>1</ttScaleX>
+						<ttScaleY>1</ttScaleY>
+						<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>scaleXy</ttType>
+						<ttActionDuration>0.15</ttActionDuration>
+						<ttScaleX>1.15</ttScaleX>
+						<ttScaleY>0.85</ttScaleY>
+						<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>scaleXy</ttType>
+						<ttActionDuration>0.15</ttActionDuration>
+						<ttScaleX>1</ttScaleX>
+						<ttScaleY>1</ttScaleY>
+						<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+					</ttAction>
+					<ttAction>
+						<ttType>fadeTo</ttType>
+						<ttOpacity>0</ttOpacity>
+						<ttActionDuration>0.2</ttActionDuration>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>	
+			<ttActionsGroup> <!-- showPointer -->
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>correctObjectDubbing</ttNotificationIdentifyer>	
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>disableObject</ttType>
+					</ttAction>
+				</ttSequenceGroup>				
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>makeInvisible</ttType>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+		</ttObject>
+	</ttMacroBody>
+</ttMacro>
+<ttMacro name="progressAndHintLayer">
+    <ttMacroParams>
+		<ttMacroParamDef name="$step"/>
+		<ttMacroParamDef name="$items"/>
+		<ttMacroParamDef name="$curHO"/>
+		<ttMacroParamDef name="$flurryVal"/>
+    </ttMacroParams>
+	<ttMacroBody>
+		<ttLayer>
+			<ttObject> <!-- progress bar BACK -->
+				<ttImage>images/hiddenObjects/hoUI/progressBarBack.png</ttImage>
+				<ttBasePosition x="50" y="91.5" />
+				<ttScale>1</ttScale>
+				<ttActionsGroup>
+					<ttTrigger>notification</ttTrigger>
+					<ttNotificationIdentifyer>setFlurry</ttNotificationIdentifyer>
+					<ttOperator>
+						<ttScript>return (($curHO == 1) or($curHO == 4)) </ttScript>
+					</ttOperator>					
+					<ttSequenceGroup>
+						<ttAction>
+							<ttType>logEvent</ttType>
+							<ttLogEventName>$flurryVal</ttLogEventName>
+							<ttLogEventParam>Item_Completed</ttLogEventParam>
+							<ttLogEventVal>#itemsFound</ttLogEventVal>
+						</ttAction>
+					</ttSequenceGroup>
+				</ttActionsGroup>
+				<ttActionsGroup>
+					<ttTrigger>notification</ttTrigger>
+					<ttNotificationIdentifyer>setFlurry</ttNotificationIdentifyer>
+					<ttOperator>
+						<ttScript>return ($curHO == 2)</ttScript>
+					</ttOperator>					
+					<ttSequenceGroup>
+						<ttAction>
+							<ttType>logEvent</ttType>
+							<ttLogEventName>$flurryVal</ttLogEventName>
+							<ttLogEventParam>Item_Completed</ttLogEventParam>
+							<ttLogEventVal>script: return "Firefly_Tap_"..itemsFound</ttLogEventVal>
+						</ttAction>
+					</ttSequenceGroup>
+				</ttActionsGroup>
+				<ttActionsGroup>
+					<ttTrigger>notification</ttTrigger>
+					<ttNotificationIdentifyer>setFlurry</ttNotificationIdentifyer>
+					<ttOperator>
+						<ttScript>return ($curHO == 3)</ttScript>
+					</ttOperator>					
+					<ttSequenceGroup>
+						<ttAction>
+							<ttType>logEvent</ttType>
+							<ttLogEventName>$flurryVal</ttLogEventName>
+							<ttLogEventParam>Item_Completed</ttLogEventParam>
+							<ttLogEventVal>script: return "Key_Tap_"..itemsFound</ttLogEventVal>
+						</ttAction>
+					</ttSequenceGroup>
+				</ttActionsGroup>
+				<ttActionsGroup>
+					<ttTrigger>notification</ttTrigger>
+					<ttNotificationIdentifyer>setFlurry</ttNotificationIdentifyer>
+					<ttOperator>
+						<ttScript>return ($flurryVal == "Level_12_Hidden_Items")</ttScript>
+					</ttOperator>					
+					<ttSequenceGroup>
+						<ttAction>
+							<ttType>logEvent</ttType>
+							<ttLogEventName>$flurryVal</ttLogEventName>
+							<ttLogEventParam>Item_Completed</ttLogEventParam>
+							<ttLogEventVal>script: return "Key_Tap_"..itemsFound</ttLogEventVal>
+						</ttAction>
+					</ttSequenceGroup>
+				</ttActionsGroup>
+				<ttActionsGroup>
+					<ttTrigger>notification</ttTrigger>
+					<ttNotificationIdentifyer>xMarksTheSpot</ttNotificationIdentifyer>
+					<ttSequenceGroup>
+						<ttAction>
+							<ttType>logEvent</ttType>
+							<ttLogEventName>$flurryVal</ttLogEventName>
+							<ttLogEventParam>Wrong_Item_Click</ttLogEventParam>
+							<ttLogEventVal>Wrong_Item_Click</ttLogEventVal>
+						</ttAction>
+					</ttSequenceGroup>
+				</ttActionsGroup>
+				<ttActionsGroup>
+					<ttTrigger>notification</ttTrigger>
+					<ttNotificationIdentifyer>correctObject.checkmark</ttNotificationIdentifyer>
+					<ttSequenceGroup>	
+						<ttAction>
+							<ttType>setVariable</ttType>
+							<ttVariable>muchProgress</ttVariable>
+							<ttOperator>
+								<ttScript>return (muchProgress + $step)</ttScript>
+							</ttOperator>
+						</ttAction>
+					</ttSequenceGroup>
+					<ttSequenceGroup>	
+						<ttAction>
+							<ttType>setVariable</ttType>
+							<ttVariable>itemsFound</ttVariable>
+							<ttOperator>
+								<ttScript>return (itemsFound + 1)</ttScript>
+							</ttOperator>
+						</ttAction>
+					</ttSequenceGroup>
+					<ttSequenceGroup>	
+						<ttAction>
+							<ttType>setVariable</ttType>
+							<ttVariable>itemsLeft</ttVariable>
+							<ttOperator>
+								<ttScript>return (itemsLeft - 1)</ttScript>
+							</ttOperator>
+						</ttAction>
+					</ttSequenceGroup>
+					<ttSequenceGroup>
+						<ttAction ttType="delay" ttActionDuration="0.2"/>
+					</ttSequenceGroup>
+					<ttSequenceGroup>
+						<ttAction ttType="sendNotification" ttNotificationIdentifyer="setProgress"/>
+						<ttAction ttType="sendNotification" ttNotificationIdentifyer="setFlurry"/>
+					</ttSequenceGroup>
+					<ttSequenceGroup>
+						<ttAction ttType="sendNotification" ttNotificationIdentifyer="checkProgress"/>
+					</ttSequenceGroup>				
+				</ttActionsGroup>
+				<ttActionsGroup>
+					<ttTrigger>notification</ttTrigger>
+					<ttNotificationIdentifyer>checkProgress</ttNotificationIdentifyer>	
+					<ttOperator>
+						<ttScript>return (muchProgress >= 100) </ttScript>
+					</ttOperator>
+					<ttSequenceGroup>
+						<ttAction ttType="delay" ttActionDuration="0.5"/>
+					</ttSequenceGroup>
+					<ttSequenceGroup>
+						<ttAction ttType="sendNotification" ttNotificationIdentifyer="hiddenObjects.done"/>
+					</ttSequenceGroup>				
+				</ttActionsGroup>	
+			</ttObject>
+			<ttObject> <!-- progress bar -->
+				<ttImage>images/hiddenObjects/hoUI/progressBar.png</ttImage>
+				<ttBasePosition x="50" y="91.35" />
+				<ttType>progress</ttType>
+				<ttProgressStyle>LeftToRight</ttProgressStyle>
+				<ttActionsGroup>
+					<ttTrigger>notification</ttTrigger>
+					<ttNotificationIdentifyer>setProgress</ttNotificationIdentifyer>
+					<ttSequenceGroup>
+						<ttAction>
+							<ttType>progressTo</ttType>
+							<ttPercent>#muchProgress</ttPercent>
+							<ttDuration>0.2</ttDuration>
+						</ttAction>
+					</ttSequenceGroup>
+				</ttActionsGroup>
+				<ttActionsGroup>
+					<ttTrigger>automatic</ttTrigger>
+					<ttSequenceGroup>
+						<ttAction>
+							<ttType>progressTo</ttType>
+							<ttPercent>0</ttPercent>
+							<ttDuration>0</ttDuration>
+						</ttAction>
+					</ttSequenceGroup>
+					<ttSequenceGroup>	
+						<ttAction>
+							<ttType>setVariable</ttType>
+							<ttVariable>itemsFound</ttVariable>
+							<ttOperator>
+								<ttScript>return 0</ttScript>
+							</ttOperator>
+						</ttAction>
+					</ttSequenceGroup>
+					<ttSequenceGroup>	
+						<ttAction>
+							<ttType>setVariable</ttType>
+							<ttVariable>itemsLeft</ttVariable>
+							<ttOperator>
+								<ttScript>return $items</ttScript>
+							</ttOperator>
+						</ttAction>
+					</ttSequenceGroup>
+				</ttActionsGroup>
+			</ttObject>
+			
+			<ttObject> <!-- clock red -->
+				<ttImage>images/fullBlocker.png</ttImage>
+				<ttBasePosition x="29" y="93" />
+				<ttVisible>NO</ttVisible>
+				<ttActionsGroup>
+					<ttTrigger>notification</ttTrigger>
+					<ttNotificationIdentifyer>time_out</ttNotificationIdentifyer>
+					<ttSequenceGroup>
+						<ttAction ttType="delay" ttActionDuration="1"/>
+					</ttSequenceGroup>				
+					<ttSequenceGroup>
+						<ttAction ttType="sendNotification" ttNotificationIdentifyer="hideHintBlocker"/>
+					</ttSequenceGroup>
+				</ttActionsGroup>
+			</ttObject>
+			<ttObject> <!--timer-->	
+				<ttImage></ttImage>
+				<ttType>lable</ttType>
+				<ttFontType>Arial-BoldMT</ttFontType>
+				<ttFontSize>17</ttFontSize>
+				<ttVisible>NO</ttVisible>
+				<ttBasePosition x="29" y="91" />
+				<ttActionsGroup>
+					<ttTrigger>automatic</ttTrigger>
+					<ttSequenceGroup>
+						<ttAction>
+							<ttType>setVariable</ttType>
+							<ttVariable>time</ttVariable>
+							<ttOperator>
+								<ttScript>return 10</ttScript>
+							</ttOperator>
+						</ttAction>
+					</ttSequenceGroup>
+				</ttActionsGroup>
+				<ttActionsGroup>
+					<ttTrigger>notification</ttTrigger>
+					<ttNotificationIdentifyer>startTimer</ttNotificationIdentifyer>		
+					<ttAutoActionRunEvery>1</ttAutoActionRunEvery>
+					<ttSequenceGroup>
+						<ttAction ttType="makeVisible"/>
+					</ttSequenceGroup>
+					<ttSequenceGroup>
+						<ttAction>
+							<ttType>setVariable</ttType>
+							<ttVariable>time</ttVariable>
+							<ttOperator>
+								<ttScript>return (time-1)</ttScript>
+							</ttOperator>
+						</ttAction>
+					</ttSequenceGroup>
+					<ttSequenceGroup>
+						<ttAction>
+							<ttType>setLabelText</ttType>
+							<ttText>#time</ttText>
+						</ttAction>
+						<ttAction>
+							<ttType>sendNotification</ttType>
+							<ttNotificationIdentifyer>check_time</ttNotificationIdentifyer>
+						</ttAction>	
+					</ttSequenceGroup>
+				</ttActionsGroup>
+				<ttActionsGroup>
+					<ttTrigger>notification</ttTrigger>
+					<ttNotificationIdentifyer>check_time</ttNotificationIdentifyer>
+					<ttOperator>
+						<ttScript>return (time == 0)</ttScript>
+					</ttOperator>
+					<ttSequenceGroup>
+						<ttAction>
+							<ttType>sendNotification</ttType>
+							<ttNotificationIdentifyer>time_out</ttNotificationIdentifyer>
+						</ttAction>	
+					</ttSequenceGroup>
+					<ttSequenceGroup>
+						<ttAction>
+							<ttType>setVariable</ttType>
+							<ttVariable>time</ttVariable>
+							<ttOperator>
+								<ttScript>return 10</ttScript>
+							</ttOperator>
+						</ttAction>
+					</ttSequenceGroup>
+					<ttSequenceGroup>
+						<ttAction ttType="makeVisible"/>
+					</ttSequenceGroup>
+					<ttSequenceGroup>
+						<ttAction>
+							<ttType>stopRunningActions</ttType>
+						</ttAction>	
+					</ttSequenceGroup>
+				</ttActionsGroup>
+			</ttObject>
+			<ttObject> <!-- clock -->
+				<ttImage>images/fullBlocker.png</ttImage>
+				<ttBasePosition x="29" y="93" />
+				<ttVisible>NO</ttVisible>
+				<ttActionsGroup>
+					<ttTrigger>notification</ttTrigger>
+					<ttNotificationIdentifyer>story.close</ttNotificationIdentifyer>
+					<ttSequenceGroup>
+						<ttAction>
+							<ttType>delay</ttType>
+							<ttActionDuration>1.5</ttActionDuration>
+						</ttAction>
+					</ttSequenceGroup>
+					<ttSequenceGroup>
+						<ttAction> 
+							<ttType>sendNotification</ttType> 
+							<ttNotificationIdentifyer>startHOPointer</ttNotificationIdentifyer>
+						</ttAction> 
+					</ttSequenceGroup>
+				</ttActionsGroup>				
+			</ttObject>
+			<ttObject> <!-- hintBtn -->
+				<ttImage>images/iconsUI/hintBtn.png</ttImage>
+				<ttBasePosition x="9" y="93" />
+				<ttVisible>yes</ttVisible>
+				<ttEnabled>yes</ttEnabled>
+				<ttActionsGroup>
+					<ttTrigger>notification</ttTrigger>
+					<ttNotificationIdentifyer>automatic</ttNotificationIdentifyer>
+						<ttAction ttType="enableObject" />
+				</ttActionsGroup>
+				<ttActionsGroup>
+					<ttTrigger>notification</ttTrigger>
+					<ttNotificationIdentifyer>story.close</ttNotificationIdentifyer>
+						<ttAction ttType="enableObject" />
+				</ttActionsGroup>
+				<ttActionsGroup>
+					<ttTrigger>notification</ttTrigger>
+					<ttNotificationIdentifyer>time_out</ttNotificationIdentifyer>
+						<ttAction ttType="enableObject" />
+				</ttActionsGroup>
+				<ttActionsGroup>
+					<ttTrigger>notification</ttTrigger>
+					<ttNotificationIdentifyer>hiddenObjects.done</ttNotificationIdentifyer>
+						<ttAction ttType="disableObject" />
+				</ttActionsGroup>
+				<ttActionsGroup>
+					<ttTrigger>onTouchesBegan</ttTrigger>
+					<ttAction ttType="disableObject" />
+					<ttSequenceGroup>
+						<ttAction>
+							<ttType>logEvent</ttType>
+							<ttLogEventName>$flurryVal</ttLogEventName>
+							<ttLogEventParam>Hint_Still_Hidden</ttLogEventParam>
+							<ttLogEventVal>#itemsLeft</ttLogEventVal>
+						</ttAction>
+					</ttSequenceGroup>
+					<ttSequenceGroup>
+						<ttAction> 
+							<ttType>sendNotification</ttType> 
+							<ttNotificationIdentifyer>showHintBlocker</ttNotificationIdentifyer>
+						</ttAction> 
+					</ttSequenceGroup>
+					<ttSequenceGroup>	
+						<ttAction>
+							<ttType>sendNotification</ttType>
+							<ttNotificationIdentifyer>script: return "hintParticles"..whichHint</ttNotificationIdentifyer>
+						</ttAction>
+					</ttSequenceGroup>	
+					<ttSequenceGroup>
+						<ttAction>
+							<ttType>playSound</ttType>
+							<ttFile>sounds/hiddenObject/hintSound.mp3</ttFile>
+						</ttAction>
+					</ttSequenceGroup>
+						<ttAction>
+							<ttType>sendNotification</ttType>
+							<ttNotificationIdentifyer>startTimer</ttNotificationIdentifyer>
+						</ttAction>			
+				</ttActionsGroup>
+			</ttObject>
+			<ttObject>
+				<ttImage>00</ttImage>
+				<ttType>lable</ttType>
+				<ttScale>0</ttScale>
+				<ttBasePosition x="0" y="0"/>
+				<ttActionsGroup>
+					<ttTrigger>onTouchesBegan</ttTrigger>
+					<ttSequenceGroup/>
+				</ttActionsGroup>
+				<ttActionsGroup>
+					<ttTrigger>notification</ttTrigger>
+					<ttNotificationIdentifyer>setRandomHint</ttNotificationIdentifyer>					
+					<ttSequenceGroup>
+						<ttAction>
+							<ttType>setVariable</ttType>
+							<ttVariable>whichHint</ttVariable>
+							<ttOperator>
+								<ttScript>return (hiddenObj.randomHint())</ttScript>
+							</ttOperator>
+						</ttAction>
+					</ttSequenceGroup>
+					<ttSequenceGroup>
+						<ttAction>
+							<ttType>delay</ttType>
+							<ttActionDuration>1</ttActionDuration>
+						</ttAction>
+					</ttSequenceGroup>
+					<ttSequenceGroup>
+						<ttAction>
+							<ttType>sendNotification</ttType>
+							<ttNotificationIdentifyer>refreshThought</ttNotificationIdentifyer>
+						</ttAction>		
+					</ttSequenceGroup>
+				</ttActionsGroup>
+			</ttObject>
+		</ttLayer>
+	</ttMacroBody>
+</ttMacro>
+
+<ttMacro name="hoThoughtItem">
+	 <ttMacroParams>
+        <ttMacroParamDef name="$image"/>
+        <ttMacroParamDef name="$whatIndex"/>
+        <ttMacroParamDef name="$scale"/>
+    </ttMacroParams>
+	<ttMacroBody>
+		<ttObject>
+			<ttImage>$image</ttImage>
+			<ttScale>$scale</ttScale>
+			<ttVisible>script: return (whichHint == $whatIndex)</ttVisible>
+			<ttBasePosition x="30" y="15" />
+			<ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>hiddenObjects.done</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+					<ttAction ttType="unLoadLayer" ttData="thoughtsLayer"/>
+				</ttSequenceGroup>	
+			</ttActionsGroup>
+			<ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>setRandomHint</ttNotificationIdentifyer>
+				<ttOperator>
+					<ttScript>return (objectThatHasBeenTouched == $whatIndex)</ttScript>
+				</ttOperator>
+				<ttSequenceGroup>
+					<ttAction ttType="unLoadLayer" ttData="thoughtsLayer"/>
+				</ttSequenceGroup>	
+			</ttActionsGroup>
+		</ttObject>	
+	</ttMacroBody>
+</ttMacro>
+<ttMacro name="hoPanel">
+	<ttMacroParams>
+	</ttMacroParams>
+	<ttMacroBody>	
+		<ttObject>
+			<ttImage>images/hiddenObjects/hoUI/panelSantaRing.png</ttImage>
+			<ttBasePosition x="17.0391" y="10.8659" />
+			<ttScale>1.152</ttScale>
+		</ttObject>
+		<ttObject>
+			<ttImage>images/hiddenObjects/hoUI/santaHO.png</ttImage>
+			<ttBasePosition x="14.432" y="6.67598" />
+		</ttObject>
+		<ttObject>
+			<ttImage>images/hiddenObjects/hoUI/toughtBubble.png</ttImage>
+			<ttBasePosition x="26.9088" y="14.9162" />
+			<ttActionsGroup>
+				<ttTrigger>automatic</ttTrigger>
+				<ttAutoActionRunEvery>2.4</ttAutoActionRunEvery>
+				<ttSequenceGroup>
+					<ttAction ttType="scaleXy" ttScaleX="1" ttScaleY="0.9" ttActionDuration="0.6" ttActionEaseMode="easeBackOut" ttActionEaseRate="2"/> 
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="scaleXy" ttScaleX="0.9" ttScaleY="1" ttActionDuration="0.6" ttActionEaseMode="easeBackOut" ttActionEaseRate="2"/> 
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="scaleXy" ttScaleX="1" ttScaleY="0.9" ttActionDuration="0.6" ttActionEaseMode="easeBackOut" ttActionEaseRate="2"/> 
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="scaleXy" ttScaleX="0.9" ttScaleY="1" ttActionDuration="0.6" ttActionEaseMode="easeBackOut" ttActionEaseRate="2"/> 
+				</ttSequenceGroup>				
+			</ttActionsGroup>
+		</ttObject>	
+	</ttMacroBody>
+</ttMacro>	
+<ttMacro name="hoScroll">
+	<ttMacroParams>
+	</ttMacroParams>
+	<ttMacroBody>	
+		<ttObject>
+			<ttImage>dummy</ttImage>
+			<ttType>lable</ttType>
+			<ttTopLeftX>40.00</ttTopLeftX>
+			<ttTopLeftY>13.00</ttTopLeftY>
+			<ttTopRightX>100.00</ttTopRightX>
+			<ttTopRightY>13.00</ttTopRightY>
+			<ttBottomLeftX>40.00</ttBottomLeftX>
+			<ttBottomLeftY>0.00</ttBottomLeftY>
+			<ttBottomRightX>100.00</ttBottomRightX>
+			<ttBottomRightY>0.00</ttBottomRightY>
+			<ttVisible>NO</ttVisible>
+			<ttBasePosition x="80" y="5" />
+			<ttActionsGroup>
+				<ttTrigger>onTouchesEnded</ttTrigger>
+				<ttApplyOn>layer</ttApplyOn>
+				<ttOperator>
+					<ttScript>return (isMoving == 1)</ttScript>
+				</ttOperator>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>isMoving</ttVariable>
+						<ttOperator>
+							<ttConst>0.00</ttConst>
+						</ttOperator>
+					</ttAction>
+					<ttAction>
+						<ttType>moveToPoint</ttType>
+						<ttFinalPosition x="36" y="0"/>
+						<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+						<ttActionEaseRate>3.00</ttActionEaseRate>						
+						<ttActionDuration>0.3</ttActionDuration>
+					</ttAction>
+				</ttSequenceGroup>					
+
+			</ttActionsGroup>
+			<ttActionsGroup>
+				<ttTrigger>onTouchesBegan</ttTrigger>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>smoothScrollStop</ttType>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup>
+				<ttTrigger>onTouchesMoved</ttTrigger>
+				<ttApplyOn>layer</ttApplyOn>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>moveToTouchX</ttType>
+					</ttAction>
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>isMoving</ttVariable>
+						<ttOperator>
+							<ttConst>1.00</ttConst>
+						</ttOperator>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+		</ttObject>			
+	</ttMacroBody>
+</ttMacro>

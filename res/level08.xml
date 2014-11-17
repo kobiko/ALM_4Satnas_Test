@@ -1,0 +1,1908 @@
+<?xml version="1.0" ?>
+<ttScene> <!-- dressUpScene -->
+	<ttImport>TabTaleMacros.xml</ttImport>
+	<ttImport>InAppDialogMacro.xml</ttImport>
+	<ttName>level08</ttName>
+    <ttBackgroundMusicFile>sounds/music/dressup_music_level_3_8_10_13.mp3</ttBackgroundMusicFile>
+    <ttBackgroundMusicVolume>0.50</ttBackgroundMusicVolume>
+	<ttInitScript>
+		vars:setVar("bootsRV","0")		
+		vars:setVar("cloaksRV","0")
+		vars:setVar("hatsRV","0")
+		vars:setVar("pantsRV","0")
+		vars:setVar("talismansRV","0")
+		vars:setVar("wandsRV","0")
+		vars:setVar("whichItemWatchesRV","0")
+	</ttInitScript>
+	<ttLayer> <!-- BackgroundLayer -->
+		<ttName>BackgroundLayer</ttName>
+		<ttObject>
+			<ttImage>backgrounds/lelvel08_bkg.jpg</ttImage>
+			<ttIsBackground>YES</ttIsBackground>
+			<ttBasePosition x="50" y="50" />
+			<ttActionsGroup>
+				<ttTrigger>automatic</ttTrigger>
+				<ttAutoActionRunEvery>5</ttAutoActionRunEvery>
+				<ttSequenceGroup>
+					<ttAction ttType="sendNotification" ttNotificationIdentifyer="blink"/>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup>
+				<ttTrigger>onTouchesBegan</ttTrigger>
+				<ttSequenceGroup />
+			</ttActionsGroup>
+			<ttActionsGroup> <!-- multiTouch -->
+				<ttTrigger>automatic</ttTrigger>
+				<ttSequenceGroup>
+                    <ttAction>
+                        <ttType>setMultiTouch</ttType>
+                        <ttIntValue>0</ttIntValue>
+                    </ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+            <ttActionsGroup> <!-- background music control-->
+                <ttTrigger>automatic</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>pauseBackgroundMusic</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup> <!-- background music control for story and intro  -->
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>story.close</ttNotificationIdentifyer>
+				<ttOperator>
+					<ttScript>return (stopBackgroundMusic ~= 1)</ttScript>
+				</ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>resumeBackgroundMusic</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+			<ttActionsGroup> <!-- init dress up -->
+				<ttTrigger>automatic</ttTrigger>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>countItems</ttVariable>
+						<ttOperator>
+							<ttScript>return 0</ttScript> 
+						</ttOperator>
+					</ttAction> 
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>itemsDressed</ttVariable>
+						<ttOperator>
+							<ttScript>return 0</ttScript> 
+						</ttOperator>
+					</ttAction> 
+				</ttSequenceGroup>				
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>muchProgress</ttVariable>
+						<ttOperator>
+							<ttScript>return 0</ttScript> 
+						</ttOperator>
+					</ttAction> 
+				</ttSequenceGroup>				
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>initDressUpController</ttType>
+						<ttControllerType>DressUp</ttControllerType>
+						<ttControllerName>dressUp</ttControllerName>
+						<ttUseSetItemAnimation>YES</ttUseSetItemAnimation> 
+						<ttTailParticle></ttTailParticle>
+						<ttShowSound>sounds/dressUp/category_selection_1.mp3</ttShowSound>
+						<ttShowSound>sounds/dressUp/category_selection_2.mp3</ttShowSound>
+						<ttShowSound>sounds/dressUp/category_selection_3.mp3</ttShowSound>
+						<ttHideSound>sounds/dressUp/item_off.mp3</ttHideSound>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>sendNotification</ttType>
+						<ttNotificationIdentifyer>registerDressUpObjects</ttNotificationIdentifyer>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+		</ttObject>
+		<ttObject><!--narrations controller-->
+            <ttImage>images/fullBlocker.png</ttImage>
+            <ttBasePosition x="0" y="0" />
+			<ttActionsGroup>
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>dressUpItemSelected(category:cloaks)</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+					<ttAction ttType="stopSound"/>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>playSound</ttType>
+						<ttFile>sounds/narrations/fancySanta/this_looks_right.mp3</ttFile>
+						<ttFile>sounds/narrations/fancySanta/i_love_this_one.mp3</ttFile>
+						<ttFile>sounds/narrations/fancySanta/great.mp3</ttFile>
+						<ttFile>sounds/narrations/fancySanta/nice_fit-01.mp3</ttFile>
+						<ttVolume>1</ttVolume>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>logEvent</ttType>
+						<ttLogEventName>Level_8_Dress_Up</ttLogEventName>
+						<ttLogEventParam>Item_Clicks</ttLogEventParam>
+						<ttLogEventVal>Top</ttLogEventVal>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup>
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>dressUpItemSelected(category:pants)</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+					<ttAction ttType="stopSound"/>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>playSound</ttType>
+						<ttFile>sounds/narrations/fancySanta/this_looks_right.mp3</ttFile>
+						<ttFile>sounds/narrations/fancySanta/i_love_this_one.mp3</ttFile>
+						<ttFile>sounds/narrations/fancySanta/great.mp3</ttFile>
+						<ttFile>sounds/narrations/fancySanta/nice_fit-01.mp3</ttFile>
+						<ttVolume>1</ttVolume>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>logEvent</ttType>
+						<ttLogEventName>Level_8_Dress_Up</ttLogEventName>
+						<ttLogEventParam>Item_Clicks</ttLogEventParam>
+						<ttLogEventVal>Pants</ttLogEventVal>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup>
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>dressUpItemSelected(category:hats)</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+					<ttAction ttType="stopSound"/>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>playSound</ttType>
+						<ttFile>sounds/narrations/fancySanta/this_looks_right.mp3</ttFile>
+						<ttFile>sounds/narrations/fancySanta/i_love_this_one.mp3</ttFile>
+						<ttFile>sounds/narrations/fancySanta/great.mp3</ttFile>
+						<ttFile>sounds/narrations/fancySanta/nice_fit-01.mp3</ttFile>
+						<ttVolume>1</ttVolume>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>logEvent</ttType>
+						<ttLogEventName>Level_8_Dress_Up</ttLogEventName>
+						<ttLogEventParam>Item_Clicks</ttLogEventParam>
+						<ttLogEventVal>Hat</ttLogEventVal>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup>
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>dressUpItemSelected(category:boots)</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+					<ttAction ttType="stopSound"/>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>playSound</ttType>
+						<ttFile>sounds/narrations/fancySanta/this_looks_right.mp3</ttFile>
+						<ttFile>sounds/narrations/fancySanta/i_love_this_one.mp3</ttFile>
+						<ttFile>sounds/narrations/fancySanta/great.mp3</ttFile>
+						<ttFile>sounds/narrations/fancySanta/nice_fit-01.mp3</ttFile>
+						<ttVolume>1</ttVolume>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>logEvent</ttType>
+						<ttLogEventName>Level_8_Dress_Up</ttLogEventName>
+						<ttLogEventParam>Item_Clicks</ttLogEventParam>
+						<ttLogEventVal>Shoes</ttLogEventVal>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup>
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>dressUpItemSelected(category:wands)</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+					<ttAction ttType="stopSound"/>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>playSound</ttType>
+						<ttFile>sounds/narrations/fancySanta/this_looks_right.mp3</ttFile>
+						<ttFile>sounds/narrations/fancySanta/i_love_this_one.mp3</ttFile>
+						<ttFile>sounds/narrations/fancySanta/great.mp3</ttFile>
+						<ttFile>sounds/narrations/fancySanta/nice_fit-01.mp3</ttFile>
+						<ttVolume>1</ttVolume>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>logEvent</ttType>
+						<ttLogEventName>Level_8_Dress_Up</ttLogEventName>
+						<ttLogEventParam>Item_Clicks</ttLogEventParam>
+						<ttLogEventVal>Stick</ttLogEventVal>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup>
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>dressUpItemSelected(category:talismans)</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+					<ttAction ttType="stopSound"/>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>playSound</ttType>
+						<ttFile>sounds/narrations/fancySanta/this_looks_right.mp3</ttFile>
+						<ttFile>sounds/narrations/fancySanta/i_love_this_one.mp3</ttFile>
+						<ttFile>sounds/narrations/fancySanta/great.mp3</ttFile>
+						<ttFile>sounds/narrations/fancySanta/nice_fit-01.mp3</ttFile>
+						<ttVolume>1</ttVolume>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>logEvent</ttType>
+						<ttLogEventName>Level_8_Dress_Up</ttLogEventName>
+						<ttLogEventParam>Item_Clicks</ttLogEventParam>
+						<ttLogEventVal>Medalion</ttLogEventVal>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup>
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>dressUpCategoryChanged(category:talismans)</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>logEvent</ttType>
+						<ttLogEventName>Level_8_Dress_Up</ttLogEventName>
+						<ttLogEventParam>Category_Click</ttLogEventParam>
+						<ttLogEventVal>Medalion</ttLogEventVal>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup>
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>dressUpCategoryChanged(category:wands)</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>logEvent</ttType>
+						<ttLogEventName>Level_8_Dress_Up</ttLogEventName>
+						<ttLogEventParam>Category_Click</ttLogEventParam>
+						<ttLogEventVal>Stick</ttLogEventVal>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup>
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>dressUpCategoryChanged(category:boots)</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>logEvent</ttType>
+						<ttLogEventName>Level_8_Dress_Up</ttLogEventName>
+						<ttLogEventParam>Category_Click</ttLogEventParam>
+						<ttLogEventVal>Shoes</ttLogEventVal>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup>
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>dressUpCategoryChanged(category:hats)</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>logEvent</ttType>
+						<ttLogEventName>Level_8_Dress_Up</ttLogEventName>
+						<ttLogEventParam>Category_Click</ttLogEventParam>
+						<ttLogEventVal>Hat</ttLogEventVal>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup>
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>dressUpCategoryChanged(category:cloaks)</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>logEvent</ttType>
+						<ttLogEventName>Level_8_Dress_Up</ttLogEventName>
+						<ttLogEventParam>Category_Click</ttLogEventParam>
+						<ttLogEventVal>Top</ttLogEventVal>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup>
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>dressUpCategoryChanged(category:pants)</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>logEvent</ttType>
+						<ttLogEventName>Level_8_Dress_Up</ttLogEventName>
+						<ttLogEventParam>Category_Click</ttLogEventParam>
+						<ttLogEventVal>Pants</ttLogEventVal>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+		</ttObject>
+        <ttObject> <!-- calculator -->
+            <ttImage>images/fullBlocker.png</ttImage>
+            <ttBasePosition x="251.9544" y="43.6508"/>
+            <ttOpacity>0</ttOpacity>
+            <ttActionsGroup>
+                <ttTrigger>automatic</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>whichItemWatchesRV</ttVariable>
+                        <ttOperator>
+                            <ttScript>return 0</ttScript>
+                        </ttOperator>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+	</ttLayer>
+	<ttLayer> <!-- dressup panel -->
+		<ttObject> <!-- particles -->
+			<ttImage>images/fullBlocker.png</ttImage>
+			<ttBasePosition x="50" y="50" />
+			<ttType>particles</ttType>
+			<ttParticles>
+				<ttParticlesPlist>images/particles/fullSparkleDressUp.plist</ttParticlesPlist>
+			</ttParticles>
+			<ttActionsGroup>
+				<ttTrigger>automatic</ttTrigger>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>startParticles</ttType>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+		</ttObject>
+		<ttObject>
+			<ttImage>images/level08/duUI/panelBack.png</ttImage>
+			<ttBasePosition x="50" y="0" />
+			<ttAnchorPositionX>0.5</ttAnchorPositionX>
+			<ttAnchorPositionY>0</ttAnchorPositionY>
+		</ttObject>	
+		<ttObject>
+			<ttImage>images/level08/duUI/panelFront.png</ttImage>
+            <ttBasePosition x="50" y="15.5" />
+		</ttObject>	
+	</ttLayer>
+	<ttLayer> <!-- hair back -->
+		<ttName>FancySantaBoots</ttName>
+
+	</ttLayer>
+	<ttLayer> <!-- santa -->
+		<ttName>santaLayer</ttName>
+		<ttObject><!--torso-->
+			<ttImage>images/santas/santa_02/fancySantaPose01.png</ttImage>
+			<ttScale>0.92</ttScale>
+			<ttBasePosition x="55.35" y="50.3307" />
+		</ttObject>
+	</ttLayer>
+	<ttLayer> <!-- clothes on -->
+		<ttName>ClothesLayer</ttName>
+		<ttObject> <!-- boots -->
+            <ttImage>images/level08/boots/boots01.png</ttImage>
+            <ttImage>images/level08/boots/boots02.png</ttImage>
+            <ttImage>images/level08/boots/boots03.png</ttImage>
+            <ttImage>images/level08/boots/boots04.png</ttImage>
+            <ttImage>images/level08/boots/boots05.png</ttImage>
+            <ttImage>images/level08/boots/boots06.png</ttImage>
+            <ttImage>images/level08/boots/boots07.png</ttImage>
+            <ttImage>images/level08/boots/boots08.png</ttImage>
+            <ttImage>images/level08/boots/boots09.png</ttImage>
+            <ttImage>images/level08/boots/boots10.png</ttImage>
+            <ttBasePosition x="45.1583" y="27.905" />
+			<ttImageGroupIndex>1</ttImageGroupIndex>
+			<ttMacroInvoke macro_name="registerDUObjects">
+				<ttMacroParam name="$param" value="boots"/>
+			</ttMacroInvoke>
+		</ttObject>
+		<ttObject> <!-- pants-->
+            <ttImage>images/level08/pants/pants01.png</ttImage>
+            <ttImage>images/level08/pants/pants02.png</ttImage>
+            <ttImage>images/level08/pants/pants03.png</ttImage>
+            <ttImage>images/level08/pants/pants04.png</ttImage>
+            <ttImage>images/level08/pants/pants05.png</ttImage>
+            <ttImage>images/level08/pants/pants06.png</ttImage>
+            <ttImage>images/level08/pants/pants07.png</ttImage>
+            <ttImage>images/level08/pants/pants08.png</ttImage>
+            <ttImage>images/level08/pants/pants09.png</ttImage>
+            <ttImage>images/level08/pants/pants10.png</ttImage>
+            <ttBasePosition x="55.8177" y="41.5" />
+			<ttScale>1.02</ttScale>
+			<ttImageGroupIndex>4</ttImageGroupIndex>
+			<ttMacroInvoke macro_name="registerDUObjects">
+				<ttMacroParam name="$param" value="pants"/>
+			</ttMacroInvoke>
+		</ttObject>
+		<ttObject> <!-- cloaks -->
+            <ttImage>images/level08/cloaks/cloak01.png</ttImage>
+            <ttImage>images/level08/cloaks/cloak02.png</ttImage>
+            <ttImage>images/level08/cloaks/cloak03.png</ttImage>
+            <ttImage>images/level08/cloaks/cloak04.png</ttImage>
+            <ttImage>images/level08/cloaks/cloak05.png</ttImage>
+            <ttImage>images/level08/cloaks/cloak06.png</ttImage>
+            <ttImage>images/level08/cloaks/cloak07.png</ttImage>
+            <ttImage>images/level08/cloaks/cloak08.png</ttImage>
+            <ttImage>images/level08/cloaks/cloak09.png</ttImage>
+            <ttImage>images/level08/cloaks/cloak10.png</ttImage>
+            <ttBasePosition x="53.1657" y="52.905" />
+			<ttImageGroupIndex>2</ttImageGroupIndex>
+			<ttMacroInvoke macro_name="registerDUObjects">
+				<ttMacroParam name="$param" value="cloaks"/>
+			</ttMacroInvoke>
+		</ttObject>
+		<ttObject> <!-- talismans -->
+            <ttImage>images/level08/talismans/talisman01.png</ttImage>
+            <ttImage>images/level08/talismans/talisman02.png</ttImage>
+            <ttImage>images/level08/talismans/talisman03.png</ttImage>
+            <ttImage>images/level08/talismans/talisman04.png</ttImage>
+            <ttImage>images/level08/talismans/talisman05.png</ttImage>
+            <ttImage>images/level08/talismans/talisman06.png</ttImage>            
+			<ttImage>images/level08/talismans/talisman07.png</ttImage>
+            <ttImage>images/level08/talismans/talisman08.png</ttImage>
+            <ttImage>images/level08/talismans/talisman09.png</ttImage>
+            <ttImage>images/level08/talismans/talisman10.png</ttImage>
+            <ttBasePosition x="52.9795" y="61.0056" />
+			<ttImageGroupIndex>5</ttImageGroupIndex>
+			<ttMacroInvoke macro_name="registerDUObjects">
+				<ttMacroParam name="$param" value="talismans"/>
+			</ttMacroInvoke>
+		</ttObject>		
+		<ttObject> <!-- wands -->
+            <ttImage>images/level08/wands/wand01.png</ttImage>
+            <ttImage>images/level08/wands/wand02.png</ttImage>
+            <ttImage>images/level08/wands/wand03.png</ttImage>
+            <ttImage>images/level08/wands/wand04.png</ttImage>
+            <ttImage>images/level08/wands/wand05.png</ttImage>
+            <ttImage>images/level08/wands/wand06.png</ttImage>            
+			<ttImage>images/level08/wands/wand07.png</ttImage>
+            <ttImage>images/level08/wands/wand08.png</ttImage>
+            <ttImage>images/level08/wands/wand09.png</ttImage>
+            <ttImage>images/level08/wands/wand10.png</ttImage>
+            <ttBasePosition x="34.0438" y="38.3799" />
+			<ttImageGroupIndex>6</ttImageGroupIndex>
+			<ttMacroInvoke macro_name="registerDUObjects">
+				<ttMacroParam name="$param" value="wands"/>
+			</ttMacroInvoke>
+		</ttObject>
+	</ttLayer>
+	<ttLayer ttName="eyesLayer">
+		<ttBasePosition x="-1.3" y="-2.5" />
+		<ttScale>1</ttScale>
+		<ttObject>
+			<ttImage>images/santas/santa_02/eyeWhites.png</ttImage>
+			<ttBasePosition x="54.8" y="85.652" />
+		</ttObject>
+		<ttMacroInvoke macro_name="pupil">
+			<ttMacroParam name="$pupilImage" value="images/santas/santa_02/pupils.png"/>
+			<ttMacroParam name="$posx" value="54.6555"/>
+			<ttMacroParam name="$posy" value="85.852"/>
+			<ttMacroParam name="$scale" value="1"/>
+		</ttMacroInvoke>
+		<ttObject>
+			<ttImage>images/santas/santa_02/eyeLids.png</ttImage>
+			<ttBasePosition x="54.9" y="85.852" />
+		</ttObject>            
+		<ttObject>
+			<ttImage>images/santas/santa_02/eyesBlink.png</ttImage>
+			<ttBasePosition x="54.6555" y="86.852" />
+			<ttAnchorPositionX>0.5</ttAnchorPositionX>
+			<ttAnchorPositionY>0.9</ttAnchorPositionY>
+			<ttScaleY>0</ttScaleY>
+			<ttActionsGroup>
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>blink</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+					<ttAction ttType="scaleXy" ttScaleY="1" ttActionDuration="0.1"/> 
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="scaleXy" ttScaleY="0" ttActionDuration="0.1"/> 
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="scaleXy" ttScaleY="1" ttActionDuration="0.1"/> 
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="scaleXy" ttScaleY="0" ttActionDuration="0.1"/> 
+				</ttSequenceGroup>
+			</ttActionsGroup>
+		</ttObject>
+	</ttLayer>
+	<ttLayer ttName="faceLayer">
+		<ttBasePosition x="-1" y="0" />
+		<ttScale>1</ttScale>
+			<ttObject><!--ear-->
+				<ttImage>images/santas/santa_02/santaEar.png</ttImage>
+				<ttBasePosition x="39.8" y="82.352" />
+			</ttObject>
+			<ttObject><!--ear-->
+				<ttImage>images/santas/santa_02/santaEar.png</ttImage>
+				<ttBasePosition x="69.1" y="82.352" />
+				<ttFlipX>YES</ttFlipX>				
+			</ttObject>
+			<ttObject><!--face-->
+				<ttImage>images/santas/santa_02/fancySantaFace.png</ttImage>
+				<ttBasePosition x="54.6555" y="84.8883" />
+				<ttScale>1.094</ttScale>
+			</ttObject>
+			<ttObject><!--beard-->
+				<ttImage>images/santas/santa_02/beardDress.png</ttImage>
+				<ttBasePosition x="54.6555" y="79.581" />
+			</ttObject>
+			<ttObject><!--nose-->
+				<ttImage>images/santas/santa_02/nose.png</ttImage>
+				<ttBasePosition x="54.0968" y="82.2346" />
+			</ttObject>
+			<ttObject> <!-- hats -->
+				<ttImage>images/level08/hats/hat01.png</ttImage>
+				<ttImage>images/level08/hats/hat02.png</ttImage>
+				<ttImage>images/level08/hats/hat03.png</ttImage>
+				<ttImage>images/level08/hats/hat04.png</ttImage>
+				<ttImage>images/level08/hats/hat05.png</ttImage>
+				<ttImage>images/level08/hats/hat06.png</ttImage>
+				<ttImage>images/level08/hats/hat07.png</ttImage>
+				<ttImage>images/level08/hats/hat08.png</ttImage>
+				<ttImage>images/level08/hats/hat09.png</ttImage>
+				<ttImage>images/level08/hats/hat10.png</ttImage>
+				<ttBasePosition x="54.1" y="81.2553" />
+				<ttImageGroupIndex>3</ttImageGroupIndex>
+				<ttScale>1.1</ttScale>
+				<ttMacroInvoke macro_name="registerDUObjects">
+					<ttMacroParam name="$param" value="hats"/>
+				</ttMacroInvoke>
+			</ttObject>
+		</ttLayer>
+
+	<ttLayer> <!-- items boots -->
+		<ttName>bootsLayer</ttName>
+		<ttLoadAtInit>NO</ttLoadAtInit>
+		<ttMacroInvoke macro_name="dressUpMenuItem">
+			<ttMacroParam name="$itemId" value="10"/>
+			<ttMacroParam name="$image" value="images/level08/boots/bootsThumb01.png"/>
+			<ttMacroParam name="$data" value="0"/>
+			<ttMacroParam name="$categoryName" value="boots" />
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItem">
+			<ttMacroParam name="$itemId" value="11"/>
+			<ttMacroParam name="$image" value="images/level08/boots/bootsThumb02.png"/>
+			<ttMacroParam name="$data" value="1"/>
+			<ttMacroParam name="$categoryName" value="boots" />
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="12"/>
+			<ttMacroParam name="$image" value="images/level08/boots/bootsThumb03.png"/>
+			<ttMacroParam name="$data" value="2"/>
+			<ttMacroParam name="$categoryName" value="boots" />
+        	<ttMacroParam name="$itemVarRV" value="bootsRV"/>
+        	<ttMacroParam name="$itemNo" value="1"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="13"/>
+			<ttMacroParam name="$image" value="images/level08/boots/bootsThumb04.png"/>
+			<ttMacroParam name="$data" value="3"/>
+			<ttMacroParam name="$categoryName" value="boots" />
+        	<ttMacroParam name="$itemVarRV" value="bootsRV"/>
+        	<ttMacroParam name="$itemNo" value="1"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="14"/>
+			<ttMacroParam name="$image" value="images/level08/boots/bootsThumb05.png"/>
+			<ttMacroParam name="$data" value="4"/>
+			<ttMacroParam name="$categoryName" value="boots" />
+        	<ttMacroParam name="$itemVarRV" value="bootsRV"/>
+        	<ttMacroParam name="$itemNo" value="1"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="15"/>
+			<ttMacroParam name="$image" value="images/level08/boots/bootsThumb06.png"/>
+			<ttMacroParam name="$data" value="5"/>
+			<ttMacroParam name="$categoryName" value="boots" />
+        	<ttMacroParam name="$itemVarRV" value="bootsRV"/>
+        	<ttMacroParam name="$itemNo" value="1"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="16"/>
+			<ttMacroParam name="$image" value="images/level08/boots/bootsThumb07.png"/>
+			<ttMacroParam name="$data" value="6"/>
+			<ttMacroParam name="$categoryName" value="boots" />
+        	<ttMacroParam name="$itemVarRV" value="bootsRV"/>
+        	<ttMacroParam name="$itemNo" value="1"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="17"/>
+			<ttMacroParam name="$image" value="images/level08/boots/bootsThumb08.png"/>
+			<ttMacroParam name="$data" value="7"/>
+			<ttMacroParam name="$categoryName" value="boots" />
+        	<ttMacroParam name="$itemVarRV" value="bootsRV"/>
+        	<ttMacroParam name="$itemNo" value="1"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="18"/>
+			<ttMacroParam name="$image" value="images/level08/boots/bootsThumb09.png"/>
+			<ttMacroParam name="$data" value="8"/>
+			<ttMacroParam name="$categoryName" value="boots" />
+        	<ttMacroParam name="$itemVarRV" value="bootsRV"/>
+        	<ttMacroParam name="$itemNo" value="1"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="19"/>
+			<ttMacroParam name="$image" value="images/level08/boots/bootsThumb10.png"/>
+			<ttMacroParam name="$data" value="9"/>
+			<ttMacroParam name="$categoryName" value="boots" />
+        	<ttMacroParam name="$itemVarRV" value="bootsRV"/>
+        	<ttMacroParam name="$itemNo" value="1"/>
+		</ttMacroInvoke>
+		
+		<ttMacroInvoke macro_name="dressUpItemsSlider">
+			<ttMacroParam name="$name" value="bootsLayer"/>
+			<ttMacroParam name="$objectsId" value="10-19"/>
+			<ttMacroParam name="$categoryNo" value="1"/>
+			<ttMacroParam name="$categoryName" value="boots" /> 
+		</ttMacroInvoke>
+	</ttLayer>
+	<ttLayer> <!-- items cloaks -->
+		<ttName>cloaksLayer</ttName>
+		<ttLoadAtInit>YES</ttLoadAtInit>
+		<ttMacroInvoke macro_name="dressUpMenuItem">
+			<ttMacroParam name="$itemId" value="20"/>
+			<ttMacroParam name="$image" value="images/level08/cloaks/cloakThumb01.png"/>
+			<ttMacroParam name="$data" value="0"/>
+			<ttMacroParam name="$categoryName" value="cloaks" />
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItem">
+			<ttMacroParam name="$itemId" value="21"/>
+			<ttMacroParam name="$image" value="images/level08/cloaks/cloakThumb02.png"/>
+			<ttMacroParam name="$data" value="1"/>
+			<ttMacroParam name="$categoryName" value="cloaks" />
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="22"/>
+			<ttMacroParam name="$image" value="images/level08/cloaks/cloakThumb03.png"/>
+			<ttMacroParam name="$data" value="2"/>
+			<ttMacroParam name="$categoryName" value="cloaks" />
+        	<ttMacroParam name="$itemVarRV" value="cloaksRV"/>
+        	<ttMacroParam name="$itemNo" value="2"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="23"/>
+			<ttMacroParam name="$image" value="images/level08/cloaks/cloakThumb04.png"/>
+			<ttMacroParam name="$data" value="3"/>
+			<ttMacroParam name="$categoryName" value="cloaks" />
+        	<ttMacroParam name="$itemVarRV" value="cloaksRV"/>
+        	<ttMacroParam name="$itemNo" value="2"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="24"/>
+			<ttMacroParam name="$image" value="images/level08/cloaks/cloakThumb05.png"/>
+			<ttMacroParam name="$data" value="4"/>
+			<ttMacroParam name="$categoryName" value="cloaks" />
+        	<ttMacroParam name="$itemVarRV" value="cloaksRV"/>
+        	<ttMacroParam name="$itemNo" value="2"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="25"/>
+			<ttMacroParam name="$image" value="images/level08/cloaks/cloakThumb06.png"/>
+			<ttMacroParam name="$data" value="5"/>
+			<ttMacroParam name="$categoryName" value="cloaks" />
+        	<ttMacroParam name="$itemVarRV" value="cloaksRV"/>
+        	<ttMacroParam name="$itemNo" value="2"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="26"/>
+			<ttMacroParam name="$image" value="images/level08/cloaks/cloakThumb07.png"/>
+			<ttMacroParam name="$data" value="6"/>
+			<ttMacroParam name="$categoryName" value="cloaks" />
+        	<ttMacroParam name="$itemVarRV" value="cloaksRV"/>
+        	<ttMacroParam name="$itemNo" value="2"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="27"/>
+			<ttMacroParam name="$image" value="images/level08/cloaks/cloakThumb08.png"/>
+			<ttMacroParam name="$data" value="7"/>
+			<ttMacroParam name="$categoryName" value="cloaks" />
+        	<ttMacroParam name="$itemVarRV" value="cloaksRV"/>
+        	<ttMacroParam name="$itemNo" value="2"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="28"/>
+			<ttMacroParam name="$image" value="images/level08/cloaks/cloakThumb09.png"/>
+			<ttMacroParam name="$data" value="8"/>
+			<ttMacroParam name="$categoryName" value="cloaks" />
+        	<ttMacroParam name="$itemVarRV" value="cloaksRV"/>
+        	<ttMacroParam name="$itemNo" value="2"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="29"/>
+			<ttMacroParam name="$image" value="images/level08/cloaks/cloakThumb10.png"/>
+			<ttMacroParam name="$data" value="9"/>
+			<ttMacroParam name="$categoryName" value="cloaks" />
+        	<ttMacroParam name="$itemVarRV" value="cloaksRV"/>
+        	<ttMacroParam name="$itemNo" value="2"/>
+		</ttMacroInvoke>
+		
+		<ttMacroInvoke macro_name="dressUpItemsSlider">
+			<ttMacroParam name="$name" value="cloaksLayer"/>
+			<ttMacroParam name="$objectsId" value="20-29"/>
+			<ttMacroParam name="$categoryNo" value="2"/>
+			<ttMacroParam name="$categoryName" value="cloaks" /> 
+		</ttMacroInvoke>
+	</ttLayer>
+	<ttLayer> <!-- items hats -->
+		<ttName>hatsLayer</ttName>
+		<ttLoadAtInit>NO</ttLoadAtInit>
+		<ttMacroInvoke macro_name="dressUpMenuItem">
+			<ttMacroParam name="$itemId" value="30"/>
+			<ttMacroParam name="$image" value="images/level08/hats/hatThumb01.png"/>
+			<ttMacroParam name="$data" value="0"/>
+			<ttMacroParam name="$categoryName" value="hats" />
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItem">
+			<ttMacroParam name="$itemId" value="31"/>
+			<ttMacroParam name="$image" value="images/level08/hats/hatThumb02.png"/>
+			<ttMacroParam name="$data" value="1"/>
+			<ttMacroParam name="$categoryName" value="hats" />
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="32"/>
+			<ttMacroParam name="$image" value="images/level08/hats/hatThumb03.png"/>
+			<ttMacroParam name="$data" value="2"/>
+			<ttMacroParam name="$categoryName" value="hats" />
+        	<ttMacroParam name="$itemVarRV" value="hatsRV"/>
+        	<ttMacroParam name="$itemNo" value="3"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="33"/>
+			<ttMacroParam name="$image" value="images/level08/hats/hatThumb04.png"/>
+			<ttMacroParam name="$data" value="3"/>
+			<ttMacroParam name="$categoryName" value="hats" />
+        	<ttMacroParam name="$itemVarRV" value="hatsRV"/>
+        	<ttMacroParam name="$itemNo" value="3"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="34"/>
+			<ttMacroParam name="$image" value="images/level08/hats/hatThumb05.png"/>
+			<ttMacroParam name="$data" value="4"/>
+			<ttMacroParam name="$categoryName" value="hats" />
+        	<ttMacroParam name="$itemVarRV" value="hatsRV"/>
+        	<ttMacroParam name="$itemNo" value="3"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="35"/>
+			<ttMacroParam name="$image" value="images/level08/hats/hatThumb06.png"/>
+			<ttMacroParam name="$data" value="5"/>
+			<ttMacroParam name="$categoryName" value="hats" />
+        	<ttMacroParam name="$itemVarRV" value="hatsRV"/>
+        	<ttMacroParam name="$itemNo" value="3"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="36"/>
+			<ttMacroParam name="$image" value="images/level08/hats/hatThumb07.png"/>
+			<ttMacroParam name="$data" value="6"/>
+			<ttMacroParam name="$categoryName" value="hats" />
+        	<ttMacroParam name="$itemVarRV" value="hatsRV"/>
+        	<ttMacroParam name="$itemNo" value="3"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="37"/>
+			<ttMacroParam name="$image" value="images/level08/hats/hatThumb08.png"/>
+			<ttMacroParam name="$data" value="7"/>
+			<ttMacroParam name="$categoryName" value="hats" />
+        	<ttMacroParam name="$itemVarRV" value="hatsRV"/>
+        	<ttMacroParam name="$itemNo" value="3"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="38"/>
+			<ttMacroParam name="$image" value="images/level08/hats/hatThumb09.png"/>
+			<ttMacroParam name="$data" value="8"/>
+			<ttMacroParam name="$categoryName" value="hats" />
+        	<ttMacroParam name="$itemVarRV" value="hatsRV"/>
+        	<ttMacroParam name="$itemNo" value="3"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="39"/>
+			<ttMacroParam name="$image" value="images/level08/hats/hatThumb10.png"/>
+			<ttMacroParam name="$data" value="9"/>
+			<ttMacroParam name="$categoryName" value="hats" />
+        	<ttMacroParam name="$itemVarRV" value="hatsRV"/>
+        	<ttMacroParam name="$itemNo" value="3"/>
+		</ttMacroInvoke>
+		
+		<ttMacroInvoke macro_name="dressUpItemsSlider">
+			<ttMacroParam name="$name" value="hatsLayer"/>
+			<ttMacroParam name="$objectsId" value="30-39"/>
+			<ttMacroParam name="$categoryNo" value="3"/>
+			<ttMacroParam name="$categoryName" value="hats" /> 
+		</ttMacroInvoke>
+	</ttLayer>
+	<ttLayer> <!-- items pants -->
+		<ttName>pantsLayer</ttName>
+		<ttLoadAtInit>NO</ttLoadAtInit>
+		<ttMacroInvoke macro_name="dressUpMenuItem">
+			<ttMacroParam name="$itemId" value="40"/>
+			<ttMacroParam name="$image" value="images/level08/pants/pantsThumb01.png"/>
+			<ttMacroParam name="$data" value="0"/>
+			<ttMacroParam name="$categoryName" value="pants" />
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItem">
+			<ttMacroParam name="$itemId" value="41"/>
+			<ttMacroParam name="$image" value="images/level08/pants/pantsThumb02.png"/>
+			<ttMacroParam name="$data" value="1"/>
+			<ttMacroParam name="$categoryName" value="pants" />
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="42"/>
+			<ttMacroParam name="$image" value="images/level08/pants/pantsThumb03.png"/>
+			<ttMacroParam name="$data" value="2"/>
+			<ttMacroParam name="$categoryName" value="pants" />
+        	<ttMacroParam name="$itemVarRV" value="pantsRV"/>
+        	<ttMacroParam name="$itemNo" value="~"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="43"/>
+			<ttMacroParam name="$image" value="images/level08/pants/pantsThumb04.png"/>
+			<ttMacroParam name="$data" value="3"/>
+			<ttMacroParam name="$categoryName" value="pants" />
+        	<ttMacroParam name="$itemVarRV" value="pantsRV"/>
+        	<ttMacroParam name="$itemNo" value="4"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="44"/>
+			<ttMacroParam name="$image" value="images/level08/pants/pantsThumb05.png"/>
+			<ttMacroParam name="$data" value="4"/>
+			<ttMacroParam name="$categoryName" value="pants" />
+        	<ttMacroParam name="$itemVarRV" value="pantsRV"/>
+        	<ttMacroParam name="$itemNo" value="4"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="45"/>
+			<ttMacroParam name="$image" value="images/level08/pants/pantsThumb06.png"/>
+			<ttMacroParam name="$data" value="5"/>
+			<ttMacroParam name="$categoryName" value="pants" />
+        	<ttMacroParam name="$itemVarRV" value="pantsRV"/>
+        	<ttMacroParam name="$itemNo" value="4"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="46"/>
+			<ttMacroParam name="$image" value="images/level08/pants/pantsThumb07.png"/>
+			<ttMacroParam name="$data" value="6"/>
+			<ttMacroParam name="$categoryName" value="pants" />
+        	<ttMacroParam name="$itemVarRV" value="pantsRV"/>
+        	<ttMacroParam name="$itemNo" value="4"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="47"/>
+			<ttMacroParam name="$image" value="images/level08/pants/pantsThumb08.png"/>
+			<ttMacroParam name="$data" value="7"/>
+			<ttMacroParam name="$categoryName" value="pants" />
+        	<ttMacroParam name="$itemVarRV" value="pantsRV"/>
+        	<ttMacroParam name="$itemNo" value="4"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="48"/>
+			<ttMacroParam name="$image" value="images/level08/pants/pantsThumb09.png"/>
+			<ttMacroParam name="$data" value="8"/>
+			<ttMacroParam name="$categoryName" value="pants" />
+        	<ttMacroParam name="$itemVarRV" value="pantsRV"/>
+        	<ttMacroParam name="$itemNo" value="4"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="49"/>
+			<ttMacroParam name="$image" value="images/level08/pants/pantsThumb10.png"/>
+			<ttMacroParam name="$data" value="9"/>
+			<ttMacroParam name="$categoryName" value="pants" />
+        	<ttMacroParam name="$itemVarRV" value="pantsRV"/>
+        	<ttMacroParam name="$itemNo" value="4"/>
+		</ttMacroInvoke>
+		
+		<ttMacroInvoke macro_name="dressUpItemsSlider">
+			<ttMacroParam name="$name" value="pantsLayer"/>
+			<ttMacroParam name="$objectsId" value="40-49"/>
+			<ttMacroParam name="$categoryNo" value="4"/>
+			<ttMacroParam name="$categoryName" value="pants" /> 
+		</ttMacroInvoke>
+	</ttLayer>
+	<ttLayer> <!-- items talismans -->
+		<ttName>talismansLayer</ttName>
+		<ttLoadAtInit>NO</ttLoadAtInit>
+		<ttMacroInvoke macro_name="dressUpMenuItem">
+			<ttMacroParam name="$itemId" value="50"/>
+			<ttMacroParam name="$image" value="images/level08/talismans/talismanThumb01.png"/>
+			<ttMacroParam name="$data" value="0"/>
+			<ttMacroParam name="$categoryName" value="talismans" />
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItem">
+			<ttMacroParam name="$itemId" value="51"/>
+			<ttMacroParam name="$image" value="images/level08/talismans/talismanThumb02.png"/>
+			<ttMacroParam name="$data" value="1"/>
+			<ttMacroParam name="$categoryName" value="talismans" />
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="52"/>
+			<ttMacroParam name="$image" value="images/level08/talismans/talismanThumb03.png"/>
+			<ttMacroParam name="$data" value="2"/>
+			<ttMacroParam name="$categoryName" value="talismans" />
+        	<ttMacroParam name="$itemVarRV" value="talismansRV"/>
+        	<ttMacroParam name="$itemNo" value="5"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="53"/>
+			<ttMacroParam name="$image" value="images/level08/talismans/talismanThumb04.png"/>
+			<ttMacroParam name="$data" value="3"/>
+			<ttMacroParam name="$categoryName" value="talismans" />
+        	<ttMacroParam name="$itemVarRV" value="talismansRV"/>
+        	<ttMacroParam name="$itemNo" value="5"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="54"/>
+			<ttMacroParam name="$image" value="images/level08/talismans/talismanThumb05.png"/>
+			<ttMacroParam name="$data" value="4"/>
+			<ttMacroParam name="$categoryName" value="talismans" />
+        	<ttMacroParam name="$itemVarRV" value="talismansRV"/>
+        	<ttMacroParam name="$itemNo" value="5"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="55"/>
+			<ttMacroParam name="$image" value="images/level08/talismans/talismanThumb06.png"/>
+			<ttMacroParam name="$data" value="5"/>
+			<ttMacroParam name="$categoryName" value="talismans" />
+        	<ttMacroParam name="$itemVarRV" value="talismansRV"/>
+        	<ttMacroParam name="$itemNo" value="5"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="56"/>
+			<ttMacroParam name="$image" value="images/level08/talismans/talismanThumb07.png"/>
+			<ttMacroParam name="$data" value="6"/>
+			<ttMacroParam name="$categoryName" value="talismans" />
+        	<ttMacroParam name="$itemVarRV" value="talismansRV"/>
+        	<ttMacroParam name="$itemNo" value="5"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="57"/>
+			<ttMacroParam name="$image" value="images/level08/talismans/talismanThumb08.png"/>
+			<ttMacroParam name="$data" value="7"/>
+			<ttMacroParam name="$categoryName" value="talismans" />
+        	<ttMacroParam name="$itemVarRV" value="talismansRV"/>
+        	<ttMacroParam name="$itemNo" value="5"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="58"/>
+			<ttMacroParam name="$image" value="images/level08/talismans/talismanThumb09.png"/>
+			<ttMacroParam name="$data" value="8"/>
+			<ttMacroParam name="$categoryName" value="talismans" />
+        	<ttMacroParam name="$itemVarRV" value="talismansRV"/>
+        	<ttMacroParam name="$itemNo" value="5"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="59"/>
+			<ttMacroParam name="$image" value="images/level08/talismans/talismanThumb10.png"/>
+			<ttMacroParam name="$data" value="9"/>
+			<ttMacroParam name="$categoryName" value="talismans" />
+        	<ttMacroParam name="$itemVarRV" value="talismansRV08"/>
+        	<ttMacroParam name="$itemNo" value="5"/>
+		</ttMacroInvoke>
+		
+		<ttMacroInvoke macro_name="dressUpItemsSlider">
+			<ttMacroParam name="$name" value="talismansLayer"/>
+			<ttMacroParam name="$objectsId" value="50-59"/>
+			<ttMacroParam name="$categoryNo" value="5"/>
+			<ttMacroParam name="$categoryName" value="talismans" /> 
+		</ttMacroInvoke>
+	</ttLayer>	
+	<ttLayer> <!-- items wands -->
+		<ttName>wandsLayer</ttName>
+		<ttLoadAtInit>NO</ttLoadAtInit>
+		<ttMacroInvoke macro_name="dressUpMenuItem">
+			<ttMacroParam name="$itemId" value="60"/>
+			<ttMacroParam name="$image" value="images/level08/wands/wandThumb01.png"/>
+			<ttMacroParam name="$data" value="0"/>
+			<ttMacroParam name="$categoryName" value="wands" />
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItem">
+			<ttMacroParam name="$itemId" value="61"/>
+			<ttMacroParam name="$image" value="images/level08/wands/wandThumb02.png"/>
+			<ttMacroParam name="$data" value="1"/>
+			<ttMacroParam name="$categoryName" value="wands" />
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="62"/>
+			<ttMacroParam name="$image" value="images/level08/wands/wandThumb03.png"/>
+			<ttMacroParam name="$data" value="2"/>
+			<ttMacroParam name="$categoryName" value="wands" />
+        	<ttMacroParam name="$itemVarRV" value="wandsRV"/>
+        	<ttMacroParam name="$itemNo" value="6"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="63"/>
+			<ttMacroParam name="$image" value="images/level08/wands/wandThumb04.png"/>
+			<ttMacroParam name="$data" value="3"/>
+			<ttMacroParam name="$categoryName" value="wands" />
+        	<ttMacroParam name="$itemVarRV" value="wandsRV"/>
+        	<ttMacroParam name="$itemNo" value="6"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="64"/>
+			<ttMacroParam name="$image" value="images/level08/wands/wandThumb05.png"/>
+			<ttMacroParam name="$data" value="4"/>
+			<ttMacroParam name="$categoryName" value="wands" />
+        	<ttMacroParam name="$itemVarRV" value="wandsRV"/>
+        	<ttMacroParam name="$itemNo" value="6"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="65"/>
+			<ttMacroParam name="$image" value="images/level08/wands/wandThumb06.png"/>
+			<ttMacroParam name="$data" value="5"/>
+			<ttMacroParam name="$categoryName" value="wands" />
+        	<ttMacroParam name="$itemVarRV" value="wandsRV"/>
+        	<ttMacroParam name="$itemNo" value="6"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="66"/>
+			<ttMacroParam name="$image" value="images/level08/wands/wandThumb07.png"/>
+			<ttMacroParam name="$data" value="6"/>
+			<ttMacroParam name="$categoryName" value="wands" />
+        	<ttMacroParam name="$itemVarRV" value="wandsRV"/>
+        	<ttMacroParam name="$itemNo" value="6"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="67"/>
+			<ttMacroParam name="$image" value="images/level08/wands/wandThumb08.png"/>
+			<ttMacroParam name="$data" value="7"/>
+			<ttMacroParam name="$categoryName" value="wands" />
+        	<ttMacroParam name="$itemVarRV" value="wandsRV"/>
+        	<ttMacroParam name="$itemNo" value="6"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="68"/>
+			<ttMacroParam name="$image" value="images/level08/wands/wandThumb09.png"/>
+			<ttMacroParam name="$data" value="8"/>
+			<ttMacroParam name="$categoryName" value="wands" />
+        	<ttMacroParam name="$itemVarRV" value="wandsRV"/>
+        	<ttMacroParam name="$itemNo" value="6"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpMenuItemLocked">
+			<ttMacroParam name="$itemId" value="69"/>
+			<ttMacroParam name="$image" value="images/level08/wands/wandThumb10.png"/>
+			<ttMacroParam name="$data" value="9"/>
+			<ttMacroParam name="$categoryName" value="wands" />
+        	<ttMacroParam name="$itemVarRV" value="wandsRV"/>
+        	<ttMacroParam name="$itemNo" value="6"/>
+		</ttMacroInvoke>
+		
+		<ttMacroInvoke macro_name="dressUpItemsSlider">
+			<ttMacroParam name="$name" value="wandsLayer"/>
+			<ttMacroParam name="$objectsId" value="60-69"/>
+			<ttMacroParam name="$categoryNo" value="6"/>
+			<ttMacroParam name="$categoryName" value="wands" /> 
+		</ttMacroInvoke>
+	</ttLayer>
+	<ttLayer> <!-- categories slider-->
+		<ttName>categoriesSliderLayer</ttName>	
+		<ttMacroInvoke macro_name="dressUpCategoriesMenuItem">
+			<ttMacroParam name="$itemId" value="1"/>
+			<ttMacroParam name="$image" value="images/level08/duUI/cloakBtn.png"/>
+			<ttMacroParam name="$selectedimage" value="images/level08/duUI/cloakBtnSelected.png"/>
+			<ttMacroParam name="$categoryNo" value="2"/>
+			<ttMacroParam name="$layerName" value="cloaksLayer"/>
+			<ttMacroParam name="$dressUpItemSelectedNotification" value="dressUpItemSelected(category:cloaks)"/>
+			<ttMacroParam name="$dressUpCategoryChangedNotification" value="dressUpCategoryChanged(category:cloaks)"/>
+			<ttMacroParam name="$dressUpCategoryReplaceNotification" value="replaceCategories_cloaks"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpCategoriesMenuItem">
+			<ttMacroParam name="$itemId" value="2"/>
+			<ttMacroParam name="$image" value="images/level08/duUI/pantsBtn.png"/>
+			<ttMacroParam name="$selectedimage" value="images/level08/duUI/pantsBtnSelected.png"/>
+			<ttMacroParam name="$categoryNo" value="4"/>
+			<ttMacroParam name="$layerName" value="pantsLayer"/>
+			<ttMacroParam name="$dressUpItemSelectedNotification" value="dressUpItemSelected(category:pants)"/>
+			<ttMacroParam name="$dressUpCategoryChangedNotification" value="dressUpCategoryChanged(category:pants)"/>
+			<ttMacroParam name="$dressUpCategoryReplaceNotification" value="replaceCategories_pants"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpCategoriesMenuItem">
+			<ttMacroParam name="$itemId" value="3"/>
+			<ttMacroParam name="$image" value="images/level08/duUI/hatBtn.png"/>
+			<ttMacroParam name="$selectedimage" value="images/level08/duUI/hatBtnSelected.png"/>
+			<ttMacroParam name="$categoryNo" value="3"/>
+			<ttMacroParam name="$layerName" value="hatsLayer"/>
+			<ttMacroParam name="$dressUpItemSelectedNotification" value="dressUpItemSelected(category:hats)"/>
+			<ttMacroParam name="$dressUpCategoryChangedNotification" value="dressUpCategoryChanged(category:hats)"/>
+			<ttMacroParam name="$dressUpCategoryReplaceNotification" value="replaceCategories_hats"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpCategoriesMenuItem">
+			<ttMacroParam name="$itemId" value="4"/>
+			<ttMacroParam name="$image" value="images/level08/duUI/bootsBtn.png"/>
+			<ttMacroParam name="$selectedimage" value="images/level08/duUI/bootsBtnSelected.png"/>
+			<ttMacroParam name="$categoryNo" value="1"/>
+			<ttMacroParam name="$layerName" value="bootsLayer"/>
+			<ttMacroParam name="$dressUpItemSelectedNotification" value="dressUpItemSelected(category:boots)"/>
+			<ttMacroParam name="$dressUpCategoryChangedNotification" value="dressUpCategoryChanged(category:boots)"/>
+			<ttMacroParam name="$dressUpCategoryReplaceNotification" value="replaceCategories_boots"/>
+		</ttMacroInvoke>	
+		<ttMacroInvoke macro_name="dressUpCategoriesMenuItem">
+			<ttMacroParam name="$itemId" value="5"/>
+			<ttMacroParam name="$image" value="images/level08/duUI/scepterBtn.png"/>
+			<ttMacroParam name="$selectedimage" value="images/level08/duUI/scepterBtnSelected.png"/>
+			<ttMacroParam name="$categoryNo" value="6"/>
+			<ttMacroParam name="$layerName" value="wandsLayer"/>
+			<ttMacroParam name="$dressUpItemSelectedNotification" value="dressUpItemSelected(category:wands)"/>
+			<ttMacroParam name="$dressUpCategoryChangedNotification" value="dressUpCategoryChanged(category:wands)"/>
+			<ttMacroParam name="$dressUpCategoryReplaceNotification" value="replaceCategories_wands"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="dressUpCategoriesMenuItem">
+			<ttMacroParam name="$itemId" value="6"/>
+			<ttMacroParam name="$image" value="images/level08/duUI/talismanBtn.png"/>
+			<ttMacroParam name="$selectedimage" value="images/level08/duUI/talismanBtnSelected.png"/>
+			<ttMacroParam name="$categoryNo" value="5"/>
+			<ttMacroParam name="$layerName" value="talismansLayer"/>
+			<ttMacroParam name="$dressUpItemSelectedNotification" value="dressUpItemSelected(category:talismans)"/>
+			<ttMacroParam name="$dressUpCategoryChangedNotification" value="dressUpCategoryChanged(category:talismans)"/>
+			<ttMacroParam name="$dressUpCategoryReplaceNotification" value="replaceCategories_talismans"/>
+		</ttMacroInvoke>
+		<ttObject>
+			<ttSoundList>sounds/dressUp/category_selection_1.mp3</ttSoundList>
+			<ttSoundList>sounds/dressUp/category_selection_2.mp3</ttSoundList>
+			<ttSoundList>sounds/dressUp/category_selection_3.mp3</ttSoundList>
+			<ttType>compoundCategorySlider</ttType>
+			<ttName>dressUpCategoriesSlider</ttName>
+			<ttMoveUpOrLeftNotification>moveCategoriesSliderUp</ttMoveUpOrLeftNotification>
+			<ttMoveDownOrRightNotification>moveCategoriesSliderDown</ttMoveDownOrRightNotification>
+			<ttBasePosition x="5" y="0"/>
+			<ttMenuWidth>90</ttMenuWidth>
+			<ttMenuHeight>10</ttMenuHeight>
+			<ttObjectsIdList>1-6</ttObjectsIdList>
+			<ttIsLooped>no</ttIsLooped>
+			<ttMovingSpeed>0</ttMovingSpeed>
+			<ttFriction>0</ttFriction>
+			<ttScrollSound></ttScrollSound>
+			<ttNumberOfItemInRow>6</ttNumberOfItemInRow>
+			<ttNumberOfItemInCol>1</ttNumberOfItemInCol>
+			<ttIsHorizontal>YES</ttIsHorizontal>
+		</ttObject>
+		<ttObject>
+			<ttImage>images/level08/duUI/pinkOrnament.png</ttImage>
+			<ttBasePosition x="2" y="5.5" />
+		</ttObject>
+		<ttObject>
+			<ttImage>images/level08/duUI/orangeOrnament.png</ttImage>
+			<ttBasePosition x="98" y="5.5" />
+		</ttObject>
+		<ttObject>
+			<ttImage>images/level08/duUI/panelIce.png</ttImage>
+			<ttFlipX>YES</ttFlipX>
+			<ttBasePosition x="50" y="2.06704" />
+		</ttObject>
+		<ttObject> <!-- arrow right -->
+            <ttImage>images/level08/duUI/arrow.png</ttImage>
+            <ttAnchorPositionX>0.00</ttAnchorPositionX>
+            <ttAnchorPositionY>0.50</ttAnchorPositionY>
+            <ttBasePosition x="91.7511" y="16.0694" />
+			<ttActionsGroup>
+				<ttTrigger>onTouchesBegan</ttTrigger>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>playSound</ttType>
+						<ttFile>sounds/button_press.mp3</ttFile>
+					</ttAction>
+					<ttAction>
+						<ttType>scaleXy</ttType>
+						<ttActionDuration>0.12</ttActionDuration>
+						<ttActionEaseRate>2.00</ttActionEaseRate>
+						<ttActionEaseMode>easeInOut</ttActionEaseMode>
+						<ttScaleX>0.8</ttScaleX>
+						<ttScaleY>1</ttScaleY>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>sendNotification</ttType>
+						<ttNotificationIdentifyer>moveItemsSliderUp</ttNotificationIdentifyer>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>scaleXy</ttType>
+						<ttActionDuration>0.12</ttActionDuration>
+						<ttActionEaseRate>2.00</ttActionEaseRate>
+						<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+						<ttScaleX>1</ttScaleX>
+						<ttScaleY>1</ttScaleY>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+		</ttObject>
+		<ttObject> <!-- arrow left -->
+            <ttImage>images/level08/duUI/arrow.png</ttImage>
+            <ttAnchorPositionX>1.00</ttAnchorPositionX>
+            <ttAnchorPositionY>0.50</ttAnchorPositionY>
+            <ttFlipX>YES</ttFlipX>
+            <ttBasePosition x="8.24893" y="16.0694" />
+			<ttActionsGroup>
+				<ttTrigger>onTouchesBegan</ttTrigger>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>playSound</ttType>
+						<ttFile>sounds/button_press.mp3</ttFile>
+					</ttAction>
+					<ttAction>
+						<ttType>scaleXy</ttType>
+						<ttActionDuration>0.12</ttActionDuration>
+						<ttActionEaseRate>2.00</ttActionEaseRate>
+						<ttActionEaseMode>easeInOut</ttActionEaseMode>
+						<ttScaleX>0.8</ttScaleX>
+						<ttScaleY>1</ttScaleY>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>sendNotification</ttType>
+						<ttNotificationIdentifyer>moveItemsSliderDown</ttNotificationIdentifyer>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>scaleXy</ttType>
+						<ttActionDuration>0.12</ttActionDuration>
+						<ttActionEaseRate>2.00</ttActionEaseRate>
+						<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+						<ttScaleX>1</ttScaleX>
+						<ttScaleY>1</ttScaleY>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+		</ttObject>
+		<ttObject> <!-- particles -->
+			<ttImage>images/fullBlocker.png</ttImage>
+			<ttBasePosition x="50" y="17" />
+			<ttType>particles</ttType>
+			<ttParticles>
+				<ttParticlesPlist>images/particles/dressUpSuccessRV.plist</ttParticlesPlist>
+			</ttParticles>
+			<ttActionsGroup>
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>successRVParticles</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>startParticles</ttType>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+		</ttObject>
+	</ttLayer>
+	<ttLayer> <!-- buttons layer -->
+		<ttName>ButtonsLayer</ttName>
+	 	<ttBasePosition x="0" y="0" />
+	    <ttObject> <!-- home -->
+            <ttImage>images/iconsUI/homeBtn.png</ttImage>
+	        <ttBasePosition x="90" y="91" />
+			<ttActionsGroup>
+				<ttTrigger>onTouchesBegan</ttTrigger>
+				<ttOperator>
+					<ttScript>return (100 > muchProgress)</ttScript>
+				</ttOperator>	
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>logEvent</ttType>
+                        <ttLogEventName>Button_Click_Levels1_8</ttLogEventName>
+                        <ttLogEventParam>Level_8</ttLogEventParam>
+                        <ttLogEventVal>Home_Before_Completed</ttLogEventVal>
+                    </ttAction>
+                </ttSequenceGroup>			
+			</ttActionsGroup>
+			<ttActionsGroup>
+				<ttTrigger>onTouchesBegan</ttTrigger>
+				<ttOperator>
+					<ttScript>return (muchProgress >= 100) </ttScript>
+				</ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>logEvent</ttType>
+                        <ttLogEventName>Button_Click_Levels1_8</ttLogEventName>
+                        <ttLogEventParam>Level_8</ttLogEventParam>
+                        <ttLogEventVal>Home_After_Completed</ttLogEventVal>
+                    </ttAction>
+                </ttSequenceGroup>	
+			</ttActionsGroup>
+			<ttActionsGroup>
+				<ttTrigger>onTouchesBegan</ttTrigger>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>playSound</ttType>
+						<ttFile>sounds/button_press.mp3</ttFile>
+					</ttAction>
+					<ttAction>
+						<ttType>scaleXy</ttType>
+						<ttActionDuration>0.12</ttActionDuration>
+						<ttActionEaseRate>2.00</ttActionEaseRate>
+						<ttActionEaseMode>easeInOut</ttActionEaseMode>
+						<ttScaleX>0.85</ttScaleX>
+						<ttScaleY>1.15</ttScaleY>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>scaleXy</ttType>
+						<ttActionDuration>0.12</ttActionDuration>
+						<ttActionEaseRate>2.00</ttActionEaseRate>
+						<ttActionEaseMode>easeInOut</ttActionEaseMode>
+						<ttScaleX>1.1</ttScaleX>
+						<ttScaleY>0.9</ttScaleY>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>scaleXy</ttType>
+						<ttActionDuration>0.12</ttActionDuration>
+						<ttActionEaseRate>2.00</ttActionEaseRate>
+						<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+						<ttScaleX>1</ttScaleX>
+						<ttScaleY>1</ttScaleY>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>dressUpEntered</ttVariable>
+						<ttOperator>
+							<ttScript>return 1</ttScript>
+						</ttOperator>
+						<ttSave>1</ttSave>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>delay</ttType>
+						<ttActionDuration>0.4</ttActionDuration>
+					</ttAction>
+				</ttSequenceGroup>
+                <ttSequenceGroup>
+					<ttAction>
+						<ttType>saveLayerToPng</ttType>
+						<ttLayerName>santaLayer</ttLayerName>
+						<ttOriginX>30</ttOriginX>
+						<ttOriginY>20</ttOriginY>
+						<ttWidth>50</ttWidth>
+						<ttHeight>80</ttHeight>
+						<ttScaleToOne>NO</ttScaleToOne>
+						<ttFileName>savedAvatarPicture.png</ttFileName>
+					</ttAction>
+				</ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>loadLayer</ttType>
+                        <ttData>backToMapPopup</ttData>
+                    </ttAction>
+                </ttSequenceGroup>
+			</ttActionsGroup>
+		</ttObject> 
+		<ttObject>
+			<ttImage>images/iconsUI/backBtn.png</ttImage>
+			<ttBasePosition x="90" y="29.4414" />
+			<ttScale>0</ttScale>
+			<ttFlipX>YES</ttFlipX>
+			<ttActionsGroup>
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>dressUp.done</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>scaleMap</ttVariable>
+                        <ttOperator>
+                            <ttScript>return 1</ttScript>
+                        </ttOperator>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>posX</ttVariable>
+                        <ttOperator>
+                            <ttScript>return 0</ttScript>
+                        </ttOperator>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>posY</ttVariable>
+                        <ttOperator>
+                            <ttScript>return -100</ttScript>
+                        </ttOperator>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>level08Done</ttVariable>
+                        <ttOperator>
+                            <ttScript>return 1</ttScript>
+                        </ttOperator>
+                        <ttSave>1</ttSave>
+                    </ttAction>
+                </ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="scale" ttScaleTo="1" ttActionDuration="0.2" ttActionEaseMode="easeBackOut" ttActionEaseRate="3"/> 
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup>
+				<ttTrigger>onTouchesBegan</ttTrigger>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>playSound</ttType>
+						<ttFile>sounds/button_press.mp3</ttFile>
+					</ttAction>
+					<ttAction>
+						<ttType>scaleXy</ttType>
+						<ttActionDuration>0.12</ttActionDuration>
+						<ttActionEaseRate>2.00</ttActionEaseRate>
+						<ttActionEaseMode>easeInOut</ttActionEaseMode>
+						<ttScaleX>0.85</ttScaleX>
+						<ttScaleY>1.15</ttScaleY>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>scaleXy</ttType>
+						<ttActionDuration>0.12</ttActionDuration>
+						<ttActionEaseRate>2.00</ttActionEaseRate>
+						<ttActionEaseMode>easeInOut</ttActionEaseMode>
+						<ttScaleX>1.1</ttScaleX>
+						<ttScaleY>0.9</ttScaleY>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>scaleXy</ttType>
+						<ttActionDuration>0.12</ttActionDuration>
+						<ttActionEaseRate>2.00</ttActionEaseRate>
+						<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+						<ttScaleX>1</ttScaleX>
+						<ttScaleY>1</ttScaleY>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>dressUpEntered</ttVariable>
+						<ttOperator>
+							<ttScript>return 1</ttScript>
+						</ttOperator>
+						<ttSave>1</ttSave>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>delay</ttType>
+						<ttActionDuration>0.4</ttActionDuration>
+					</ttAction>
+				</ttSequenceGroup>
+                <ttSequenceGroup>
+					<ttAction>
+						<ttType>saveLayerToPng</ttType>
+						<ttLayerName>santaLayer</ttLayerName>
+						<ttOriginX>30</ttOriginX>
+						<ttOriginY>20</ttOriginY>
+						<ttWidth>50</ttWidth>
+						<ttHeight>80</ttHeight>
+						<ttScaleToOne>NO</ttScaleToOne>
+						<ttFileName>savedAvatarPicture.png</ttFileName>
+					</ttAction>
+				</ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>moveToScene</ttType>
+                        <ttSceneName>mapScene</ttSceneName>
+                        <ttSceneId>1000000</ttSceneId>
+                    </ttAction>
+                </ttSequenceGroup>
+			</ttActionsGroup>
+	    </ttObject>
+	</ttLayer>
+    <ttLayer> <!-- blocker -->
+        <ttName>BlockerLayer</ttName>
+        <ttObject>
+            <ttImage>images/fullBlocker.png</ttImage>
+            <ttBasePosition x="0" y="0" />
+            <ttOpacity>0</ttOpacity>
+            <ttScale>0</ttScale>
+            <ttActionsGroup> <!-- onTouchesBegan -->
+                <ttTrigger>onTouchesBegan</ttTrigger>
+                <ttSequenceGroup />
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>closeEyesForAvatar</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>scale</ttType>
+                        <ttActionDuration>0.0</ttActionDuration>
+                        <ttScaleTo>1024</ttScaleTo>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>resetProgress.close</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>scale</ttType>
+                        <ttActionDuration>0.0</ttActionDuration>
+                        <ttScaleTo>0</ttScaleTo>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>blockerForCamera</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>scale</ttType>
+                        <ttActionDuration>0.0</ttActionDuration>
+                        <ttScaleTo>1024</ttScaleTo>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>polaroid.close</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>scale</ttType>
+                        <ttActionDuration>0.0</ttActionDuration>
+                        <ttScaleTo>0</ttScaleTo>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+    </ttLayer>
+	<ttLayer ttName="progressLayer"> 
+		<ttObject> <!-- progress bar BACK -->
+			<ttImage>images/hiddenObjects/hoUI/progressBarBack.png</ttImage>
+			<ttBasePosition x="10.55" y="60" />
+			<ttRotate>-90</ttRotate>
+			<ttActionsGroup><!--wands dressed-->
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>dressUpItemSelected(category:wands)</ttNotificationIdentifyer>
+				<ttMaxNumberOfTimesToRun>1</ttMaxNumberOfTimesToRun>
+				<ttSequenceGroup>	
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>muchProgress</ttVariable>
+						<ttOperator>
+							<ttScript>return (muchProgress + 16.7)</ttScript>
+						</ttOperator>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>	
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>itemsDressed</ttVariable>
+						<ttOperator>
+							<ttScript>return (itemsDressed + 1)</ttScript>
+						</ttOperator>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="delay" ttActionDuration="0.1"/>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="sendNotification" ttNotificationIdentifyer="setProgress"/>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="sendNotification" ttNotificationIdentifyer="checkProgress"/>
+				</ttSequenceGroup>				
+			</ttActionsGroup>			
+			<ttActionsGroup><!--hats dressed-->
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>dressUpItemSelected(category:hats)</ttNotificationIdentifyer>
+				<ttMaxNumberOfTimesToRun>1</ttMaxNumberOfTimesToRun>
+				<ttSequenceGroup>	
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>muchProgress</ttVariable>
+						<ttOperator>
+							<ttScript>return (muchProgress + 16.7)</ttScript>
+						</ttOperator>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>	
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>itemsDressed</ttVariable>
+						<ttOperator>
+							<ttScript>return (itemsDressed + 1)</ttScript>
+						</ttOperator>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="delay" ttActionDuration="0.1"/>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="sendNotification" ttNotificationIdentifyer="setProgress"/>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="sendNotification" ttNotificationIdentifyer="checkProgress"/>
+				</ttSequenceGroup>				
+			</ttActionsGroup>			
+			<ttActionsGroup><!--cloaks dressed-->
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>dressUpItemSelected(category:cloaks)</ttNotificationIdentifyer>
+				<ttMaxNumberOfTimesToRun>1</ttMaxNumberOfTimesToRun>
+				<ttSequenceGroup>	
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>muchProgress</ttVariable>
+						<ttOperator>
+							<ttScript>return (muchProgress + 16.7)</ttScript>
+						</ttOperator>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>	
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>itemsDressed</ttVariable>
+						<ttOperator>
+							<ttScript>return (itemsDressed + 1)</ttScript>
+						</ttOperator>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="delay" ttActionDuration="0.1"/>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="sendNotification" ttNotificationIdentifyer="setProgress"/>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="sendNotification" ttNotificationIdentifyer="checkProgress"/>
+				</ttSequenceGroup>				
+			</ttActionsGroup>			
+			<ttActionsGroup><!--pants dressed-->
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>dressUpItemSelected(category:pants)</ttNotificationIdentifyer>
+				<ttMaxNumberOfTimesToRun>1</ttMaxNumberOfTimesToRun>
+				<ttSequenceGroup>	
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>muchProgress</ttVariable>
+						<ttOperator>
+							<ttScript>return (muchProgress + 16.7)</ttScript>
+						</ttOperator>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>	
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>itemsDressed</ttVariable>
+						<ttOperator>
+							<ttScript>return (itemsDressed + 1)</ttScript>
+						</ttOperator>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="delay" ttActionDuration="0.1"/>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="sendNotification" ttNotificationIdentifyer="setProgress"/>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="sendNotification" ttNotificationIdentifyer="checkProgress"/>
+				</ttSequenceGroup>				
+			</ttActionsGroup>			
+			<ttActionsGroup><!--boots dressed-->
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>dressUpItemSelected(category:boots)</ttNotificationIdentifyer>
+				<ttMaxNumberOfTimesToRun>1</ttMaxNumberOfTimesToRun>
+				<ttSequenceGroup>	
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>muchProgress</ttVariable>
+						<ttOperator>
+							<ttScript>return (muchProgress + 16.7)</ttScript>
+						</ttOperator>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>	
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>itemsDressed</ttVariable>
+						<ttOperator>
+							<ttScript>return (itemsDressed + 1)</ttScript>
+						</ttOperator>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="delay" ttActionDuration="0.1"/>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="sendNotification" ttNotificationIdentifyer="setProgress"/>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="sendNotification" ttNotificationIdentifyer="checkProgress"/>
+				</ttSequenceGroup>				
+			</ttActionsGroup>			
+			<ttActionsGroup><!--talismans dressed-->
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>dressUpItemSelected(category:talismans)</ttNotificationIdentifyer>
+				<ttMaxNumberOfTimesToRun>1</ttMaxNumberOfTimesToRun>
+				<ttSequenceGroup>	
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>muchProgress</ttVariable>
+						<ttOperator>
+							<ttScript>return (muchProgress + 16.7)</ttScript>
+						</ttOperator>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>	
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>itemsDressed</ttVariable>
+						<ttOperator>
+							<ttScript>return (itemsDressed + 1)</ttScript>
+						</ttOperator>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="delay" ttActionDuration="0.1"/>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="sendNotification" ttNotificationIdentifyer="setProgress"/>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="sendNotification" ttNotificationIdentifyer="checkProgress"/>
+				</ttSequenceGroup>				
+			</ttActionsGroup>
+			<ttActionsGroup><!--checkProgress-->
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>checkProgress</ttNotificationIdentifyer>	
+				<ttOperator>
+					<ttScript>return (muchProgress >= 100) </ttScript>
+				</ttOperator>
+				<ttSequenceGroup>
+					<ttAction ttType="delay" ttActionDuration="0.5"/>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="sendNotification" ttNotificationIdentifyer="dressUp.done"/>
+				</ttSequenceGroup>				
+			</ttActionsGroup>	
+		</ttObject>
+		<ttObject> <!-- progress bar -->
+			<ttImage>images/hiddenObjects/hoUI/progressBar.png</ttImage>
+			<ttBasePosition x="10.6" y="60" />
+			<ttRotate>-90</ttRotate>
+			<ttType>progress</ttType>
+			<ttProgressStyle>LeftToRight</ttProgressStyle>
+			<ttActionsGroup>
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>setProgress</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>progressTo</ttType>
+						<ttPercent>#muchProgress</ttPercent>
+						<ttDuration>0.2</ttDuration>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>logEvent</ttType>
+						<ttLogEventName>Level_8_Dress_Up</ttLogEventName>
+						<ttLogEventParam>Category_Completed_Progress</ttLogEventParam>
+						<ttLogEventVal>#itemsDressed</ttLogEventVal>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup>
+				<ttTrigger>automatic</ttTrigger>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>progressTo</ttType>
+						<ttPercent>0</ttPercent>
+						<ttDuration>0</ttDuration>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+		</ttObject>
+		<ttObject>
+			<ttImage>images/level08/duUI/starOff.png</ttImage>
+			<ttImage>images/level08/duUI/starOn.png</ttImage>
+			<ttBasePosition x="12.5" y="50" />
+			<ttRotate>-90</ttRotate>
+			<ttActionsGroup><!--checkProgress-->
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>checkProgress</ttNotificationIdentifyer>	
+				<ttOperator>
+					<ttScript>return (muchProgress >= 16) </ttScript>
+				</ttOperator>
+				<ttSequenceGroup>
+					<ttAction ttType="replaceSpriteWithNextImage" ttIntValue="1"/>
+				</ttSequenceGroup>				
+			</ttActionsGroup>
+		</ttObject>
+		<ttObject>
+			<ttImage>images/level08/duUI/starOff.png</ttImage>
+			<ttImage>images/level08/duUI/starOn.png</ttImage>
+			<ttBasePosition x="12.5" y="55.3" />
+			<ttRotate>-90</ttRotate>
+			<ttActionsGroup><!--checkProgress-->
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>checkProgress</ttNotificationIdentifyer>	
+				<ttOperator>
+					<ttScript>return (muchProgress >= 32) </ttScript>
+				</ttOperator>
+				<ttSequenceGroup>
+					<ttAction ttType="replaceSpriteWithNextImage" ttIntValue="1"/>
+				</ttSequenceGroup>				
+			</ttActionsGroup>
+		</ttObject>
+		<ttObject>
+			<ttImage>images/level08/duUI/starOff.png</ttImage>
+			<ttImage>images/level08/duUI/starOn.png</ttImage>
+			<ttBasePosition x="12.5" y="60.3" />
+			<ttRotate>-90</ttRotate>
+			<ttActionsGroup><!--checkProgress-->
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>checkProgress</ttNotificationIdentifyer>	
+				<ttOperator>
+					<ttScript>return (muchProgress >= 48) </ttScript>
+				</ttOperator>
+				<ttSequenceGroup>
+					<ttAction ttType="replaceSpriteWithNextImage" ttIntValue="1"/>
+				</ttSequenceGroup>				
+			</ttActionsGroup>
+		</ttObject>
+		<ttObject>
+			<ttImage>images/level08/duUI/starOff.png</ttImage>
+			<ttImage>images/level08/duUI/starOn.png</ttImage>
+			<ttBasePosition x="12.5" y="65.3" />
+			<ttRotate>-90</ttRotate>
+			<ttActionsGroup><!--checkProgress-->
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>checkProgress</ttNotificationIdentifyer>	
+				<ttOperator>
+					<ttScript>return (muchProgress >= 64) </ttScript>
+				</ttOperator>
+				<ttSequenceGroup>
+					<ttAction ttType="replaceSpriteWithNextImage" ttIntValue="1"/>
+				</ttSequenceGroup>				
+			</ttActionsGroup>
+		</ttObject>
+		<ttObject>
+			<ttImage>images/level08/duUI/starOff.png</ttImage>
+			<ttImage>images/level08/duUI/starOn.png</ttImage>
+			<ttBasePosition x="12.5" y="70.3" />
+			<ttRotate>-90</ttRotate>
+			<ttActionsGroup><!--checkProgress-->
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>checkProgress</ttNotificationIdentifyer>	
+				<ttOperator>
+					<ttScript>return (muchProgress >= 80) </ttScript>
+				</ttOperator>
+				<ttSequenceGroup>
+					<ttAction ttType="replaceSpriteWithNextImage" ttIntValue="1"/> 
+				</ttSequenceGroup>				
+			</ttActionsGroup>
+		</ttObject>
+	</ttLayer>
+    <ttMacroInvoke macro_name="backToMap">
+        <ttMacroParam name="$posXVar" value="0"/>
+        <ttMacroParam name="$posYVar" value="-100"/>
+        <ttMacroParam name="$flurryName" value="Button_Click_Levels1_8"/>
+        <ttMacroParam name="$flurryParam" value="Level_8"/>
+    </ttMacroInvoke>
+    <ttMacroInvoke macro_name="inAppLayers"/>
+    <ttMacroInvoke macro_name="storyLayer">
+        <ttMacroParam name="$storyNum" value="8"/>
+        <ttMacroParam name="$storyNarration" value="sounds/stories/story9.mp3"/>
+        <ttMacroParam name="$delayForClose" value="8"/>
+    </ttMacroInvoke>
+</ttScene>

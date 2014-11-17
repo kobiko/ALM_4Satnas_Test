@@ -1,0 +1,858 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ldoc</h1>
+
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><strong>debugMenu</strong></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>debugMenu</code></h1>
+<p>debug menu unit that holds all labels, menus and open layers.</p>
+<p></p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#new">new ()</a></td>
+	<td class="summary">create a new debugMenu instance (singleton)</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getMenuYPos">getMenuYPos (name)</a></td>
+	<td class="summary">get Y coordinate position of a menu.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getMenuBackButtonYPos">getMenuBackButtonYPos (name)</a></td>
+	<td class="summary">get Y coordinate position of the menu back button (<<=).</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getMenuBackButtonXPos">getMenuBackButtonXPos (name)</a></td>
+	<td class="summary">get X coordinate position of the menu back button (<<=).</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getMenuExitButtonYPos">getMenuExitButtonYPos (name)</a></td>
+	<td class="summary">get Y coordinate position of the menu exit button (X).</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getMenuExitButtonXPos">getMenuExitButtonXPos (name)</a></td>
+	<td class="summary">get X coordinate position of the menu exit button (X).</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getMenuTitleYPos">getMenuTitleYPos (name)</a></td>
+	<td class="summary">get Y coordinate position of the menu title label.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getMenuTitleXPos">getMenuTitleXPos (name)</a></td>
+	<td class="summary">get X coordinate position of the menu title label.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getMenuXPos">getMenuXPos (name)</a></td>
+	<td class="summary">get X coordinate position of the menu.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getMenuWidth">getMenuWidth (name)</a></td>
+	<td class="summary">get menu width.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getMenuHeight">getMenuHeight (name)</a></td>
+	<td class="summary">get menu height.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#addLabel">addLabel (name, menuName)</a></td>
+	<td class="summary">adds a label to the label table and increment the counter for that label.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#calculateLabelX">calculateLabelX (name)</a></td>
+	<td class="summary">calculate the label X position.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#calculateLabelY">calculateLabelY (name)</a></td>
+	<td class="summary">calculate the label Y position.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#openLayer">openLayer (name)</a></td>
+	<td class="summary">open a layer by adding it to the table of open layers and marking it as true.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#closeLayer">closeLayer (name)</a></td>
+	<td class="summary">close a layer by marking it as false in the table of open layers.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#isLayerOpen">isLayerOpen (name)</a></td>
+	<td class="summary">check whether a layer is open.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#hide">hide ()</a></td>
+	<td class="summary">sets the visibility of the debugMenu button to false.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#isVisible">isVisible ()</a></td>
+	<td class="summary">check whether the debugMenu button is visible.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#toggleBackButtonVisibility">toggleBackButtonVisibility ()</a></td>
+	<td class="summary">toggles the visibility of the android back button.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setCurrentMenu">setCurrentMenu (menuName)</a></td>
+	<td class="summary">sets the current menu</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getCurrentMenu">getCurrentMenu ()</a></td>
+	<td class="summary">gets the current open menu</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getLastMenu">getLastMenu ()</a></td>
+	<td class="summary">gets the last open menu</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getOrientation">getOrientation ()</a></td>
+	<td class="summary">gets the orientation of the app according to isLandscape variable set by the platform.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getPositionY">getPositionY (y, yOffset)</a></td>
+	<td class="summary">gets a position depending on the orientation.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getRewardedAdsAvailability">getRewardedAdsAvailability ()</a></td>
+	<td class="summary">checks for rewarded ads availability.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getBackButtonVisibility">getBackButtonVisibility ()</a></td>
+	<td class="summary">gets the android back button visibility.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#shouldScaleSceneText">shouldScaleSceneText ()</a></td>
+	<td class="summary">gets the correct label text for the scale scene action.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#toggleShouldScaleScene">toggleShouldScaleScene ()</a></td>
+	<td class="summary">toggles scale scene.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getToggleAdsBlockingViewNotification">getToggleAdsBlockingViewNotification ()</a></td>
+	<td class="summary">gets the notification for toggleAdsBlockingView according to its state</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getKeyBoardPosition">getKeyBoardPosition (key)</a></td>
+	<td class="summary">gets the position for each key</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2><a name="Functions"></a>Functions</h2>
+    <dl class="function">
+    <dt>
+    <a name = "new"></a>
+    <strong>new ()</strong>
+    </dt>
+    <dd>
+    create a new debugMenu instance (singleton)
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        debugMenu object
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getMenuYPos"></a>
+    <strong>getMenuYPos (name)</strong>
+    </dt>
+    <dd>
+    get Y coordinate position of a menu.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">name</span>
+         the name of the menu as appears in debugMenuConfig.plist
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Y coordinate of the menu or 55 by default if the menu does not appear in debugMenuConfig
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getMenuBackButtonYPos"></a>
+    <strong>getMenuBackButtonYPos (name)</strong>
+    </dt>
+    <dd>
+    get Y coordinate position of the menu back button (<<=).
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">name</span>
+         the name of the menu as appears in debugMenuConfig.plist
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Y coordinate of the menu back button
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getMenuBackButtonXPos"></a>
+    <strong>getMenuBackButtonXPos (name)</strong>
+    </dt>
+    <dd>
+    get X coordinate position of the menu back button (<<=).
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">name</span>
+         the name of the menu as appears in debugMenuConfig.plist
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        X coordinate of the menu back button
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getMenuExitButtonYPos"></a>
+    <strong>getMenuExitButtonYPos (name)</strong>
+    </dt>
+    <dd>
+    get Y coordinate position of the menu exit button (X).
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">name</span>
+         the name of the menu as appears in debugMenuConfig.plist
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Y coordinate of the menu exit button
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getMenuExitButtonXPos"></a>
+    <strong>getMenuExitButtonXPos (name)</strong>
+    </dt>
+    <dd>
+    get X coordinate position of the menu exit button (X).
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">name</span>
+         the name of the menu as appears in debugMenuConfig.plist
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        X coordinate of the menu exit button
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getMenuTitleYPos"></a>
+    <strong>getMenuTitleYPos (name)</strong>
+    </dt>
+    <dd>
+    get Y coordinate position of the menu title label.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">name</span>
+         the name of the menu as appears in debugMenuConfig.plist
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Y coordinate of the menu title label
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getMenuTitleXPos"></a>
+    <strong>getMenuTitleXPos (name)</strong>
+    </dt>
+    <dd>
+    get X coordinate position of the menu title label.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">name</span>
+         the name of the menu as appears in debugMenuConfig.plist
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        X coordinate of the menu title label
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getMenuXPos"></a>
+    <strong>getMenuXPos (name)</strong>
+    </dt>
+    <dd>
+    get X coordinate position of the menu.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">name</span>
+         the name of the menu as appears in debugMenuConfig.plist
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        X coordinate of the menu or 50 by default if it does not exist in debugMenuConfig
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getMenuWidth"></a>
+    <strong>getMenuWidth (name)</strong>
+    </dt>
+    <dd>
+    get menu width.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">name</span>
+         the name of the menu as appears in debugMenuConfig.plist
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        width of the menu or 60 by default if it does not exist in debugMenuConfig
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getMenuHeight"></a>
+    <strong>getMenuHeight (name)</strong>
+    </dt>
+    <dd>
+    get menu height.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">name</span>
+         the name of the menu as appears in debugMenuConfig.plist
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        height of the menu or 50 by default if it does not exist in debugMenuConfig
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "addLabel"></a>
+    <strong>addLabel (name, menuName)</strong>
+    </dt>
+    <dd>
+    adds a label to the label table and increment the counter for that label.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">name</span>
+         the name of the label to add
+        </li>
+        <li><span class="parameter">menuName</span>
+         the name of the menu as appears in debugMenuConfig.plist
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "calculateLabelX"></a>
+    <strong>calculateLabelX (name)</strong>
+    </dt>
+    <dd>
+    calculate the label X position.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">name</span>
+         the name of the label
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "calculateLabelY"></a>
+    <strong>calculateLabelY (name)</strong>
+    </dt>
+    <dd>
+    calculate the label Y position.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">name</span>
+         the name of the label
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "openLayer"></a>
+    <strong>openLayer (name)</strong>
+    </dt>
+    <dd>
+    open a layer by adding it to the table of open layers and marking it as true.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">name</span>
+         the name of the layer
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "closeLayer"></a>
+    <strong>closeLayer (name)</strong>
+    </dt>
+    <dd>
+    close a layer by marking it as false in the table of open layers.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">name</span>
+         the name of the layer
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "isLayerOpen"></a>
+    <strong>isLayerOpen (name)</strong>
+    </dt>
+    <dd>
+    check whether a layer is open.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">name</span>
+         the name of the layer
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        true if the layer is open, false otherwise
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "hide"></a>
+    <strong>hide ()</strong>
+    </dt>
+    <dd>
+    sets the visibility of the debugMenu button to false.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "isVisible"></a>
+    <strong>isVisible ()</strong>
+    </dt>
+    <dd>
+    check whether the debugMenu button is visible.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        true if visible, false otherwise
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "toggleBackButtonVisibility"></a>
+    <strong>toggleBackButtonVisibility ()</strong>
+    </dt>
+    <dd>
+    toggles the visibility of the android back button.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "setCurrentMenu"></a>
+    <strong>setCurrentMenu (menuName)</strong>
+    </dt>
+    <dd>
+    sets the current menu
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">menuName</span>
+         the current menu to set to
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getCurrentMenu"></a>
+    <strong>getCurrentMenu ()</strong>
+    </dt>
+    <dd>
+    gets the current open menu
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the current menu name
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getLastMenu"></a>
+    <strong>getLastMenu ()</strong>
+    </dt>
+    <dd>
+    gets the last open menu
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the last menu name
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getOrientation"></a>
+    <strong>getOrientation ()</strong>
+    </dt>
+    <dd>
+    gets the orientation of the app according to isLandscape variable set by the platform.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        "landscape" if the orientation is landscape, portrait otherwise
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getPositionY"></a>
+    <strong>getPositionY (y, yOffset)</strong>
+    </dt>
+    <dd>
+    gets a position depending on the orientation.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">y</span>
+         the y position for landscape
+        </li>
+        <li><span class="parameter">yOffset</span>
+         the offset for portrait (optional: default is 0)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        y if landscape and y+yOffset for portrait
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getRewardedAdsAvailability"></a>
+    <strong>getRewardedAdsAvailability ()</strong>
+    </dt>
+    <dd>
+    checks for rewarded ads availability.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        "RewardedAds: available" if available, "RewardedAds: not available" otherwise
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getBackButtonVisibility"></a>
+    <strong>getBackButtonVisibility ()</strong>
+    </dt>
+    <dd>
+    gets the android back button visibility.  This function returns the correct string for the label (button).
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        "Hide Back Button" if the android back button is shown, "Show Back Button" otherwise
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "shouldScaleSceneText"></a>
+    <strong>shouldScaleSceneText ()</strong>
+    </dt>
+    <dd>
+    gets the correct label text for the scale scene action.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        "Scale Scene" if the scene is not scaled currently, "Unscale Scene" otherwise
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "toggleShouldScaleScene"></a>
+    <strong>toggleShouldScaleScene ()</strong>
+    </dt>
+    <dd>
+    toggles scale scene.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getToggleAdsBlockingViewNotification"></a>
+    <strong>getToggleAdsBlockingViewNotification ()</strong>
+    </dt>
+    <dd>
+    gets the notification for toggleAdsBlockingView according to its state
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        "showAdsDebug" if the ads blocking view is not shown, "hideAdsDebug" otherwise
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getKeyBoardPosition"></a>
+    <strong>getKeyBoardPosition (key)</strong>
+    </dt>
+    <dd>
+    gets the position for each key
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">key</span>
+         the key to get the position for
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table with {x,y} the position of the key
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.2</a></i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

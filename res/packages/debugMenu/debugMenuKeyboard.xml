@@ -1,0 +1,254 @@
+<!-- keyboard macros-->
+
+<ttMacro name="debugMenu.keyboard">
+    <ttMacroParams>
+        <ttMacroParamDef name="$var"/>
+        <ttMacroParamDef name="$notification"/>
+    </ttMacroParams>
+    <ttMacroBody>
+        
+        
+        <ttObject>
+            <ttImage>packages/debugMenu/keyboard/1.png</ttImage>
+            <ttBasePosition x="script: return debugMenu:getKeyBoardPosition('1').x" y="script: return debugMenu:getKeyBoardPosition('1').y" />
+            <ttMacroInvoke macro_name="debugMenu.keyboardLetter">
+                <ttMacroParam name="$letter" value="1"/>
+                <ttMacroParam name="$var" value="$var"/>
+                <ttMacroParam name="$notification" value="$notification"/>
+            </ttMacroInvoke>
+        </ttObject>
+        <ttObject>
+            <ttImage>packages/debugMenu/keyboard/3.png</ttImage>
+            <ttBasePosition x="script: return debugMenu:getKeyBoardPosition('3').x" y="script: return debugMenu:getKeyBoardPosition('3').y" />
+            
+            <ttMacroInvoke macro_name="debugMenu.keyboardLetter">
+                <ttMacroParam name="$letter" value="3"/>
+                <ttMacroParam name="$var" value="$var"/>
+                <ttMacroParam name="$notification" value="$notification"/>
+            </ttMacroInvoke>
+        </ttObject>
+        <ttObject>
+            <ttImage>packages/debugMenu/keyboard/2.png</ttImage>
+            <ttBasePosition x="script: return debugMenu:getKeyBoardPosition('2').x" y="script: return debugMenu:getKeyBoardPosition('2').y" />
+            <ttMacroInvoke macro_name="debugMenu.keyboardLetter">
+                <ttMacroParam name="$letter" value="2"/>
+                <ttMacroParam name="$var" value="$var"/>
+                <ttMacroParam name="$notification" value="$notification"/>
+            </ttMacroInvoke>
+        </ttObject>
+        <ttObject>
+            <ttImage>packages/debugMenu/keyboard/5.png</ttImage>
+            <ttBasePosition x="script: return debugMenu:getKeyBoardPosition('5').x" y="script: return debugMenu:getKeyBoardPosition('5').y" />
+            <ttMacroInvoke macro_name="debugMenu.keyboardLetter">
+                <ttMacroParam name="$letter" value="5"/>
+                <ttMacroParam name="$var" value="$var"/>
+                <ttMacroParam name="$notification" value="$notification"/>
+            </ttMacroInvoke>
+        </ttObject>
+        <ttObject>
+            <ttImage>packages/debugMenu/keyboard/4.png</ttImage>
+            <ttBasePosition x="script: return debugMenu:getKeyBoardPosition('4').x" y="script: return debugMenu:getKeyBoardPosition('4').y" />
+            <ttMacroInvoke macro_name="debugMenu.keyboardLetter">
+                <ttMacroParam name="$letter" value="4"/>
+                <ttMacroParam name="$var" value="$var"/>
+                <ttMacroParam name="$notification" value="$notification"/>
+            </ttMacroInvoke>
+        </ttObject>
+        <ttObject>
+            <ttImage>packages/debugMenu/keyboard/7.png</ttImage>
+            <ttBasePosition x="script: return debugMenu:getKeyBoardPosition('7').x" y="script: return debugMenu:getKeyBoardPosition('7').y" />
+            <ttMacroInvoke macro_name="debugMenu.keyboardLetter">
+                <ttMacroParam name="$letter" value="7"/>
+                <ttMacroParam name="$var" value="$var"/>
+                <ttMacroParam name="$notification" value="$notification"/>
+            </ttMacroInvoke>
+        </ttObject>
+        <ttObject>
+            <ttImage>packages/debugMenu/keyboard/6.png</ttImage>
+            <ttBasePosition x="script: return debugMenu:getKeyBoardPosition('6').x" y="script: return debugMenu:getKeyBoardPosition('6').y" />
+            <ttMacroInvoke macro_name="debugMenu.keyboardLetter">
+                <ttMacroParam name="$letter" value="6"/>
+                <ttMacroParam name="$var" value="$var"/>
+                <ttMacroParam name="$notification" value="$notification"/>
+            </ttMacroInvoke>
+        </ttObject>
+        <ttObject>
+            <ttImage>packages/debugMenu/keyboard/8.png</ttImage>
+            <ttBasePosition x="script: return debugMenu:getKeyBoardPosition('8').x" y="script: return debugMenu:getKeyBoardPosition('8').y" />
+            <ttMacroInvoke macro_name="debugMenu.keyboardLetter">
+                <ttMacroParam name="$letter" value="8"/>
+                <ttMacroParam name="$var" value="$var"/>
+                <ttMacroParam name="$notification" value="$notification"/>
+            </ttMacroInvoke>
+        </ttObject>
+        <ttObject>
+            <ttImage>packages/debugMenu/keyboard/9.png</ttImage>
+            <ttBasePosition x="script: return debugMenu:getKeyBoardPosition('9').x" y="script: return debugMenu:getKeyBoardPosition('9').y" />
+            <ttMacroInvoke macro_name="debugMenu.keyboardLetter">
+                <ttMacroParam name="$letter" value="9"/>
+                <ttMacroParam name="$var" value="$var"/>
+                <ttMacroParam name="$notification" value="$notification"/>
+            </ttMacroInvoke>
+        </ttObject>
+        <ttObject>
+            <ttImage>packages/debugMenu/keyboard/dot.png</ttImage>
+            <ttBasePosition x="script: return debugMenu:getKeyBoardPosition('.').x" y="script: return debugMenu:getKeyBoardPosition('.').y" />
+            <ttMacroInvoke macro_name="debugMenu.keyboardLetter">
+                <ttMacroParam name="$letter" value="."/>
+                <ttMacroParam name="$var" value="$var"/>
+                <ttMacroParam name="$notification" value="$notification"/>
+            </ttMacroInvoke>
+        </ttObject>
+        <ttObject>
+            <ttImage>packages/debugMenu/keyboard/delete.png</ttImage>
+            <ttBasePosition x="script: return debugMenu:getKeyBoardPosition('delete').x" y="script: return debugMenu:getKeyBoardPosition('delete').y" />
+            <ttMacroInvoke macro_name="debugMenu.keyboardDelete">
+                <ttMacroParam name="$var" value="$var"/>
+                <ttMacroParam name="$notification" value="$notification"/>
+            </ttMacroInvoke>
+        </ttObject>
+        <ttObject>
+            <ttImage>packages/debugMenu/keyboard/0.png</ttImage>
+            <ttBasePosition x="script: return debugMenu:getKeyBoardPosition('0').x" y="script: return debugMenu:getKeyBoardPosition('0').y" />
+            <ttMacroInvoke macro_name="debugMenu.keyboardLetter">
+                <ttMacroParam name="$letter" value="0"/>
+                <ttMacroParam name="$var" value="$var"/>
+                <ttMacroParam name="$notification" value="$notification"/>
+            </ttMacroInvoke>
+        </ttObject>
+    </ttMacroBody>
+</ttMacro>
+<ttMacro name="debugMenu.keyboardLetter">
+    <ttMacroParams>
+        <ttMacroParamDef name="$letter"/>
+        <ttMacroParamDef name="$var"/>
+        <ttMacroParamDef name="$notification"/>
+    </ttMacroParams>
+    <ttMacroBody>
+        <!--var parameter is used here for the vatiable name and the notification setting the label-->
+        <ttActionsGroup>
+            <ttTrigger>onTouchesBegan</ttTrigger>
+            <ttSequenceGroup>
+                <ttAction>
+                    <ttType>color</ttType> <!--grey-->
+                    <ttRedPercentage>65</ttRedPercentage>
+                    <ttGreenPercentage>65</ttGreenPercentage>
+                    <ttBluePercentage>65</ttBluePercentage>
+                    <ttActionDuration>0</ttActionDuration>
+                </ttAction>
+            </ttSequenceGroup>
+        </ttActionsGroup>
+        <ttActionsGroup>
+            <ttTrigger>onTouchesEnded</ttTrigger>
+            
+            <ttSequenceGroup>
+                <ttAction>
+                    <ttType>color</ttType> <!--back to previous color-->
+                    <ttRedPercentage>100</ttRedPercentage>
+                    <ttGreenPercentage>100</ttGreenPercentage>
+                    <ttBluePercentage>100</ttBluePercentage>
+                    <ttActionDuration>0</ttActionDuration>
+                </ttAction>
+            </ttSequenceGroup>
+            
+            <ttSequenceGroup>
+                <ttAction>
+                    <ttType>playSound</ttType>
+                    <ttVolume>1</ttVolume>
+                    <ttFile>packages/debugMenu/keyboard/button_press.mp3</ttFile>
+                </ttAction>
+            </ttSequenceGroup>
+            <ttSequenceGroup>
+                <ttAction>
+                    <ttType>setVariable</ttType>
+                    <ttVariable>$var</ttVariable>
+                    <ttOperator>
+                        <ttScript>
+                            if (($var == nil or $var == "") and UC~=1) then
+                            return "ip:".."$letter"
+                            
+                            elseif (($var == nil or $var == "") and UC == 1) then
+                            return "ip:"..string.upper("$letter")
+                            elseif (UC ==1) then
+                            return tostring($var)..string.upper("$letter")
+                            else
+                            return tostring($var).."$letter"
+                            end
+                        </ttScript>
+                    </ttOperator>
+                </ttAction>
+            </ttSequenceGroup>
+            <ttSequenceGroup>
+                <ttAction>
+                    <ttType>sendNotification</ttType>
+                    <ttNotificationIdentifyer>$notification</ttNotificationIdentifyer>
+                </ttAction>
+            </ttSequenceGroup>
+        </ttActionsGroup>
+        
+    </ttMacroBody>
+</ttMacro>
+<ttMacro name="debugMenu.keyboardDelete">
+    <ttMacroParams>
+        <ttMacroParamDef name="$var"/>
+        <ttMacroParamDef name="$notification"/>
+    </ttMacroParams>
+    <ttMacroBody>
+        <!--var parameter is used here for the vatiable name and the notification setting the label-->
+        <ttActionsGroup>
+            <ttTrigger>onTouchesBegan</ttTrigger>
+            <ttSequenceGroup>
+                <ttAction>
+                    <ttType>color</ttType> <!--grey-->
+                    <ttRedPercentage>65</ttRedPercentage>
+                    <ttGreenPercentage>65</ttGreenPercentage>
+                    <ttBluePercentage>65</ttBluePercentage>
+                    <ttActionDuration>0</ttActionDuration>
+                </ttAction>
+            </ttSequenceGroup>
+        </ttActionsGroup>
+        <ttActionsGroup>
+            <ttTrigger>onTouchesEnded</ttTrigger>
+            <ttSequenceGroup>
+                <ttAction>
+                    <ttType>color</ttType> <!--back to previous color-->
+                    <ttRedPercentage>100</ttRedPercentage>
+                    <ttGreenPercentage>100</ttGreenPercentage>
+                    <ttBluePercentage>100</ttBluePercentage>
+                    <ttActionDuration>0</ttActionDuration>
+                </ttAction>
+            </ttSequenceGroup>
+            <ttSequenceGroup>
+                <ttAction>
+                    <ttType>playSound</ttType>
+                    <ttVolume>1</ttVolume>
+                    <ttFile>packages/debugMenu/keyboard/button_press.mp3</ttFile>
+                </ttAction>
+            </ttSequenceGroup>
+            <ttSequenceGroup>
+                <ttAction>
+                    <ttType>setVariable</ttType>
+                    <ttVariable>$var</ttVariable>
+                    <ttOperator>
+                        <ttScript>
+                            if ($var == nil) then
+                            return "ip:"
+                            elseif ($var == "ip:") then
+                            return "ip:"
+                            else
+                            return string.sub($var, 1, -2)
+                            end
+                        </ttScript>
+                    </ttOperator>
+                </ttAction>
+            </ttSequenceGroup>
+            <ttSequenceGroup>
+                <ttAction>
+                    <ttType>sendNotification</ttType>
+                    <ttNotificationIdentifyer>$notification</ttNotificationIdentifyer>
+                </ttAction>
+            </ttSequenceGroup>
+        </ttActionsGroup>
+        
+    </ttMacroBody>
+</ttMacro>

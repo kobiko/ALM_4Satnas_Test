@@ -1,0 +1,126 @@
+<!-- keyboard macros: -->
+<ttScenes>
+    <ttImport>CustomPanel.xml</ttImport>
+    <ttImport>packages/debugMenu/debugMenuLayer.xml</ttImport>
+    <ttImport>packages/debugMenu/debugMenuActions.xml</ttImport>
+    <ttImport>packages/debugMenu/debugMenuLabels.xml</ttImport>
+    <ttImport>packages/debugMenu/debugMenuKeyboard.xml</ttImport>
+    <ttImport>packages/debugMenu/debugMenuExternalLayers.xml</ttImport>
+    
+    <ttScene>
+        <ttName>debugMenu</ttName>
+        <!-- BUTTON -->
+        <ttLayer>
+            <ttLoadAtInit>script: return debugMenu:isVisible() == true and debugMenu:isLayerOpen() == false</ttLoadAtInit>
+            <ttName>debugMenuButton</ttName>
+            <ttObject>
+                <ttId>debugMenuButton</ttId>
+                <ttVisible>script: return debugMenu:isVisible() == true</ttVisible>
+                <ttEnabled>script: return debugMenu:isVisible() == true</ttEnabled>
+                <ttImage>Debug</ttImage>
+                <ttType>lable</ttType>
+                <ttBasePosition x ="20" y = "95"/>
+                <ttOpacity>200</ttOpacity>
+                <ttFontSize>50</ttFontSize>
+                <ttActionsGroup>
+                    <ttTrigger>automatic</ttTrigger>
+                    <ttSequenceGroup>
+                        <ttAction>
+                            <ttType>setLayerZIndex</ttType>
+                            <ttIntValue>10000</ttIntValue>
+                        </ttAction>
+                    </ttSequenceGroup>
+                </ttActionsGroup>
+                <ttActionsGroup>
+                    <ttTrigger>onTouchesMoved</ttTrigger>
+                    <ttSequenceGroup>
+                        <ttAction>
+                            <ttType>setVariable</ttType>
+                            <ttVariable>isDebugMenuMoved</ttVariable>
+                            <ttOperator>
+                                <ttConst>1</ttConst>
+                            </ttOperator>
+                        </ttAction>
+                        <ttAction>
+                            <ttType>moveToTouch</ttType>
+                            <ttDragFromTap>YES</ttDragFromTap>
+                        </ttAction>
+                    </ttSequenceGroup>
+                </ttActionsGroup>
+                <ttActionsGroup>
+                    <ttTrigger>automatic</ttTrigger>
+                    <!--<ttOperator>
+                        <ttScript><![CDATA[return (showMemory ~=1 and showAnalytics ~= 1 and hideDebugMenu == nil )]]></ttScript>
+                    </ttOperator>-->
+                    <ttSequenceGroup>
+                        <ttAction>
+                            <ttType>setVariable</ttType>
+                            <ttVariable>isDebugMenuMoved</ttVariable>
+                            <ttOperator>
+                                <ttConst>0</ttConst>
+                            </ttOperator>
+                        </ttAction>
+                    </ttSequenceGroup>
+                    <ttSequenceGroup>
+                        <ttAction>
+                            <ttType>makeVisible</ttType>
+                        </ttAction>
+                        <!--<ttAction>
+                            <ttType>moveToPoint</ttType>
+                            <ttActionDuration>1</ttActionDuration>
+                            <ttFinalPositionX>30</ttFinalPositionX>
+                            <ttFinalPositionY>95</ttFinalPositionY>
+                        </ttAction>-->
+                    </ttSequenceGroup>
+                </ttActionsGroup>
+                <ttActionsGroup>
+                    <ttTrigger>onTouchesEnded</ttTrigger>
+                    <ttOperator>
+                        <ttScript><![CDATA[return (isDebugMenuMoved == 0)]]></ttScript>
+                    </ttOperator>
+                    <ttSequenceGroup>
+                        <ttAction>
+                            <ttType>runScript</ttType>
+                            <ttScript>
+                                debugMenu:setCurrentMenu("None")
+                                debugMenu:setLastMenu("None")
+                            
+                            </ttScript>
+                        </ttAction>
+                    </ttSequenceGroup>
+                    <ttSequenceGroup>
+                        <ttAction>
+                            <ttType>loadLayer</ttType>
+                            <ttData>debugMenu</ttData>
+                        </ttAction>
+                        <ttAction>
+                            <ttType>fadeOut</ttType>
+                            <ttActionDuration>1</ttActionDuration>
+                        </ttAction>
+                        <ttAction>
+                            <ttType>unLoadLayer</ttType>
+                            <ttData>debugMenuButton</ttData>
+                        </ttAction>
+                    </ttSequenceGroup>
+                </ttActionsGroup>
+                <ttActionsGroup>
+                    <ttTrigger>onTouchesEnded</ttTrigger>
+                    <ttSequenceGroup>
+                        <ttAction>
+                            <ttType>setVariable</ttType>
+                            <ttVariable>isDebugMenuMoved</ttVariable>
+                            <ttOperator>
+                                <ttScript>return 0</ttScript>
+                            </ttOperator>
+                        </ttAction>
+                    </ttSequenceGroup>
+                </ttActionsGroup>
+            </ttObject>
+        </ttLayer>
+        <!-- ALL EXTERNAL LAYERS -->
+        <ttMacroInvoke macro_name="debugMenu.externalLayers" />
+        <!-- INVOKE OF debugMenu.layer (THE MENU) -->
+        <ttMacroInvoke macro_name="debugMenu.layer" />
+    </ttScene>
+</ttScenes>
+

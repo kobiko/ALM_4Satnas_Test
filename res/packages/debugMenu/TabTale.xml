@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+<ttScenes>
+    <ttXmlVerion>1</ttXmlVerion>
+    <ttScene>
+        <ttLayer>
+            <ttName>interactiveLayer</ttName>
+            <ttObject>
+                <ttImage>images/ticTacToe/panel.png</ttImage>
+                <ttBasePosition x="49.2188" y="49.2708" />
+            </ttObject>
+            <ttObject>
+                <ttImage>images/ticTacToe/grid.png</ttImage>
+                <ttBasePosition x="49.2188" y="49.4444" />
+            </ttObject>
+            <ttObject>
+                <ttImage>images/ticTacToe/X.png</ttImage>
+                <ttBasePosition x="35.026" y="69.2361" />
+            </ttObject>
+            <ttObject>
+                <ttImage>images/ticTacToe/X.png</ttImage>
+                <ttBasePosition x="49.4792" y="69.2361" />
+            </ttObject>
+            <ttObject>
+                <ttImage>images/ticTacToe/X.png</ttImage>
+                <ttBasePosition x="63.4115" y="69.2361" />
+            </ttObject>
+            <ttObject>
+                <ttImage>images/ticTacToe/X.png</ttImage>
+                <ttBasePosition x="35.026" y="49.2708" />
+            </ttObject>
+            <ttObject>
+                <ttImage>images/ticTacToe/X.png</ttImage>
+                <ttBasePosition x="49.4792" y="49.0972" />
+            </ttObject>
+            <ttObject>
+                <ttImage>images/ticTacToe/X.png</ttImage>
+                <ttBasePosition x="63.5417" y="49.4444" />
+            </ttObject>
+            <ttObject>
+                <ttImage>images/ticTacToe/X.png</ttImage>
+                <ttBasePosition x="34.8958" y="29.4792" />
+            </ttObject>
+            <ttObject>
+                <ttImage>images/ticTacToe/X.png</ttImage>
+                <ttBasePosition x="49.349" y="29.1319" />
+            </ttObject>
+            <ttObject>
+                <ttImage>images/ticTacToe/X.png</ttImage>
+                <ttBasePosition x="63.5417" y="29.1319" />
+            </ttObject>
+        </ttLayer>
+    </ttScene>
+</ttScenes>

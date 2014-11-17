@@ -1,0 +1,677 @@
+<ttMacro name="keys"> 
+    <ttMacroParams>
+		<ttMacroParamDef name="$keyId"/>
+		<ttMacroParamDef name="$lockId"/>
+        <ttMacroParamDef name="$randomId"/>
+        <ttMacroParamDef name="$posX"/>
+        <ttMacroParamDef name="$keyVarValue"/>
+        <ttMacroParamDef name="$posYFit"/>
+    </ttMacroParams>
+    <ttMacroBody>
+        <ttObject><!-- keylock -->
+			<ttId>$keyId</ttId>
+            <ttImage>script: return ("images/level12/key0"..$randomId..".png")</ttImage>
+            <ttAnchorPositionX>0.5</ttAnchorPositionX>
+            <ttAnchorPositionY>1</ttAnchorPositionY>
+            <ttBasePosition x="$posX" y="23" />
+            <ttScale>1.0922</ttScale>
+			<ttActionsGroup> <!-- automatic -->
+				<ttTrigger>automatic</ttTrigger>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>enableObject</ttType>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup> <!-- automatic -->
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>script: return "keyMovementNotification".."$randomId"</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>$keyVarValue</ttVariable>
+						<ttOperator>
+							<ttScript>return 1</ttScript> 
+						</ttOperator>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup> <!-- onTouchesBegan -->
+				<ttTrigger>onTouchesBegan</ttTrigger>
+				<ttSequenceGroup>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>blockKeys</ttNotificationIdentifyer>
+                    </ttAction>
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>canIMoveKey</ttVariable>
+						<ttOperator>
+							<ttScript>return 1</ttScript> 
+						</ttOperator>
+					</ttAction> 
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>moveObjectToLayer</ttType>
+						<ttLayerName>frontKeylockLayer</ttLayerName>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup> <!-- onTouchesMoved -->
+				<ttTrigger>onTouchesMoved</ttTrigger>
+				<ttOperator>
+					<ttScript>return ($keyVarValue == 1)</ttScript> 
+				</ttOperator>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>isObjectInPlace</ttType>
+						<ttMovedObjectId>$keyId</ttMovedObjectId>
+						<ttPlacedObjectId>$lockId</ttPlacedObjectId>
+						<ttInPlaceTolerance>6</ttInPlaceTolerance>
+						<ttInPlaceNotification>script: return "inPlace".."$randomId"</ttInPlaceNotification>
+                    </ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup> <!-- onTouchesMoved -->
+				<ttTrigger>onTouchesMoved</ttTrigger>
+				<ttOperator>
+					<ttScript>return (canIMoveKey == 1)</ttScript> 
+				</ttOperator>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>moveToTouch</ttType>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup> <!-- onTouchesEnded -->
+				<ttTrigger>onTouchesEnded+notification</ttTrigger>
+		        <ttNotificationIdentifyer>disableKeys</ttNotificationIdentifyer>
+				<ttOperator>
+					<ttScript>return (canIMoveKey == 1)</ttScript> 
+				</ttOperator>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>disableObject</ttType>
+					</ttAction>
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>canIMoveKey</ttVariable>
+						<ttOperator>
+							<ttScript>return 0</ttScript> 
+						</ttOperator>
+					</ttAction> 
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>moveToBase</ttType>
+						<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+						<ttActionEaseRate>2.00</ttActionEaseRate>
+						<ttActionDuration>0.3</ttActionDuration>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>moveObjectToLayer</ttType>
+						<ttLayerName>keysLayer</ttLayerName>
+					</ttAction>
+					<ttAction>
+						<ttType>enableObject</ttType>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup> <!-- $inPlaceNotification -->
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>script: return "inPlace".."$randomId"</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>canIMoveKey</ttVariable>
+						<ttOperator>
+							<ttScript>return 0</ttScript> 
+						</ttOperator>
+					</ttAction> 
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>sendNotification</ttType>
+						<ttNotificationIdentifyer>blockKeys</ttNotificationIdentifyer>
+					</ttAction>
+					<ttAction>
+						<ttType>delay</ttType>
+						<ttActionDuration>0.1</ttActionDuration>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>scaleXy</ttType>
+						<ttActionDuration>0.1</ttActionDuration>
+						<ttScaleX>1.3922</ttScaleX>
+						<ttScaleY>0.9922</ttScaleY>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>scaleXy</ttType>
+						<ttActionDuration>0.3</ttActionDuration>
+						<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+						<ttScaleX>1.1922</ttScaleX>
+						<ttScaleY>1.1922</ttScaleY>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>sendNotification</ttType>
+						<ttNotificationIdentifyer>unblockKeys</ttNotificationIdentifyer>
+					</ttAction>
+					<ttAction>
+						<ttType>delay</ttType>
+						<ttActionDuration>0.1</ttActionDuration>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup> <!-- $inPlaceNotification -->
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>script: return "inPlace".."$randomId"</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>disableObject</ttType>
+					</ttAction>
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>canIMoveKey</ttVariable>
+						<ttOperator>
+							<ttScript>return 0</ttScript> 
+						</ttOperator>
+					</ttAction> 
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>bringToFront</ttType>
+					</ttAction>
+					<ttAction>
+						<ttType>moveToPoint</ttType>
+						<ttActionDuration>0.2</ttActionDuration>
+						<ttFinalPosition x="55" y="$posYFit"/>
+						<ttActionEaseMode>easeInOut</ttActionEaseMode>
+					</ttAction>
+                    <ttAction>
+                        <ttType>rotateTo</ttType>
+                        <ttActionRotateAngle>75.00</ttActionRotateAngle>
+                        <ttActionDuration>1</ttActionDuration>
+                    </ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+                        <ttType>moveToPoint</ttType>
+                        <ttActionDuration>0.5</ttActionDuration>
+                        <ttFinalPosition x="30" y="$posYFit" />
+						<ttActionEaseMode>easeBackIn</ttActionEaseMode>
+                    </ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>delay</ttType>
+						<ttActionDuration>0.2</ttActionDuration>
+					</ttAction>
+				</ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>playSound</ttType>
+                        <ttFile>sounds/gateLocksGame/key_unlock.mp3</ttFile>
+                        <ttVolume>1</ttVolume>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>rotate</ttType>
+                        <ttActionDuration>0.1</ttActionDuration>
+                        <ttActionRotateAngle>5</ttActionRotateAngle>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>rotate</ttType>
+                        <ttActionDuration>0.1</ttActionDuration>
+                        <ttActionRotateAngle>-5</ttActionRotateAngle>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>playSound</ttType>
+                        <ttFile>sounds/gateLocksGame/key_unlock.mp3</ttFile>
+                        <ttVolume>1</ttVolume>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>rotate</ttType>
+                        <ttActionDuration>0.1</ttActionDuration>
+                        <ttActionRotateAngle>5</ttActionRotateAngle>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>rotate</ttType>
+                        <ttActionDuration>0.1</ttActionDuration>
+                        <ttActionRotateAngle>-5</ttActionRotateAngle>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>playSound</ttType>
+                        <ttFile>sounds/gateLocksGame/key_unlock.mp3</ttFile>
+                        <ttVolume>1</ttVolume>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>rotate</ttType>
+                        <ttActionDuration>0.1</ttActionDuration>
+                        <ttActionRotateAngle>5</ttActionRotateAngle>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>rotate</ttType>
+                        <ttActionDuration>0.1</ttActionDuration>
+                        <ttActionRotateAngle>-5</ttActionRotateAngle>
+                    </ttAction>
+                </ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>delay</ttType>
+						<ttActionDuration>0.5</ttActionDuration>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>moveToPoint</ttType>
+						<ttActionDuration>0.2</ttActionDuration>
+						<ttFinalPosition x="55" y="$posYFit"/>
+						<ttActionEaseMode>easeInOut</ttActionEaseMode>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>moveToBase</ttType>
+						<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+						<ttActionEaseRate>2.00</ttActionEaseRate>
+						<ttActionDuration>0.3</ttActionDuration>
+					</ttAction>
+                    <ttAction>
+                        <ttType>rotateToBase</ttType>
+                        <ttActionDuration>0.3</ttActionDuration>
+                    </ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>sendNotification</ttType>
+						<ttNotificationIdentifyer>script: return "unlockPadlock".."$randomId"</ttNotificationIdentifyer>
+					</ttAction>
+					<ttAction>
+						<ttType>fadeTo</ttType>
+						<ttOpacity>0</ttOpacity>
+						<ttActionDuration>0.15</ttActionDuration>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+        </ttObject>
+    </ttMacroBody>
+</ttMacro>
+
+<ttMacro name="locks">
+    <ttMacroParams>
+        <ttMacroParamDef name="$randomId"/>
+        <ttMacroParamDef name="$posX"/>
+        <ttMacroParamDef name="$posY"/>
+        <ttMacroParamDef name="$rotate"/>
+    </ttMacroParams>
+    <ttMacroBody>
+        <ttObject><!-- padlock -->
+            <ttImage>script: return ("images/level12/lock_0"..$randomId..".png")</ttImage>
+            <ttBasePosition x="$posX" y="$posY" />
+			<ttScale>0.3</ttScale>
+			<ttRotate>$rotate</ttRotate>
+			<ttActionsGroup> <!-- $inPlaceNotification -->
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>script: return "unlockPadlock".."$randomId"</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+                    <ttAction>
+                        <ttType>makeInvisible</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+			</ttActionsGroup>
+    	</ttObject>
+    </ttMacroBody>
+</ttMacro>
+
+<ttMacro name="locksLoaded">
+    <ttMacroParams>
+		<ttMacroParamDef name="$lockId"/>
+        <ttMacroParamDef name="$randomId"/>
+        <ttMacroParamDef name="$posX"/>
+        <ttMacroParamDef name="$posY"/>
+        <ttMacroParamDef name="$rotate"/>
+        <ttMacroParamDef name="$zoomPosVar"/>
+        <ttMacroParamDef name="$zoomNotification"/>
+        <ttMacroParamDef name="$finalLayerToMoveTo"/>
+    </ttMacroParams>
+    <ttMacroBody>
+        <ttObject><!-- padlock -->
+			<ttId>$lockId</ttId>
+            <ttImage>script: return ("images/level12/lock_0"..$randomId..".png")</ttImage>
+            <ttImage>script: return ("images/level12/lock_0"..$randomId.."_unlocked.png")</ttImage>
+            <ttBasePosition x="$posX" y="$posY" />
+			<ttScale>0.3</ttScale>
+			<ttRotate>$rotate</ttRotate>
+            <ttObjects>
+                <ttObject>
+                    <ttImage>images/fullBlocker.png</ttImage>
+                    <ttBasePosition x="8.5" y="6"/>
+                    <ttScale>1</ttScale>
+                    <ttType>particles</ttType>
+                    <ttZOrder>10</ttZOrder>
+                    <ttParticles>
+                        <ttParticlesPlist>images/particles/lockDone.plist</ttParticlesPlist>
+                    </ttParticles>
+                    <ttActionsGroup>
+                        <ttTrigger>notification</ttTrigger>
+						<ttNotificationIdentifyer>script: return "unlockPadlock".."$randomId"</ttNotificationIdentifyer>
+                        <ttSequenceGroup>
+                            <ttAction>
+                                <ttType>startParticles</ttType>
+                            </ttAction>
+                        </ttSequenceGroup>
+                    </ttActionsGroup>
+                </ttObject>
+            </ttObjects>
+			<ttActionsGroup> <!-- automatic -->
+				<ttTrigger>automatic</ttTrigger>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>delay</ttType>
+						<ttActionDuration>0.1</ttActionDuration>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>sendNotification</ttType>
+						<ttNotificationIdentifyer>script: return "keyMovementNotification".."$randomId"</ttNotificationIdentifyer>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup> <!-- $inPlaceNotification -->
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>script: return "unlockPadlock".."$randomId"</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>localCounter</ttVariable>
+						<ttOperator>
+							<ttScript>return (localCounter + 1)</ttScript> 
+						</ttOperator>
+					</ttAction> 
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>globalCounter</ttVariable>
+						<ttOperator>
+							<ttScript>return (globalCounter + 1)</ttScript> 
+						</ttOperator>
+					</ttAction> 
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+                    <ttAction>
+                        <ttType>replaceSpriteWithNextImage</ttType>
+                        <ttIntValue>1</ttIntValue>
+                    </ttAction>
+                </ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>moveObjectToLayer</ttType>
+						<ttLayerName>$finalLayerToMoveTo</ttLayerName>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>delay</ttType>
+						<ttActionDuration>0.2</ttActionDuration>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>sendNotification</ttType>
+						<ttNotificationIdentifyer>unloadDoorLayer</ttNotificationIdentifyer>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup> <!-- zoomDoor -->
+				<ttTrigger>automatic</ttTrigger>
+				<ttOperator>
+					<ttScript>return ($zoomPosVar == 1)</ttScript>
+				</ttOperator>
+				<ttSequenceGroup>
+                    <ttAction>
+                        <ttType>rotateTo</ttType>
+                        <ttActionRotateAngle>0</ttActionRotateAngle>
+                        <ttActionDuration>0</ttActionDuration>
+                    </ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+	                    <ttType>moveToPoint</ttType>
+	                    <ttFinalPosition x="17.1875" y="58"/>
+	                    <ttActionDuration>0.5</ttActionDuration>
+	                </ttAction>
+					<ttAction>
+						<ttType>scale</ttType>
+						<ttScaleTo>1</ttScaleTo>
+						<ttActionDuration>0.3</ttActionDuration>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup> 
+				<ttTrigger>automatic</ttTrigger>
+				<ttOperator>
+					<ttScript>return ($zoomPosVar == 2)</ttScript>
+				</ttOperator>
+				<ttSequenceGroup>
+                    <ttAction>
+                        <ttType>rotateTo</ttType>
+                        <ttActionRotateAngle>0</ttActionRotateAngle>
+                        <ttActionDuration>0</ttActionDuration>
+                    </ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>moveToPoint</ttType>
+						<ttActionDuration>0.5</ttActionDuration>
+						<ttFinalPosition x="18.2291" y="35"/>
+					</ttAction>
+					<ttAction>
+						<ttType>scale</ttType>
+						<ttScaleTo>1</ttScaleTo>
+						<ttActionDuration>0.3</ttActionDuration>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+    	</ttObject>
+    </ttMacroBody>
+</ttMacro>
+
+<ttMacro name="zoomDoor">
+    <ttMacroParams>
+        <ttMacroParamDef name="$zoomNotification"/>
+        <ttMacroParamDef name="$fadeNotification1"/>
+        <ttMacroParamDef name="$fadeNotification2"/>
+        <ttMacroParamDef name="$fadeNotification3"/>
+    </ttMacroParams>
+    <ttMacroBody>
+		<ttActionsGroup> <!-- onTouchesBegan -->
+			<ttTrigger>onTouchesBegan</ttTrigger>
+			<ttSequenceGroup>
+	            <ttAction>
+	                <ttType>sendNotification</ttType>
+	                <ttNotificationIdentifyer>$zoomNotification</ttNotificationIdentifyer>
+	            </ttAction>
+	        </ttSequenceGroup>
+	    </ttActionsGroup>
+		<ttActionsGroup> <!-- zoomDoor -->
+			<ttTrigger>notification</ttTrigger>
+			<ttNotificationIdentifyer>$zoomNotification</ttNotificationIdentifyer>
+			<ttSequenceGroup>
+				<ttAction>
+					<ttType>moveToPoint</ttType>
+					<ttActionDuration>0.5</ttActionDuration>
+					<ttFinalPosition x="50" y="61"/>
+	                <ttActionEaseMode>easeBackIn</ttActionEaseMode>
+				</ttAction>
+				<ttAction>
+					<ttType>scale</ttType>
+					<ttScaleTo>2.3642</ttScaleTo>
+					<ttActionDuration>0.3</ttActionDuration>
+				</ttAction>
+			</ttSequenceGroup>
+		</ttActionsGroup>
+		<ttActionsGroup> <!-- zoomDoor -->
+			<ttTrigger>notification</ttTrigger>
+			<ttNotificationIdentifyer>$fadeNotification1</ttNotificationIdentifyer>
+			<ttApplyOn>layer</ttApplyOn>
+			<ttSequenceGroup>
+				<ttAction>
+					<ttType>scale</ttType>
+					<ttScaleTo>0</ttScaleTo>
+					<ttActionDuration>0.25</ttActionDuration>
+				</ttAction>
+			</ttSequenceGroup>
+			<ttSequenceGroup>
+				<ttAction>
+					<ttType>fadeTo</ttType>
+					<ttActionDuration>0.25</ttActionDuration>
+					<ttOpacity>0</ttOpacity>
+				</ttAction>
+			</ttSequenceGroup>
+		</ttActionsGroup>
+		<ttActionsGroup> <!-- zoomDoor -->
+			<ttTrigger>notification</ttTrigger>
+			<ttNotificationIdentifyer>$fadeNotification2</ttNotificationIdentifyer>
+			<ttApplyOn>layer</ttApplyOn>
+			<ttSequenceGroup>
+				<ttAction>
+					<ttType>scale</ttType>
+					<ttScaleTo>0</ttScaleTo>
+					<ttActionDuration>0.25</ttActionDuration>
+				</ttAction>
+			</ttSequenceGroup>
+			<ttSequenceGroup>
+				<ttAction>
+					<ttType>fadeTo</ttType>
+					<ttActionDuration>0.25</ttActionDuration>
+					<ttOpacity>0</ttOpacity>
+				</ttAction>
+			</ttSequenceGroup>
+		</ttActionsGroup>
+		<ttActionsGroup> <!-- zoomDoor -->
+			<ttTrigger>notification</ttTrigger>
+			<ttNotificationIdentifyer>$fadeNotification3</ttNotificationIdentifyer>
+			<ttApplyOn>layer</ttApplyOn>
+			<ttSequenceGroup>
+				<ttAction>
+					<ttType>scale</ttType>
+					<ttScaleTo>0</ttScaleTo>
+					<ttActionDuration>0.25</ttActionDuration>
+				</ttAction>
+			</ttSequenceGroup>
+			<ttSequenceGroup>
+				<ttAction>
+					<ttType>fadeTo</ttType>
+					<ttActionDuration>0.25</ttActionDuration>
+					<ttOpacity>0</ttOpacity>
+				</ttAction>
+			</ttSequenceGroup>
+		</ttActionsGroup>
+    </ttMacroBody>
+</ttMacro>
+
+<ttMacro name="scaleDoorLayers">
+    <ttMacroParams/>
+    <ttMacroBody>
+		<ttActionsGroup> <!-- scaleDoors -->
+			<ttTrigger>notification</ttTrigger>
+			<ttNotificationIdentifyer>unscaleDoors</ttNotificationIdentifyer>
+			<ttApplyOn>layer</ttApplyOn>
+			<ttSequenceGroup>
+                <ttAction>
+                    <ttType>disableObject</ttType>
+                </ttAction>
+			</ttSequenceGroup>
+			<ttSequenceGroup>
+				<ttAction>
+					<ttType>scale</ttType>
+					<ttScaleTo>0</ttScaleTo>
+					<ttActionDuration>0.25</ttActionDuration>
+				</ttAction>
+			</ttSequenceGroup>
+			<ttSequenceGroup>
+				<ttAction>
+					<ttType>fadeTo</ttType>
+					<ttActionDuration>0.25</ttActionDuration>
+					<ttOpacity>0</ttOpacity>
+				</ttAction>
+			</ttSequenceGroup>
+		</ttActionsGroup>
+		<ttActionsGroup> <!-- scaleDoors -->
+			<ttTrigger>notification</ttTrigger>
+			<ttNotificationIdentifyer>scaleDoors</ttNotificationIdentifyer>
+			<ttApplyOn>layer</ttApplyOn>
+			<ttSequenceGroup>
+                <ttAction>
+                    <ttType>enableObject</ttType>
+                </ttAction>
+			</ttSequenceGroup>
+			<ttSequenceGroup>
+				<ttAction>
+					<ttType>scale</ttType>
+					<ttScaleTo>1</ttScaleTo>
+					<ttActionDuration>0.25</ttActionDuration>
+				</ttAction>
+			</ttSequenceGroup>
+			<ttSequenceGroup>
+				<ttAction>
+					<ttType>fadeTo</ttType>
+					<ttActionDuration>0.25</ttActionDuration>
+					<ttOpacity>255</ttOpacity>
+				</ttAction>
+			</ttSequenceGroup>
+		</ttActionsGroup>
+    </ttMacroBody>
+</ttMacro>
+
+<ttMacro name="maskObject">
+    <ttMacroParams>
+        <ttMacroParamDef name="$randomId"/>
+		<ttMacroParamDef name="$posX"/>
+		<ttMacroParamDef name="$posY"/>
+    </ttMacroParams>
+    <ttMacroBody>
+		<ttObject>
+            <ttImage>script: return ("images/level12/lock_0"..$randomId.."_mask.png")</ttImage> 
+            <ttBasePosition x="$posX" y="$posY" />
+            <ttVisible>NO</ttVisible>
+			<ttActionsGroup> <!-- $inPlaceNotification -->
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>script: return "inPlace".."$randomId"</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+                    <ttAction>
+                        <ttType>makeVisible</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>delay</ttType>
+						<ttActionDuration>4</ttActionDuration>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+                    <ttAction>
+                        <ttType>makeInvisible</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+			</ttActionsGroup>
+        </ttObject>
+    </ttMacroBody>
+</ttMacro>

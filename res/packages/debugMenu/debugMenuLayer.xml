@@ -1,0 +1,251 @@
+<!-- MENU -->
+
+<ttMacro name="debugMenu.navigation">
+    <ttMacroParams>
+        <ttMacroParamDef name="$title"/>
+        <ttMacroParamDef name="$menuNameInConfig"/>
+        <ttMacroParamDef name="$isBackEnabled"/>
+    </ttMacroParams>
+	<ttMacroBody>
+        <ttObject>
+            <ttImage>$title</ttImage>
+            <ttType>lable</ttType>
+            <ttFontSize>40</ttFontSize>
+            <ttBasePosition x="script: return debugMenu:getMenuTitleXPos('$menuNameInConfig')" y="script: return debugMenu:getMenuTitleYPos('$menuNameInConfig')"/>
+            <ttGreenPercentage>100</ttGreenPercentage>
+            <ttBasePositionY>78</ttBasePositionY>
+        </ttObject>
+        <ttObject>
+            <ttImage><![CDATA[<<=]]></ttImage>
+            <ttType>lable</ttType>
+            <ttRedPercentage>100</ttRedPercentage>
+            <ttBasePosition x="script: return debugMenu:getMenuBackButtonXPos('$menuNameInConfig')" y="script: return debugMenu:getMenuBackButtonYPos('$menuNameInConfig')"/>
+            <ttVisible>script: return "$isBackEnabled" == "YES"</ttVisible>
+            <ttEnabled>script: return "$isBackEnabled" == "YES"</ttEnabled>
+            <!-- TODO change later to a more general form not relaying on the fact it is going back to mainMenu -->
+            <ttActionsGroup>
+                <ttTrigger>onTouchesBegan</ttTrigger>
+                
+                
+                
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>runScript</ttType>
+                        <ttScript>debugMenu:setCurrentMenu(tostring(debugMenu:getLastMenu()))
+                            
+                        
+                        </ttScript>
+                    </ttAction>
+                </ttSequenceGroup>
+                
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>runScript</ttType>
+                        <ttScript>
+                            print("backbutton stuff "..tostring(debugMenu:getLastMenu()).. " ".. tostring(debugMenu:getCurrentMenu()))
+                            
+                        </ttScript>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>loadLayer</ttType>
+                        <ttData>script: return "mainMenu"</ttData>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>unLoadLayer</ttType>
+                        <ttData>script: return debugMenu:getCurrentMenu()</ttData>
+                    </ttAction>
+
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                </ttSequenceGroup>
+                
+                
+                
+        
+        
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject>
+            <ttImage>X</ttImage>
+            <ttType>lable</ttType>
+            <ttRedPercentage>100</ttRedPercentage>
+            <ttBasePosition x="script: return debugMenu:getMenuExitButtonXPos('$menuNameInConfig')" y="script: return debugMenu:getMenuExitButtonYPos('$menuNameInConfig')"/>
+            <ttFontSize>40</ttFontSize>
+            
+            <ttActionsGroup>
+                <ttTrigger>onTouchesBegan</ttTrigger>
+                <ttMacroInvoke macro_name="debugMenu.closeMenuAndShowDebugMenuButton">
+                    <ttMacroParam name="$name" value="debugMenu"/>
+                </ttMacroInvoke>
+            </ttActionsGroup>
+        </ttObject>
+    </ttMacroBody>
+</ttMacro>
+
+<ttMacro name="debugMenu.menu">
+    <ttMacroParams>
+        <ttMacroParamDef name="$labelsMacro"/>
+        <ttMacroParamDef name="$menuNameInConfig"/>
+        <ttMacroParamDef name="$title"/>
+        <ttMacroParamDef name="$isBackEnabled"/>
+    </ttMacroParams>
+	<ttMacroBody>
+        <ttObject>
+            <ttImage>platform/misc/black.png</ttImage>
+            <ttScale>1</ttScale>
+            <!--<ttBasePositionX>50</ttBasePositionX>
+            <ttBasePositionY>55</ttBasePositionY>-->
+            <ttBasePosition x="script: return debugMenu:getMenuXPos('$menuNameInConfig')" y="script: return debugMenu:getMenuYPos('$menuNameInConfig')"/>
+            <ttActionsGroup>
+                <ttTrigger>onTouchesBegan</ttTrigger>
+                <ttSequenceGroup>
+                    <!--Not transparent-->
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>automatic</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>setLayerZIndex</ttType>
+                        <ttIntValue>5000</ttIntValue>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>unLoadLayer</ttType>
+                        <ttData>script: return debugMenu:getLastMenu()</ttData>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>scaleToFit</ttType>
+                        <ttActionWidth>script: return debugMenu:getMenuWidth("$menuNameInConfig")</ttActionWidth>
+                        <ttActionHeigth>script: return debugMenu:getMenuHeight("$menuNameInConfig")</ttActionHeigth>
+                        <ttActionDuration>0</ttActionDuration>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+    
+        <ttMacroInvoke macro_name="debugMenu.navigation">
+            <ttMacroParam name="$title" value="$title"/>
+            <ttMacroParam name="$menuNameInConfig" value="$menuNameInConfig"/>
+            <ttMacroParam name="$isBackEnabled" value="$isBackEnabled"/>
+        </ttMacroInvoke>
+        <ttMacroInvoke macro_name="$labelsMacro">
+            <ttMacroParam name="$menuNameInConfig" value="$menuNameInConfig"/>
+        </ttMacroInvoke>
+    </ttMacroBody>
+</ttMacro>
+
+<!-- DEBUG MENU LAYER -->
+
+<ttMacro name="debugMenu.layer">
+    <ttMacroParams>
+    </ttMacroParams>
+	<ttMacroBody>
+        <ttLayer>
+            <ttLoadAtInit>no</ttLoadAtInit>
+            <ttName>debugMenu</ttName>
+            <ttObject>
+                <ttVisible>no</ttVisible>
+                <ttImage>DebugMenu</ttImage>
+                <ttType>lable</ttType>
+                <ttActionsGroup>
+                    <ttTrigger>automatic</ttTrigger>
+                    <ttSequenceGroup>
+                        <ttAction>
+                            <ttType>setLayerZIndex</ttType>
+                            <ttIntValue>9000</ttIntValue>
+                        </ttAction>
+                    </ttSequenceGroup>
+                </ttActionsGroup>
+            </ttObject>
+            
+            <!-- LAYERS -->
+            <ttLayers>
+                <!-- Debug Menu Layer -->
+                <ttLayer>
+                    <ttName>mainMenu</ttName>
+                    <ttLoadAtInit>yes</ttLoadAtInit>
+                    <ttMacroInvoke macro_name="debugMenu.menu">
+                        <ttMacroParam name="$labelsMacro" value="debugMenu.mainLabels"/>
+                        <ttMacroParam name="$menuNameInConfig" value="mainMenu"/>
+                        <ttMacroParam name="$title" value="New Debug Menu"/>
+                        <ttMacroParam name="$isBackEnabled" value="NO"/>
+                    </ttMacroInvoke>
+                    
+                </ttLayer>
+                
+                
+                <!-- Misc Menu Layer -->
+                <ttLayer>
+                    <ttName>miscMenu</ttName>
+                    <ttLoadAtInit>no</ttLoadAtInit>
+                    <ttMacroInvoke macro_name="debugMenu.menu">
+                        <ttMacroParam name="$labelsMacro" value="debugMenu.miscLabels"/>
+                        <ttMacroParam name="$menuNameInConfig" value="miscMenu"/>
+                        <ttMacroParam name="$title" value="Misc Menu"/>
+                        <ttMacroParam name="$isBackEnabled" value="YES"/>
+                    </ttMacroInvoke>
+                </ttLayer>
+                
+                <ttLayer>
+                    <ttName>debugLogMenu</ttName>
+                    <ttLoadAtInit>no</ttLoadAtInit>
+                    <ttMacroInvoke macro_name="debugMenu.menu">
+                        <ttMacroParam name="$labelsMacro" value="debugMenu.debugLogLabels"/>
+                        <ttMacroParam name="$menuNameInConfig" value="debugLogMenu"/>
+                        <ttMacroParam name="$title" value="Debug Log"/>
+                        <ttMacroParam name="$isBackEnabled" value="YES"/>
+                    </ttMacroInvoke>
+                </ttLayer>
+                
+                <ttLayer>
+                    <ttName>memoryMenu</ttName>
+                    <ttLoadAtInit>no</ttLoadAtInit>
+                    <ttMacroInvoke macro_name="debugMenu.menu">
+                        <ttMacroParam name="$labelsMacro" value="debugMenu.memoryLabels"/>
+                        <ttMacroParam name="$menuNameInConfig" value="memoryMenu"/>
+                        <ttMacroParam name="$title" value="Memory Menu"/>
+                        <ttMacroParam name="$isBackEnabled" value="YES"/>
+                    </ttMacroInvoke>
+                </ttLayer>
+                
+                <ttLayer>
+                    <ttName>monetizationMenu</ttName>
+                    <ttLoadAtInit>no</ttLoadAtInit>
+                    <ttMacroInvoke macro_name="debugMenu.menu">
+                        <ttMacroParam name="$labelsMacro" value="debugMenu.monetizationLabels"/>
+                        <ttMacroParam name="$menuNameInConfig" value="monetizationMenu"/>
+                        <ttMacroParam name="$title" value="Monetization Menu"/>
+                        <ttMacroParam name="$isBackEnabled" value="YES"/>
+                    </ttMacroInvoke>
+                </ttLayer>
+                
+                <ttLayer>
+                    <ttName>rewardedAdsMenu</ttName>
+                    <ttLoadAtInit>no</ttLoadAtInit>
+                    <ttMacroInvoke macro_name="debugMenu.menu">
+                        <ttMacroParam name="$labelsMacro" value="debugMenu.rewardedAdsLabels"/>
+                        <ttMacroParam name="$menuNameInConfig" value="rewardedAdsMenu"/>
+                        <ttMacroParam name="$title" value="rewarded Ads Menu"/>
+                        <ttMacroParam name="$isBackEnabled" value="YES"/>
+                    </ttMacroInvoke>
+                </ttLayer>
+                <ttLayer>
+                    <ttName>resourcesMenu</ttName>
+                    <ttLoadAtInit>no</ttLoadAtInit>
+                    <ttMacroInvoke macro_name="debugMenu.menu">
+                        <ttMacroParam name="$labelsMacro" value="debugMenu.resourcesLabels"/>
+                        <ttMacroParam name="$menuNameInConfig" value="resourcesMenu"/>
+                        <ttMacroParam name="$title" value="rewarded Ads Menu"/>
+                        <ttMacroParam name="$isBackEnabled" value="YES"/>
+                    </ttMacroInvoke>
+                </ttLayer>
+            </ttLayers>
+        </ttLayer>
+    </ttMacroBody>
+</ttMacro>

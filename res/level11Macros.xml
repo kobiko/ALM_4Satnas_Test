@@ -1,0 +1,422 @@
+<ttMacro name="squidAnimation">
+	<ttMacroParams> 
+	</ttMacroParams>
+	<ttMacroBody>
+		<ttSequenceGroup>
+			<ttAction>
+				<ttType>scaleXy</ttType>
+				<ttActionDuration>0.10</ttActionDuration>
+				<ttScaleX>1.20</ttScaleX>
+				<ttScaleY>0.8</ttScaleY>
+				<ttActionEaseMode>easeInOut</ttActionEaseMode>
+				<ttActionEaseRate>2.00</ttActionEaseRate>
+			</ttAction>                  
+		</ttSequenceGroup>                  
+		<ttSequenceGroup>
+			<ttAction>
+				<ttType>scaleXy</ttType>
+				<ttActionDuration>0.10</ttActionDuration>
+				<ttScaleX>0.9</ttScaleX>
+				<ttScaleY>1.1</ttScaleY>
+				<ttActionEaseMode>easeInOut</ttActionEaseMode>
+				<ttActionEaseRate>2.00</ttActionEaseRate>
+			</ttAction>
+		</ttSequenceGroup>
+		<ttSequenceGroup>
+			<ttAction>
+				<ttType>scaleXy</ttType>
+				<ttActionDuration>0.10</ttActionDuration>
+				<ttScaleX>1</ttScaleX>
+				<ttScaleY>1</ttScaleY>
+				<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+				<ttActionEaseRate>2.00</ttActionEaseRate>
+			</ttAction>
+		</ttSequenceGroup>
+	</ttMacroBody>
+</ttMacro>
+<ttMacro name="gear">
+    <ttMacroParams>
+		<ttMacroParamDef name="$bgPartID"/>
+		<ttMacroParamDef name="$positionID"/>
+		<ttMacroParamDef name="$isInPlace"/>
+		<ttMacroParamDef name="$notInPlace"/>
+        <ttMacroParamDef name="$posX"/>
+        <ttMacroParamDef name="$posY"/>
+        <ttMacroParamDef name="$posXf"/>
+        <ttMacroParamDef name="$posYf"/>
+        <ttMacroParamDef name="$scale"/>
+        <ttMacroParamDef name="$scaleInPlace"/>
+    </ttMacroParams>
+    <ttMacroBody>
+		<ttObject>
+			<ttImage>images/level11/gears/gear.png</ttImage>
+			<ttBasePosition x="$posX" y="$posY" />
+			<ttId>$bgPartID</ttId>
+			<ttScale>$scale</ttScale>
+			<ttActionsGroup>
+				<ttTrigger>automatic</ttTrigger>
+				<ttSequenceGroup>
+					<ttAction ttType="enableObject"/>
+				</ttSequenceGroup>              
+			</ttActionsGroup>
+			<ttActionsGroup> <!-- onTouchesBegan -->
+				<ttTrigger>onTouchesBegan</ttTrigger>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>canMoveParts</ttVariable>
+						<ttOperator>
+							<ttScript>return 1</ttScript>
+						</ttOperator>
+					</ttAction>
+				</ttSequenceGroup>		
+				<ttSequenceGroup>
+					<ttAction ttType="moveToTouch"/>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="sendNotification" ttNotificationIdentifyer="hideGearsPointer"/>
+				</ttSequenceGroup>	
+			</ttActionsGroup>
+			<ttActionsGroup> <!-- onTouchesMoved -->
+				<ttTrigger>onTouchesMoved</ttTrigger>
+				<ttOperator>
+					<ttScript>return (canMoveParts == 1)</ttScript>
+				</ttOperator>
+				<ttSequenceGroup>
+					<ttAction ttType="moveToTouch"/>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>isObjectInPlace</ttType>
+						<ttMovedObjectId>$bgPartID</ttMovedObjectId>
+						<ttPlacedObjectId>$positionID</ttPlacedObjectId>
+						<ttInPlaceMode>tolerance</ttInPlaceMode>
+						<ttInPlaceTolerance>1</ttInPlaceTolerance>
+						<ttInPlaceNotification>$isInPlace</ttInPlaceNotification>
+						<ttNotInPlaceNotification>$notInPlace</ttNotInPlaceNotification>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup> <!-- onTouchesMoved -->
+				<ttTrigger>onTouchesEnded</ttTrigger>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>canMoveParts</ttVariable>
+						<ttOperator>
+							<ttScript>return 0</ttScript>
+						</ttOperator>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="disableObject"/>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="moveToBase" ttActionDuration="0.3"/>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="enableObject"/>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup>
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>$isInPlace</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+					<ttAction ttType="disableObject"/>
+				</ttSequenceGroup>
+                <ttAction ttType="playSound" ttFile="sounds/level11/gear_mini_game.mp3"/>
+				<ttSequenceGroup>
+					<ttAction ttType="moveToPoint">
+						<ttFinalPosition x="$posXf" y="$posYf"/>
+						<ttActionDuration>0.2</ttActionDuration>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>	
+					<ttAction ttType="makeInvisible"/>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>partsTogether</ttVariable>
+						<ttOperator>
+							<ttScript>return (partsTogether + 1)</ttScript>
+						</ttOperator>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>	
+					<ttAction ttType="delay" ttActionDuration="0.3"/>
+				</ttSequenceGroup>	
+				<ttSequenceGroup>
+					<ttAction ttType="sendNotification" ttNotificationIdentifyer="checkGearsDone"/>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+		</ttObject>
+		<ttObject>
+			<ttImage>images/level11/gears/gearInPlace.png</ttImage>
+			<ttScale>$scaleInPlace</ttScale>
+			<ttVisible>NO</ttVisible>
+			<ttId>$positionID</ttId>
+			<ttBasePosition x="$posXf" y="$posYf" />
+			<ttActionsGroup>
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>$isInPlace</ttNotificationIdentifyer>
+				<ttSequenceGroup>	
+					<ttAction ttType="delay" ttActionDuration="0.2"/>
+				</ttSequenceGroup>	
+				<ttSequenceGroup>	
+					<ttAction ttType="makeVisible"/>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+		</ttObject>
+	</ttMacroBody>
+</ttMacro>
+
+
+<ttMacro name="screw">
+    <ttMacroParams>
+        <ttMacroParamDef name="$boltId"/>
+        <ttMacroParamDef name="$posX"/>
+        <ttMacroParamDef name="$posY"/>
+    </ttMacroParams>
+	<ttMacroBody>
+        <ttObject>
+            <ttType>regularSprite</ttType>
+            <ttId>$boltId</ttId>
+            <ttBasePosition x="$posX" y="$posY"/>
+            <ttImage>images/level11/tools/screw01.png</ttImage>
+            <ttImage>images/level11/tools/screw02.png</ttImage>
+            <ttImage>images/level11/tools/screw03.png</ttImage>
+			<ttCollision>
+				<ttCollisionAnchorPoint x="0.5" y="0.5"/>
+				<ttCollisionRadius>2</ttCollisionRadius>
+			</ttCollision>
+			<ttObjects>
+				<ttObject> <!-- pointer -->
+					<ttImage>images/tools/pointer.png</ttImage>
+					<ttAnchorPositionX>0.51</ttAnchorPositionX>
+					<ttAnchorPositionY>0.09</ttAnchorPositionY>
+					<ttRotate>-30</ttRotate>
+					<ttScale>0.7</ttScale>
+					<ttBasePosition x="1" y="1.5" />
+					<ttOpacity>0</ttOpacity>
+					<ttActionsGroup> <!-- showPointer -->
+						<ttTrigger>notification</ttTrigger>
+						<ttNotificationIdentifyer>showScrewPointer</ttNotificationIdentifyer>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>fadeTo</ttType>
+								<ttOpacity>255</ttOpacity>
+								<ttActionDuration>0.2</ttActionDuration>
+							</ttAction>
+						</ttSequenceGroup>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>scaleXy</ttType>
+								<ttActionDuration>0.15</ttActionDuration>
+								<ttScaleX>0.95</ttScaleX>
+								<ttScaleY>0.75</ttScaleY>
+								<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+							</ttAction>
+						</ttSequenceGroup>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>scaleXy</ttType>
+								<ttActionDuration>0.15</ttActionDuration>
+								<ttScaleX>0.8</ttScaleX>
+								<ttScaleY>0.8</ttScaleY>
+								<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+							</ttAction>
+						</ttSequenceGroup>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>scaleXy</ttType>
+								<ttActionDuration>0.15</ttActionDuration>
+								<ttScaleX>0.95</ttScaleX>
+								<ttScaleY>0.75</ttScaleY>
+								<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+							</ttAction>
+						</ttSequenceGroup>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>scaleXy</ttType>
+								<ttActionDuration>0.15</ttActionDuration>
+								<ttScaleX>0.8</ttScaleX>
+								<ttScaleY>0.8</ttScaleY>
+								<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+							</ttAction>
+						</ttSequenceGroup>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>scaleXy</ttType>
+								<ttActionDuration>0.15</ttActionDuration>
+								<ttScaleX>0.95</ttScaleX>
+								<ttScaleY>0.75</ttScaleY>
+								<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+							</ttAction>
+						</ttSequenceGroup>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>scaleXy</ttType>
+								<ttActionDuration>0.15</ttActionDuration>
+								<ttScaleX>0.8</ttScaleX>
+								<ttScaleY>0.8</ttScaleY>
+								<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+							</ttAction>
+							<ttAction>
+								<ttType>fadeTo</ttType>
+								<ttOpacity>0</ttOpacity>
+								<ttActionDuration>0.2</ttActionDuration>
+							</ttAction>
+						</ttSequenceGroup>
+					</ttActionsGroup>
+					<ttActionsGroup> <!-- hidePointer -->
+						<ttTrigger>notification</ttTrigger>
+						<ttNotificationIdentifyer>hideScrewPointer</ttNotificationIdentifyer>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>fadeTo</ttType>
+								<ttOpacity>0</ttOpacity>
+								<ttActionDuration>0</ttActionDuration>
+							</ttAction>
+						</ttSequenceGroup>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>stopRunningActions</ttType>
+							</ttAction>
+						</ttSequenceGroup>
+					</ttActionsGroup>
+					<ttActionsGroup> <!-- sucker.allvisited -->
+						<ttTrigger>notification</ttTrigger>
+						<ttNotificationIdentifyer>script: return "removedBolt".."$boltId"</ttNotificationIdentifyer>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>fadeTo</ttType>
+								<ttOpacity>0</ttOpacity>
+								<ttActionDuration>0</ttActionDuration>
+							</ttAction>
+							<ttAction>
+								<ttType>makeInvisible</ttType>
+							</ttAction>
+							<ttAction>
+								<ttType>moveToPoint</ttType>
+								<ttFinalPosition x="-121.3542" y="119.5508"/>
+								<ttActionDuration>0</ttActionDuration>
+							</ttAction>
+						</ttSequenceGroup>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>stopRunningActions</ttType>
+							</ttAction>
+						</ttSequenceGroup>
+					</ttActionsGroup>
+				</ttObject>
+			</ttObjects>
+            <ttActionsGroup>
+				<ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>script: return "$boltId"..".activate"</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>sendMessageToController</ttType>
+                        <ttControllerName>drill</ttControllerName>
+                        <ttMessage>activate</ttMessage>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction ttType="replaceSpriteWithNextImage" ttIntValue="0"/>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>drill.enter.specific</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>moveTheDrillX</ttVariable>
+                        <ttOperator>
+                            <ttScript>return $posX</ttScript> 
+                        </ttOperator>
+                    </ttAction> 
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>moveTheDrillY</ttVariable>
+                        <ttOperator>
+                            <ttScript>return $posY</ttScript> 
+                        </ttOperator>
+                    </ttAction>     
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>script: return "removedBolt".."$boltId"</ttNotificationIdentifyer>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>showDrillAnimation</ttNotificationIdentifyer>
+                    </ttAction>
+                </ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>moveBy</ttType>
+						<ttFinalPosition x="1" y="0"/>
+						<ttActionDuration>0.2</ttActionDuration>
+					</ttAction>
+				</ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction ttType="replaceSpriteWithNextImage" ttIntValue="1"/>
+                </ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>moveBy</ttType>
+						<ttFinalPosition x="1" y="0"/>
+						<ttActionDuration>0.2</ttActionDuration>
+					</ttAction>
+				</ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction ttType="replaceSpriteWithNextImage" ttIntValue="2"/>
+                </ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>moveBy</ttType>
+						<ttFinalPosition x="1" y="0"/>
+						<ttActionDuration>0.2</ttActionDuration>
+					</ttAction>
+				</ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>jumpBy</ttType>
+                        <ttActionDuration>0.8</ttActionDuration>
+                        <ttFinalPosition x="-10" y="-80"/>
+                        <ttActionHeigth>20</ttActionHeigth>
+                        <ttNumberOfJumps>1</ttNumberOfJumps>
+                        <ttActionEaseMode>easeIn</ttActionEaseMode>
+                        <ttActionEaseRate>3.00</ttActionEaseRate>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>rotate</ttType>
+                        <ttActionRotateAngle>-360</ttActionRotateAngle>
+                        <ttActionDuration>0.8</ttActionDuration>
+                        <ttActionEaseMode>easeIn</ttActionEaseMode>
+                        <ttActionEaseRate>3.00</ttActionEaseRate>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction ttType="makeInvisible"/>
+                </ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>screwsRemoved</ttVariable>
+						<ttOperator>
+							<ttScript>return (screwsRemoved + 1)</ttScript>
+						</ttOperator>
+					</ttAction>	
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="sendNotification" ttNotificationIdentifyer="checkDrillDone"/>
+				</ttSequenceGroup>
+            </ttActionsGroup>
+		</ttObject>
+	</ttMacroBody>
+</ttMacro>

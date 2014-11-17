@@ -1,0 +1,2747 @@
+<ttScene ttName="level12"> <!-- Hidden objects minigame-->
+	<ttImport>hiddenObjectsMacros.xml</ttImport>
+	<ttImport>TabTaleMacros.xml</ttImport>
+	<ttImport>level12Macros.xml</ttImport>
+    <ttBackgroundMusicFile>sounds/music/super_santa_music_level_4_6_12_15.mp3</ttBackgroundMusicFile>
+    <ttBackgroundMusicVolume>0.50</ttBackgroundMusicVolume>
+
+		<!-- HIDDEN OBJECTS INITIALIZATION-->
+
+		<!--This is where you set 3 presets for the thrown objects possitions, their variable names and the number of valid objects from them-->
+ 
+	<ttInitScript>
+        hiddenObj.hiddenObjectsInit = function()
+        math.randomseed(os.time())
+		hiddenObj.setValidObjects({11,12,13,14,15,16,17,18})
+        whatPreset = math.random(1, 3)
+        whatPreset = math.random(1, 3)
+        whatPreset = math.random(1, 3)
+        whatPreset = math.random(1, 3)
+        whatPreset = math.random(1, 3)
+        whatPreset = math.random(1, 3)
+        whatPreset = math.random(1, 3)
+        whatPreset = math.random(1, 3)
+        whatPreset = math.random(1, 3)
+        whatPreset = math.random(1, 3)
+        whatPreset = math.random(1, 3)
+        whatPreset = math.random(1, 3)
+        vars:setVar("whatPreset", whatPreset)
+        if (whatPreset == 1) then		
+	        vars:setVar("item01PosX", 8.473)
+	        vars:setVar("item01PosY", 46.7598)
+	        vars:setVar("item01Rotate", 0)
+	        vars:setVar("item01Flip", "YES")
+	        vars:setVar("item01Scale", 1)
+	        vars:setVar("item02PosX", 4.3762)
+	        vars:setVar("item02PosY", 26.7877)
+			vars:setVar("item02Rotate", 0)
+			vars:setVar("item02Scale", 1)
+			vars:setVar("item02Flip", "NO")	        
+			vars:setVar("item03PosX", 35.5642)
+	        vars:setVar("item03PosY", 42.2905)
+			vars:setVar("item03Rotate", 0)
+			vars:setVar("item03Scale", 0.6)
+			vars:setVar("item03Flip", "NO")	  
+	        vars:setVar("item04PosX", 42.365)
+	        vars:setVar("item04PosY", 33.7486)
+			vars:setVar("item04Rotate", 10)
+			vars:setVar("item04Scale", 1)
+			vars:setVar("item04Flip", "NO")	
+	        vars:setVar("item05PosX", 67.3184)
+	        vars:setVar("item05PosY", 29.581)
+			vars:setVar("item05Rotate", 0)
+			vars:setVar("item05Scale", 1.25)
+			vars:setVar("item05Flip", "YES")
+	        vars:setVar("item06PosX", 4.7486)
+	        vars:setVar("item06PosY", 41.8715)
+			vars:setVar("item06Rotate", -23.5)
+			vars:setVar("item06Scale", 1)
+			vars:setVar("item06Flip", "YES")
+	        vars:setVar("item07PosX", 80.3538)
+	        vars:setVar("item07PosY", 20.7821)
+			vars:setVar("item07Rotate", 0)
+			vars:setVar("item07Scale", 1)
+			vars:setVar("item07Flip", "YES")
+	        vars:setVar("item08PosX", 79.0503)
+	        vars:setVar("item08PosY", 37.9609)
+			vars:setVar("item08Rotate", 0)
+			vars:setVar("item08Scale", 1.83)
+			vars:setVar("item08Flip", "YES")
+	        vars:setVar("item09PosX", 66.0149)
+	        vars:setVar("item09PosY", 40.1955)
+			vars:setVar("item09Rotate", -22.56)
+			vars:setVar("item09Scale", 1)
+			vars:setVar("item09Flip", "YES")
+	        vars:setVar("item10PosX", 34.1713)
+	        vars:setVar("item10PosY", 47.229)
+	        vars:setVar("item10Rotate", 55.229)
+	        vars:setVar("item10Scale", 1)
+	        vars:setVar("item10Flip", "NO")
+			vars:setVar("item11PosX", 3.8175)
+	        vars:setVar("item11PosY", 38.7989)
+	        vars:setVar("item11Rotate", -34)
+	        vars:setVar("item11Scale", 0.40)	        
+			vars:setVar("item12PosX", 10.5214)
+	        vars:setVar("item12PosY", 22.7375)
+	        vars:setVar("item12Rotate", -211)
+	        vars:setVar("item12Scale", 0.35)	
+			vars:setVar("item13PosX", 64.7114)
+	        vars:setVar("item13PosY", 63.7989)
+	        vars:setVar("item13Rotate", -45)
+	        vars:setVar("item13Scale", 0.4)			
+			vars:setVar("item14PosX", 31.1918)
+	        vars:setVar("item14PosY", 46.9441)
+	        vars:setVar("item14Scale", 0.35)
+	        vars:setVar("item14Rotate", -104.92)        
+			vars:setVar("item15PosX", 68.8081)
+	        vars:setVar("item15PosY", 38.5196)
+	        vars:setVar("item15Scale", 0.4)
+	        vars:setVar("item15Rotate", 7.97)        
+			vars:setVar("item16PosX", 88.175)
+	        vars:setVar("item16PosY", 18.6871)
+	        vars:setVar("item16Scale", 0.5)
+	        vars:setVar("item16Rotate", 110)        
+			vars:setVar("item17PosX", 19.2737)
+	        vars:setVar("item17PosY", 49.2737)
+	        vars:setVar("item17Scale", 0.35)
+	        vars:setVar("item17Rotate", 63)        
+			vars:setVar("item18PosX", 98.41713)
+	        vars:setVar("item18PosY", 45.2235)
+	        vars:setVar("item18Scale", 0.4)
+	        vars:setVar("item18Rotate", 13.3)
+       	elseif (whatPreset == 2) then
+	        vars:setVar("item01PosX", 11.2663)
+	        vars:setVar("item01PosY", 49.2738)
+	        vars:setVar("item01Rotate", 0)
+	        vars:setVar("item01Flip", "YES")
+	        vars:setVar("item01Scale", 0.78)
+	        vars:setVar("item02PosX", 54.0968)
+	        vars:setVar("item02PosY", 37.9609)
+			vars:setVar("item02Rotate", 0)
+			vars:setVar("item02Scale", 1)
+			vars:setVar("item02Flip", "NO")	        
+			vars:setVar("item03PosX", 41.2477)
+	        vars:setVar("item03PosY", 29.581)
+			vars:setVar("item03Rotate", 13)
+			vars:setVar("item03Scale", 0.73)
+			vars:setVar("item03Flip", "NO")	  
+	        vars:setVar("item04PosX", 42.2961)
+	        vars:setVar("item04PosY", 33.3296)
+			vars:setVar("item04Rotate", -1)
+			vars:setVar("item04Scale", 0.87)
+			vars:setVar("item04Flip", "NO")	
+	        vars:setVar("item05PosX", 88.9199)
+	        vars:setVar("item05PosY", 18.9665)
+			vars:setVar("item05Rotate", 0)
+			vars:setVar("item05Scale", 1.46)
+			vars:setVar("item05Flip", "YES")
+	        vars:setVar("item06PosX", 47.3929)
+	        vars:setVar("item06PosY", 46.6201)
+			vars:setVar("item06Rotate", -23.5)
+			vars:setVar("item06Scale", 0.68)
+			vars:setVar("item06Flip", "NO")
+	        vars:setVar("item07PosX", 5.49349)
+	        vars:setVar("item07PosY", 23.2961)
+			vars:setVar("item07Rotate", 0)
+			vars:setVar("item07Scale", 1)
+			vars:setVar("item07Flip", "YES")        
+			vars:setVar("item08PosX", 6.23834)
+	        vars:setVar("item08PosY", 47.8771)
+			vars:setVar("item08Rotate", 0)
+			vars:setVar("item08Scale", 1.3)
+			vars:setVar("item08Flip", "NO")
+	        vars:setVar("item09PosX", 34.0782)
+	        vars:setVar("item09PosY", 52.2346)
+			vars:setVar("item09Rotate", -22.56)
+			vars:setVar("item09Scale", 0.7)
+			vars:setVar("item09Flip", "YES")
+	        vars:setVar("item10PosX", 81.2849)
+	        vars:setVar("item10PosY", 31.3966)
+	        vars:setVar("item10Rotate", 72.57)
+	        vars:setVar("item10Scale", 1.12)
+	        vars:setVar("item10Flip", "NO")
+			vars:setVar("item11PosX", 92.6443)
+	        vars:setVar("item11PosY", 45.0838)
+	        vars:setVar("item11Rotate", -34)
+	        vars:setVar("item11Scale", 0.4)	        
+			vars:setVar("item12PosX", 93.0167)
+	        vars:setVar("item12PosY", 20.4581)
+	        vars:setVar("item12Rotate", 0)
+	        vars:setVar("item12Scale", 0.4)	
+			vars:setVar("item13PosX", 47.9515)
+	        vars:setVar("item13PosY", 41.1732)
+	        vars:setVar("item13Rotate", -45)
+	        vars:setVar("item13Scale", 0.35)			
+			vars:setVar("item14PosX", 13.5009)
+	        vars:setVar("item14PosY", 53.0446)
+	        vars:setVar("item14Scale", 0.35)
+	        vars:setVar("item14Rotate", -188.35)        
+			vars:setVar("item15PosX", 5.67967)
+	        vars:setVar("item15PosY", 37.4023)
+	        vars:setVar("item15Scale", 0.43)
+	        vars:setVar("item15Rotate", -134.71)        
+			vars:setVar("item16PosX", 54.635)
+	        vars:setVar("item16PosY", 34.1899)
+	        vars:setVar("item16Scale", 0.43)
+	        vars:setVar("item16Rotate", 109.79)        
+			vars:setVar("item17PosX", 34.73)
+	        vars:setVar("item17PosY", 50.1116)
+	        vars:setVar("item17Scale", 0.35)
+	        vars:setVar("item17Rotate", 19.36)        
+			vars:setVar("item18PosX", 3.44507)
+	        vars:setVar("item18PosY", 55.6984)
+	        vars:setVar("item18Scale", 0.4)
+	        vars:setVar("item18Rotate", -10.34)
+		else
+	        vars:setVar("item01PosX", 8.473)
+	        vars:setVar("item01PosY", 46.7598)
+	        vars:setVar("item01Rotate", 0)
+	        vars:setVar("item01Flip", "YES")
+	        vars:setVar("item01Scale", 1)
+	        vars:setVar("item02PosX", 4.3762)
+	        vars:setVar("item02PosY", 26.7877)
+			vars:setVar("item02Rotate", 0)
+			vars:setVar("item02Scale", 1)
+			vars:setVar("item02Flip", "NO")	        
+			vars:setVar("item03PosX", 35.5642)
+	        vars:setVar("item03PosY", 42.2905)
+			vars:setVar("item03Rotate", 0)
+			vars:setVar("item03Scale", 0.6)
+			vars:setVar("item03Flip", "NO")	  
+	        vars:setVar("item04PosX", 42.365)
+	        vars:setVar("item04PosY", 33.7486)
+			vars:setVar("item04Rotate", 10)
+			vars:setVar("item04Scale", 1)
+			vars:setVar("item04Flip", "NO")	
+	        vars:setVar("item05PosX", 67.3184)
+	        vars:setVar("item05PosY", 29.581)
+			vars:setVar("item05Rotate", 0)
+			vars:setVar("item05Scale", 1.25)
+			vars:setVar("item05Flip", "YES")
+	        vars:setVar("item06PosX", 4.7486)
+	        vars:setVar("item06PosY", 41.8715)
+			vars:setVar("item06Rotate", -23.5)
+			vars:setVar("item06Scale", 1)
+			vars:setVar("item06Flip", "YES")
+	        vars:setVar("item07PosX", 80.3538)
+	        vars:setVar("item07PosY", 20.7821)
+			vars:setVar("item07Rotate", 0)
+			vars:setVar("item07Scale", 1)
+			vars:setVar("item07Flip", "YES")
+	        vars:setVar("item08PosX", 79.0503)
+	        vars:setVar("item08PosY", 37.9609)
+			vars:setVar("item08Rotate", 0)
+			vars:setVar("item08Scale", 1.83)
+			vars:setVar("item08Flip", "YES")
+	        vars:setVar("item09PosX", 66.0149)
+	        vars:setVar("item09PosY", 40.1955)
+			vars:setVar("item09Rotate", -22.56)
+			vars:setVar("item09Scale", 1)
+			vars:setVar("item09Flip", "YES")
+	        vars:setVar("item10PosX", 34.1713)
+	        vars:setVar("item10PosY", 47.229)
+	        vars:setVar("item10Rotate", 55.229)
+	        vars:setVar("item10Scale", 1)
+	        vars:setVar("item10Flip", "NO")
+			vars:setVar("item11PosX", 3.8175)
+	        vars:setVar("item11PosY", 38.7989)
+	        vars:setVar("item11Rotate", -34)
+	        vars:setVar("item11Scale", 0.40)	        
+			vars:setVar("item12PosX", 10.5214)
+	        vars:setVar("item12PosY", 22.7375)
+	        vars:setVar("item12Rotate", -211)
+	        vars:setVar("item12Scale", 0.35)	
+			vars:setVar("item13PosX", 64.7114)
+	        vars:setVar("item13PosY", 63.7989)
+	        vars:setVar("item13Rotate", -45)
+	        vars:setVar("item13Scale", 0.4)			
+			vars:setVar("item14PosX", 31.1918)
+	        vars:setVar("item14PosY", 46.9441)
+	        vars:setVar("item14Scale", 0.35)
+	        vars:setVar("item14Rotate", -104.92)        
+			vars:setVar("item15PosX", 68.8081)
+	        vars:setVar("item15PosY", 38.5196)
+	        vars:setVar("item15Scale", 0.4)
+	        vars:setVar("item15Rotate", 7.97)        
+			vars:setVar("item16PosX", 88.175)
+	        vars:setVar("item16PosY", 18.6871)
+	        vars:setVar("item16Scale", 0.5)
+	        vars:setVar("item16Rotate", 110)        
+			vars:setVar("item17PosX", 19.2737)
+	        vars:setVar("item17PosY", 49.2737)
+	        vars:setVar("item17Scale", 0.35)
+	        vars:setVar("item17Rotate", 63)        
+			vars:setVar("item18PosX", 98.41713)
+	        vars:setVar("item18PosY", 45.2235)
+	        vars:setVar("item18Scale", 0.4)
+	        vars:setVar("item18Rotate", 13.3)
+        end
+
+        end
+        hiddenObj.hiddenObjectsInit ()
+    </ttInitScript>
+    <ttInitScript>app.createRandomArray(8)</ttInitScript>
+    <ttInitScript>
+    	vars:setVar("keyVar0",0)
+    	vars:setVar("keyVar1",0)
+    	vars:setVar("keyVar2",0)
+    	vars:setVar("keyVar3",0)
+    	vars:setVar("keyVar4",0)
+    	vars:setVar("keyVar5",0)
+    	vars:setVar("keyVar6",0)
+    	vars:setVar("keyVar7",0) 
+    	vars:setVar("globalCounter",0)
+    	vars:setVar("door1Done",0)
+    	vars:setVar("door2Done",0)
+    	vars:setVar("door3Done",0)
+    	vars:setVar("door4Done",0)
+    	vars:setVar("loadedDoor1",0)
+    	vars:setVar("loadedDoor2",0)
+    	vars:setVar("loadedDoor3",0)
+    	vars:setVar("loadedDoor4",0)
+    </ttInitScript>
+	<ttLayer> <!-- background -->
+		<ttName>backgroundLayer</ttName>
+		<ttObject> <!-- bkg INIT -->
+			<ttImage>backgrounds/level12_bkg_locks.jpg</ttImage>
+			<ttImage>backgrounds/level12_bkg.jpg</ttImage>
+			<ttIsBackground>YES</ttIsBackground>
+			<ttBasePosition x="50" y="50" />
+            <ttActionsGroup>
+                <ttTrigger>automatic</ttTrigger>
+                <ttSequenceGroup>
+					<ttAction>
+						<ttType>setMultiTouch</ttType>
+						<ttIntValue>0</ttIntValue>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+            <ttActionsGroup> <!-- background music control-->
+                <ttTrigger>automatic</ttTrigger> 
+                <ttOperator>
+			      	<ttScript>return (stopBackgroundMusic ~= 1)</ttScript>
+			    </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>pauseBackgroundMusic</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup> <!-- background music control for story and intro  -->
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>story.close</ttNotificationIdentifyer>
+                <ttOperator>
+			      	<ttScript>return (stopBackgroundMusic ~= 1)</ttScript>
+			    </ttOperator>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>playSound</ttType>
+                        <ttFile>sounds/music/super_santa_intro_level_4_12_15.mp3</ttFile>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>delay</ttType>
+                        <ttActionDuration>9</ttActionDuration>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>resumeBackgroundMusic</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>sendNotification</ttType>
+						<ttNotificationIdentifyer>setRandomHint</ttNotificationIdentifyer>
+					</ttAction>	
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction ttType="sendNotification" ttNotificationIdentifyer="startHOPointer"/>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup>
+				<ttTrigger>automatic</ttTrigger>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>time</ttVariable>
+						<ttOperator>
+							<ttScript>return 10</ttScript>
+						</ttOperator>
+					</ttAction>
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>selectedIndex</ttVariable>
+						<ttOperator>
+							<ttScript>return 0</ttScript> 
+						</ttOperator>
+					</ttAction>
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>correctObjectsCounter</ttVariable>
+						<ttOperator>
+							<ttScript>return 0</ttScript>
+						</ttOperator>
+					</ttAction>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>objectThatHasBeenTouched</ttVariable>
+                        <ttOperator>
+                            <ttScript>return 0</ttScript>
+                        </ttOperator>
+                    </ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>	
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>muchProgress</ttVariable>
+						<ttOperator>
+							<ttScript>return 0</ttScript>
+						</ttOperator>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>sendNotification</ttType>
+						<ttNotificationIdentifyer>minigame.initiate</ttNotificationIdentifyer>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>sendNotification</ttType>
+						<ttNotificationIdentifyer>items.activate</ttNotificationIdentifyer>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup>
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>replaceBackground</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+                    <ttAction>
+                        <ttType>replaceSpriteWithNextImage</ttType>
+                        <ttIntValue>1</ttIntValue>
+                    </ttAction>
+                </ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup>
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>unloadAllPopups</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>unLoadLayer</ttType>
+						<ttData>locksPopup</ttData>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup>
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>checkAllLocksDone</ttNotificationIdentifyer>
+				<ttOperator>
+					<ttScript>return (globalCounter == 8)</ttScript>
+				</ttOperator>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>delay</ttType>
+						<ttActionDuration>1</ttActionDuration>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>replaceBackground</ttNotificationIdentifyer>
+                    </ttAction>
+				</ttSequenceGroup> 
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>unLoadLayer</ttType>
+						<ttData>locksPopup</ttData>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>delay</ttType>
+						<ttActionDuration>0.1</ttActionDuration>
+					</ttAction>
+				</ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>loadLayer</ttType>
+                        <ttData>finalDecorationsLayer</ttData>
+                    </ttAction>
+                </ttSequenceGroup>
+			</ttActionsGroup>
+		</ttObject>
+        <ttObject><!--narrations and thoughts controller-->
+            <ttImage>images/fullBlocker.png</ttImage>
+            <ttBasePosition x="0" y="0" />
+			<ttActionsGroup>
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>correctObjectDubbing</ttNotificationIdentifyer>
+				<ttOperator>
+					<ttScript>return (correctObjectsCounter ~= 6)</ttScript>
+				</ttOperator>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>playSound</ttType>
+						<ttFile>sounds/narrations/curiousSanta/one_down-02.mp3</ttFile>
+						<ttVolume>1</ttVolume>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup>
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>correctObjectDubbing</ttNotificationIdentifyer>
+				<ttOperator>
+					<ttScript>return (correctObjectsCounter == 6)</ttScript>
+				</ttOperator>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>playSound</ttType>
+						<ttFile>sounds/narrations/curiousSanta/is_that_all_of_them-01.mp3</ttFile>
+						<ttVolume>1</ttVolume>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup>
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>unloadDoorLayer</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>playSound</ttType>
+						<ttFile>sounds/narrations/curiousSanta/wooopy.mp3</ttFile>
+						<ttFile>sounds/narrations/curiousSanta/your_free_boddy-02.mp3</ttFile>
+						<ttVolume>1</ttVolume>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup>
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>setBegginingThought</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+					<ttAction ttType="loadLayer" ttData="thoughtsLayer"/>
+				</ttSequenceGroup>	
+			</ttActionsGroup>
+			<ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>refreshThought</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+					<ttAction ttType="unLoadLayer" ttData="thoughtsLayer"/>
+				</ttSequenceGroup>	
+				<ttSequenceGroup>
+					<ttAction ttType="loadLayer" ttData="thoughtsLayer"/>
+				</ttSequenceGroup>	
+			</ttActionsGroup>
+		</ttObject>
+	</ttLayer>
+ 
+
+	<ttLayer><!--tableObjects-->
+		<ttName>thrownObject07sLayer</ttName>
+		<ttObject>
+			<ttImage>images/fullBlocker.png</ttImage>
+			<ttBasePosition x="50" y="70" />
+			<ttScale>256</ttScale>
+			<ttOpacity>0</ttOpacity>
+			<ttActionsGroup>
+				<ttTrigger>automatic</ttTrigger>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>enableObject</ttType>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup>
+				<ttTrigger>onTouchesBegan</ttTrigger>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>sendNotification</ttType>
+						<ttNotificationIdentifyer>xMarksTheSpotMovement</ttNotificationIdentifyer>
+					</ttAction>
+					<ttAction>
+						<ttType>sendNotification</ttType>
+						<ttNotificationIdentifyer>xMarksTheSpot</ttNotificationIdentifyer>
+					</ttAction>
+					<ttAction>
+						<ttType>delay</ttType>
+						<ttActionDuration>0.5</ttActionDuration>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+		</ttObject>
+
+ 		<ttMacroInvoke macro_name="key" >
+			<ttMacroParam name="$keyID" value="1"/>
+			<ttMacroParam name="$variableX" value="#item11PosX"/>
+			<ttMacroParam name="$variableY" value="#item11PosY"/>
+			<ttMacroParam name="$scale" value="#item11Scale"/>
+			<ttMacroParam name="$rotate" value="#item11Rotate"/>
+			<ttMacroParam name="$whatDelayForEntrance" value="0.24"/>
+			<ttMacroParam name="$whatItemAmI" value="11"/>
+			<ttMacroParam name="$specificParticles" value="particlesFound11"/>
+			<ttMacroParam name="$specificHint" value="specificHint11"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="key" >
+			<ttMacroParam name="$keyID" value="2"/>
+			<ttMacroParam name="$variableX" value="#item12PosX"/>
+			<ttMacroParam name="$variableY" value="#item12PosY"/>
+			<ttMacroParam name="$scale" value="#item12Scale"/>
+			<ttMacroParam name="$rotate" value="#item12Rotate"/>
+			<ttMacroParam name="$whatDelayForEntrance" value="0.3"/>
+			<ttMacroParam name="$whatItemAmI" value="12"/>
+			<ttMacroParam name="$specificParticles" value="particlesFound12"/>
+			<ttMacroParam name="$specificHint" value="specificHint12"/>
+		</ttMacroInvoke>		
+		<ttMacroInvoke macro_name="key" >
+			<ttMacroParam name="$keyID" value="3"/>
+			<ttMacroParam name="$variableX" value="#item13PosX"/>
+			<ttMacroParam name="$variableY" value="#item13PosY"/>
+			<ttMacroParam name="$scale" value="#item13Scale"/>
+			<ttMacroParam name="$rotate" value="#item13Rotate"/>
+			<ttMacroParam name="$whatDelayForEntrance" value="0.3"/>
+			<ttMacroParam name="$whatItemAmI" value="13"/>
+			<ttMacroParam name="$specificParticles" value="particlesFound13"/>
+			<ttMacroParam name="$specificHint" value="specificHint13"/>
+		</ttMacroInvoke>		
+		<ttMacroInvoke macro_name="key" >
+			<ttMacroParam name="$keyID" value="4"/>
+			<ttMacroParam name="$variableX" value="#item14PosX"/>
+			<ttMacroParam name="$variableY" value="#item14PosY"/>
+			<ttMacroParam name="$scale" value="#item14Scale"/>
+			<ttMacroParam name="$rotate" value="#item14Rotate"/>
+			<ttMacroParam name="$whatDelayForEntrance" value="0.3"/>
+			<ttMacroParam name="$whatItemAmI" value="14"/>
+			<ttMacroParam name="$specificParticles" value="particlesFound14"/>
+			<ttMacroParam name="$specificHint" value="specificHint14"/>
+		</ttMacroInvoke>			
+		<ttMacroInvoke macro_name="key" >
+			<ttMacroParam name="$keyID" value="5"/>
+			<ttMacroParam name="$variableX" value="#item15PosX"/>
+			<ttMacroParam name="$variableY" value="#item15PosY"/>
+			<ttMacroParam name="$scale" value="#item15Scale"/>
+			<ttMacroParam name="$rotate" value="#item15Rotate"/>
+			<ttMacroParam name="$whatDelayForEntrance" value="0.3"/>
+			<ttMacroParam name="$whatItemAmI" value="15"/>
+			<ttMacroParam name="$specificParticles" value="particlesFound15"/>
+			<ttMacroParam name="$specificHint" value="specificHint15"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="key" >
+			<ttMacroParam name="$keyID" value="6"/>
+			<ttMacroParam name="$variableX" value="#item16PosX"/>
+			<ttMacroParam name="$variableY" value="#item16PosY"/>
+			<ttMacroParam name="$scale" value="#item16Scale"/>
+			<ttMacroParam name="$rotate" value="#item16Rotate"/>
+			<ttMacroParam name="$whatDelayForEntrance" value="0.3"/>
+			<ttMacroParam name="$whatItemAmI" value="16"/>
+			<ttMacroParam name="$specificParticles" value="particlesFound16"/>
+			<ttMacroParam name="$specificHint" value="specificHint16"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="key" >
+			<ttMacroParam name="$keyID" value="7"/>
+			<ttMacroParam name="$variableX" value="#item17PosX"/>
+			<ttMacroParam name="$variableY" value="#item17PosY"/>
+			<ttMacroParam name="$scale" value="#item17Scale"/>
+			<ttMacroParam name="$rotate" value="#item17Rotate"/>
+			<ttMacroParam name="$whatDelayForEntrance" value="0.3"/>
+			<ttMacroParam name="$whatItemAmI" value="17"/>
+			<ttMacroParam name="$specificParticles" value="particlesFound17"/>
+			<ttMacroParam name="$specificHint" value="specificHint17"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="key" >
+			<ttMacroParam name="$keyID" value="8"/>
+			<ttMacroParam name="$variableX" value="#item18PosX"/>
+			<ttMacroParam name="$variableY" value="#item18PosY"/>
+			<ttMacroParam name="$scale" value="#item18Scale"/>
+			<ttMacroParam name="$rotate" value="#item18Rotate"/>
+			<ttMacroParam name="$whatDelayForEntrance" value="0.3"/>
+			<ttMacroParam name="$whatItemAmI" value="18"/>
+			<ttMacroParam name="$specificParticles" value="particlesFound18"/>
+			<ttMacroParam name="$specificHint" value="specificHint18"/>
+		</ttMacroInvoke>
+
+		
+		<ttMacroInvoke macro_name="thrownObject07" >
+			<ttMacroParam name="$imagePath" value="images/hiddenObjects/chest.png"/>
+			<ttMacroParam name="$variableX" value="#item01PosX"/>
+			<ttMacroParam name="$variableY" value="#item01PosY"/>
+			<ttMacroParam name="$rotate" value="#item01Rotate"/>
+			<ttMacroParam name="$scale" value="#item01Scale"/>
+			<ttMacroParam name="$isFlipped" value="#item01Flip"/>
+			<ttMacroParam name="$whatDelayForEntrance" value="0.48"/>
+			<ttMacroParam name="$whatItemAmI" value="1"/>
+			<ttMacroParam name="$specificParticles" value="particlesFound1"/>
+			<ttMacroParam name="$specificHint" value="specificHint1"/>
+			<ttMacroParam name="$isValid" value="0"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="thrownObject07" >
+			<ttMacroParam name="$imagePath" value="images/hiddenObjects/bookStall.png"/>
+			<ttMacroParam name="$variableX" value="#item02PosX"/>
+			<ttMacroParam name="$variableY" value="#item02PosY"/>
+			<ttMacroParam name="$rotate" value="#item02Rotate"/>
+			<ttMacroParam name="$scale" value="#item02Scale"/>
+			<ttMacroParam name="$isFlipped" value="#item02Flip"/>
+			<ttMacroParam name="$whatDelayForEntrance" value="0.48"/>
+			<ttMacroParam name="$whatItemAmI" value="2"/>
+			<ttMacroParam name="$specificParticles" value="particlesFound2"/>
+			<ttMacroParam name="$specificHint" value="specificHint2"/>
+			<ttMacroParam name="$isValid" value="0"/>
+		</ttMacroInvoke>
+ 		<ttMacroInvoke macro_name="thrownObject07" >
+			<ttMacroParam name="$imagePath" value="images/hiddenObjects/boards.png"/>
+			<ttMacroParam name="$variableX" value="#item03PosX"/>
+			<ttMacroParam name="$variableY" value="#item03PosY"/>
+			<ttMacroParam name="$rotate" value="#item03Rotate"/>
+			<ttMacroParam name="$scale" value="#item03Scale"/>
+			<ttMacroParam name="$isFlipped" value="#item03Flip"/>
+			<ttMacroParam name="$whatDelayForEntrance" value="0.48"/>
+			<ttMacroParam name="$whatItemAmI" value="3"/>
+			<ttMacroParam name="$specificParticles" value="particlesFound3"/>
+			<ttMacroParam name="$specificHint" value="specificHint3"/>
+			<ttMacroParam name="$isValid" value="0"/>
+		</ttMacroInvoke>
+ 		<ttMacroInvoke macro_name="thrownObject07" >
+			<ttMacroParam name="$imagePath" value="images/hiddenObjects/watch.png"/>
+			<ttMacroParam name="$variableX" value="#item04PosX"/>
+			<ttMacroParam name="$variableY" value="#item04PosY"/>
+			<ttMacroParam name="$rotate" value="#item04Rotate"/>
+			<ttMacroParam name="$scale" value="#item04Scale"/>
+			<ttMacroParam name="$isFlipped" value="#item04Flip"/>
+			<ttMacroParam name="$whatDelayForEntrance" value="0.48"/>
+			<ttMacroParam name="$whatItemAmI" value="4"/>
+			<ttMacroParam name="$specificParticles" value="particlesFound4"/>
+			<ttMacroParam name="$specificHint" value="specificHint4"/>
+			<ttMacroParam name="$isValid" value="0"/>
+		</ttMacroInvoke>
+ 		<ttMacroInvoke macro_name="thrownObject07" >
+			<ttMacroParam name="$imagePath" value="images/hiddenObjects/box.png"/>
+			<ttMacroParam name="$variableX" value="#item05PosX"/>
+			<ttMacroParam name="$variableY" value="#item05PosY"/>
+			<ttMacroParam name="$rotate" value="#item05Rotate"/>
+			<ttMacroParam name="$scale" value="#item05Scale"/>
+			<ttMacroParam name="$isFlipped" value="#item05Flip"/>
+			<ttMacroParam name="$whatDelayForEntrance" value="0.48"/>
+			<ttMacroParam name="$whatItemAmI" value="5"/>
+			<ttMacroParam name="$specificParticles" value="particlesFound5"/>
+			<ttMacroParam name="$specificHint" value="specificHint5"/>
+			<ttMacroParam name="$isValid" value="0"/>
+		</ttMacroInvoke>
+ 		<ttMacroInvoke macro_name="thrownObject07" >
+			<ttMacroParam name="$imagePath" value="images/hiddenObjects/wheel.png"/>
+			<ttMacroParam name="$variableX" value="#item06PosX"/>
+			<ttMacroParam name="$variableY" value="#item06PosY"/>
+			<ttMacroParam name="$rotate" value="#item06Rotate"/>
+			<ttMacroParam name="$scale" value="#item06Scale"/>
+			<ttMacroParam name="$isFlipped" value="#item06Flip"/>
+			<ttMacroParam name="$whatDelayForEntrance" value="0.48"/>
+			<ttMacroParam name="$whatItemAmI" value="6"/>
+			<ttMacroParam name="$specificParticles" value="particlesFound6"/>
+			<ttMacroParam name="$specificHint" value="specificHint6"/>
+			<ttMacroParam name="$isValid" value="0"/>
+		</ttMacroInvoke>
+ 		<ttMacroInvoke macro_name="thrownObject07" >
+			<ttMacroParam name="$imagePath" value="images/hiddenObjects/ladder.png"/>
+			<ttMacroParam name="$variableX" value="#item08PosX"/>
+			<ttMacroParam name="$variableY" value="#item08PosY"/>
+			<ttMacroParam name="$rotate" value="#item08Rotate"/>
+			<ttMacroParam name="$scale" value="#item08Scale"/>
+			<ttMacroParam name="$isFlipped" value="#item08Flip"/>
+			<ttMacroParam name="$whatDelayForEntrance" value="0.48"/>
+			<ttMacroParam name="$whatItemAmI" value="8"/>
+			<ttMacroParam name="$specificParticles" value="particlesFound8"/>
+			<ttMacroParam name="$specificHint" value="specificHint8"/>
+			<ttMacroParam name="$isValid" value="0"/>
+		</ttMacroInvoke>
+ 		<ttMacroInvoke macro_name="thrownObject07" >
+			<ttMacroParam name="$imagePath" value="images/hiddenObjects/football.png"/>
+			<ttMacroParam name="$variableX" value="#item07PosX"/>
+			<ttMacroParam name="$variableY" value="#item07PosY"/>
+			<ttMacroParam name="$rotate" value="#item07Rotate"/>
+			<ttMacroParam name="$scale" value="#item07Scale"/>
+			<ttMacroParam name="$isFlipped" value="#item07Flip"/>
+			<ttMacroParam name="$whatDelayForEntrance" value="0.48"/>
+			<ttMacroParam name="$whatItemAmI" value="7"/>
+			<ttMacroParam name="$specificParticles" value="particlesFound7"/>
+			<ttMacroParam name="$specificHint" value="specificHint7"/>
+			<ttMacroParam name="$isValid" value="0"/>
+		</ttMacroInvoke>
+ 		<ttMacroInvoke macro_name="thrownObject07" >
+			<ttMacroParam name="$imagePath" value="images/hiddenObjects/pickaxe.png"/>
+			<ttMacroParam name="$variableX" value="#item09PosX"/>
+			<ttMacroParam name="$variableY" value="#item09PosY"/>
+			<ttMacroParam name="$rotate" value="#item09Rotate"/>
+			<ttMacroParam name="$scale" value="#item09Scale"/>
+			<ttMacroParam name="$isFlipped" value="#item09Flip"/>
+			<ttMacroParam name="$whatDelayForEntrance" value="0.48"/>
+			<ttMacroParam name="$whatItemAmI" value="9"/>
+			<ttMacroParam name="$specificParticles" value="particlesFound9"/>
+			<ttMacroParam name="$specificHint" value="specificHint9"/>
+			<ttMacroParam name="$isValid" value="0"/>
+		</ttMacroInvoke> 		
+		<ttMacroInvoke macro_name="thrownObject07" >
+			<ttMacroParam name="$imagePath" value="images/hiddenObjects/axe.png"/>
+			<ttMacroParam name="$variableX" value="#item10PosX"/>
+			<ttMacroParam name="$variableY" value="#item10PosY"/>
+			<ttMacroParam name="$rotate" value="#item10Rotate"/>
+			<ttMacroParam name="$scale" value="#item10Scale"/>
+			<ttMacroParam name="$isFlipped" value="#item10Flip"/>
+			<ttMacroParam name="$whatDelayForEntrance" value="0.48"/>
+			<ttMacroParam name="$whatItemAmI" value="10"/>
+			<ttMacroParam name="$specificParticles" value="particlesFound10"/>
+			<ttMacroParam name="$specificHint" value="specificHint10"/>
+			<ttMacroParam name="$isValid" value="0"/>
+		</ttMacroInvoke>
+		<ttObject>
+			<ttImage>images/fullBlocker.png</ttImage>
+			<ttBasePosition x="50" y="50" />			
+			<ttScale>0</ttScale>
+			<ttOpacity>0</ttOpacity>
+			<ttActionsGroup>
+				<ttTrigger>onTouchesBegan</ttTrigger>
+				<ttSequenceGroup/>	
+			</ttActionsGroup>
+			<ttActionsGroup>
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>noTouching</ttNotificationIdentifyer>	
+				<ttSequenceGroup>				
+					<ttAction ttType="scale" ttScaleTo="2000"/>
+				</ttSequenceGroup>
+				<ttSequenceGroup>				
+					<ttAction ttType="delay" ttActionDuration="1.6"/>
+				</ttSequenceGroup>
+				<ttSequenceGroup>				
+					<ttAction ttType="scale" ttScaleTo="0"/>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+		</ttObject>					
+		<ttObject>
+			<ttImage>images/hiddenObjects/xMarksTheSpot.png</ttImage>
+			<ttBasePosition x="-150" y="-150" />
+			<ttScale>0</ttScale>
+			<ttActionsGroup>
+				<ttTrigger>automatic</ttTrigger>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>enableObject</ttType>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup>
+				<ttTrigger>notification</ttTrigger>
+				<ttNotificationIdentifyer>xMarksTheSpotMovement</ttNotificationIdentifyer>
+				<ttSequenceGroup>
+                    <ttAction>
+                        <ttType>moveToTouch</ttType>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>bringToFront</ttType>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>howMuchRotate</ttVariable>
+                        <ttOperator>
+                            <ttScript>ttRand(0,360)</ttScript>
+                        </ttOperator>
+                    </ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+                    <ttAction>
+                        <ttType>scale</ttType>
+                        <ttActionDuration>0.1</ttActionDuration>
+                        <ttScaleTo>1</ttScaleTo>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>rotate</ttType>
+                        <ttActionDuration>0</ttActionDuration>
+                        <ttActionRotateAngle>#howMuchRotate</ttActionRotateAngle>
+                    </ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+                    <ttAction>
+                        <ttType>scale</ttType>
+                        <ttActionDuration>0.3</ttActionDuration>
+                        <ttScaleTo>0</ttScaleTo>
+                    </ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+		</ttObject>
+	</ttLayer>
+	<ttLayer>
+		<ttName>correctObjectLayer</ttName>
+
+		<ttObject> <!-- holder -->
+			<ttImage>images/fullBlocker.png</ttImage>
+			<ttBasePosition x="-100" y="14" />
+			<ttScale>0</ttScale>
+		</ttObject>
+	</ttLayer>
+	<ttLayer><!--panel and validobjects-->
+		<ttName>validObjectsLayer</ttName>
+		<ttBasePosition x="0" y="0" />
+		
+		<ttObject> <!-- init valid -->
+ 			<ttImage>images/hiddenObjects/hoUI/panel6.png</ttImage>
+			<ttBasePosition x="49.8138" y="7.23464" />
+			<ttActionsGroup>
+				<ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>hiddenObjects.done</ttNotificationIdentifyer>	
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>loadLayer</ttType>
+						<ttData>locksPopup</ttData>
+					</ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+			<ttActionsGroup>
+				<ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>items.activate</ttNotificationIdentifyer>
+				 <ttSequenceGroup>
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>panelItem01HasValue</ttVariable>
+						<ttOperator>
+							<ttScript>return 10</ttScript>
+						</ttOperator>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>panelItem02HasValue</ttVariable>
+						<ttOperator>
+							<ttScript>return 11</ttScript>
+						</ttOperator>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>panelItem03HasValue</ttVariable>
+						<ttOperator>
+							<ttScript>return 12</ttScript>
+						</ttOperator>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>panelItem04HasValue</ttVariable>
+						<ttOperator>
+							<ttScript>return 13</ttScript>
+						</ttOperator>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>panelItem05HasValue</ttVariable>
+						<ttOperator>
+							<ttScript>return 14</ttScript>
+						</ttOperator>
+					</ttAction>
+				</ttSequenceGroup>				
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>setVariable</ttType>
+						<ttVariable>panelItem06HasValue</ttVariable>
+						<ttOperator>
+							<ttScript>return 15</ttScript>
+						</ttOperator>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>initiate.panel</ttNotificationIdentifyer>
+                    </ttAction>
+				</ttSequenceGroup>
+			</ttActionsGroup>
+		</ttObject>
+	</ttLayer>	
+	<ttLayer ttName="panelItemsLayer">
+		<ttBasePosition x="36" y="0" />
+		<ttMacroInvoke macro_name="validObjectStatic12" >
+			<ttMacroParam name="$imageRing" value="images/hiddenObjects/hoUI/panelRing.png"/>
+			<ttMacroParam name="$posX" value="10"/>
+			<ttMacroParam name="$posY" value="7.5"/>
+			<ttMacroParam name="$whatIndex" value="11"/>
+			<ttMacroParam name="$didIMove" value="item01Moved"/>
+			<ttMacroParam name="$specificMessageForControll" value="1"/>
+		</ttMacroInvoke>		
+		<ttMacroInvoke macro_name="validObjectStatic12" >
+			<ttMacroParam name="$imageRing" value="images/hiddenObjects/hoUI/panelRing.png"/>
+			<ttMacroParam name="$posX" value="26"/>
+			<ttMacroParam name="$posY" value="7.2"/>
+			<ttMacroParam name="$whatIndex" value="12"/>
+			<ttMacroParam name="$didIMove" value="item02Moved"/>
+			<ttMacroParam name="$specificMessageForControll" value="2"/>
+		</ttMacroInvoke>		
+		<ttMacroInvoke macro_name="validObjectStatic12" >
+			<ttMacroParam name="$imageRing" value="images/hiddenObjects/hoUI/panelRing.png"/>
+			<ttMacroParam name="$posX" value="42"/>
+			<ttMacroParam name="$posY" value="7.2"/>
+			<ttMacroParam name="$whatIndex" value="13"/>
+			<ttMacroParam name="$didIMove" value="item03Moved"/>
+			<ttMacroParam name="$specificMessageForControll" value="3"/>
+		</ttMacroInvoke>		
+		<ttMacroInvoke macro_name="validObjectStatic12" >
+			<ttMacroParam name="$imageRing" value="images/hiddenObjects/hoUI/panelRing.png"/>
+			<ttMacroParam name="$posX" value="58"/>
+			<ttMacroParam name="$posY" value="7.5"/>
+			<ttMacroParam name="$whatIndex" value="14"/>
+			<ttMacroParam name="$didIMove" value="item04Moved"/>
+			<ttMacroParam name="$specificMessageForControll" value="4"/>
+		</ttMacroInvoke>		
+		<ttMacroInvoke macro_name="validObjectStatic12" >
+			<ttMacroParam name="$imageRing" value="images/hiddenObjects/hoUI/panelRing.png"/>
+			<ttMacroParam name="$posX" value="74"/>
+			<ttMacroParam name="$posY" value="7.2"/>
+			<ttMacroParam name="$whatIndex" value="15"/>
+			<ttMacroParam name="$didIMove" value="item05Moved"/>
+			<ttMacroParam name="$specificMessageForControll" value="5"/>
+		</ttMacroInvoke>		
+		<ttMacroInvoke macro_name="validObjectStatic12" >
+			<ttMacroParam name="$imageRing" value="images/hiddenObjects/hoUI/panelRing.png"/>
+			<ttMacroParam name="$posX" value="90"/>
+			<ttMacroParam name="$posY" value="7.2"/>
+			<ttMacroParam name="$whatIndex" value="16"/>
+			<ttMacroParam name="$didIMove" value="item06Moved"/>
+			<ttMacroParam name="$specificMessageForControll" value="6"/>
+		</ttMacroInvoke>		
+		<ttMacroInvoke macro_name="validObjectStatic12" >
+			<ttMacroParam name="$imageRing" value="images/hiddenObjects/hoUI/panelRing.png"/>
+			<ttMacroParam name="$posX" value="106"/>
+			<ttMacroParam name="$posY" value="7.2"/>
+			<ttMacroParam name="$whatIndex" value="17"/>
+			<ttMacroParam name="$didIMove" value="item07Moved"/>
+			<ttMacroParam name="$specificMessageForControll" value="7"/>
+		</ttMacroInvoke>		
+		<ttMacroInvoke macro_name="validObjectStatic12" >
+			<ttMacroParam name="$imageRing" value="images/hiddenObjects/hoUI/panelRing.png"/>
+			<ttMacroParam name="$posX" value="122"/>
+			<ttMacroParam name="$posY" value="7.5"/>
+			<ttMacroParam name="$whatIndex" value="18"/>
+			<ttMacroParam name="$didIMove" value="item08Moved"/>
+			<ttMacroParam name="$specificMessageForControll" value="8"/>
+		</ttMacroInvoke>
+		<ttMacroInvoke macro_name="hoScroll" />
+		<!--<ttMacroInvoke macro_name="checkmarksHiddenObject"/> -->
+	</ttLayer>
+    <ttLayer ttName="finalDecorationsLayer"> 
+        <ttLoadAtInit>no</ttLoadAtInit>
+        <ttObject> <!-- ornament door -->
+            <ttImage>images/level01/ornamentDoor.png</ttImage>
+            <ttBasePosition x="57.9861" y="69.0625" />
+            <ttScale>0</ttScale>
+            <ttActionsGroup><!--end level music-->
+                <ttTrigger>automatic</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>pauseBackgroundMusic</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>playSound</ttType>
+                        <ttFile>sounds/end_level_music.mp3</ttFile>
+                        <ttVolume>1</ttVolume>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+	            <ttNotificationIdentifyer>startEndDecoration.2</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>scaleXy</ttType>
+                        <ttActionDuration>0.25</ttActionDuration>
+                        <ttScaleX>1.58</ttScaleX>
+                        <ttScaleY>1.58</ttScaleY>
+                        <ttActionEaseMode>easeBounceOut</ttActionEaseMode>
+                        <ttActionEaseRate>2.00</ttActionEaseRate>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>startEndDecoration.3</ttNotificationIdentifyer>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject> <!-- ornament door -->
+            <ttImage>images/level01/ornamentDoor.png</ttImage>
+            <ttBasePosition x="33.6805" y="63.0729" />
+            <ttScale>0</ttScale>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+	            <ttNotificationIdentifyer>startEndDecoration.4</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>scaleXy</ttType>
+                        <ttActionDuration>0.25</ttActionDuration>
+                        <ttScaleX>0.65</ttScaleX>
+                        <ttScaleY>0.65</ttScaleY>
+                        <ttActionEaseMode>easeBounceOut</ttActionEaseMode>
+                        <ttActionEaseRate>2.00</ttActionEaseRate>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>startEndDecoration.5</ttNotificationIdentifyer>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject> <!-- ornament door -->
+            <ttImage>images/level01/ornamentDoor.png</ttImage>
+            <ttBasePosition x="16.493" y="63.0729" />
+            <ttFlipX>YES</ttFlipX>
+            <ttScale>0</ttScale>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+	            <ttNotificationIdentifyer>startEndDecoration.4</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>scaleXy</ttType>
+                        <ttActionDuration>0.25</ttActionDuration>
+                        <ttScaleX>0.65</ttScaleX>
+                        <ttScaleY>0.65</ttScaleY>
+                        <ttActionEaseMode>easeBounceOut</ttActionEaseMode>
+                        <ttActionEaseRate>2.00</ttActionEaseRate>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject> <!-- ornament --> 
+            <ttImage>images/level01/ornamentBall_00.png</ttImage>
+            <ttAnchorPositionX>0.50</ttAnchorPositionX>
+            <ttAnchorPositionY>1.00</ttAnchorPositionY>
+            <ttBasePosition x="23.0903" y="73.8283" />
+            <ttScale>0</ttScale>
+            <ttActionsGroup>
+                <ttTrigger>automatic</ttTrigger>
+                <ttTriggerDelay>2.5</ttTriggerDelay>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>scaleXy</ttType>
+                        <ttActionDuration>0.25</ttActionDuration>
+                        <ttScaleX>0.52</ttScaleX>
+                        <ttScaleY>0.52</ttScaleY>
+                        <ttActionEaseMode>easeBounceOut</ttActionEaseMode>
+                        <ttActionEaseRate>2.00</ttActionEaseRate>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+	                    <ttNotificationIdentifyer>startEndDecoration.1</ttNotificationIdentifyer>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>   
+            <ttMacroInvoke macro_name="UIOrnamentChildSparkles"/>         
+            <ttObjects>
+                <ttObject>
+                    <ttImage>images/fullBlocker.png</ttImage>
+                    <ttBasePosition x="5" y="3" />
+                    <ttZOrder>30</ttZOrder>
+                    <ttType>particles</ttType>
+                    <ttParticles>
+                        <ttParticlesPlist>images/particles/snowOrnamentParticles.plist</ttParticlesPlist>
+                    </ttParticles>
+                    <ttActionsGroup>
+		                <ttTrigger>automatic</ttTrigger>
+		                <ttTriggerDelay>2.5</ttTriggerDelay>
+                        <ttSequenceGroup>
+                            <ttAction>
+                                <ttType>delay</ttType>
+                                <ttActionDuration>0</ttActionDuration>
+                            </ttAction>
+                        </ttSequenceGroup>
+                        <ttSequenceGroup>
+                            <ttAction>
+                                <ttType>startParticles</ttType>
+                            </ttAction>
+                        </ttSequenceGroup>
+                    </ttActionsGroup>
+                </ttObject>
+                <ttObject>
+                    <ttImage>images/fullBlocker.png</ttImage>
+                    <ttBasePosition x="5" y="3" />
+                    <ttZOrder>30</ttZOrder>
+                    <ttType>particles</ttType>
+                    <ttParticles>
+                        <ttParticlesPlist>images/particles/ornametsParticles.plist</ttParticlesPlist>
+                    </ttParticles>
+                    <ttActionsGroup>
+		                <ttTrigger>automatic</ttTrigger>
+		                <ttTriggerDelay>2.5</ttTriggerDelay>
+                        <ttSequenceGroup>
+                            <ttAction>
+                                <ttType>delay</ttType>
+                                <ttActionDuration>0</ttActionDuration>
+                            </ttAction>
+                        </ttSequenceGroup>
+                        <ttSequenceGroup>
+                            <ttAction>
+                                <ttType>startParticles</ttType>
+                            </ttAction>
+                        </ttSequenceGroup>
+                    </ttActionsGroup>
+                </ttObject>
+            </ttObjects>
+        </ttObject>
+        <ttObject> <!-- ornament -->
+            <ttImage>images/level01/ornamentBall_02.png</ttImage>
+            <ttAnchorPositionX>0.50</ttAnchorPositionX>
+            <ttAnchorPositionY>1.00</ttAnchorPositionY>
+            <ttBasePosition x="25" y="83.5939" />
+            <ttScale>0</ttScale>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+	            <ttNotificationIdentifyer>startEndDecoration.1</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>scaleXy</ttType>
+                        <ttActionDuration>0.25</ttActionDuration>
+                        <ttScaleX>0.81</ttScaleX>
+                        <ttScaleY>0.81</ttScaleY>
+                        <ttActionEaseMode>easeBounceOut</ttActionEaseMode>
+                        <ttActionEaseRate>2.00</ttActionEaseRate>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>startEndDecoration.2</ttNotificationIdentifyer>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+            <ttMacroInvoke macro_name="UIOrnamentChildSparkles"/>
+            <ttObjects>
+                <ttObject>
+                    <ttImage>images/fullBlocker.png</ttImage>
+                    <ttBasePosition x="5" y="3" />
+                    <ttZOrder>30</ttZOrder>
+                    <ttType>particles</ttType>
+                    <ttParticles>
+                        <ttParticlesPlist>images/particles/snowOrnamentParticles.plist</ttParticlesPlist>
+                    </ttParticles>
+                    <ttActionsGroup>
+                        <ttTrigger>notification</ttTrigger>
+	            		<ttNotificationIdentifyer>startEndDecoration.1</ttNotificationIdentifyer>
+                        <ttSequenceGroup>
+                            <ttAction>
+                                <ttType>delay</ttType>
+                                <ttActionDuration>0</ttActionDuration>
+                            </ttAction>
+                        </ttSequenceGroup>
+                        <ttSequenceGroup>
+                            <ttAction>
+                                <ttType>startParticles</ttType>
+                            </ttAction>
+                        </ttSequenceGroup>
+                    </ttActionsGroup>
+                </ttObject>
+                <ttObject>
+                    <ttImage>images/fullBlocker.png</ttImage>
+                    <ttBasePosition x="5" y="3" />
+                    <ttZOrder>30</ttZOrder>
+                    <ttType>particles</ttType>
+                    <ttParticles>
+                        <ttParticlesPlist>images/particles/ornametsParticles.plist</ttParticlesPlist>
+                    </ttParticles>
+                    <ttActionsGroup>
+                        <ttTrigger>notification</ttTrigger>
+	            		<ttNotificationIdentifyer>startEndDecoration.1</ttNotificationIdentifyer>
+                        <ttSequenceGroup>
+                            <ttAction>
+                                <ttType>delay</ttType>
+                                <ttActionDuration>0</ttActionDuration>
+                            </ttAction>
+                        </ttSequenceGroup>
+                        <ttSequenceGroup>
+                            <ttAction>
+                                <ttType>startParticles</ttType>
+                            </ttAction>
+                        </ttSequenceGroup>
+                    </ttActionsGroup>
+                </ttObject>
+            </ttObjects>
+        </ttObject>
+        <ttObject> <!-- missletoe -->
+            <ttImage>images/level01/ornamentMisletoe.png</ttImage>
+            <ttBasePosition x="81.7708" y="48.9584" />
+            <ttScale>0</ttScale>
+            <ttObjects>
+                <ttObject>
+                    <ttImage>images/fullBlocker.png</ttImage>
+                    <ttBasePosition x="0" y="0" />
+                    <ttType>particles</ttType>
+                    <ttParticles>
+                        <ttParticlesPlist>images/particles/snowCureParticles.plist</ttParticlesPlist>
+                    </ttParticles>
+                    <ttActionsGroup>
+		                <ttTrigger>notification</ttTrigger>
+			            <ttNotificationIdentifyer>startEndDecoration.5</ttNotificationIdentifyer>
+                        <ttSequenceGroup>
+                            <ttAction>
+                                <ttType>delay</ttType>
+                                <ttActionDuration>0</ttActionDuration>
+                            </ttAction>
+                        </ttSequenceGroup>
+                        <ttSequenceGroup>
+                            <ttAction>
+                                <ttType>startParticles</ttType>
+                            </ttAction>
+                        </ttSequenceGroup>
+                    </ttActionsGroup>
+                </ttObject>
+            </ttObjects>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+	            <ttNotificationIdentifyer>startEndDecoration.5</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>scaleXy</ttType>
+                        <ttActionDuration>0.25</ttActionDuration>
+                        <ttScaleX>1</ttScaleX>
+                        <ttScaleY>1</ttScaleY>
+                        <ttActionEaseMode>easeBounceOut</ttActionEaseMode>
+                        <ttActionEaseRate>2.00</ttActionEaseRate>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>startEndDecoration.6</ttNotificationIdentifyer>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject> <!-- missletoe -->
+            <ttImage>images/level01/ornamentMisletoe.png</ttImage>
+            <ttBasePosition x="93.2292" y="19.1406" />
+            <ttFlipX>YES</ttFlipX>
+            <ttScale>0</ttScale>
+            <ttObjects>
+                <ttObject>
+                    <ttImage>images/fullBlocker.png</ttImage>
+                    <ttBasePosition x="0" y="0" />
+                    <ttType>particles</ttType>
+                    <ttParticles>
+                        <ttParticlesPlist>images/particles/snowCureParticles.plist</ttParticlesPlist>
+                    </ttParticles>
+                    <ttActionsGroup>
+		                <ttTrigger>notification</ttTrigger>
+			            <ttNotificationIdentifyer>startEndDecoration.3</ttNotificationIdentifyer>
+                        <ttSequenceGroup>
+                            <ttAction>
+                                <ttType>delay</ttType>
+                                <ttActionDuration>0</ttActionDuration>
+                            </ttAction>
+                        </ttSequenceGroup>
+                        <ttSequenceGroup>
+                            <ttAction>
+                                <ttType>startParticles</ttType>
+                            </ttAction>
+                        </ttSequenceGroup>
+                    </ttActionsGroup>
+                </ttObject>
+            </ttObjects>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+	            <ttNotificationIdentifyer>startEndDecoration.3</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>scaleXy</ttType>
+                        <ttActionDuration>0.25</ttActionDuration>
+                        <ttScaleX>1</ttScaleX>
+                        <ttScaleY>1</ttScaleY>
+                        <ttActionEaseMode>easeBounceOut</ttActionEaseMode>
+                        <ttActionEaseRate>2.00</ttActionEaseRate>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>startEndDecoration.4</ttNotificationIdentifyer>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject> <!-- missletoe -->
+            <ttImage>images/level01/ornamentMisletoe.png</ttImage>
+            <ttBasePosition x="52.6042" y="52.9948" />
+            <ttFlipX>YES</ttFlipX>
+            <ttScale>0</ttScale>
+            <ttObjects>
+                <ttObject>
+                    <ttImage>images/fullBlocker.png</ttImage>
+                    <ttBasePosition x="0" y="0" />
+                    <ttType>particles</ttType>
+                    <ttParticles>
+                        <ttParticlesPlist>images/particles/snowCureParticles.plist</ttParticlesPlist>
+                    </ttParticles>
+                    <ttActionsGroup>
+		                <ttTrigger>notification</ttTrigger>
+			            <ttNotificationIdentifyer>startEndDecoration.6</ttNotificationIdentifyer>
+                        <ttSequenceGroup>
+                            <ttAction>
+                                <ttType>delay</ttType>
+                                <ttActionDuration>0</ttActionDuration>
+                            </ttAction>
+                        </ttSequenceGroup>
+                        <ttSequenceGroup>
+                            <ttAction>
+                                <ttType>startParticles</ttType>
+                            </ttAction>
+                        </ttSequenceGroup>
+                    </ttActionsGroup>
+                </ttObject>
+            </ttObjects>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>startEndDecoration.6</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>scaleXy</ttType>
+                        <ttActionDuration>0.25</ttActionDuration>
+                        <ttScaleX>0.75</ttScaleX>
+                        <ttScaleY>0.75</ttScaleY>
+                        <ttActionEaseMode>easeBounceOut</ttActionEaseMode>
+                        <ttActionEaseRate>2.00</ttActionEaseRate>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>sendNotification</ttType>
+                        <ttNotificationIdentifyer>startEndDecoration.6</ttNotificationIdentifyer>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject> <!-- snow particles -->
+            <ttImage>images/fullBlocker.png</ttImage>
+            <ttType>particles</ttType>
+            <ttBasePosition x="50" y="110" />
+            <ttScale>1</ttScale>
+            <ttParticles>
+                <ttParticlesPlist>images/particles/snowFalling.plist</ttParticlesPlist>
+            </ttParticles>
+            <ttActionsGroup>
+                <ttTrigger>automatic</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>startParticles</ttType>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+        <ttObject> <!-- blocker -->
+            <ttImage>images/fullBlocker.png</ttImage>
+            <ttBasePosition x="0" y="0" />
+            <ttOpacity>0</ttOpacity>
+            <ttActionsGroup> <!-- onTouchesBegan -->
+                <ttTrigger>onTouchesBegan</ttTrigger>
+                <ttSequenceGroup />
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>automatic</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>scale</ttType>
+                        <ttActionDuration>0.0</ttActionDuration>
+                        <ttScaleTo>1024</ttScaleTo>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>delay</ttType>
+                        <ttActionDuration>6.5</ttActionDuration>
+                    </ttAction>
+                </ttSequenceGroup>
+				<ttSequenceGroup>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>scaleMap</ttVariable>
+                        <ttOperator>
+                            <ttScript>return 1</ttScript>
+                        </ttOperator>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>posX</ttVariable>
+                        <ttOperator>
+                            <ttScript>return -100</ttScript>
+                        </ttOperator>
+                    </ttAction>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>posY</ttVariable>
+                        <ttOperator>
+                            <ttScript>return -100</ttScript>
+                        </ttOperator>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>setVariable</ttType>
+                        <ttVariable>level12Done</ttVariable>
+                        <ttOperator>
+                            <ttScript>return 1</ttScript>
+                        </ttOperator>
+                        <ttSave>1</ttSave>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>delay</ttType>
+                        <ttActionDuration>1.5</ttActionDuration>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>moveToScene</ttType>
+                        <ttSceneName>mapScene</ttSceneName>
+                        <ttSceneId>1000000</ttSceneId>
+                    </ttAction>
+                </ttSequenceGroup>
+            </ttActionsGroup>
+        </ttObject>
+    </ttLayer>	
+    <ttLayer ttName="thoughtsSantaLayer">
+		<ttMacroInvoke macro_name="hoPointer">
+			<ttMacroParam name="$posX" value="#item15PosX - 3.5"/>
+			<ttMacroParam name="$posY" value="#item15PosY + 4"/>
+		</ttMacroInvoke> 
+		<ttMacroInvoke macro_name="hoPanel" />
+    </ttLayer>
+    <ttLayer ttName="thoughtsLayer">
+		<ttLoadAtInit>NO</ttLoadAtInit>
+		<ttMacroInvoke macro_name="hoThoughtItem">
+			<ttMacroParam name="$image" value="images/level12/key01.png"/>
+			<ttMacroParam name="$whatIndex" value="11"/>
+			<ttMacroParam name="$scale" value="0.6"/>
+		</ttMacroInvoke>	
+		<ttMacroInvoke macro_name="hoThoughtItem">
+			<ttMacroParam name="$image" value="images/level12/key02.png"/>
+			<ttMacroParam name="$whatIndex" value="12"/>
+			<ttMacroParam name="$scale" value="0.6"/>
+		</ttMacroInvoke>	
+		<ttMacroInvoke macro_name="hoThoughtItem">
+			<ttMacroParam name="$image" value="images/level12/key03.png"/>
+			<ttMacroParam name="$whatIndex" value="13"/>
+			<ttMacroParam name="$scale" value="0.6"/>
+		</ttMacroInvoke>	
+		<ttMacroInvoke macro_name="hoThoughtItem">
+			<ttMacroParam name="$image" value="images/level12/key04.png"/>
+			<ttMacroParam name="$whatIndex" value="14"/>
+			<ttMacroParam name="$scale" value="0.6"/>
+		</ttMacroInvoke>	
+		<ttMacroInvoke macro_name="hoThoughtItem">
+			<ttMacroParam name="$image" value="images/level12/key05.png"/>
+			<ttMacroParam name="$whatIndex" value="15"/>
+			<ttMacroParam name="$scale" value="0.6"/>
+		</ttMacroInvoke>		
+		<ttMacroInvoke macro_name="hoThoughtItem">
+			<ttMacroParam name="$image" value="images/level12/key06.png"/>
+			<ttMacroParam name="$whatIndex" value="16"/>
+			<ttMacroParam name="$scale" value="0.6"/>
+		</ttMacroInvoke>		
+		<ttMacroInvoke macro_name="hoThoughtItem">
+			<ttMacroParam name="$image" value="images/level12/key07.png"/>
+			<ttMacroParam name="$whatIndex" value="17"/>
+			<ttMacroParam name="$scale" value="0.6"/>
+		</ttMacroInvoke>		
+		<ttMacroInvoke macro_name="hoThoughtItem">
+			<ttMacroParam name="$image" value="images/level12/key08.png"/>
+			<ttMacroParam name="$whatIndex" value="18"/>
+			<ttMacroParam name="$scale" value="0.6"/>
+		</ttMacroInvoke>			
+    </ttLayer>
+	<ttMacroInvoke macro_name="progressAndHintLayer">
+		<ttMacroParam name="$step" value="12.5"/>
+		<ttMacroParam name="$items" value="8"/>
+		<ttMacroParam name="$flurryVal" value="Level_12_Hidden_Items"/>
+		<ttMacroParam name="$curHO" value="3"/>
+	</ttMacroInvoke>
+	<ttLayer ttName="locksPopup">
+		<ttLoadAtInit>no</ttLoadAtInit>
+		<ttScale>0</ttScale>
+		<ttLayers>
+			<ttLayer ttName="locksStuffLayer">
+				<ttObject><!-- blockingView -->
+					<ttImage>images/fullBlocker.png</ttImage>
+					<ttBasePosition x="40" y="60" />
+					<ttScale>0</ttScale>
+					<ttActionsGroup>
+						<ttTrigger>onTouchesBegan</ttTrigger>
+						<ttSequenceGroup/>
+					</ttActionsGroup>
+					<ttActionsGroup>
+						<ttTrigger>notification</ttTrigger>
+						<ttNotificationIdentifyer>blockPadlocks</ttNotificationIdentifyer>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>scale</ttType>
+								<ttActionDuration>0</ttActionDuration>
+								<ttScaleTo>100</ttScaleTo>
+							</ttAction>
+						</ttSequenceGroup>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>delay</ttType>
+								<ttActionDuration>0.5</ttActionDuration>
+							</ttAction>
+						</ttSequenceGroup>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>scale</ttType>
+								<ttActionDuration>0</ttActionDuration>
+								<ttScaleTo>0</ttScaleTo>
+							</ttAction>
+						</ttSequenceGroup>
+					</ttActionsGroup>
+				</ttObject>
+				<ttObject><!-- blockingView -->
+					<ttImage>images/fullBlocker.png</ttImage>
+					<ttBasePosition x="50" y="50" />
+					<ttOpacity>0</ttOpacity>
+					<ttScale>256</ttScale>
+					<ttActionsGroup>
+						<ttTrigger>automatic</ttTrigger>
+						<ttApplyOn levels="2">layer</ttApplyOn>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>playSound</ttType>
+								<ttFile>sounds/pop_up_open.mp3</ttFile>
+							</ttAction>
+							<ttAction>
+								<ttType>scale</ttType>
+								<ttActionDuration>0.4</ttActionDuration>
+								<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+								<ttScaleTo>1</ttScaleTo>
+							</ttAction>
+						</ttSequenceGroup>
+					</ttActionsGroup>
+				</ttObject>
+				<ttObject><!-- bg -->
+					<ttImage>images/popUps/lockPopUp.png</ttImage>
+					<ttBasePosition x="50" y="50" />
+					<ttFlipX>YES</ttFlipX>
+		            <ttAnchorPositionX>1.00</ttAnchorPositionX>
+		            <ttAnchorPositionY>1.00</ttAnchorPositionY>
+				</ttObject>
+				<ttObject><!-- bg -->
+					<ttImage>images/popUps/lockPopUp.png</ttImage>
+					<ttBasePosition x="50" y="50" />
+					<ttFlipX>YES</ttFlipX>
+					<ttFlipY>YES</ttFlipY>
+		            <ttAnchorPositionX>1.00</ttAnchorPositionX>
+		            <ttAnchorPositionY>0.00</ttAnchorPositionY>
+				</ttObject>
+				<ttObject><!-- bg -->
+					<ttImage>images/popUps/lockPopUp.png</ttImage>
+					<ttBasePosition x="50" y="50" />
+		            <ttAnchorPositionX>0.00</ttAnchorPositionX>
+		            <ttAnchorPositionY>1.00</ttAnchorPositionY>
+				</ttObject>
+				<ttObject><!-- bg -->
+					<ttImage>images/popUps/lockPopUp.png</ttImage>
+					<ttBasePosition x="50" y="50" />
+					<ttFlipY>YES</ttFlipY>
+		            <ttAnchorPositionX>0.00</ttAnchorPositionX>
+		            <ttAnchorPositionY>0.00</ttAnchorPositionY>
+				</ttObject>
+			</ttLayer>
+			<ttLayer ttName="keysLayer"> 
+		        <ttObject> 
+		            <ttType>lable</ttType>
+		            <ttImage/>
+		            <ttActionsGroup>
+		                <ttTrigger>automatic</ttTrigger>
+		                <ttApplyOn>layer</ttApplyOn>
+		                <ttSequenceGroup>
+		                    <ttAction>
+		                        <ttType>moveToPoint</ttType>
+		                        <ttActionDuration>0</ttActionDuration>
+		                        <ttFinalPosition x="0" y="-30" />
+		                        <ttActionEaseMode>easeBackIn</ttActionEaseMode>
+		                    </ttAction>
+		                </ttSequenceGroup>
+		            </ttActionsGroup>
+		            <ttActionsGroup>
+		                <ttTrigger>notification</ttTrigger>
+		                <ttNotificationIdentifyer>scaleDoors</ttNotificationIdentifyer>
+		                <ttApplyOn>layer</ttApplyOn>
+		                <ttSequenceGroup>
+		                    <ttAction>
+		                        <ttType>moveToPoint</ttType>
+		                        <ttActionDuration>0.25</ttActionDuration>
+		                        <ttFinalPosition x="0" y="-30" />
+		                        <ttActionEaseMode>easeBackIn</ttActionEaseMode>
+		                    </ttAction>
+		                </ttSequenceGroup>
+		            </ttActionsGroup>
+		            <ttActionsGroup> 
+		                <ttTrigger>notification</ttTrigger>
+		                <ttNotificationIdentifyer>unscaleDoors</ttNotificationIdentifyer>
+		                <ttApplyOn>layer</ttApplyOn>
+		                <ttSequenceGroup>
+		                    <ttAction>
+		                        <ttType>moveToPoint</ttType>
+		                        <ttActionDuration>0.25</ttActionDuration>
+		                        <ttFinalPosition x="0" y="0" />
+		                        <ttActionEaseMode>easeBackOut</ttActionEaseMode>
+		                    </ttAction>
+		                </ttSequenceGroup>
+		            </ttActionsGroup>
+		        </ttObject>
+				<ttMacroInvoke macro_name="keys">
+					<ttMacroParam name="$keyId" value="key1"/>
+					<ttMacroParam name="$lockId" value="lock1"/>
+					<ttMacroParam name="$randomId" value="app.returnRandom(1)"/>
+					<ttMacroParam name="$posX" value="32.2917"/>
+					<ttMacroParam name="$keyVarValue" value="keyVar0"/>
+					<ttMacroParam name="$posYFit" value="31.4324"/>
+				</ttMacroInvoke>
+				<ttMacroInvoke macro_name="keys">
+					<ttMacroParam name="$keyId" value="key2"/>
+					<ttMacroParam name="$lockId" value="lock2"/>
+					<ttMacroParam name="$randomId" value="app.returnRandom(2)"/>
+					<ttMacroParam name="$posX" value="79.5139"/>
+					<ttMacroParam name="$keyVarValue" value="keyVar1"/>
+					<ttMacroParam name="$posYFit" value="53.5678"/>
+				</ttMacroInvoke>
+				<ttMacroInvoke macro_name="keys">
+					<ttMacroParam name="$keyId" value="key3"/>
+					<ttMacroParam name="$lockId" value="lock3"/>
+					<ttMacroParam name="$randomId" value="app.returnRandom(3)"/>
+					<ttMacroParam name="$posX" value="8.6806"/>
+					<ttMacroParam name="$keyVarValue" value="keyVar2"/>
+					<ttMacroParam name="$posYFit" value="31.4324"/>
+				</ttMacroInvoke>
+				<ttMacroInvoke macro_name="keys">
+					<ttMacroParam name="$keyId" value="key4"/>
+					<ttMacroParam name="$lockId" value="lock4"/>
+					<ttMacroParam name="$randomId" value="app.returnRandom(4)"/>
+					<ttMacroParam name="$posX" value="55.9028"/>
+					<ttMacroParam name="$keyVarValue" value="keyVar3"/>
+					<ttMacroParam name="$posYFit" value="53.5678"/>
+				</ttMacroInvoke>
+				<ttMacroInvoke macro_name="keys"> 
+					<ttMacroParam name="$keyId" value="key5"/>
+					<ttMacroParam name="$lockId" value="lock5"/>
+					<ttMacroParam name="$randomId" value="app.returnRandom(5)"/>
+					<ttMacroParam name="$posX" value="20.4861"/>
+					<ttMacroParam name="$keyVarValue" value="keyVar4"/>
+					<ttMacroParam name="$posYFit" value="31.4324"/>
+				</ttMacroInvoke>
+				<ttMacroInvoke macro_name="keys">
+					<ttMacroParam name="$keyId" value="key6"/>
+					<ttMacroParam name="$lockId" value="lock6"/>
+					<ttMacroParam name="$randomId" value="app.returnRandom(6)"/>
+					<ttMacroParam name="$posX" value="91.4931"/>
+					<ttMacroParam name="$keyVarValue" value="keyVar5"/>
+					<ttMacroParam name="$posYFit" value="53.5678"/>
+				</ttMacroInvoke>
+				<ttMacroInvoke macro_name="keys">
+					<ttMacroParam name="$keyId" value="key7"/>
+					<ttMacroParam name="$lockId" value="lock7"/>
+					<ttMacroParam name="$randomId" value="app.returnRandom(7)"/>
+					<ttMacroParam name="$posX" value="44.2708"/>
+					<ttMacroParam name="$keyVarValue" value="keyVar6"/>
+					<ttMacroParam name="$posYFit" value="53.5678"/>
+				</ttMacroInvoke>
+				<ttMacroInvoke macro_name="keys">
+					<ttMacroParam name="$keyId" value="key8"/>
+					<ttMacroParam name="$lockId" value="lock8"/>
+					<ttMacroParam name="$randomId" value="app.returnRandom(8)"/>
+					<ttMacroParam name="$posX" value="67.8819"/>
+					<ttMacroParam name="$keyVarValue" value="keyVar7"/>
+					<ttMacroParam name="$posYFit" value="31.4324"/>
+				</ttMacroInvoke>
+			</ttLayer>
+			<ttLayer ttName="doorsAndLocksLayer">
+				<ttLayers>
+					<ttLayer ttName="door01Layer">
+				        <ttObject>
+				            <ttImage>images/level12/door04.png</ttImage>
+				            <ttImage>images/level12/door.png</ttImage>
+				            <ttBasePosition x="73.0903" y="42.1094" />
+		            		<ttScale>1.1821</ttScale>
+							<ttActionsGroup> <!-- onTouchesBegan -->
+								<ttTrigger>onTouchesBegan</ttTrigger>
+								<ttOperator>
+									<ttScript>return (door1Done ~= 1)</ttScript>
+								</ttOperator>
+								<ttSequenceGroup>
+				                    <ttAction>
+				                        <ttType>sendNotification</ttType>
+				                        <ttNotificationIdentifyer>showFullBlocker</ttNotificationIdentifyer>
+				                    </ttAction>
+				                    <ttAction>
+				                        <ttType>sendNotification</ttType>
+				                        <ttNotificationIdentifyer>unscaleDoors</ttNotificationIdentifyer>
+				                    </ttAction>
+				                    <ttAction>
+				                        <ttType>setVariable</ttType>
+				                        <ttVariable>localCounter</ttVariable>
+				                        <ttOperator>
+				                            <ttScript>return 0</ttScript>
+				                        </ttOperator>
+				                    </ttAction>
+				                    <ttAction>
+				                        <ttType>setVariable</ttType>
+				                        <ttVariable>loadedDoor1</ttVariable>
+				                        <ttOperator>
+				                            <ttScript>return 1</ttScript>
+				                        </ttOperator>
+				                    </ttAction>
+				                </ttSequenceGroup>
+								<ttSequenceGroup>
+									<ttAction>
+										<ttType>loadLayer</ttType>
+										<ttData>door01LoadLayer</ttData>
+									</ttAction>
+								</ttSequenceGroup>
+						    </ttActionsGroup>
+							<ttActionsGroup>
+								<ttTrigger>notification</ttTrigger>
+								<ttNotificationIdentifyer>unloadDoorLayer</ttNotificationIdentifyer>
+								<ttOperator>
+									<ttScript>return ((localCounter == 2) and (loadedDoor1 == 1))</ttScript>
+								</ttOperator>
+								<ttSequenceGroup>
+									<ttAction>
+										<ttType>delay</ttType>
+										<ttActionDuration>1</ttActionDuration>
+									</ttAction>
+								</ttSequenceGroup>
+								<ttSequenceGroup>
+									<ttAction>
+										<ttType>unLoadLayer</ttType>
+										<ttData>final01LocksLayer</ttData>
+									</ttAction>
+								</ttSequenceGroup>
+								<ttSequenceGroup>
+				                    <ttAction>
+				                        <ttType>sendNotification</ttType>
+				                        <ttNotificationIdentifyer>disableKeys</ttNotificationIdentifyer>
+				                    </ttAction>
+				                </ttSequenceGroup>
+								<ttSequenceGroup>
+									<ttAction>
+										<ttType>unLoadLayer</ttType>
+										<ttData>door01LoadLayer</ttData>
+									</ttAction>
+				                    <ttAction>
+				                        <ttType>setVariable</ttType>
+				                        <ttVariable>door1Done</ttVariable>
+				                        <ttOperator>
+				                            <ttScript>return 1</ttScript>
+				                        </ttOperator>
+				                    </ttAction>
+				                </ttSequenceGroup>
+								<ttSequenceGroup>
+				                    <ttAction>
+				                        <ttType>replaceSpriteWithNextImage</ttType>
+				                        <ttIntValue>1</ttIntValue>
+				                    </ttAction>
+				                </ttSequenceGroup>
+								<ttSequenceGroup>
+				                    <ttAction>
+				                        <ttType>sendNotification</ttType>
+				                        <ttNotificationIdentifyer>scaleDoors</ttNotificationIdentifyer>
+				                    </ttAction>
+				                </ttSequenceGroup>
+								<ttSequenceGroup>
+									<ttAction>
+										<ttType>delay</ttType>
+										<ttActionDuration>1</ttActionDuration>
+									</ttAction>
+								</ttSequenceGroup>
+								<ttSequenceGroup>
+				                    <ttAction>
+				                        <ttType>sendNotification</ttType>
+				                        <ttNotificationIdentifyer>checkAllLocksDone</ttNotificationIdentifyer>
+				                    </ttAction>
+								</ttSequenceGroup>
+							</ttActionsGroup>
+							<ttMacroInvoke macro_name="scaleDoorLayers"/>
+				        </ttObject>
+						<ttMacroInvoke macro_name="locks">
+							<ttMacroParam name="$randomId" value="app.returnRandom(1)"/>
+							<ttMacroParam name="$posX" value="59.2014"/>
+							<ttMacroParam name="$posY" value="30.1302"/>
+							<ttMacroParam name="$rotate" value="-18.77"/>
+						</ttMacroInvoke>
+						<ttMacroInvoke macro_name="locks">
+							<ttMacroParam name="$randomId" value="app.returnRandom(2)"/>
+							<ttMacroParam name="$posX" value="57.8125"/>
+							<ttMacroParam name="$posY" value="37.8125"/>
+							<ttMacroParam name="$rotate" value="0"/>
+						</ttMacroInvoke>
+					</ttLayer>
+					<ttLayer ttName="door02Layer">
+				        <ttObject>
+				            <ttImage>images/level12/door03.png</ttImage>
+				            <ttImage>images/level12/door.png</ttImage>
+				            <ttBasePosition x="73.0903" y="77.3958" />
+		            		<ttScale>1.1821</ttScale>
+							<ttActionsGroup> <!-- onTouchesBegan -->
+								<ttTrigger>onTouchesBegan</ttTrigger>
+								<ttOperator>
+									<ttScript>return (door2Done ~= 1)</ttScript>
+								</ttOperator>
+								<ttSequenceGroup>
+				                    <ttAction>
+				                        <ttType>sendNotification</ttType>
+				                        <ttNotificationIdentifyer>showFullBlocker</ttNotificationIdentifyer>
+				                    </ttAction>
+				                    <ttAction>
+				                        <ttType>sendNotification</ttType>
+				                        <ttNotificationIdentifyer>unscaleDoors</ttNotificationIdentifyer>
+				                    </ttAction>
+				                    <ttAction>
+				                        <ttType>setVariable</ttType>
+				                        <ttVariable>localCounter</ttVariable>
+				                        <ttOperator>
+				                            <ttScript>return 0</ttScript>
+				                        </ttOperator>
+				                    </ttAction>
+				                    <ttAction>
+				                        <ttType>setVariable</ttType>
+				                        <ttVariable>loadedDoor2</ttVariable>
+				                        <ttOperator>
+				                            <ttScript>return 1</ttScript>
+				                        </ttOperator>
+				                    </ttAction>
+				                </ttSequenceGroup>
+								<ttSequenceGroup>
+									<ttAction>
+										<ttType>loadLayer</ttType>
+										<ttData>door02LoadLayer</ttData>
+									</ttAction>
+								</ttSequenceGroup>
+						    </ttActionsGroup>
+							<ttActionsGroup>
+								<ttTrigger>notification</ttTrigger>
+								<ttNotificationIdentifyer>unloadDoorLayer</ttNotificationIdentifyer>
+								<ttOperator>
+									<ttScript>return ((localCounter == 2) and (loadedDoor2 == 1))</ttScript>
+								</ttOperator>
+								<ttSequenceGroup>
+									<ttAction>
+										<ttType>delay</ttType>
+										<ttActionDuration>1</ttActionDuration>
+									</ttAction>
+								</ttSequenceGroup>
+								<ttSequenceGroup>
+									<ttAction>
+										<ttType>unLoadLayer</ttType>
+										<ttData>final02LocksLayer</ttData>
+									</ttAction>
+								</ttSequenceGroup>
+								<ttSequenceGroup>
+									<ttAction>
+										<ttType>unLoadLayer</ttType>
+										<ttData>door02LoadLayer</ttData>
+									</ttAction>
+				                    <ttAction>
+				                        <ttType>setVariable</ttType>
+				                        <ttVariable>door2Done</ttVariable>
+				                        <ttOperator>
+				                            <ttScript>return 1</ttScript>
+				                        </ttOperator>
+				                    </ttAction>
+				                </ttSequenceGroup>
+								<ttSequenceGroup>
+				                    <ttAction>
+				                        <ttType>replaceSpriteWithNextImage</ttType>
+				                        <ttIntValue>1</ttIntValue>
+				                    </ttAction>
+				                </ttSequenceGroup>
+								<ttSequenceGroup>
+				                    <ttAction>
+				                        <ttType>sendNotification</ttType>
+				                        <ttNotificationIdentifyer>scaleDoors</ttNotificationIdentifyer>
+				                    </ttAction>
+				                </ttSequenceGroup>
+								<ttSequenceGroup>
+									<ttAction>
+										<ttType>delay</ttType>
+										<ttActionDuration>1</ttActionDuration>
+									</ttAction>
+								</ttSequenceGroup>
+								<ttSequenceGroup>
+				                    <ttAction>
+				                        <ttType>sendNotification</ttType>
+				                        <ttNotificationIdentifyer>checkAllLocksDone</ttNotificationIdentifyer>
+				                    </ttAction>
+								</ttSequenceGroup>
+							</ttActionsGroup>
+							<ttMacroInvoke macro_name="scaleDoorLayers"/>
+				        </ttObject>
+						<ttMacroInvoke macro_name="locks">
+							<ttMacroParam name="$randomId" value="app.returnRandom(3)"/>
+							<ttMacroParam name="$posX" value="58.3333"/>
+							<ttMacroParam name="$posY" value="65.8073"/>
+							<ttMacroParam name="$rotate" value="-12.45"/>
+						</ttMacroInvoke>
+						<ttMacroInvoke macro_name="locks">
+							<ttMacroParam name="$randomId" value="app.returnRandom(4)"/>
+							<ttMacroParam name="$posX" value="57.8125"/>
+							<ttMacroParam name="$posY" value="72.7083"/>
+							<ttMacroParam name="$rotate" value="-15.82"/>
+						</ttMacroInvoke>
+					</ttLayer>
+					<ttLayer ttName="door03Layer">
+				        <ttObject>
+				            <ttImage>images/level12/door02.png</ttImage>
+				            <ttImage>images/level12/door.png</ttImage>
+				            <ttBasePosition x="28.2986" y="42.3698" />
+		            		<ttScale>1.1821</ttScale>
+							<ttActionsGroup> <!-- onTouchesBegan -->
+								<ttTrigger>onTouchesBegan</ttTrigger>
+								<ttOperator>
+									<ttScript>return (door3Done ~= 1)</ttScript>
+								</ttOperator>
+								<ttSequenceGroup>
+				                    <ttAction>
+				                        <ttType>sendNotification</ttType>
+				                        <ttNotificationIdentifyer>showFullBlocker</ttNotificationIdentifyer>
+				                    </ttAction>
+				                    <ttAction>
+				                        <ttType>sendNotification</ttType>
+				                        <ttNotificationIdentifyer>unscaleDoors</ttNotificationIdentifyer>
+				                    </ttAction>
+				                    <ttAction>
+				                        <ttType>setVariable</ttType>
+				                        <ttVariable>localCounter</ttVariable>
+				                        <ttOperator>
+				                            <ttScript>return 0</ttScript>
+				                        </ttOperator>
+				                    </ttAction>
+				                    <ttAction>
+				                        <ttType>setVariable</ttType>
+				                        <ttVariable>loadedDoor3</ttVariable>
+				                        <ttOperator>
+				                            <ttScript>return 1</ttScript>
+				                        </ttOperator>
+				                    </ttAction>
+				                </ttSequenceGroup>
+								<ttSequenceGroup>
+									<ttAction>
+										<ttType>loadLayer</ttType>
+										<ttData>door03LoadLayer</ttData>
+									</ttAction>
+								</ttSequenceGroup>
+						    </ttActionsGroup>
+							<ttActionsGroup>
+								<ttTrigger>notification</ttTrigger>
+								<ttNotificationIdentifyer>unloadDoorLayer</ttNotificationIdentifyer>
+								<ttOperator>
+									<ttScript>return ((localCounter == 2) and (loadedDoor3 == 1))</ttScript>
+								</ttOperator>
+								<ttSequenceGroup>
+									<ttAction>
+										<ttType>delay</ttType>
+										<ttActionDuration>1</ttActionDuration>
+									</ttAction>
+								</ttSequenceGroup>
+								<ttSequenceGroup>
+									<ttAction>
+										<ttType>unLoadLayer</ttType>
+										<ttData>final03LocksLayer</ttData>
+									</ttAction>
+								</ttSequenceGroup>
+								<ttSequenceGroup>
+									<ttAction>
+										<ttType>unLoadLayer</ttType>
+										<ttData>door03LoadLayer</ttData>
+									</ttAction>
+				                    <ttAction>
+				                        <ttType>setVariable</ttType>
+				                        <ttVariable>door3Done</ttVariable>
+				                        <ttOperator>
+				                            <ttScript>return 1</ttScript>
+				                        </ttOperator>
+				                    </ttAction>
+				                </ttSequenceGroup>
+								<ttSequenceGroup>
+				                    <ttAction>
+				                        <ttType>replaceSpriteWithNextImage</ttType>
+				                        <ttIntValue>1</ttIntValue>
+				                    </ttAction>
+				                </ttSequenceGroup>
+								<ttSequenceGroup>
+				                    <ttAction>
+				                        <ttType>sendNotification</ttType>
+				                        <ttNotificationIdentifyer>scaleDoors</ttNotificationIdentifyer>
+				                    </ttAction>
+				                </ttSequenceGroup>
+								<ttSequenceGroup>
+									<ttAction>
+										<ttType>delay</ttType>
+										<ttActionDuration>1</ttActionDuration>
+									</ttAction>
+								</ttSequenceGroup>
+								<ttSequenceGroup>
+				                    <ttAction>
+				                        <ttType>sendNotification</ttType>
+				                        <ttNotificationIdentifyer>checkAllLocksDone</ttNotificationIdentifyer>
+				                    </ttAction>
+								</ttSequenceGroup>
+							</ttActionsGroup>
+							<ttMacroInvoke macro_name="scaleDoorLayers"/>
+				        </ttObject>
+						<ttMacroInvoke macro_name="locks">
+							<ttMacroParam name="$randomId" value="app.returnRandom(5)"/>
+							<ttMacroParam name="$posX" value="9.9652"/>
+							<ttMacroParam name="$posY" value="29.8698"/>
+							<ttMacroParam name="$rotate" value="-9"/>
+						</ttMacroInvoke>
+						<ttMacroInvoke macro_name="locks">
+							<ttMacroParam name="$randomId" value="app.returnRandom(6)"/>
+							<ttMacroParam name="$posX" value="10.4861"/>
+							<ttMacroParam name="$posY" value="37.4219"/>
+							<ttMacroParam name="$rotate" value="5"/>
+						</ttMacroInvoke>
+					</ttLayer>
+					<ttLayer ttName="door04Layer">
+						<ttObject>
+				            <ttImage>images/level12/door01.png</ttImage>
+				            <ttImage>images/level12/door.png</ttImage>
+				            <ttBasePosition x="28.2986" y="77.3958" />
+		            		<ttScale>1.1821</ttScale>
+							<ttActionsGroup> <!-- onTouchesBegan -->
+								<ttTrigger>onTouchesBegan</ttTrigger>
+								<ttOperator>
+									<ttScript>return (door4Done ~= 1)</ttScript>
+								</ttOperator>
+								<ttSequenceGroup>
+				                    <ttAction>
+				                        <ttType>sendNotification</ttType>
+				                        <ttNotificationIdentifyer>showFullBlocker</ttNotificationIdentifyer>
+				                    </ttAction>
+				                    <ttAction>
+				                        <ttType>sendNotification</ttType>
+				                        <ttNotificationIdentifyer>unscaleDoors</ttNotificationIdentifyer>
+				                    </ttAction>
+				                    <ttAction>
+				                        <ttType>setVariable</ttType>
+				                        <ttVariable>localCounter</ttVariable>
+				                        <ttOperator>
+				                            <ttScript>return 0</ttScript>
+				                        </ttOperator>
+				                    </ttAction>
+				                    <ttAction>
+				                        <ttType>setVariable</ttType>
+				                        <ttVariable>loadedDoor4</ttVariable>
+				                        <ttOperator>
+				                            <ttScript>return 1</ttScript>
+				                        </ttOperator>
+				                    </ttAction>
+				                </ttSequenceGroup>
+								<ttSequenceGroup>
+									<ttAction>
+										<ttType>loadLayer</ttType>
+										<ttData>door04LoadLayer</ttData>
+									</ttAction>
+								</ttSequenceGroup>
+						    </ttActionsGroup>
+							<ttActionsGroup>
+								<ttTrigger>notification</ttTrigger>
+								<ttNotificationIdentifyer>unloadDoorLayer</ttNotificationIdentifyer>
+								<ttOperator>
+									<ttScript>return ((localCounter == 2) and (loadedDoor4 == 1))</ttScript>
+								</ttOperator>
+								<ttSequenceGroup>
+									<ttAction>
+										<ttType>delay</ttType>
+										<ttActionDuration>1</ttActionDuration>
+									</ttAction>
+								</ttSequenceGroup>
+								<ttSequenceGroup>
+									<ttAction>
+										<ttType>unLoadLayer</ttType>
+										<ttData>final04LocksLayer</ttData>
+									</ttAction>
+								</ttSequenceGroup>
+								<ttSequenceGroup>
+									<ttAction>
+										<ttType>unLoadLayer</ttType>
+										<ttData>door04LoadLayer</ttData>
+									</ttAction>
+				                    <ttAction>
+				                        <ttType>setVariable</ttType>
+				                        <ttVariable>door4Done</ttVariable>
+				                        <ttOperator>
+				                            <ttScript>return 1</ttScript>
+				                        </ttOperator>
+				                    </ttAction>
+				                </ttSequenceGroup>
+								<ttSequenceGroup>
+				                    <ttAction>
+				                        <ttType>replaceSpriteWithNextImage</ttType>
+				                        <ttIntValue>1</ttIntValue>
+				                    </ttAction>
+				                </ttSequenceGroup>
+								<ttSequenceGroup>
+				                    <ttAction>
+				                        <ttType>sendNotification</ttType>
+				                        <ttNotificationIdentifyer>scaleDoors</ttNotificationIdentifyer>
+				                    </ttAction>
+				                </ttSequenceGroup>
+								<ttSequenceGroup>
+									<ttAction>
+										<ttType>delay</ttType>
+										<ttActionDuration>1</ttActionDuration>
+									</ttAction>
+								</ttSequenceGroup>
+								<ttSequenceGroup>
+				                    <ttAction>
+				                        <ttType>sendNotification</ttType>
+				                        <ttNotificationIdentifyer>checkAllLocksDone</ttNotificationIdentifyer>
+				                    </ttAction>
+								</ttSequenceGroup>
+							</ttActionsGroup>
+							<ttMacroInvoke macro_name="scaleDoorLayers"/>
+				        </ttObject>
+						<ttMacroInvoke macro_name="locks">
+							<ttMacroParam name="$randomId" value="app.returnRandom(7)"/>
+							<ttMacroParam name="$posX" value="10.4861"/>
+							<ttMacroParam name="$posY" value="72.8386"/>
+							<ttMacroParam name="$rotate" value="-15.33"/>
+						</ttMacroInvoke>
+						<ttMacroInvoke macro_name="locks">
+							<ttMacroParam name="$randomId" value="app.returnRandom(8)"/>
+							<ttMacroParam name="$posX" value="10.0556"/>
+							<ttMacroParam name="$posY" value="65.8073"/>
+							<ttMacroParam name="$rotate" value="16.72"/>
+						</ttMacroInvoke>
+					</ttLayer>
+				</ttLayers>
+		        <ttObject> <!-- door pointer -->
+		            <ttImage>images/tools/pointer.png</ttImage>
+		            <ttBasePosition x="75" y="75"  />
+		            <ttAnchorPositionX>0</ttAnchorPositionX>
+		            <ttAnchorPositionY>0</ttAnchorPositionY>
+		            <ttFlipX>YES</ttFlipX>
+		            <ttVisible>no</ttVisible>
+		            <ttActionsGroup>
+		                <ttTrigger>automatic</ttTrigger>
+		                <ttTriggerDelay>2</ttTriggerDelay>
+		                <ttSequenceGroup>
+		                    <ttAction>
+		                        <ttType>bringToFront</ttType>
+		                    </ttAction>
+		                    <ttAction>
+		                        <ttType>makeVisible</ttType>
+		                    </ttAction>
+		                    <ttAction>
+		                        <ttType>fadeTo</ttType>
+		                        <ttOpacity>255</ttOpacity>
+		                        <ttActionDuration>0.1</ttActionDuration>
+		                    </ttAction>
+		                    <ttAction>
+		                        <ttType>scaleXy</ttType>
+		                        <ttActionDuration>0.25</ttActionDuration>
+		                        <ttScaleX>0.8</ttScaleX>
+		                        <ttScaleY>0.8</ttScaleY>
+		                        <ttActionEaseMode>easeInOut</ttActionEaseMode>
+		                        <ttActionEaseRate>2.00</ttActionEaseRate>
+		                    </ttAction>
+		                </ttSequenceGroup>
+		                <ttSequenceGroup>
+		                    <ttAction>
+		                        <ttType>scaleXy</ttType>
+		                        <ttActionDuration>0.25</ttActionDuration>
+		                        <ttScaleX>1</ttScaleX>
+		                        <ttScaleY>1</ttScaleY>
+		                        <ttActionEaseMode>easeInOut</ttActionEaseMode>
+		                        <ttActionEaseRate>2.00</ttActionEaseRate>
+		                    </ttAction>
+		                </ttSequenceGroup>
+		                <ttSequenceGroup>
+		                    <ttAction>
+		                        <ttType>scaleXy</ttType>
+		                        <ttActionDuration>0.25</ttActionDuration>
+		                        <ttScaleX>0.8</ttScaleX>
+		                        <ttScaleY>0.8</ttScaleY>
+		                        <ttActionEaseMode>easeInOut</ttActionEaseMode>
+		                        <ttActionEaseRate>2.00</ttActionEaseRate>
+		                    </ttAction>
+		                </ttSequenceGroup>
+		                <ttSequenceGroup>
+		                    <ttAction>
+		                        <ttType>scaleXy</ttType>
+		                        <ttActionDuration>0.25</ttActionDuration>
+		                        <ttScaleX>1</ttScaleX>
+		                        <ttScaleY>1</ttScaleY>
+		                        <ttActionEaseMode>easeInOut</ttActionEaseMode>
+		                        <ttActionEaseRate>2.00</ttActionEaseRate>
+		                    </ttAction>
+		                </ttSequenceGroup>
+		                <ttSequenceGroup>
+		                    <ttAction>
+		                        <ttType>scaleXy</ttType>
+		                        <ttActionDuration>0.25</ttActionDuration>
+		                        <ttScaleX>0.8</ttScaleX>
+		                        <ttScaleY>0.8</ttScaleY>
+		                        <ttActionEaseMode>easeInOut</ttActionEaseMode>
+		                        <ttActionEaseRate>2.00</ttActionEaseRate>
+		                    </ttAction>
+		                </ttSequenceGroup>
+		                <ttSequenceGroup>
+		                    <ttAction>
+		                        <ttType>scaleXy</ttType>
+		                        <ttActionDuration>0.25</ttActionDuration>
+		                        <ttScaleX>1</ttScaleX>
+		                        <ttScaleY>1</ttScaleY>
+		                        <ttActionEaseMode>easeInOut</ttActionEaseMode>
+		                        <ttActionEaseRate>2.00</ttActionEaseRate>
+		                    </ttAction>
+		                </ttSequenceGroup>
+		                <ttSequenceGroup>
+		                    <ttAction>
+		                        <ttType>scaleXy</ttType>
+		                        <ttActionDuration>0.25</ttActionDuration>
+		                        <ttScaleX>0.8</ttScaleX>
+		                        <ttScaleY>0.8</ttScaleY>
+		                        <ttActionEaseMode>easeInOut</ttActionEaseMode>
+		                        <ttActionEaseRate>2.00</ttActionEaseRate>
+		                    </ttAction>
+		                </ttSequenceGroup>
+		                <ttSequenceGroup>
+		                    <ttAction>
+		                        <ttType>scaleXy</ttType>
+		                        <ttActionDuration>0.25</ttActionDuration>
+		                        <ttScaleX>1</ttScaleX>
+		                        <ttScaleY>1</ttScaleY>
+		                        <ttActionEaseMode>easeInOut</ttActionEaseMode>
+		                        <ttActionEaseRate>2.00</ttActionEaseRate>
+		                    </ttAction>
+		                </ttSequenceGroup>
+		                <ttSequenceGroup>
+		                    <ttAction>
+		                        <ttType>scaleXy</ttType>
+		                        <ttActionDuration>0.25</ttActionDuration>
+		                        <ttScaleX>0.8</ttScaleX>
+		                        <ttScaleY>0.8</ttScaleY>
+		                        <ttActionEaseMode>easeInOut</ttActionEaseMode>
+		                        <ttActionEaseRate>2.00</ttActionEaseRate>
+		                    </ttAction>
+		                </ttSequenceGroup>
+		                <ttSequenceGroup>
+		                    <ttAction>
+		                        <ttType>scaleXy</ttType>
+		                        <ttActionDuration>0.25</ttActionDuration>
+		                        <ttScaleX>1</ttScaleX>
+		                        <ttScaleY>1</ttScaleY>
+		                        <ttActionEaseMode>easeInOut</ttActionEaseMode>
+		                        <ttActionEaseRate>2.00</ttActionEaseRate>
+		                    </ttAction>
+		                    <ttAction>
+		                        <ttType>fadeTo</ttType>
+		                        <ttOpacity>0</ttOpacity>
+		                        <ttActionDuration>0.25</ttActionDuration>
+		                    </ttAction>
+		                </ttSequenceGroup>
+		                <ttSequenceGroup>
+		                    <ttAction>
+		                        <ttType>makeInvisible</ttType>
+		                    </ttAction>
+		                </ttSequenceGroup>
+		            </ttActionsGroup>
+		            <ttActionsGroup>
+		                <ttTrigger>notification</ttTrigger>
+		                <ttNotificationIdentifyer>scaleDoors</ttNotificationIdentifyer>
+		                <ttSequenceGroup>
+		                    <ttAction>
+		                        <ttType>makeInvisible</ttType>
+		                    </ttAction>
+		                </ttSequenceGroup>
+		                <ttSequenceGroup>
+		                    <ttAction>
+		                        <ttType>moveToPoint</ttType>
+		                        <ttFinalPosition x="-121.3542" y="119.5508"/>
+		                        <ttActionDuration>0</ttActionDuration>
+		                    </ttAction>
+		                </ttSequenceGroup>
+		                <ttSequenceGroup>
+		                    <ttAction>
+		                        <ttType>stopRunningActions</ttType>
+		                    </ttAction>
+		                </ttSequenceGroup>
+		            </ttActionsGroup>
+		        </ttObject>
+			</ttLayer>
+			<ttLayer ttName="door01LoadLayer">
+				<ttLoadAtInit>NO</ttLoadAtInit>
+		        <ttObject>
+		            <ttImage>images/level12/door04.png</ttImage>
+		            <ttBasePosition x="73.0903" y="42.1094" />
+		            <ttScale>1.1821</ttScale>
+					<ttActionsGroup>
+						<ttTrigger>automatic</ttTrigger>
+						<ttSequenceGroup>
+				            <ttAction>
+				                <ttType>sendNotification</ttType>
+				                <ttNotificationIdentifyer>zoomDoor1</ttNotificationIdentifyer>
+				            </ttAction>
+				        </ttSequenceGroup>
+				    </ttActionsGroup>
+					<ttMacroInvoke macro_name="zoomDoor">
+						<ttMacroParam name="$zoomNotification" value="zoomDoor1"/>
+						<ttMacroParam name="$fadeNotification1" value="zoomDoor2"/>
+						<ttMacroParam name="$fadeNotification2" value="zoomDoor3"/>
+						<ttMacroParam name="$fadeNotification3" value="zoomDoor4"/>
+					</ttMacroInvoke>
+		        </ttObject>
+				<ttMacroInvoke macro_name="locksLoaded">
+					<ttMacroParam name="$lockId" value="lock2"/>
+					<ttMacroParam name="$randomId" value="app.returnRandom(2)"/>
+					<ttMacroParam name="$posX" value="57.8125"/>
+					<ttMacroParam name="$posY" value="37.8125"/>
+					<ttMacroParam name="$rotate" value="0"/>
+					<ttMacroParam name="$zoomPosVar" value="1"/>
+					<ttMacroParam name="$zoomNotification" value="zoomDoor1"/>
+        			<ttMacroParam name="$finalLayerToMoveTo" value="final01LocksLayer"/>
+				</ttMacroInvoke>
+				<ttMacroInvoke macro_name="locksLoaded">
+					<ttMacroParam name="$lockId" value="lock1"/>
+					<ttMacroParam name="$randomId" value="app.returnRandom(1)"/>
+					<ttMacroParam name="$posX" value="59.2014"/>
+					<ttMacroParam name="$posY" value="30.1302"/>
+					<ttMacroParam name="$rotate" value="-18.77"/>
+					<ttMacroParam name="$zoomPosVar" value="2"/>
+					<ttMacroParam name="$zoomNotification" value="zoomDoor1"/>
+        			<ttMacroParam name="$finalLayerToMoveTo" value="final01LocksLayer"/>
+				</ttMacroInvoke>
+			</ttLayer>
+			<ttLayer ttName="door02LoadLayer">
+				<ttLoadAtInit>NO</ttLoadAtInit>
+		        <ttObject>
+		            <ttImage>images/level12/door03.png</ttImage>
+		            <ttBasePosition x="73.0903" y="77.3958" />
+		            <ttScale>1.1821</ttScale>
+					<ttActionsGroup> <!-- automatic -->
+						<ttTrigger>automatic</ttTrigger>
+						<ttSequenceGroup>
+				            <ttAction>
+				                <ttType>sendNotification</ttType>
+				                <ttNotificationIdentifyer>zoomDoor2</ttNotificationIdentifyer>
+				            </ttAction>
+				        </ttSequenceGroup>
+				    </ttActionsGroup>
+					<ttMacroInvoke macro_name="zoomDoor">
+						<ttMacroParam name="$zoomNotification" value="zoomDoor2"/>
+						<ttMacroParam name="$fadeNotification1" value="zoomDoor1"/>
+						<ttMacroParam name="$fadeNotification2" value="zoomDoor3"/>
+						<ttMacroParam name="$fadeNotification3" value="zoomDoor4"/>
+					</ttMacroInvoke>
+		        </ttObject>
+				<ttMacroInvoke macro_name="locksLoaded">
+					<ttMacroParam name="$lockId" value="lock4"/>
+					<ttMacroParam name="$randomId" value="app.returnRandom(4)"/>
+					<ttMacroParam name="$posX" value="57.8125"/>
+					<ttMacroParam name="$posY" value="72.7083"/>
+					<ttMacroParam name="$rotate" value="-15.82"/>
+					<ttMacroParam name="$zoomPosVar" value="1"/>
+					<ttMacroParam name="$zoomNotification" value="zoomDoor2"/>
+        			<ttMacroParam name="$finalLayerToMoveTo" value="final02LocksLayer"/>
+				</ttMacroInvoke>
+				<ttMacroInvoke macro_name="locksLoaded">
+					<ttMacroParam name="$lockId" value="lock3"/>
+					<ttMacroParam name="$randomId" value="app.returnRandom(3)"/>
+					<ttMacroParam name="$posX" value="58.3333"/>
+					<ttMacroParam name="$posY" value="65.8073"/>
+					<ttMacroParam name="$rotate" value="-12.45"/>
+					<ttMacroParam name="$zoomPosVar" value="2"/>
+					<ttMacroParam name="$zoomNotification" value="zoomDoor2"/>
+        			<ttMacroParam name="$finalLayerToMoveTo" value="final02LocksLayer"/>
+				</ttMacroInvoke>
+			</ttLayer>
+			<ttLayer ttName="door03LoadLayer">
+				<ttLoadAtInit>NO</ttLoadAtInit>
+		        <ttObject>
+		            <ttImage>images/level12/door02.png</ttImage>
+		            <ttBasePosition x="28.2986" y="42.3698" />
+		            <ttScale>1.1821</ttScale>
+					<ttActionsGroup> <!-- automatic -->
+						<ttTrigger>automatic</ttTrigger>
+						<ttSequenceGroup>
+				            <ttAction>
+				                <ttType>sendNotification</ttType>
+				                <ttNotificationIdentifyer>zoomDoor3</ttNotificationIdentifyer>
+				            </ttAction>
+				        </ttSequenceGroup>
+				    </ttActionsGroup>
+					<ttMacroInvoke macro_name="zoomDoor">
+						<ttMacroParam name="$zoomNotification" value="zoomDoor3"/>
+						<ttMacroParam name="$fadeNotification1" value="zoomDoor1"/>
+						<ttMacroParam name="$fadeNotification2" value="zoomDoor2"/>
+						<ttMacroParam name="$fadeNotification3" value="zoomDoor4"/>
+					</ttMacroInvoke>
+		        </ttObject>
+				<ttMacroInvoke macro_name="locksLoaded">
+					<ttMacroParam name="$lockId" value="lock6"/>
+					<ttMacroParam name="$randomId" value="app.returnRandom(6)"/>
+					<ttMacroParam name="$posX" value="10.4861"/>
+					<ttMacroParam name="$posY" value="37.4219"/>
+					<ttMacroParam name="$rotate" value="5"/>
+					<ttMacroParam name="$zoomPosVar" value="1"/>
+					<ttMacroParam name="$zoomNotification" value="zoomDoor3"/>
+        			<ttMacroParam name="$finalLayerToMoveTo" value="final03LocksLayer"/>
+				</ttMacroInvoke>
+				<ttMacroInvoke macro_name="locksLoaded">
+					<ttMacroParam name="$lockId" value="lock5"/>
+					<ttMacroParam name="$randomId" value="app.returnRandom(5)"/>
+					<ttMacroParam name="$posX" value="9.9652"/>
+					<ttMacroParam name="$posY" value="29.8698"/>
+					<ttMacroParam name="$rotate" value="-9"/>
+					<ttMacroParam name="$zoomPosVar" value="2"/>
+					<ttMacroParam name="$zoomNotification" value="zoomDoor3"/>
+        			<ttMacroParam name="$finalLayerToMoveTo" value="final03LocksLayer"/>
+				</ttMacroInvoke>
+			</ttLayer>
+			<ttLayer ttName="door04LoadLayer">
+				<ttLoadAtInit>NO</ttLoadAtInit>
+				<ttObject>
+		            <ttImage>images/level12/door01.png</ttImage>
+		            <ttBasePosition x="28.2986" y="77.3958" />
+		            <ttScale>1.1821</ttScale>
+					<ttActionsGroup> <!-- automatic -->
+						<ttTrigger>automatic</ttTrigger>
+						<ttSequenceGroup>
+				            <ttAction>
+				                <ttType>sendNotification</ttType>
+				                <ttNotificationIdentifyer>zoomDoor4</ttNotificationIdentifyer>
+				            </ttAction>
+				        </ttSequenceGroup>
+				    </ttActionsGroup>
+					<ttMacroInvoke macro_name="zoomDoor">
+						<ttMacroParam name="$zoomNotification" value="zoomDoor4"/>
+						<ttMacroParam name="$fadeNotification1" value="zoomDoor1"/>
+						<ttMacroParam name="$fadeNotification2" value="zoomDoor2"/>
+						<ttMacroParam name="$fadeNotification3" value="zoomDoor3"/>
+					</ttMacroInvoke>
+		        </ttObject>
+				<ttMacroInvoke macro_name="locksLoaded">
+					<ttMacroParam name="$lockId" value="lock7"/>
+					<ttMacroParam name="$randomId" value="app.returnRandom(7)"/>
+					<ttMacroParam name="$posX" value="10.4861"/>
+					<ttMacroParam name="$posY" value="72.8386"/>
+					<ttMacroParam name="$rotate" value="-15.33"/>
+					<ttMacroParam name="$zoomPosVar" value="1"/>
+					<ttMacroParam name="$zoomNotification" value="zoomDoor4"/>
+        			<ttMacroParam name="$finalLayerToMoveTo" value="final04LocksLayer"/>
+				</ttMacroInvoke>
+				<ttMacroInvoke macro_name="locksLoaded">
+					<ttMacroParam name="$lockId" value="lock8"/>
+					<ttMacroParam name="$randomId" value="app.returnRandom(8)"/>
+					<ttMacroParam name="$posX" value="10.0556"/>
+					<ttMacroParam name="$posY" value="65.8073"/>
+					<ttMacroParam name="$rotate" value="16.72"/>
+					<ttMacroParam name="$zoomPosVar" value="2"/>
+					<ttMacroParam name="$zoomNotification" value="zoomDoor4"/>
+        			<ttMacroParam name="$finalLayerToMoveTo" value="final04LocksLayer"/>
+				</ttMacroInvoke>
+			</ttLayer>
+			<ttLayer ttName="frontKeylockLayer">
+				<ttObject><!-- blockingView -->
+					<ttImage>images/fullBlocker.png</ttImage>
+					<ttBasePosition x="50" y="40" />
+					<ttOpacity>0</ttOpacity>
+					<ttScale>0</ttScale>
+					<ttActionsGroup>
+						<ttTrigger>notification</ttTrigger>
+						<ttNotificationIdentifyer>blockKeys</ttNotificationIdentifyer>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>scaleXy</ttType>
+								<ttActionDuration>0</ttActionDuration>
+								<ttScaleX>190</ttScaleX>
+								<ttScaleY>100</ttScaleY>
+							</ttAction>
+						</ttSequenceGroup>
+					</ttActionsGroup>
+					<ttActionsGroup>
+						<ttTrigger>notification</ttTrigger>
+						<ttNotificationIdentifyer>unblockKeys</ttNotificationIdentifyer>
+						<ttSequenceGroup>
+							<ttAction>
+								<ttType>scaleXy</ttType>
+								<ttActionDuration>0</ttActionDuration>
+								<ttScaleX>0</ttScaleX>
+								<ttScaleY>0</ttScaleY>
+							</ttAction>
+						</ttSequenceGroup>
+					</ttActionsGroup>
+					<ttActionsGroup>
+						<ttTrigger>onTouchesBegan</ttTrigger>
+						<ttSequenceGroup/>
+					</ttActionsGroup>
+				</ttObject>
+			</ttLayer>			
+			<ttLayer ttName="masksLayer">
+				<ttMacroInvoke macro_name="maskObject">
+					<ttMacroParam name="$randomId" value="app.returnRandom(1)"/>
+					<ttMacroParam name="$posX" value="18.2291"/>
+					<ttMacroParam name="$posY" value="35"/>
+				</ttMacroInvoke>
+				<ttMacroInvoke macro_name="maskObject">
+					<ttMacroParam name="$randomId" value="app.returnRandom(2)"/>
+					<ttMacroParam name="$posX" value="17.1875"/>
+					<ttMacroParam name="$posY" value="58"/>
+				</ttMacroInvoke>
+				<ttMacroInvoke macro_name="maskObject">
+					<ttMacroParam name="$randomId" value="app.returnRandom(3)"/>
+					<ttMacroParam name="$posX" value="18.2291"/>
+					<ttMacroParam name="$posY" value="35"/>
+				</ttMacroInvoke>
+				<ttMacroInvoke macro_name="maskObject">
+					<ttMacroParam name="$randomId" value="app.returnRandom(4)"/>
+					<ttMacroParam name="$posX" value="17.1875"/>
+					<ttMacroParam name="$posY" value="58"/>
+				</ttMacroInvoke>
+				<ttMacroInvoke macro_name="maskObject">
+					<ttMacroParam name="$randomId" value="app.returnRandom(5)"/>
+					<ttMacroParam name="$posX" value="18.2291"/>
+					<ttMacroParam name="$posY" value="35"/>
+				</ttMacroInvoke>
+				<ttMacroInvoke macro_name="maskObject">
+					<ttMacroParam name="$randomId" value="app.returnRandom(6)"/>
+					<ttMacroParam name="$posX" value="17.1875"/>
+					<ttMacroParam name="$posY" value="58"/>
+				</ttMacroInvoke>
+				<ttMacroInvoke macro_name="maskObject">
+					<ttMacroParam name="$randomId" value="app.returnRandom(7)"/>
+					<ttMacroParam name="$posX" value="17.1875"/>
+					<ttMacroParam name="$posY" value="58"/>
+				</ttMacroInvoke>
+				<ttMacroInvoke macro_name="maskObject">
+					<ttMacroParam name="$randomId" value="app.returnRandom(8)"/>
+					<ttMacroParam name="$posX" value="18.2291"/>
+					<ttMacroParam name="$posY" value="35"/>
+				</ttMacroInvoke>
+			</ttLayer>
+			<ttLayer ttName="final01LocksLayer"/>
+			<ttLayer ttName="final02LocksLayer"/>
+			<ttLayer ttName="final03LocksLayer"/>
+			<ttLayer ttName="final04LocksLayer"/>
+		</ttLayers>
+	</ttLayer>	
+    <ttLayer ttName="uiLayer">
+        <ttBasePosition x="0" y="0" />
+        <ttObject>
+            <ttImage>images/fullBlocker.png</ttImage>
+            <ttBasePosition x="50" y="50" />
+            <ttOpacity>0</ttOpacity>
+            <ttActionsGroup> <!-- onTouchesBegan -->
+                <ttTrigger>onTouchesBegan</ttTrigger>
+                <ttSequenceGroup />
+            </ttActionsGroup>
+            <ttActionsGroup>
+                <ttTrigger>notification</ttTrigger>
+                <ttNotificationIdentifyer>showFullBlocker</ttNotificationIdentifyer>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>scale</ttType>
+                        <ttActionDuration>0.0</ttActionDuration>
+                        <ttScaleTo>1024</ttScaleTo>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>delay</ttType>
+                        <ttActionDuration>1</ttActionDuration>
+                    </ttAction>
+                </ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>scale</ttType>
+                        <ttActionDuration>0.0</ttActionDuration>
+                        <ttScaleTo>0</ttScaleTo>
+                    </ttAction>
+                </ttSequenceGroup>             
+            </ttActionsGroup>
+        </ttObject>
+	    <ttObject> <!-- home -->
+            <ttImage>images/iconsUI/homeBtn.png</ttImage>
+	        <ttBasePosition x="90" y="91" />
+			<ttActionsGroup>
+				<ttTrigger>onTouchesBegan</ttTrigger>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>logEvent</ttType>
+                        <ttLogEventName>Button_Click_Levels9_16</ttLogEventName>
+                        <ttLogEventParam>Level_12</ttLogEventParam>
+                        <ttLogEventVal>Home</ttLogEventVal>
+                    </ttAction>
+                </ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>playSound</ttType>
+						<ttFile>sounds/button_press.mp3</ttFile>
+					</ttAction>
+					<ttAction>
+						<ttType>scaleXy</ttType>
+						<ttActionDuration>0.12</ttActionDuration>
+						<ttActionEaseRate>2.00</ttActionEaseRate>
+						<ttActionEaseMode>easeInOut</ttActionEaseMode>
+						<ttScaleX>0.85</ttScaleX>
+						<ttScaleY>1.15</ttScaleY>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>scaleXy</ttType>
+						<ttActionDuration>0.12</ttActionDuration>
+						<ttActionEaseRate>2.00</ttActionEaseRate>
+						<ttActionEaseMode>easeInOut</ttActionEaseMode>
+						<ttScaleX>1.1</ttScaleX>
+						<ttScaleY>0.9</ttScaleY>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>scaleXy</ttType>
+						<ttActionDuration>0.12</ttActionDuration>
+						<ttActionEaseRate>2.00</ttActionEaseRate>
+						<ttActionEaseMode>easeBackOut</ttActionEaseMode>
+						<ttScaleX>1</ttScaleX>
+						<ttScaleY>1</ttScaleY>
+					</ttAction>
+				</ttSequenceGroup>
+				<ttSequenceGroup>
+					<ttAction>
+						<ttType>delay</ttType>
+						<ttActionDuration>0.4</ttActionDuration>
+					</ttAction>
+				</ttSequenceGroup>
+                <ttSequenceGroup>
+                    <ttAction>
+                        <ttType>loadLayer</ttType>
+                        <ttData>backToMapPopup</ttData>
+                    </ttAction>
+                </ttSequenceGroup>
+			</ttActionsGroup>
+		</ttObject>
+	</ttLayer>
+
+    <ttMacroInvoke macro_name="backToMap">
+        <ttMacroParam name="$posXVar" value="-100"/>
+        <ttMacroParam name="$posYVar" value="-100"/>
+        <ttMacroParam name="$flurryName" value="Button_Click_Levels9_16"/>
+        <ttMacroParam name="$flurryParam" value="Level_12"/>		
+    </ttMacroInvoke>
+    <ttMacroInvoke macro_name="storyLayer">
+        <ttMacroParam name="$storyNum" value="12"/>
+        <ttMacroParam name="$storyNarration" value="sounds/stories/story13.mp3"/>
+        <ttMacroParam name="$delayForClose" value="8"/>
+    </ttMacroInvoke>
+</ttScene>

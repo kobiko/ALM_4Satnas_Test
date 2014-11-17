@@ -1,0 +1,327 @@
+<!-- actions -->
+<ttMacro name="debugMenu.setVariable">
+    <ttMacroParams>
+        <ttMacroParamDef name="$param"/>
+    </ttMacroParams>
+	<ttMacroBody>
+        <ttSequenceGroup>
+            <ttAction>
+                <ttType>setVariable</ttType>
+                <ttVariable>$param</ttVariable>
+                <ttOperator>
+                    <ttConst>1</ttConst>
+                </ttOperator>
+            </ttAction>
+        </ttSequenceGroup>
+        <ttMacroInvoke macro_name="debugMenu.closeMenuAndShowDebugMenuButton">
+            <ttMacroParam name="$name" value="debugMenu"/>
+        </ttMacroInvoke>
+    </ttMacroBody>
+</ttMacro>
+
+<ttMacro name="debugMenu.scaleScene">
+    <ttMacroParams>
+        <ttMacroParamDef name="$param"/>
+    </ttMacroParams>
+	<ttMacroBody>
+        <ttSequenceGroup>
+            <ttAction>
+                <ttType>setVariable</ttType>
+                <ttVariable>shouldScaleScene</ttVariable>
+                <ttOperator>
+                    <ttScript>
+                        if shouldScaleScene == 0 or shouldScaleScene == nil then
+                            debugMenu:toggleShouldScaleScene()
+                            return 1
+                        else
+                            debugMenu:toggleShouldScaleScene()
+                            return 0
+                        end
+                    </ttScript>
+                </ttOperator>
+            </ttAction>
+        </ttSequenceGroup>
+        <ttSequenceGroup>
+            <ttAction>
+                <ttType>unLoadLayer</ttType>
+                <ttData>dummyForAutomaticScaleScene</ttData>
+            </ttAction>
+        </ttSequenceGroup>
+        <ttSequenceGroup>
+            <ttAction>
+                <ttType>loadLayer</ttType>
+                <ttData>dummyForAutomaticScaleScene</ttData>
+            </ttAction>
+        </ttSequenceGroup>
+        <ttSequenceGroup>
+            <ttAction>
+                <ttType>setLabelText</ttType>
+                <ttText>script: return debugMenu:shouldScaleSceneText()</ttText>
+            </ttAction>
+        </ttSequenceGroup>
+        <ttMacroInvoke macro_name="debugMenu.closeMenuAndShowDebugMenuButton">
+            <ttMacroParam name="$name" value="debugMenu"/>
+        </ttMacroInvoke>
+    </ttMacroBody>
+</ttMacro>
+<ttMacro name="debugMenu.toggleAdsBlockingView">
+    <ttMacroParams>
+        <ttMacroParamDef name="$param"/>
+    </ttMacroParams>
+	<ttMacroBody>
+        <ttSequenceGroup>
+            <ttAction>
+                <ttType>sendNotification</ttType>
+                <ttNotificationIdentifyer>script: return debugMenu:getToggleAdsBlockingViewNotification()</ttNotificationIdentifyer>
+            </ttAction>
+        </ttSequenceGroup>
+    </ttMacroBody>
+</ttMacro>
+
+<ttMacro name="debugMenu.executeScript">
+    <ttMacroParams>
+        <ttMacroParamDef name="$param"/>
+    </ttMacroParams>
+	<ttMacroBody>
+        <ttSequenceGroup>
+            <ttAction>
+                <ttType>runScript</ttType>
+                <ttScript>$param</ttScript>
+            </ttAction>
+        </ttSequenceGroup>
+        <ttMacroInvoke macro_name="debugMenu.closeMenuAndShowDebugMenuButton">
+            <ttMacroParam name="$name" value="debugMenu"/>
+        </ttMacroInvoke>
+    </ttMacroBody>
+</ttMacro>
+<!-- debugMenu.actionAndLoadLayer executes an action and loads a layer both named $param NOT USED FOR NOW -->
+<ttMacro name="debugMenu.actionAndLoadLayer">
+    <ttMacroParams>
+        <ttMacroParamDef name="$param"/>
+    </ttMacroParams>
+	<ttMacroBody>
+        <ttMacroInvoke macro_name="debugMenu.action">
+            <ttMacroParam name="$param" value="$param"/>
+        </ttMacroInvoke>
+        <ttMacroInvoke macro_name="debugMenu.loadLayer">
+            <ttMacroParam name="$param" value="$param"/>
+        </ttMacroInvoke>
+        <ttMacroInvoke macro_name="debugMenu.closeMenu">
+            <ttMacroParam name="$name" value="debugMenu"/>
+        </ttMacroInvoke>
+    </ttMacroBody>
+</ttMacro>
+<!-- debugMenu.loadLayer loads a new layer named $param and unloads the main window -->
+<ttMacro name="debugMenu.loadLayer">
+    <ttMacroParams>
+        <ttMacroParamDef name="$param"/>
+    </ttMacroParams>
+	<ttMacroBody>
+        <ttSequenceGroup>
+            <ttAction>
+                <ttType>runScript</ttType>
+                <ttScript>debugMenu:openLayer("$param")</ttScript>
+            </ttAction>
+            <ttAction>
+                <ttType>loadLayer</ttType>
+                <ttData>$param</ttData>
+            </ttAction>
+            
+        </ttSequenceGroup>
+        <ttMacroInvoke macro_name="debugMenu.closeMenu">
+            <ttMacroParam name="$name" value="debugMenu"/>
+        </ttMacroInvoke>
+    </ttMacroBody>
+</ttMacro>
+<!-- debugMenu.newMenu loads a new layer named $param and unloads the main window -->
+<!-- TODO change to a more general unload layer not relaying on the fact that it is a mainMenu -->
+<ttMacro name="debugMenu.newMenu">
+    <ttMacroParams>
+        <ttMacroParamDef name="$param"/>
+    </ttMacroParams>
+	<ttMacroBody>
+        <ttSequenceGroup>
+            <ttAction>
+                <ttType>runScript</ttType>
+                <ttScript>debugMenu:setCurrentMenu("$param")</ttScript>
+            </ttAction>
+        </ttSequenceGroup>
+        <ttSequenceGroup>
+            <ttAction>
+                <ttType>loadLayer</ttType>
+                <ttData>$param</ttData>
+            </ttAction>
+        </ttSequenceGroup>
+        <ttSequenceGroup>
+            <ttAction>
+                <ttType>unLoadLayer</ttType>
+                <ttData>mainMenu</ttData>
+            </ttAction>
+        </ttSequenceGroup>
+        <ttSequenceGroup>
+            <ttAction>
+                <ttType>runScript</ttType>
+                <ttScript>print("in debugMenu.newMenu ", debugMenu:getLastMenu(),debugMenu:getCurrentMenu() )</ttScript>
+            </ttAction>
+        </ttSequenceGroup>
+        
+        
+    </ttMacroBody>
+</ttMacro>
+<!-- debugMenu.sendNotification sends a notification named $param -->
+<ttMacro name="debugMenu.sendNotification">
+    <ttMacroParams>
+        <ttMacroParamDef name="$param"/>
+    </ttMacroParams>
+	<ttMacroBody>
+        <ttSequenceGroup>
+            <ttAction>
+                <ttType>sendNotification</ttType>
+                <ttNotificationIdentifyer>$param</ttNotificationIdentifyer>
+            </ttAction>
+        </ttSequenceGroup>
+        <!--<ttMacroInvoke macro_name="debugMenu.closeMenuAndShowDebugMenuButton">
+            <ttMacroParam name="$name" value="debugMenu"/>
+        </ttMacroInvoke>-->
+    </ttMacroBody>
+</ttMacro>
+<ttMacro name="debugMenu.action">
+    <ttMacroParams>
+        <ttMacroParamDef name="$param"/>
+    </ttMacroParams>
+	<ttMacroBody>
+        <ttSequenceGroup>
+            <ttAction>
+                <ttType>$param</ttType>
+            </ttAction>
+        </ttSequenceGroup>
+        <ttMacroInvoke macro_name="debugMenu.closeMenuAndShowDebugMenuButton">
+            <ttMacroParam name="$name" value="debugMenu"/>
+        </ttMacroInvoke>
+    </ttMacroBody>
+</ttMacro>
+<!-- debugMenu.closeMenu closes the menu $param and shows the debugMenu button-->
+<ttMacro name="debugMenu.closeMenu">
+    <ttMacroParams>
+        <ttMacroParamDef name="$name"/>
+    </ttMacroParams>
+	<ttMacroBody>
+        <ttSequenceGroup>
+            <ttAction>
+                <ttType>runScript</ttType>
+                <ttScript>debugMenu:setCurrentMenu("None")</ttScript>
+            </ttAction>
+        </ttSequenceGroup>
+        <ttSequenceGroup>
+            <ttAction>
+                <ttType>unLoadLayer</ttType>
+                <ttData>$name</ttData>
+            </ttAction>
+        </ttSequenceGroup>
+    </ttMacroBody>
+</ttMacro>
+<ttMacro name="debugMenu.closeExternalLayerAndShowDebugMenuButton">
+    <ttMacroParams>
+        <ttMacroParamDef name="$name"/>
+    </ttMacroParams>
+	<ttMacroBody>
+        <ttSequenceGroup>
+            <ttAction>
+                <ttType>runScript</ttType>
+                <ttScript>debugMenu:closeLayer("$name")</ttScript>
+            </ttAction>
+        </ttSequenceGroup>
+        <ttSequenceGroup>
+            <ttAction>
+                <ttType>loadLayer</ttType>
+                <ttData>debugMenuButton</ttData>
+            </ttAction>
+        </ttSequenceGroup>
+        <ttSequenceGroup>
+            <ttAction>
+                <ttType>unLoadLayer</ttType>
+                <ttData>$name</ttData>
+            </ttAction>
+        </ttSequenceGroup>
+    </ttMacroBody>
+</ttMacro>
+<ttMacro name="debugMenu.closeMenuAndShowDebugMenuButton">
+    <ttMacroParams>
+        <ttMacroParamDef name="$name"/>
+    </ttMacroParams>
+	<ttMacroBody>
+        <ttSequenceGroup>
+            <ttAction>
+                <ttType>runScript</ttType>
+                <ttScript>debugMenu:setCurrentMenu("None")</ttScript>
+            </ttAction>
+        </ttSequenceGroup>
+        <ttSequenceGroup>
+            <ttAction>
+                <ttType>runScript</ttType>
+                <ttScript>debugMenu:setLastMenu("None")</ttScript>
+            </ttAction>
+        </ttSequenceGroup>
+        <ttSequenceGroup>
+            <ttAction>
+                <ttType>loadLayer</ttType>
+                <ttData>debugMenuButton</ttData>
+            </ttAction>
+        </ttSequenceGroup>
+        <ttSequenceGroup>
+            <ttAction>
+                <ttType>unLoadLayer</ttType>
+                <ttData>$name</ttData>
+            </ttAction>
+        </ttSequenceGroup>
+    </ttMacroBody>
+</ttMacro>
+<!-- debugMenu.toggleRewardedAds toggles rewarded ads availability-->
+<ttMacro name="debugMenu.toggleRewardedAds">
+    <ttMacroParams>
+        <ttMacroParamDef name="$param"/>
+    </ttMacroParams>
+	<ttMacroBody>
+
+        <ttSequenceGroup>
+            <ttAction>
+                <ttType>runScript</ttType>
+                <ttScript>services:rewardedAdsChangeAvailabilityDebug()</ttScript>
+            </ttAction>
+            </ttSequenceGroup>
+        <ttSequenceGroup>
+            <ttAction>
+                <ttType>setLabelText</ttType>
+                <ttText>script:return debugMenu:getRewardedAdsAvailability()</ttText>
+            </ttAction>
+        </ttSequenceGroup>
+    </ttMacroBody>
+</ttMacro>
+<!-- debugMenu.toggleBackButtonVisibility toggles the android back button visibility-->
+<ttMacro name="debugMenu.toggleBackButtonVisibility">
+    <ttMacroParams>
+        <ttMacroParamDef name="$param"/>
+    </ttMacroParams>
+	<ttMacroBody>
+        
+        <ttSequenceGroup>
+            <ttAction>
+                <ttType>runScript</ttType>
+                <ttScript>debugMenu:toggleBackButtonVisibility()</ttScript>
+            </ttAction>
+        </ttSequenceGroup>
+        <ttSequenceGroup>
+            <ttAction>
+                <ttType>sendNotification</ttType>
+                <ttNotificationIdentifyer>debugMenu.hideShowBackButton</ttNotificationIdentifyer>
+            </ttAction>
+        </ttSequenceGroup>
+        <ttSequenceGroup>
+            <ttAction>
+                <ttType>setLabelText</ttType>
+                <ttText>script:return debugMenu:getBackButtonVisibility()</ttText>
+            </ttAction>
+        </ttSequenceGroup>
+    </ttMacroBody>
+</ttMacro>
+
